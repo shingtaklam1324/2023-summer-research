@@ -2,6 +2,127 @@
 
 \subsection{Complex manifolds}
 
+\begin{definition}
+    [complex manifold] A complex manifold of dimension \(n\) is defined as for a real manifold of dimension \(n\), except we replace \(\R^n\) with \(\C^n\) and require the transition maps to be biholomorphisms.
+\end{definition}
+
+\begin{proposition}
+    Any complex manifold has a canonical almost complex structure.
+\end{proposition}
+
+\begin{proof}
+    Locally, suppose we have complex coordinates \(z_1, \dots, z_n\), say \(z_j = x_j + iy_j\), then we can define \(J\) locally (where we consider \(M\) to be a real \(2n\)-manifold), by
+
+    \begin{align*}
+        J_p\left(\pdv{x_j}\right) &= \pdv{y_j} \\
+        J_p\left(\pdv{y_j}\right) &= -\pdv{x_j}
+    \end{align*}
+
+    This definition is independent of the choice of local coordinates, and gives a well-defined almost complex structure.
+\end{proof}
+
+\begin{definition}
+    Let \(z_j = x_j + iy_j\) be complex coordinates on \(M\). Then define the differential operators
+
+    \begin{align*}
+        \pdv{z_j} &= \frac{1}{2}\left(\pdv{x_j} - i\pdv{y_j}\right) \\
+        \pdv{\overline{z_j}} &= \frac{1}{2}\left(\pdv{x_j} + i\pdv{y_j}\right)
+    \end{align*}
+\end{definition}
+
+\begin{lemma}
+    \begin{align*}
+        (\TT_{1, 0})_p &= \Span_\C\left\{\pdv{z_1}\bigg\vert_p, \dots, \pdv{z_n}\bigg\vert_p\right\} \\
+        (\TT_{0, 1})_p &= \Span_\C\left\{\pdv{\overline{z_1}}\bigg\vert_p, \dots, \pdv{\overline{z_n}}\bigg\vert_p\right\}
+    \end{align*}
+\end{lemma}
+
+\begin{definition}
+    Let \(z_j = x_j + iy_j\) be complex coordinates on \(M\), then we have differential forms
+
+    \begin{align*}
+        \dd z_j &= \dd x_j + i\dd y_j \\
+        \dd \overline{z_j} &= \dd x_j - i\dd y_j
+    \end{align*}
+\end{definition}
+
+\begin{lemma}
+    \begin{align*}
+        \TT^{1, 0} = \Span_\C\left\{\dd z_1, \dots, \dd z_n\right\} \\
+        \TT^{0, 1} = \Span_\C\left\{\dd \overline{z_1}, \dots, \dd \overline{z_n}\right\}
+    \end{align*}
+\end{lemma}
+
+\begin{proposition}
+    \[\Omega^{\ell, m} = \left\{\sum_{\abs{J} = \ell, \abs{K} = m}b_{JK}\dd z_J \wedge \dd \overline{z_K}\right\}\]
+
+    where \(J = (j_1, \dots, j_\ell)\) and \(\dd z_J = \dd z_{j_1} \wedge \dots \wedge \dd z_{j_\ell}\) etc.
+\end{proposition}
+
+\begin{proposition}
+    If \(M\) is a complex manifold, then \(d = \partial + \overline\partial\).
+\end{proposition}
+
 \subsection{K\"ahler forms}
 
-\subsection{Compact K\"ahler manifolds}
+\begin{definition}
+    [K\"ahler manifold] A K\"ahler manifold is a complex manifold \(M\), with a symplectic form \(\omega\) which is compatible with the canonical almost complex structure \(J\) on \(M\). \(\omega\) is called a K\"ahler form.
+\end{definition}
+
+Let \((M, \omega)\) be a K\"ahler manifold.
+
+\begin{proposition}
+    \(\omega \in \Omega^{1, 1}\), with \(\partial \omega = 0\) and \(\overline\partial\omega = 0\). Moreover, in local coordinates, we have
+
+    \[\omega = \frac{i}{2}\sum_{j, k = 1}^n h_{jk}\dd z_j \wedge \dd\overline{z_k}\]
+
+    then at every \(p\), the matrix \((h_{jk}(p))_{jk}\) is a positive definite Hermitian matrix.
+\end{proposition}
+
+\subsection{Hodge theory}
+
+Throughout, let \((M, \omega)\) be a compact K\"ahler manifold.
+
+\begin{theorem}
+    [Hodge decomposition]
+
+    \[\Hdr^k(M; \C) \simeq \bigoplus_{\ell + m = k}\Hdol^{\ell, m}(M)\]
+
+\end{theorem}
+
+Recall that \((M, \omega)\) being K\"ahler means that \(J\) and \(\omega\) are compatible, and so we have a \emph{Riemannian} metric.
+
+\begin{proposition}
+    \[\Delta = 2(\overline\partial\overline\partial^* + \overline\partial^*\overline\partial)\]
+\end{proposition}
+
+\begin{corollary}
+    \(\Delta\) restricts to \(\Delta : \Omega^{\ell, m} \to \Omega^{\ell, m}\), and we have a decomposition of harmonic \(k\)-forms
+
+    \[\mcH^k = \bigoplus_{\ell + m = k}\mcH^{\ell, m}\]
+\end{corollary}
+
+\begin{theorem}
+    [Hodge] Every Dolbeault cohomology class on a compact K\"ahler manifold has a unique harmonic representative. That is, 
+
+    \[\Hdol^{\ell, m}(M) \simeq \mcH^{\ell, m}\]
+\end{theorem}
+
+\begin{definition}
+    [Betti numbers] The Betti numbers of \(M\) are
+
+    \[b^k(M) = \dim(\Hdr^k(M))\]
+\end{definition}
+
+\begin{definition}
+    [Hodge numbers] The Hodge numbers of \(M\) are
+
+    \[h^{\ell, m}(M) = \dim(\Hdol^{\ell, m}(M))\]
+\end{definition}
+
+\begin{proposition}
+    \begin{align*}
+        b^k &= \sum_{\ell + m = k}h^{\ell, m} \\
+        h^{\ell, m} &= h^{m, \ell} \\
+    \end{align*}
+\end{proposition}
