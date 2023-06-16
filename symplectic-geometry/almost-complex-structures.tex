@@ -1,0 +1,183 @@
+\section{Almost complex structures}
+
+\subsection{Complex structures}
+
+\begin{definition}
+    [complex structure] Let \(V\) be a vector space, a complex structure on \(V\) is a linear map \(J : V \to V\) with \(J^2 = -\id_V\). The pair \((V, J)\) is called a complex vector space.
+\end{definition}
+
+\begin{definition}
+    [compatible] Let \((V, \Omega)\) be a symplectic vector space, a complex structure \(J\) on \(V\) is compatible with \(\Omega\) if
+
+    \[G_J(u, v) = \Omega(u, Jv)\]
+
+    defines an inner product on \(V\).
+\end{definition}
+
+\begin{proposition}
+    Let \((V, \Omega)\) be a symplectic vector space, then there exists a compatible complex structure \(J\) on \(V\).
+\end{proposition}
+
+\begin{definition}
+    [almost complex structure] An almost complex structure on a manifold \(M\) is a smooth field of complex structures \(J\) on \(\TT M\), i.e. \(J_x : \TT_x M \to \TT_x M\) is linear, with \(J_x^2 = \id\).
+
+    The pair \((M, J)\) is called an almost complex manifold.
+\end{definition}
+
+\begin{definition}
+    [compatible] Let \((M, \omega)\) be a symplectic manifold. An almost complex structure \(J\) on \(M\) is compatible with \(\omega\) if
+
+    \[g_x(u, v) = \omega_x(u, J_xv)\]
+
+    is a Riemannian metric on \(M\). The triple \((\omega, g, J)\), where \(\omega\) is a symplectic form, \(g\) a Riemannian metric, \(J\) an almost complex structure is called a compatible triple if \(g(u, v) = \omega(u, Jv)\).
+\end{definition}
+
+\begin{proposition}
+    Let \((M, \omega)\) be a symplectic manifold, \(g\) a Riemannian metric on \(M\), then there exists a canonical almost complex structure on \(M\) which is compatible.
+\end{proposition}
+
+\begin{corollary}
+    Any symplectic manifold admits a compatible almost complex structure.
+\end{corollary}
+
+\begin{proposition}
+    Let \((M, \omega)\) be a symplectic manifold, \(J_0, J_1\) almost complex structures compatible with \(\omega\). Then we have a smooth family \(J_t\) of almost complex structures compatible with \(\omega\).
+\end{proposition}
+
+\begin{proposition}
+    If \((\omega, g, J)\) is a compatible triple, then we can write any one of them in terms of the other two. That is,
+
+    \begin{enumerate}
+        \item \(g(u, v) = \omega(u, Jv)\),
+        \item \(\omega(u,v) = g(Ju, v)\),
+        \item \(J(u) = \tilde g^{-1}(\tilde\omega(u))\),
+    \end{enumerate}
+
+    where \(\tilde\omega, \tilde g : \TT M \to \TT^* M\), are linear isomorphisms defined by
+
+    \[\tilde\omega(u)(v) = \omega(u,v) \qqtext{and}\tilde g(u)(v) = g(u, v)\]
+\end{proposition}
+
+\begin{definition}
+    [almost complex submanifold] A submanifold \(X\) of an almost complex manifold \((M, J)\) is an almost complex submanifold if \(J(\TT X) \subseteq \TT X\).
+\end{definition}
+
+\subsection{Complexification}
+
+\begin{definition}
+    [complexified tangent bundle]
+
+    Let \((M, J)\) be an almost complex manifold, the complexified tangent bundle of \(M\) is the bundle \(\TT M \otimes \C\), with fibre \((\TT M \otimes \C)_p = \TT_pM \otimes \C\). Each fibre is a complex vector space.
+\end{definition}
+
+\begin{proposition}
+    We can extend \(J\) to \(\TT M \otimes \C\) by
+
+    \[J(v \otimes c) = Jv \otimes c\]
+\end{proposition}
+
+\begin{definition}
+    [\(J\)-(anti-)holomorphic tangent vectors]
+
+    Define the \(J\)-holomorphic tangent vectors to be the eigenvectors of \(J\) with eigenvalue \(i\), and the \(J\)-anti-holomorphic tangent vectors to be the eigenvectors of \(J\) with eigenvalue \(-i\). That is,
+
+    \begin{align*}
+        \TT_{1, 0} &= \{v \in \TT M \otimes \C \mid Jv = iv\} \\
+       \TT_{0, 1} &= \{v \in \TT M \otimes \C \mid Jv = -iv\}
+    \end{align*}
+\end{definition}
+
+\begin{lemma}
+    Define \(\pi_{1, 0} : \TT M \to \TT_{1, 0}\) by
+
+    \[\pi_{1, 0}(v) = \frac{1}{2}(v \otimes 1 - Jv \otimes i)\]
+
+    Then \(\pi_{1, 0}\) defines an isomorphism of vector bundles, with \(\pi_{1, 0}\circ J = i\pi_{1, 0}\). An analogous statement holds for \(\pi_{0, 1}\).
+\end{lemma}
+
+\begin{corollary}
+    Extending \(\pi_{1, 0}\) and \(\pi_{0, 1}\) to \(\TT M \otimes \C\), we have an isomorphism
+
+    \[(\pi_{1, 0}, \pi_{0, 1}) : \TT M \otimes \C \to \TT_{1, 0} \oplus \TT_{0, 1}\]
+\end{corollary}
+
+A very similar result holds for the cotangent bundle, that is, we have an isomorphism
+
+\[(\pi^{1, 0}, \pi^{0, 1}) : \TT^* M \otimes \C \to \TT^{1, 0} \oplus \TT^{0, 1}\]
+
+where \(\TT^{1, 0}\) and \(\TT^{0, 1}\) are the complex (anti-)linear cotangent vectors.
+
+\subsection{Differential forms}
+
+Fix an almost complex manifold \((M, J)\).
+
+\begin{definition}
+    [forms of type \((\ell, m)\)]
+
+    For \(\ell, m \ge 0\), define
+
+    \[\Lambda^{\ell, m} = (\Lambda^\ell\TT^{1, 0}) \wedge (\Lambda^m \TT^{0, 1})\]
+
+    and the forms of type \((\ell, m)\) is the space of smooth sections of \(\Lambda^{\ell, m}\), denoted by \(\Omega^{\ell, m}\).
+\end{definition}
+
+\begin{definition}
+    [complex valued forms]
+
+    Let
+
+    \[\Lambda^k(\TT^* M \otimes \C) = \Lambda^k(\TT^{1, 0}\oplus \TT^{0, 1}) = \bigoplus_{\ell + m = k}\Lambda^{\ell, m}\]
+
+    Then a section of \(\Lambda^k(\TT^*M \otimes \C)\) is called a complex valued \(k\)-form. The space of all complex values \(k\) forms is denoted by \(\Omega^k(M; \C)\).
+\end{definition}
+
+\begin{proposition}
+    \[\Omega^k(M; \C) = \bigoplus_{\ell + m = k}\Omega^{\ell, m}\]
+\end{proposition}
+
+\begin{definition}
+    [projection maps]
+
+    Define the projection maps
+
+    \[\pi^{\ell, m} : \Lambda^{\ell + m}(\TT^* M \otimes \C) \to \Lambda^{\ell, m}\]
+\end{definition}
+
+\begin{definition}
+    [differential operators] Define the differential operators
+
+    \begin{align*}
+        \partial = \pi^{\ell + 1, m} \circ d : \Omega^{\ell, m} &\to \Omega^{\ell + 1, m} \\
+        \overline\partial = \pi^{\ell, m + 1} \circ d : \Omega^{\ell, m} &\to \Omega^{\ell, m + 1}
+    \end{align*}
+\end{definition}
+
+\subsection{\(J\)-holomorphic functions}
+
+Let \(f : M \to \C\) be smooth complex values, and define \(\dd f = \dd (\Re f) + i \dd (\Im f)\).
+
+\begin{definition}
+    [\(J\)-holomorphic functions]
+
+    \(f\) is \(J\) holomorphic at \(p \in M\) if \(\dd f_p \circ J = i\dd f_p\), i.e. \(\dd f_p\) is complex linear. \(f\) is \(J\) holomorphic if it is \(J\) holomorphic at every point.
+\end{definition}
+
+\begin{remark}
+    We can define \(J\)-anti-holomorphic functions similarly.
+\end{remark}
+
+\subsection{Dolbeault cohomology}
+
+\begin{lemma}
+    Suppose \(d = \partial + \overline\partial\). Then
+
+    \[\overline\partial^2 = 0, \quad \partial\overline\partial + \overline\partial\partial = 0 \qqtext{and}\partial^2 = 0\]
+\end{lemma}
+
+\begin{definition}
+    [Dolbeault cohomology]
+
+    The cohomology groups given by \(\overline \partial\) is called the Dolbeault cohomology groups, denoted by
+
+    \[\Hdol^{\ell, m}(M)\]
+\end{definition}

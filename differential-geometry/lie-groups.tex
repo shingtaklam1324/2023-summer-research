@@ -1,1 +1,146 @@
 \section{Lie groups and principal bundles}
+
+\subsection{Lie groups and Lie algebras}
+
+\begin{definition}
+    [Lie group] A Lie group is a manifold \(G\), which is also a group, such that multiplication and inversion are smooth maps.
+\end{definition}
+
+\begin{definition}
+    [embedded Lie subgroup] An embedded Lie subgroup \(H\) of \(G\) is a submanifold which is also a subgroup. The restriction of the group operations to \(H\) makes \(H\) a Lie group.
+\end{definition}
+
+\begin{definition}
+    [left, right translation, conjugation]
+    
+    For \(g \in G\), we get diffeomorphisms \(L_g, R_g, C_g : G \to G\), given by
+
+    \[L_g(x) = gx \quad R_g(x) = xg \quad C_g(x) = gxg^{-1}\]
+
+    are called left translation, right translation, and conjugation by \(g\), respectively.
+\end{definition}
+
+\begin{definition}
+    [left, right, conjugation invariant] A tensor \(T\) is left invariant if \((L_g)_*T = T\) for all \(g \in G\). We can define right invariant and conjugation invariant tensors similarly.
+
+    \(T\) is bi-invariant if it is both left and right invariant.
+\end{definition}
+
+\begin{lemma}
+    For any \(h \in G\), the map \(T \mapsto T_h\) is an isomorphism between the set of left invariant tensors of type \((p, q)\) and tensors of type \((p, q)\) at \(h\).
+\end{lemma}
+
+\begin{definition}
+    [Lie algebra] The Lie algebra \(\mfg\) of \(G\) is
+
+    \[\mfg = \TT_eG\]
+\end{definition}
+
+\begin{notation}
+    For \(\xi \in \mfg\), define the left-invariant vector field
+
+    \[\ell_\xi(g) = (L_g)_*\xi\]
+\end{notation}
+
+\begin{lemma}
+    The Lie bracket of left invariant vector fields is left invariant.
+\end{lemma}
+
+\begin{definition}
+    [Lie bracket] The Lie bracket on \(\mfg\) is given by
+
+    \[[\xi, \eta] = \zeta\]
+
+    where \(\zeta \in \mfg\) is the unique element such that \([\ell_\xi, \ell_\eta] = \ell_\zeta\). This makes \(\mfg\) into a Lie algebra.
+\end{definition}
+
+\begin{definition}
+    [smooth group action] An action of a Lie group \(G\) on a manifold \(X\) is smooth if the action map \(\sigma : G \times X \to X\) is smooth.
+\end{definition}
+
+\begin{definition}
+    [adjoint representation] The adjoint representation of \(G\) on \(\mfg\) is given by
+
+    \[\Ad_g(\xi) = (C_g)_*\xi\]
+\end{definition}
+
+\begin{definition}
+    [infitesimal action] Given a smooth left action of \(G\) on \(X\), the infitesimal action of \(\xi \in G\) on \(x\in X\) is given by
+
+    \[\xi\vdot x = \DD_{(e, x)}\sigma(\xi, 0) = [\gamma(t)x]\]
+
+    where \(\gamma(t)\) is any curve representing \(\xi\). We can define \(x \vdot \xi\) for the analogous right action.
+\end{definition}
+
+\subsection{Principal bundles}
+
+Fix a Lie group \(G\).
+
+\begin{definition}
+    [principal \(G\)-bundle] A principal \(G\) bundle \(P\) over \(B\) is defined as in the same way as for a vector bundle, except the trivialisations are 
+
+    \[\Phi_\alpha : \pi^{-1}(U_\alpha) \to U_\alpha \times G\]
+
+    and on overlaps, \(\Phi_\beta \circ \Phi_\alpha^{-1}(b, g) = (b, g_{\beta\alpha}(b)g)\) where \(g_{\beta\alpha} : U_\alpha \times U_\beta \to G\) is smooth.
+\end{definition}
+
+\begin{definition}
+    [frame bundle] Given a rank \(k\) bundle \(E \to B\), its frame bundle \(F(E) \to B\) is the principal \(\GL(k, \R)\) bundle, with
+
+    \[F(E)_b = \left\{\text{ordered bases of }E_b\right\}\]
+
+    Moreover, if \(E\) has an inner product, the orthonormal frame bundle is the principal \(O(k)\) bundle, with
+
+    \[F_O(E)_b = \left\{\text{ordered orthonormal bases of }E_b\right\}\]
+\end{definition}
+
+\begin{remark}
+    Most definitions, such as sections, pullbacks, constructions by gluing etc. carry over from vector bundles. On the other hand, there is no zero section.
+\end{remark}
+
+\begin{lemma}
+    A \(G\)-bundle \(P\) has a right \(G\)-action, defined by right translation on each fibre, i.e.
+
+    \[\Phi_\alpha^{-1}(b, x)g = \Phi_\alpha^{-1}(b, xg)\]
+\end{lemma}
+
+\begin{lemma}
+    Sections \(s\) of \(P\) over an open \(U \subseteq B\) correspond to trivialisations \(\Phi\) of \(P\) over \(U\), i.e. given \(\Phi\), we can define \(s(b) = \Phi^{-1}(b, e)\), and given \(s\), we can define \(\Phi(s(b)g) = (b, g)\).
+\end{lemma}
+
+\subsection{Connections on principal bundles}
+
+Fix a principal \(G\)-bundle \(P \to B\), and write \(R_g : P \to P\) for the diffeomorphism arising from the right action of \(g \in G\).
+
+\begin{definition}
+    [connection] A connection on \(P\) is a \(\mfg\)-valued \(1\)-form \(\mcA\) on \(P\), such that 
+
+    \begin{enumerate}
+        \item \(\mcA(p \vdot \xi) = \xi\) for all \(p \in P\) and \(\xi \in \mfg\), where \(p \vdot \xi\) is the infitesimal right action of \(\xi\) on \(p\).
+        \item \(R_g^*\mcA = \Ad_{g^{-1}}\mcA\).
+    \end{enumerate}
+\end{definition}
+
+Given a local section \(s_\alpha\), the local connection \(1\)-form is \(\mcA_\alpha = s_\alpha^*\mcA\).
+
+\begin{lemma}
+    On overlaps, we have
+
+    \[\mcA_\alpha = \Ad_{g_{\beta\alpha}^{-1}}\mcA_\beta + (L_{g_{\beta\alpha}^{-1}})_*\dd g_{\beta\alpha}\]
+\end{lemma}
+
+\begin{remark}
+    If \(P = F(E)\) is a frame bundle, then a connection on \(P\) is the same as a connection on \(E\).
+\end{remark}
+
+\begin{definition}
+    [curvature] The curvature of \(\mcA\) is the \(\mfg\)-valued \(2\)-form \(\mcF\) on \(P\), given by
+
+    \[\mcF = \dd \mcA + \frac{1}{2}[\mcA \wedge \mcA]\]
+
+    where
+
+    \[\left[\left(\sum_i \xi_i\otimes \alpha_i\right)\wedge \left(\sum_j\eta_j\otimes\beta_j\right)\right] = \sum_{i, j}[\xi_i, \eta_j]\otimes \alpha_i \wedge \beta_j\]
+
+    \(\mcA\) is flat if \(\mcF = 0\).
+\end{definition}

@@ -1,0 +1,89 @@
+\section{Symplectic manifolds}
+
+\subsection{Symplectic linear algebra}
+
+\begin{definition}
+    [skew-symmetric bilinear form] Let \(V\) be a real vector space, a blinear map \(\Omega : V \times V \to \R\) is skew-symmetric if \(\Omega(v, w) = -\Omega(w, v)\) for all \(v, w \in V\).
+\end{definition}
+
+\begin{theorem}
+    [canonical basis]
+    Let \(\Omega\) be a skew-symmetric bilinear form on \(V\). Then there exists a basis \(u_1, \dots, u_k, e_1,\dots, e_n, f_1, \dots, f_n\) of \(V\), such that
+
+    \begin{enumerate}
+        \item \(\Omega(u_i, v) = 0\) for all \(i = 1, \dots, k\) and \(v \in V\),
+        \item \(\Omega(e_i, e_j) = \Omega(f_i, f_j) = 0\) for all \(i, j = 1, \dots, n\),
+        \item \(\Omega(e_i, f_j) = \delta_{ij}\)
+    \end{enumerate}
+\end{theorem}
+
+\begin{definition}
+    [left map] Given a bilinear map \(\Omega : V \times V \to \R\), define \(\tilde\Omega : V \to V^*\) by \(\tilde\Omega(v)(u) = \Omega(v, u)\).
+\end{definition}
+
+\begin{lemma}
+    \(\ker(\tilde\Omega) = U = \Span \left\{u_1, \dots, u_k\right\}\)
+\end{lemma}
+
+\begin{definition}
+    [symplectic] A skew-symmetric bilinear form \(\Omega\) is symplectic if \(\ker(\tilde\Omega) = U = 0\). Then \(\Omega\) is called a linear symplectic structure on \(V\), and \((V, \Omega)\) is called a symplectic vector space.
+\end{definition}
+
+\begin{definition}
+    [symplectic, isotropic subspace] A subspace \(W\) of \(V\) is
+
+    \begin{enumerate}
+        \item symplectic if \(\Omega\vert_W\) is symplectic,
+        \item isotropic if \(\Omega\vert_W = 0\).
+    \end{enumerate}
+\end{definition}
+
+\begin{definition}
+    [symplectomorphism] Let \((V, \Omega), (V', \Omega')\) be symplectic vector spaces. Then a symplectomorphism \(\varphi : V \to V'\) is a linear isomorphism, such that \(\varphi^*\Omega' = \Omega\), where \(\varphi^*\Omega'(u, v) = \Omega'(\varphi(u), \varphi(v))\).
+\end{definition}
+
+\subsection{Symplectic manifolds}
+
+Let \(M\) be a manifold, \(\omega \in \Omega^2(M)\) be a \(2\)-form.
+
+\begin{definition}
+    [symplectic form] \(\omega\) is symplectic if \(\omega\) is closed, and \(\omega_p : T_pM \times T_pM \to \R\) is symplectic for all \(p \in M\).
+\end{definition}
+
+\begin{definition}
+    [symplectic manifold] A symplectic manifold is a pair \((M, \omega)\), where \(M\) is a manifold and \(\omega\) is a symplectic form on \(M\).
+\end{definition}
+
+\begin{definition}
+    [symplectomorphism] Let \((M_1, \omega_1), (M_2, \omega_2)\) be symplectic manifolds. Then a diffeomorphism \(f : M_1 \to M_2\) is a symplectomorphism if \(f^*\omega_2 = \omega_1\).
+\end{definition}
+
+\subsection{Canonical and tautological forms}
+
+Suppose \(X\) is a manifold, \(\pi : \TT^*X \to X\) is the cotangent bundle of \(X\).
+
+\begin{definition}
+    [cotangent coordinates] Suppose \(x_1, \dots, x_n\) are local coordinates on \(X\), then \((\dd x_1)p, \dots, (\dd x_n)_p\) define a basis for \(\TT^*_p X\). That is, if \(\xi \in \TT^*_pX\), then \(\xi = \sum_i \xi_i (\dd x_i)_p\). We call \((x_1, \dots, x_n, \xi_1, \dots, \xi_n)\) the cotangent coordinates on \(\TT^*X\) associated to \(x_1, \dots, x_n\).
+\end{definition}
+
+\begin{definition}
+    [tautological form] The tautological \(1\)-form \(\alpha\) is defined pointwise by
+
+    \[\alpha_p = (\dd \pi_p)^\vee\xi \in \TT_p^*(\TT^* X)\]
+
+    That is, if \(p = (x, \xi) \in \TT^*X\), \(v \in \TT_p(\TT^*X)\), then
+
+    \[\alpha_p(v) = \xi((\dd\pi_p)v)\]
+\end{definition}
+
+\begin{definition}
+    [canonical form] The canonical symplectic \(2\)-form \(\omega\) on \(\TT^*X\) is defined by
+
+    \[\omega = -\dd\alpha\]
+\end{definition}
+
+\begin{lemma}
+    In cotangent coordinates,
+
+    \[\alpha = \sum_i \xi_i \dd x_i \qqtext{and}\omega = \sum_i \dd x_i \wedge \dd \xi_i\]
+\end{lemma}
