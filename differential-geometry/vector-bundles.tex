@@ -1,0 +1,256 @@
+\section{Vector bundles and tensors}
+
+\subsection{Vector bundles}
+
+\begin{definition}
+    [vector bundle]
+
+    A vector bundle of rank \(k\) over a manifold \(B\) is
+
+    \begin{enumerate}[(i)]
+        \item a manifold \(E\),
+        \item a smooth map \(\pi : E \to B\),
+        \item an open cover \(\{U_\alpha\}_{\alpha \in \mcA}\) of \(B\),
+        \item for each \(\alpha\), a diffeomorphism \(\Phi_\alpha : \pi^{-1}(U_\alpha) \to U_\alpha \times \R^k\),
+    \end{enumerate}
+
+    such that
+
+    \begin{enumerate}
+        \item \(\pr_1 \circ \Phi_\alpha = \pi\) on \(\pi^{-1}(U_\alpha)\),
+        \item for all \(\alpha, \beta\), the map
+        \[\Phi_\beta \circ \Phi_\alpha^{-1} : (U_\alpha \cap U_\beta) \times \R^k \to (U_\alpha \cap U_\beta)\times \R^k\]
+        is of the form
+
+        \[\Phi_\beta \circ \Phi_\alpha^{-1}(b, v) = (b, g_{\beta\alpha}(b)(v))\]
+
+        where \(g_{\beta\alpha} : U_\alpha \cap U_\beta \to \GL_k(\R)\) is smooth.
+    \end{enumerate}
+
+    We call
+
+    \begin{itemize}
+        \item \(E\) the total space,
+        \item \(\pi\) the projection,
+        \item the \(\Phi_\alpha\) local trivialisations,
+        \item \(g_{\beta\alpha}\) the transition functions,
+    \end{itemize}
+
+    and we write \(E_b\) for the fibre \(\pi^{-1}(b)\).
+\end{definition}
+
+\begin{remark}
+    Replacing \(\R\) with \(\C\) we get complex vector bundles.
+\end{remark}
+
+\begin{definition}
+    [trivial bundle] The trivial bundle of rank \(k\) over \(B\) is \(B \times \R^k\) with the obvious trivialisation.
+\end{definition}
+
+\begin{notation}
+    For a vector space \(V\), write \(\underline{V}\) for the trivial bundle \(B \times V\).
+\end{notation}
+
+\begin{definition}
+    [tangent bundle]
+
+    The tangent bundle of an \(n\)-manfold \(X\) is a rank \(n\) vector bundle, given by
+
+    \begin{enumerate}[(i)]
+        \item \(\TT X = \bigsqcup_{p \in X}\TT_p X = \{(p, v) \mid p \in X, v \in \TT_p X\}\). On any coordinate neighbourhood \(U\) of \(X\), with coordinates \(x_1, \dots, x_n\), and chart \(\varphi\), then we have a chart on \(\TT X\) given by
+        \[\psi\left(p, \sum_i a_i \partial_i\right) = (\varphi(p), (a_1, \dots, a_n)) \subseteq \R^{2n}\]
+        \item and \(\pi(p, v) = p\)
+    \end{enumerate}
+\end{definition}
+
+\begin{definition}
+    [section] A section \(s\) of a vector bundle \(\pi : E \to B\) is a smooth map \(s : B \to E\), such that \(\pi \circ s = \id\).
+\end{definition}
+
+\begin{definition}
+    [vector field] A section of \(\TT X\) is called a vector field.
+\end{definition}
+
+\begin{definition}
+    [morphism of vector bundles]
+
+    Given vector bundles \(\pi_1 : E_1 \to B_1\) and \(\pi_2 : E_2 \to B_2\), and a smooth map \(F : B_1 \to B_2\), a morphism of vector bundles covering \(F\) is a smooth map \(G : E_1 \to E_2\), such that
+
+    \begin{enumerate}
+        \item \(\pi_2 \circ G = F \circ \pi_1\),
+        \item for all \(p \in B\), the map \(G_p : (E_1)_p \to (E_2)_{F(p)}\) is linear.
+    \end{enumerate}
+\end{definition}
+
+\begin{definition}
+    [isomorphism of vector bundles]
+
+    An isomorphism of vector bundles over \(B\) is a morphism covering \(\id_B\), with a two sided inverse.
+\end{definition}
+
+\begin{definition}
+    [subbundle, quotient bundles] Given a vector bundle \(\pi : E \to B\) of rank \(k\), a subbundle of rank \(l\) is a submanifold \(F \subseteq E\), such that \(B\) is covered by the local trivialisations
+
+    \[\Phi_\alpha : \pi^{-1}(U_\alpha) \to U_\alpha \times \R^k\]
+
+    under which \(F\) is given by \(U_\alpha \times (\R^l \oplus 0)\).
+\end{definition}
+
+\subsection{Gluing}
+
+Suppose we have the following data:
+
+\begin{enumerate}[(i)]
+    \item A manifold \(B\),
+    \item and open cover \(\{U_\alpha\}_{\alpha \in \mcA}\) of \(B\),
+    \item for each \(\alpha, \beta\), a smooth map \(g_{\beta\alpha} : U_\alpha \cap U_\beta \to \GL_k(\R)\),
+\end{enumerate}
+
+such that
+
+\begin{enumerate}
+    \item \(g_{\alpha\alpha}(x) = \id\),
+    \item \(g_{\gamma\alpha} = g_{\gamma\beta} \circ g_{\beta\alpha}\) on \(U_\alpha \cap U_\beta \cap U_\gamma\).
+\end{enumerate}
+
+Then, define
+
+\[E = \frac{\bigsqcup_{\alpha \in \mcA}(U_\alpha \times \R^k)}{(b, v) \sim (b, g_{\beta\alpha}(b)(v))}\]
+
+and defining \(\pi\) by projecting onto the first factor, we get a vector bundle \(\pi : E \to B\).
+
+\begin{lemma}
+    Suppose \(E \to B\) is a vector bundle. Then the transition functions satisfy 1. and 2., and \(E\) is isomorphic to the vector bundle constructed above.
+\end{lemma}
+
+\subsection{Constructions on vector bundles}
+
+\begin{definition}
+    [pullback] Given a vector bundle \(\pi : E \to B\), and a smooth map \(F : B' \to B\), the pullback bundle \(F^*E\) over \(B'\) is given by:
+
+    \begin{enumerate}[(i)]
+        \item The total space is still \(E\), with fibres \(E_{F(p)}\).
+        \item Suppose \(E \to B\) is trivialised over \(\{U_\alpha\}_{\alpha \in \mcA}\), with transition functions \(g_{\beta\alpha}\). Then \(F^* E\) is trivialised over \(\{F^{-1}(U_\alpha)\}\), with transition functions \(F^*g_{\beta\alpha} = g_{\beta\alpha} \circ F\).
+    \end{enumerate}
+\end{definition}
+
+\begin{definition}
+    [dual bundle]
+
+    Suppose \(E \to B\) is a vector bundle. Then the dual bundle \(E^\vee \to B\) has total space
+
+    \[E^\vee = \bigsqcup_{p \in V}(E_p)^\vee\]
+
+    trivialised over the same open cover, with transition functions \((g_{\beta\alpha}^\vee)^{-1}\).
+\end{definition}
+
+\subsection{Cotangent bundle}
+
+\begin{definition}
+    [cotangent bundle]
+
+    The cotangent bundle of \(X\) is \(\TT^*X = (\TT X)^\vee\). We write \(\TT^*_pX\) for the fibre at \(p\), the cotangent space of \(X\) at \(p\).
+\end{definition}
+
+\begin{proposition}
+    Given function elements \((f, U), (g, V)\) about \(p \in X\), we say that \(f, g : U \cap V \to \R\) agree to first order if \(\DD_pf = \DD_p g\). Then we have a natural isomorphism
+
+    \[\frac{\text{function elements about }p \in X}{\text{agreement to first order}} \simeq \TT^*_pX\]
+\end{proposition}
+
+\begin{proof}
+    Define map \(e : \{\text{function elements about }p\} \to \TT_p^*X\) by
+
+    \[e(f)([\gamma]) = (f \circ \gamma)'(0)\]
+
+    Then the result follows by the first isomorphism theorem for vector spaces.
+\end{proof}
+
+\begin{definition}
+    [differential of function] For a function \(f : X \to \R\), define \(\dd_p f = e(f) \in \TT_p^*X\) as above. Then this defines a smooth section of \(\TT^*X\), denoted \(\dd f\), called the differential of \(f\).
+\end{definition}
+
+\begin{definition}
+    [\(1\)-form] A section of \(\TT_p^*X\) is called a \(1\)-form.
+\end{definition}
+
+\begin{remark}
+    The \(1\)-forms \(\dd x_i\) form a basis of \(\TT_p^*X\). Moreover, \(\dd x_i\) depends only on \(x_i\), and not the other coordinate functions.
+\end{remark}
+
+\begin{definition}
+    [pullback] Given a smooth map, the map
+
+    \[(\DD_p F)^\vee : \TT_{F(p)}^* Y \to \TT_p^* X\]
+
+    is called the pullback by \(F\), denoted by \(F^*\).
+\end{definition}
+
+\begin{lemma}
+    Suppose \(F : X \to Y\), \(g : Y \to \R\) smooth. Then
+
+    \[F^*(\dd g) = \dd (F^*g) = \dd (g \circ F)\]
+\end{lemma}
+
+\subsection{Tensors and forms}
+
+\begin{definition}
+    [direct sum] Suppose \(E, F\) are vector bundles over \(B\), trivialised over \(\{U_\alpha\}\), and with transition functions \(g_{\beta\alpha}, h_{\beta\alpha}\) respectively. Then define the direct sum bundle \(E \oplus F\), with fibres \(E_p \oplus F_p\), and transition functions \(g_{\beta\alpha} \oplus h_{\beta\alpha}\). 
+\end{definition}
+
+\begin{remark}
+    We can define the tensor product of vector bundles in a similar way, and tensor powers and symmetric, exterior powers.
+\end{remark}
+
+\begin{proposition}
+    For \(F : X \to Y\) smooth, \(\DD F\) is a section of \(T^*X \otimes F^*TY\).
+\end{proposition}
+
+\begin{proof}
+    \(\Hom(\TT_p X, \TT_{F(p)}Y) = \TT_p^*X \otimes \TT_{F(p)}Y = (\TT^*X \otimes F^*\TT Y)_p\)
+\end{proof}
+
+\begin{definition}
+    [tensor]
+
+    A tensor of type \((p, q)\) on a manifold \(X\) is a section of
+    
+    \[(\TT X)^{\otimes p} \otimes (\TT^* X)^{\otimes q}\]
+\end{definition}
+
+\begin{definition}
+    [differential form]
+
+    An \(r\) form is a section of
+
+    \[\Lambda^r\TT^*X\]
+
+    The space of all \(r\)-forms is denoted \(\Omega^r(X)\).
+\end{definition}
+
+From now on, we will write local coordinates with ``up'' indices, i.e. \(x^1, \dots, x^n\), and repeated indices, once up and once down are summed over. Up indices correspond to \(\partial_i\) factors, and down indices correspond to \(\dd x^i\) factors.
+
+\begin{notation}
+    For \(I = (i_1 < \dots < i_r)\), write
+
+    \[\dd x^I = \dd x^{i_1} \wedge \dots \wedge \dd x^{i_r}\]
+\end{notation}
+
+Fix smooth manifolds \(X, Y\), and a smooth map \(F : X \to Y\). Then we have
+
+\begin{definition}
+    [pushforward at a point]
+    For \(p \in X\), a tensor of type \((r, 0)\) at \(p\), we can push forward this to \((\TT_{F(0)}Y)^{\otimes r}\) by applying \((\DD_p F)^{\otimes r}\). We call this operation the pushforward, denoted by \(F_*\).
+\end{definition}
+
+\begin{definition}
+    [pullback at a point]
+
+    For \(p \in X\), a tensor of type \((0, r)\) at \(F(p)\), we can pull back this to \((\TT_p^* X)^{\otimes r}\) by applying \(\left((\DD_pF)^\vee\right)^{\otimes r}\). Similarly, we can pull back an \(r\) form. We call this operation the pullback, denoted by \(F^*\).
+\end{definition}
+
+\begin{definition}
+    [pullback]
+
+    Given a tensor \(T\) of type \((0, r)\) on \(Y\), we can pull this back to a tensor \(F^*T\) on \(X\), by \((F^*T)_p = F^*(T_{F(p)})\). Similarly, we can pull back an \(r\)-form.
+\end{definition}

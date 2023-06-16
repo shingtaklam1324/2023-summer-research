@@ -1,0 +1,111 @@
+\section{Riemannian geometry}
+
+\begin{definition}
+    [Riemannian metric, Riemannian manifold] A Riemannian metric is an inner product on \(\TT X \to X\). A Riemannian manifold \((X, g)\) is a manifold \(X\) with a Riemannian metric \(g\).
+\end{definition}
+
+\begin{lemma}
+    Every manifold admits a Riemannian metric.
+\end{lemma}
+
+\begin{definition}
+    [dual metric]
+
+    Given a metric \(g_{ij}\) on \(\TT X \to X\), let \(g^{ij}\) denote the corresponding metric on \(\TT^* X \to X\). That is, \(g^{ij}g_{jk} = \delta^i_{\phantom{i}k}\).
+\end{definition}
+
+\begin{definition}
+    [raising and lowering indices]
+
+    We denote contraction with \(g_{ij}\) or \(g^{ij}\) by raising and lowering indices. For example, \(v_i = g_{ij}v^j\).
+\end{definition}
+
+\begin{notation}
+    [Symmetric product] Define
+
+    \[\dd x^i\dd x^j = \frac{1}{2}\left(\dd x^i \otimes \dd x^j + \dd x^j \otimes \dd x^i\right)\]
+
+    So the standard Euclidean inner product on \(\R^n\) is \(\dd x^i\dd x^i\).
+\end{notation}
+
+\begin{theorem}
+    [fundamental theorem of Riemannian geometry] \((X, g)\) admits a unique torsion free orthogonal connection.
+\end{theorem}
+
+\begin{definition}
+    [Levi-Civita connection] The unique torsion free orthogonal connection on \((X, g)\) is called the Levi-Civita connection. In coordinates, it is given by\footnote{after lowering the \({}^i\) index}
+
+    \[\Gamma_{ijk} = \frac{1}{2}\left(\partial_jg_{ik} + \partial_kg_{ji} - \partial_i g_{jk}\right)\]
+\end{definition}
+
+Let \((X, g)\) be a Riemannian manifold, with Levi-Civita connection \(\nabla\).
+
+\begin{definition}
+    [Riemann tensor] The curvature of \(\nabla\) is the Riemann tensor \(R^{i}_{\phantom ijkl}\), which is an \(\mfo(\TT X)\) valued \(2\)-form, viewed as a tensor of type \((1, 3)\).
+\end{definition}
+
+\subsection{Hodge theory}
+
+Let \((X, g)\) be an oriented Riemannian \(n\)-manifold. Then \(g\) induces an inner product on \(\Lambda^p\TT^*X\) for all \(p\). Moreover, if \(\alpha^1, \dots, \alpha^n\) are a fibrewise orthonormal basis of \(1\)-forms, then \(\alpha^I\) form a fibrewise orthonormal basis of \(\Lambda^p\TT^*X\).
+
+In addition, from the orientation, we have a volume form \(\omega\). Therefore, by the metric, we can assume it is \emph{the} positively oriented unit volume form. Now given a \(p\)-form \(\beta\), there exists a unique \(n - p\) form \(\star\beta\) such that
+
+\[\alpha \wedge \star\beta = \inner{\alpha, \beta}\omega\]
+
+for all \(p\)-forms \(\alpha\). More concretely, \(\star\alpha^I = \pm\alpha^J\), where \(J = \{1, \dots, n\} \setminus I\). Assuming the \(\alpha^I\) are positively oriented, then the sign is \(+\) if and only if \(I, J\) is an even permutation of \(\{1, \dots, n\}\).
+
+\begin{definition}
+    [Hodge star] The map \(\star : \Omega^p(X) \to \Omega^{n-p}(X)\) is called the Hodge star operator.\
+\end{definition}
+
+\begin{proposition}
+    \(\star\) is a fibrewise linear isometry, with \(\star^2 = (-1)^{p(n-p)}\id\).
+\end{proposition}
+
+\begin{definition}
+    [inner product on forms] Suppose \(X\) is compact, then we have an inner product on \(\Omega^p(X)\) given by
+
+    \[\inner{\alpha, \beta}_X = \int_X\inner{\alpha,\beta}\omega = \int_X \alpha\wedge \star\beta\]
+\end{definition}
+
+\begin{lemma}
+    For any \(p-1\) form \(\alpha\) and \(p\)-form \(\beta\), we have that
+
+    \[\inner{\dd\alpha, \beta}_X = (-1)^p\inner{\alpha, \star^{-1}\dd\star\beta}_X\]
+\end{lemma}
+
+\begin{definition}
+    [codifferential] The map \(\delta : \Omega^\bullet(X) \to \Omega^{\bullet-1}(X)\) defined by
+
+    \[\delta = (-1)^p\star^{-1}\dd \star\]
+
+    is called the codifferential.
+\end{definition}
+
+\begin{lemma}
+    \(\delta^2 = 0\).
+\end{lemma}
+
+\begin{definition}
+    [Laplace-Beltrami operator, harmonic] The Laplace-Beltrami operator \(\Delta : \Omega^\bullet(X) \to \Omega^\bullet(X)\) is defined by \(\Delta = \dd\delta + \delta\dd\).
+
+    A form \(\alpha\) is harmonic if \(\Delta\alpha = 0\). The space of harmonic \(p\)-forms is denoted by \(\mcH^p(X)\).
+\end{definition}
+
+\begin{lemma}
+    \(\alpha\) is harmonic if and only if it is closed and coclosed, i.e. \(d\alpha = 0\) and \(\delta\alpha = 0\).
+\end{lemma}
+
+\begin{theorem}
+    [Hodge decomposition] For all \(p\), the space \(\mcH^p(X)\) is finite dimensional, and we have orthogonal decompositions
+
+    \begin{align*}
+        \Omega^p(X) &= \mcH^p(X) \oplus \Delta\Omega^p(X) \\
+        &= \mcH^p(X) \oplus \dd\delta\Omega^p(X) \oplus \delta \dd \Omega^p(X) \\
+        &= \mcH^p(X) \oplus \dd \Omega^{p-1}(X) \oplus \delta \Omega^{p+1}(X)
+    \end{align*}
+\end{theorem}
+
+\begin{theorem}
+    The map \(\mcH^p(X) \to \Hdr^p(X)\), given by \(\alpha \mapsto [\alpha]\) is an isomorphism.
+\end{theorem}

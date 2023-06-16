@@ -1,0 +1,239 @@
+\section{Smooth manifolds}
+
+\subsection{Smooth manifolds}
+
+\begin{definition}
+    [topological manifold] A topological \(n\)-manifold is a topological space \(X\), such that for every \(p \in X\), there exists an open neighbourhood \(U\) of \(p\) in \(X\), and an open set \(V\) in \(\R^n\), and a homeomorphism \(\varphi : U \to V\).
+    
+    Moreover, we require \(X\) to be Hausdorff and second countable.
+
+    \begin{enumerate}
+        \item \(\varphi\) as above is called a chart,
+        \item a collection of charts where the domains form an (open) cover of \(X\) is called an atlas,
+        \item \(U\) is a coordinate patch,
+        \item if \(x_1, \dots, x_n\) the standard coordinate functions on \(\R^n\), then \(x_1 \circ \varphi, \dots, x_n \circ \varphi\) are local coordinates on \(U\). We will usually abuse notation and denote them by \(x_1, \dots, x_n\).
+        \item if we have charts \(\varphi_1 : U_1 \to V_1\) and \(\varphi_2 : U_2 \to V_2\), the map
+        \[\varphi_2 \circ \varphi_1^{-1} : \varphi_1(U_1 \cap U_2) \to \varphi_2(U_1 \cap U_2)\]
+        is called the transition map.
+    \end{enumerate}
+\end{definition}
+
+\begin{definition}
+    [smooth function]
+
+    Given an atlas \(\mcA\) and a an open subsets \(W \subseteq X\), a function \(f : W \to \R\) is smooth with respect to \(\mcA\) if \(f \circ \varphi^{-1}\) is smooth for all \(\varphi \in \mcA\). That is, if all local coordinate expressions \(f(x_1, \dots, x_n)\) are smooth.
+\end{definition}
+
+\begin{definition}
+    [smooth atlas]
+
+    An atlas \(\mcA\) on \(X\) is smooth if all the transition functions \(\varphi_beta \circ \varphi_\alpha^{-1}\) are smooth.
+\end{definition}
+
+\begin{definition}
+    [smoothly equivalent, smooth structure]
+
+    Two smooth atlases \(\mcA\) and \(\mcB\) are smoothly equivalent if \(\mcA \cup \mcB\) is a smooth atlas. This defines an equivalence relation, and an equivalence class is called a smooth structure.
+\end{definition}
+
+\begin{definition}
+    [smooth manifold]
+
+    A smooth \(n\)-manifold \(X\) is a topological \(n\)-manifold with a smooth structure.
+\end{definition}
+
+\subsection{Smooth maps}
+
+Throughout, fix smooth manifolds \(X\), \(Y\), with atlases \(\{\varphi_\alpha : U_\alpha \to V_\alpha\}\) and \(\{\psi_\beta : S_\beta \to T_\beta\}\) respectively.
+
+\begin{definition}
+    [smooth map] A continuous map \(F : X \to Y\) is smooth if for all \(\alpha\), \(\beta\), 
+
+    \[\psi_\beta \circ F \circ \varphi_\alpha^{-1} : \varphi_\alpha(U_\alpha \cap F^{-1}(S_\beta)) \to T_\beta\]
+
+    is smooth.
+\end{definition}
+
+\begin{lemma}
+    Smoothness is local. That is, if \(F : X \to Y\) is smooth, and \(U \subseteq X\) is open, then \(F\vert_U\) is also smooth.
+\end{lemma}
+
+\begin{lemma}
+    The composition of smooth maps is smooth.
+\end{lemma}
+
+\begin{definition}
+    [diffeomorphism]
+
+    A diffeomorphism is a smooth map \(F : X \to Y\) with a smooth inverse.
+\end{definition}
+
+\subsection{Tangent spaces}
+
+Throughout, let \(X\) be a smooth \(n\)-manifold.
+
+\begin{definition}
+    [curve based at a point]
+
+    Let \(X\) be a manifold, \(p \in X\), then a curve based at \(p\) is a smooth map \(\gamma : I \to X\), where \(I \subseteq \R\) is an open interval containing \(0\), and \(\gamma(0) = p\).
+\end{definition}
+
+\begin{definition}
+    [agree to first order] Given curves \(\gamma_1, \gamma_2\) at \(p\), we say that they agree to first order if there exists a chart \(\varphi\) near \(p\), such that \((\varphi \circ \gamma_1)'(0) = (\varphi \circ \gamma_2)'(0)\) in \(\R^n\).
+
+    Write \(\pi_p^\varphi\) for the map \(\gamma \to (\varphi \circ \gamma)'(0)\).
+\end{definition}
+
+\begin{lemma}
+    Agreement to first order is independent of the choice of charts. Moreover, it is an equivalence relation.
+\end{lemma}
+
+\begin{definition}
+    [tangent space] The tangent space of \(X\) at \(p\) is
+
+    \[\TT_pX = \frac{\left\{\text{curves based at }p\right\}}{\text{agreement to first order}}\]
+
+    Elements of \(\TT_pX\) are called tangent vectors at \(p\), and we write \([\gamma]\) for the equivalence class of \(\gamma\).
+\end{definition}
+
+\begin{proposition}
+    \(\TT_pX\) is an \(n\)-dimensional vector space.
+\end{proposition}
+
+\begin{proof}
+    Given a chart \(\varphi\) at \(p\), \(\pi_p^\varphi\) induces an injective map \(\pi_p^\varphi : \TT_pX \to \R^n\). We want to show that this is surjective.
+
+    Given \(v \in \R^n\), let \(\gamma(t) = \varphi^{-1}(\varphi(p) + tv)\). Then \(\pi_p^\varphi([\gamma]) = v\), so \(\pi_p^\varphi\) is surjective.
+
+    Therefore, we can transport the \(\R\)-vector space structure using \(\pi_p^\varphi\).
+\end{proof}
+
+\begin{definition}
+    [basis of the tangent space]
+
+    Let \(\varphi\) be a chart at \(p\), with corresponding local coordinates \(x_1, \dots, x_n\), define
+
+    \[\pdv{x_i} = (\pi_p^\varphi)^{-1}(e_i) \in \TT_pX\]
+
+    where \(e_i\) is the \(i\)-th standard basis vector in \(\R^n\).
+\end{definition}
+
+\begin{remark}
+    \(\pdv{x_i}\) depends on the whole set of coordinates \(x_1, \dots, x_n\).
+\end{remark}
+
+\begin{lemma}
+    On overlaps of charts,
+
+    \[\pdv{y_i} = \sum_{j=1}^n \pdv{x_j}{y_i}\pdv{x_j}\]
+\end{lemma}
+
+\subsection{Derivatives of smooth maps}
+
+Fix manifolds \(X, Y\), with a smooth map \(F : X \to Y\).
+
+\begin{definition}
+    [derivative] The derivative of \(F\) at \(p \in X\) is the linear map
+
+    \[\DD_pF : \TT_pX \to \TT_{F(p)}Y\]
+
+    given by \(\DD_pF([\gamma]) = [F \circ \gamma]\).
+\end{definition}
+
+\begin{lemma}
+    \(\DD_pF\) is well defined and linear.
+\end{lemma}
+
+\begin{lemma}
+    [chain rule]
+
+    Suppose we have smooth maps \(F : X \to Y, G : Y \to Z\), then \(G \circ F\) is smooth, with
+
+    \[\DD_p(G \circ F) = \DD_{F(p)}G \circ \DD_pF\]
+\end{lemma}
+
+\begin{definition}
+    [immersion, submersion, local diffeomorphism]
+
+    A smooth map \(X \to Y\) is an immersion (submersion, local diffeomorphism) (at a point \(p\)) if \(\DD_pF\) is injective (surjective, bijective) (at \(p\)).
+\end{definition}
+
+\begin{definition}
+    [reguular point, regular value]
+
+    \(p \in X\) is a regular point for \(F : X \to Y\) if \(F\) is a submersion at \(p\). \(q \in X\) is a regular value for \(F : X \to Y\) if for all \(p \in F^{-1}(q)\), \(F\) is a submersion at \(p\).
+
+    If \(p \in X\) is not a regular point, then it is a critical point. Similarly, if \(q \in Y\) is not a regular value, then it is a critical value.
+\end{definition}
+
+\begin{lemma}
+    Suppose \(F : X \to Y\) is a local diffeomorphism at \(p\). Then there exists open sets \(U, V\) of \(p, F(p)\) respectively, such that \(F : U \to V\) is a diffeomorphism.
+\end{lemma}
+
+\begin{lemma}
+    [local immersion]
+
+    Suppose \(F : X \to Y\) is an immersion at \(p\). Given local coordinates \(x_1, \dots, x_n\) on \(X\), there exists local coordinates \(y_1, \dots, y_m\) on \(Y\), such that locally, \(F\) looks like the inclusion
+
+    \[\R^n = \R^n \oplus 0 \hookrightarrow \R^m\]
+\end{lemma}
+
+\begin{lemma}
+    [local submersion]
+
+    Suppose \(F : X \to Y\) is a submersion at \(p\). Given local coordinates \(y_1, \dots, y_m\) on \(Y\), there exists local coordinates \(x_1, \dots, x_n\) on \(X\), such that locally, \(F\) looks like the projection
+
+    \[\R^n \to \R^m = \R^m \oplus 0\]
+\end{lemma}
+
+\subsection{Submanifolds}
+
+Throughout, let \(X\) be an \(n\)-manifold.
+
+\begin{definition}
+    [submanifold] A subset \(Z \subseteq X\) is a submanifold of codimension \(k\) if for all \(p \in Z\), there exists local coordinates \(x_1, \dots, x_n\) on \(X\) about \(p\), such that \(Z\) is locally given by
+
+    \[\{x_1= \dots = x_k = 0\}\]
+
+    We say that \(Z\) is properly embedded if the above holds for all \(p \in X\).
+\end{definition}
+
+\begin{lemma}
+    Let \(x_1, \dots, x_n\) be as above. Then \(x_{k+1},\dots, x_n\) define local coordinates on \(Z\), making it into a smooth \((n-k)\)-manifold. Moreover, the inclusion map \(\iota : Z \hookrightarrow X\) is an immersion, and a homeomorphism onto its image.
+\end{lemma}
+
+\begin{definition}
+    [embedding] A smooth map \(F : X \to Y\) is an embedding if it is an immersion and a homeomorphism onto its image.
+\end{definition}
+
+\begin{lemma}
+    The image of an embedding \(F : X \to Y\) is a submanifold of \(Y\), which is diffeomorphic to \(X\).
+\end{lemma}
+
+\begin{proposition}
+    Suppose \(F : X \to Y\) is a smooth map, \(q \in Y\) a regular value of \(F\), then \(F^{-1}(q)\) is a submanifold of \(X\), of codimension \(\dim(Y)\).
+\end{proposition}
+
+\begin{theorem}
+    [Sard] The set of critical values of \(F : X \to Y\) has measure zero in \(Y\).
+\end{theorem}
+
+\begin{corollary}
+    The set of regular values is dense in \(Y\).
+\end{corollary}
+
+\begin{remark}
+    Note on the other hand that regular points need not exist.
+\end{remark}
+
+\begin{definition}
+    [transverse]
+
+    Submanifolds \(Y, Z\) of \(X\) are transverse if for all \(p \in Y \cap Z\),
+
+    \[\TT_pX = \TT_p Y + \TT_pZ\]
+\end{definition}
+
+\begin{proposition}
+    If \(Y, Z\) are submanifolds of codimension \(k, l\) respectively, intersecting transversally, then \(Y \cap Z\) is a submanifold of codimension \(k+l\).
+\end{proposition}

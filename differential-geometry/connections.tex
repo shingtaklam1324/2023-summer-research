@@ -1,0 +1,128 @@
+\section{Connections on vector bundles}
+
+\subsection{Connections}
+
+\begin{definition}
+    [\(E\)-valued \(r\)-form] Given a vector bundle \(E\) over \(B\), and \(E\)-valued \(r\)-form is a section of
+
+    \[E \otimes \Lambda^r \TT^* B\]
+\end{definition}
+
+\begin{definition}
+    [\(V\)-valued \(r\)-form]
+
+    Given a vector space \(V\), a \(V\)-valued \(r\)-form is a \(\underline V\)-valued \(r\)-form.
+\end{definition}
+
+\begin{notation}
+    Write \(\Omega^r(E)\) for the space \(E\) valued \(r\)-forms, and \(\Gamma(E) = \Omega^0(E)\) for the space of sections of \(E\). 
+\end{notation}
+
+\begin{notation}
+    Let \(\gl(k, \R)\) be the vector space of \(k\times k\) real matrices.
+\end{notation}
+
+\begin{definition}
+    [connection] Let \(E \to B\) be a vector bundle. A connection \(\mcA\) on \(E\) is
+    \begin{enumerate}
+        \item for each trivialisation \(\Phi_\alpha : \pi^{-1}(U_\alpha) \to U_\alpha \times \R^k\), we have a \(\gl(k, \R)\) valued \(1\)-form \(A_\alpha\) on \(U_\alpha\),
+        \item such that on overlaps,
+        \[A_\alpha = g_{\beta\alpha}^{-1}A_\beta g_{\beta\alpha} + g_{\beta\alpha}^{-1}\dd g_{\beta\alpha}\]
+    \end{enumerate}
+\end{definition}
+
+\begin{definition}
+    [covariant derivative]
+
+    Given a connection \(\mcA\) on \(E\), the covariant derivative of \(s \in \Gamma(E)\) is the \(E\)-valued \(1\)-form \(\dd^\mcA s\), given under \(\Phi_\alpha\) by
+
+    \[\dd^\mcA s = \dd v_\alpha + A_\alpha v_\alpha\]
+
+    where \(v_\alpha = \pr_2 \circ \Phi_\alpha \circ s\vert_{U_\alpha}\) is the \(\R^k\)-valued function given by \(s\).
+\end{definition}
+
+\begin{definition}
+    [horizontal, covariantly constant]
+
+    A section \(s \in \Gamma(E)\) is horizontal, or covariantly constant, if \(\dd^\mcA s = 0\).
+\end{definition}
+
+\begin{lemma}
+    Given a connection \(\mcA\) on \(E \to B\), the covariant derivative \(\dd^\mcA : \Gamma(E) \to \Omega^1(E)\) is \(\R\)-linear, and satisfies the Leibniz rule
+
+    \[\dd^\mcA(f \cdot s) = f \cdot \dd^\mcA s + s \otimes \dd f\]
+
+    Conversly, any linear map satisfying the Leibniz rule defines a connection.
+\end{lemma}
+
+\begin{lemma}
+    Any vector bundle \(E \to B\) admits a connection.
+\end{lemma}
+
+\begin{definition}
+    [\(\End(E)\)] Let \(E \to B\) be a vector bundle. Then define
+
+    \[\End(E) = E \otimes E^\vee\]
+\end{definition}
+
+\begin{proposition}
+    A section \(M\) of \(\End(E)\) is the same as a smooth map \(M_\alpha : U_\alpha \to \gl(k, \R)\) for all \(\alpha\), such that on overlaps,
+
+    \[M_\beta = g_{\beta\alpha}M_\alpha g_{\beta\alpha}^{-1}\]
+\end{proposition}
+
+\begin{proposition}
+    If \(\mcA\) is a connection on \(E\), and \(\Delta\) is an \(\End(E)\)-valued \(1\)-form, then we can define a connection \(\mcA + \Delta\) in trivialisations by \(A_\alpha + \Delta_\alpha\). Moreover, any connection on \(E\) is of this form. Therefore, the space of connections on \(E\) is an affine space modelled on \(\Omega^1(\End(E))\).
+\end{proposition}
+
+\subsection{Curvature}
+
+Fix a vector bundle \(E \to B\), with a connection \(\mcA\).
+
+\begin{definition}
+    [exterior covariant derivative] The exterior covariant derivative \(\dd^\mcA : \Omega^\bullet(E) \to \Omega^{\bullet + 1}(E)\) is the unique \(\R\)-linear extension of \(\dd^\mcA : \Gamma(E) \to \Omega^1(E)\) such that
+
+    \[\dd^\mcA(\sigma \wedge \omega) = (\dd^\mcA \sigma)\wedge \omega + (-1)^r\sigma \wedge \dd\omega\]
+
+    for \(E\)-valued \(r\)-form \(\sigma\), and a differential form \(\omega\). In trivialisations, \(\sigma\) is an \(\R^k\)-valued \(r\) form \(\sigma_\alpha\), and 
+
+    \[\dd^\mcA\sigma = \dd \sigma_\alpha + A_\alpha \wedge \sigma_\alpha\]
+\end{definition}
+
+\begin{proposition}
+    There is a unique \(\End(E)\)-valued \(2\)-form \(F\) such that for any \(E\)-valued form \(\sigma\), we have that
+
+    \[(\dd^\mcA)^2\sigma = F\wedge\sigma\]
+\end{proposition}
+
+\begin{definition}
+    [curvature]
+
+    \(F\) in the above proposition is called the curvature of \(\mcA\). \(\mcA\) is flat if \(F = 0\).
+\end{definition}
+
+\subsection{Parallel transport}
+
+Fix a vector bundle \(E \to [0, 1]\) with connection \(\mcA\).
+
+\begin{lemma}
+    For each \(s_0 \in E_0\), there exists a unique horizontal section \(s\) of \(E\), with \(s(0) = s_0\). Moreover, \(s\) depends linearly on \(s_0\).
+\end{lemma}
+
+\begin{definition}
+    [parallel transport] The parallel transport of \(s_0\) from \(0\) to \(1\) is the element \(s(1) \in E_1\). Since \(s\) depends linearly on \(s_0\), parallel transport defines a linear map \(E_0 \to E_1\).
+\end{definition}
+
+Now suppose \(E \to B\) is any vector bundle, \(\gamma : [0, 1] \to B\) is a curve. Let \(\mcA\) be a connection on \(E \to B\).
+
+\begin{definition}
+    [pullback connection]
+
+    We can define a connection \(\gamma^*\mcA\) on \(\gamma^*E\) via the \(\gl(k, \R)\) valued \(1\)-forms \(\gamma^*A_\alpha\).
+\end{definition}
+
+\begin{definition}
+    [horizontal lift, parallel transport, holonomy] Given \(s_0 \in E_{\gamma(0)}\), the horizontal lift of \(\gamma\) with respect of \(\mcA\), at \(s_0\) is the unique horizontal section of \(\gamma^*E\) starting at \(s_0\).
+
+    Parallel transport along \(\gamma\) is the linear map \(\mcP_\gamma : E_{\gamma(0)} \to E_{\gamma(1)}\) given by \(\mcP_\gamma(s_0) = s(1)\). If \(\gamma\) is a loop, then \(\mcP_\gamma\) is the holonomy of \(\mcA\) along \(\gamma\).
+\end{definition}

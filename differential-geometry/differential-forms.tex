@@ -1,0 +1,168 @@
+\section{Differential forms}
+
+\subsection{Exterior derivative}
+
+\begin{definition}
+    [exterior derivative]
+
+    Let \(\alpha\) be a \(p\)-form, say \(\alpha = \alpha_I \dd x^I\). Then define the exterior derivative by
+
+    \[\dd \alpha = \dd \alpha_I \wedge \dd x^I = \pdv{\alpha_I}{x^j}\dd x^j \wedge \dd x^I\]
+\end{definition}
+
+\begin{proposition}
+    The exterior derivative is well defined. That is, it is independent of the choice of local coordinates. Moreover,
+
+    \begin{enumerate}[(i)]
+        \item it is \(\R\)-linear,
+        \item it agrees with the differential on \(0\)-forms,
+        \item \(d^2 = 0\),
+        \item if \(F : X \to Y\) smooth, \(\alpha\) is a \(p\)-form on \(Y\), then
+        \[F^*(\dd\alpha) = d(F^*\alpha)\]
+        \item given a \(p\)-form \(\alpha\) and a \(q\)-form \(\beta\),
+        \[\dd(\alpha\wedge\beta) = \dd \alpha \wedge \beta + (-1)^p \alpha \wedge \dd\beta\]
+    \end{enumerate}
+\end{proposition}
+
+\subsection{de Rham cohomology}
+
+\begin{definition}
+    [closed, exact] A differential form \(\alpha\) is closed if \(\dd\alpha = 0\), and \(\alpha\) is exact if \(\alpha = \dd\beta\) for some \(\beta\). We write \(Z^r(X), B^r(X) \subseteq \Omega^r(X)\) for the spaces of closed and exact \(r\)-forms respectively. 
+\end{definition}
+
+\begin{definition}
+    [de Rham cohomology] The \(r\)-th de Rham cohomology group of \(X\) is
+
+    \[\Hdr^r(X) = \frac{Z^r(X)}{B^r(X)}\]
+
+    which is well defined as \(d^2 = 0\).
+\end{definition}
+
+\begin{remark}
+    \(\Hdr^r(X) = 0\) for \(r > \dim(X)\), as there are no \(r\) forms in that case. Furthermore, \(\Hdr^r(X) = 0\) for \(r < 0\), by convention.
+\end{remark}
+
+\begin{proposition}
+    [functoriality] Suppose \(F : X \to Y\) is smooth. Then \(F^*\) induces a linear map
+
+    \[F^* : \Hdr^r(Y) \to \Hdr^r(X)\]
+\end{proposition}
+
+\begin{proposition}
+    The wedge product descends to \(\Hdr^*(X)\), making it into a unital graded-commutative associative algebra.
+\end{proposition}
+
+\begin{corollary}
+    The map \(F^* : \Hdr^*(Y) \to \Hdr^*(X)\) is a unital algebra homomorphism.
+\end{corollary}
+
+\begin{proposition}
+    [homotopy invariance]
+
+    Suppose \(F_0, F_1 : X \to Y\) are smoothly homotopic. Then the induced maps \(F_0^*, F_1^* : \Hdr^*(Y) \to \Hdr^*(X)\) are equal.
+\end{proposition}
+
+\begin{corollary}
+    If \(F : X \to Y\) is a smooth homotopy equivalence, then the induced map \(F^* : \Hdr^*(Y) \to \Hdr^*(X)\) is an isomorphism.
+\end{corollary}
+
+\subsection{Orientations}
+
+\begin{definition}
+    [orientation of a vector space] For a vector space \(V\), an orientation of \(V\) is a nonzero element of \(\Lambda^nV\), up to rescaling by positive scalars, where \(n = \dim(V)\).
+\end{definition}
+
+\begin{definition}
+    [orientation of a vector bundle] An orientation of a rank \(k\) vector bundle \(E \to X\) is a nowhere zero section of \(\Lambda^rE\), again up to rescaling by positive scalars.
+\end{definition}
+
+\begin{definition}
+    [orientation of a manifold] An orientation of a manifold \(X\) is an orientation of the tangent bundle \(\TT X\).
+\end{definition}
+
+\begin{definition}
+    [volume form] A volume form on an \(n\)-manifold \(X\) is a nowhere zero \(n\)-form, i.e. a nowhere zero section of \(\Lambda^n\TT^*X\).
+\end{definition}
+
+\begin{proposition}
+    Volume forms and orientations are equivalent.
+\end{proposition}
+
+\subsection{Integration}
+
+\begin{definition}
+    [partition of unity] Given an open cover \(\{U_\alpha\}\) of \(X\), a partition of unity subordinate to the cover is a collection of smooth functions \(p_\alpha : X \to \R_{\ge 0}\), such that
+
+    \begin{enumerate}[(i)]
+        \item \(\Supp(p_\alpha) \subseteq U_\alpha\),
+        \item the collection is locally finite. That is, for all \(x \in X\), there exists an open neighbourhood \(V\) of \(x\), such that all but finitely many \(p_\alpha\) is zero on \(V\),
+        \item \(\sum_\alpha p_\alpha = 1\).
+    \end{enumerate}
+\end{definition}
+
+\begin{lemma}
+    For any open cover \(\{U_\alpha\}\), there exists a partition of unity subordinate to the cover.
+\end{lemma}
+
+\begin{definition}
+    [integral] Let \(X\) be an oriented \(n\)-manifold, \(\omega\) a compactly supported \(n\) form on \(X\). Then the integral of \(\omega\), \(\int_X\omega\) is defined by
+
+    \begin{enumerate}
+        \item Cover \(X\) by coordinate neighbourhoods \(\{U_\alpha\}\), with coordinates \(x_\alpha^1, \dots, x_\alpha^n\). Without loss of generality, suppose the \(x_\alpha^i\) are positively oriented, that is, \(\partial_{x_\alpha^1} \wedge \dots \wedge \partial_{x_\alpha^n}\) represents the orientation.
+        \item Choose a subordinate partition of unity \(\{p_\alpha\}\).
+        \item On each \(U_\alpha\), \(p_\alpha\omega = f_\alpha \dd x_\alpha^1 \wedge \dots \wedge \dd x_\alpha^n\), where \(f_\alpha\) is a smooth function.
+        \item \[\int_X\omega = \sum_\alpha \int_{\R^n}f_\alpha \dd x_\alpha^1\cdots\dd x_\alpha^n\]
+    \end{enumerate}
+
+    where the integral on the right hand side is the usual integral on \(\R^n\).
+\end{definition}
+
+\begin{lemma}
+    The integral is well defined.
+\end{lemma}
+
+\subsection{Stokes' theorem}
+
+\begin{definition}
+    [smooth manifold with boundary] A smooth \(n\)-manifold with boundary is as defined as a manifold, except the codomain of each chart is an open set in \(\R_{\ge 0} \times \R^{n-1}\).
+\end{definition}
+
+\begin{definition}
+    [interior, boundary] Let \(X\) be a manifold with boundary, \(p \in X\). Then if we have a chart \(\varphi : U \to V\) near \(p\), if \(\varphi(p) \in \{0\} \times \R^{n-1}\), then we say that \(p\) is a boundary point, \(p \in \partial X\). Otherwise, \(p\) is an interior point, \(p \in \Int(X)\).
+\end{definition}
+
+\begin{lemma}
+    The boundary and interior are well defined, i.e. independent of choice of charts.
+\end{lemma}
+
+We can define smooth maps and smooth functions as for manifolds.
+
+\begin{definition}
+    [orientation on boundary] Suppose \(X\) is an oriented \(n\)-manifold with boundary, then we can orient \(\partial X\) as follows.
+
+    Given \(p \in \partial X\), choose \(\mfo_X \in \Lambda^nX\) representing the orientation of \(X\). Choose a vector \(\bf n \in \TT_p X\) transverse to \(\partial X\) and pointing outwards. Then orient \(\partial X\) with the orientation \(\mfo_{\partial X}\) such that
+
+    \[\mfo_X = \bf n \wedge \mfo_{\partial X}\]
+\end{definition}
+
+\begin{theorem}
+    [Stokes' theorem] Given an oriented \(n\)-manifold with boundary \(X\), and a compactly supported \((n-1)\)-form \(\omega\) on \(X\), then
+
+    \[\int_X \dd \omega = \int_{\partial X}\omega\]
+\end{theorem}
+
+\begin{proposition}
+    [integration by parts]
+
+    Given an oriented \(n\)-manifold with boundary \(X\), a \(p-1\) form \(\alpha\) and an \(n-p\) form \(\beta\) on \(X\), at least one of which is compactly supported. Then
+
+    \[\int_X(\dd\alpha)\wedge \beta = \int_{\partial X}\alpha \wedge \beta + (-1)^p \int_X\alpha \wedge \dd\beta\]
+\end{proposition}
+
+\begin{proposition}
+    If \(X\) is a compact oriented \(n\)-manifold, then integration over \(X\) defines a linear map \(\int_X : \Hdr^n(X) \to \R\).
+\end{proposition}
+
+\begin{corollary}
+    Suppose \(X\) is a compact orientable \(n\)-manifold. Then \(\Hdr^n(X) \ne 0\).
+\end{corollary}

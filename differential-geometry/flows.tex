@@ -1,0 +1,117 @@
+\section{Flows and the Lie Derivative}
+
+\subsection{Flows}
+
+Let \(v\) be a vector field on \(X\).
+
+\begin{definition}
+    [integral curve] An integral curve of \(v\) is a smooth curve \(\gamma : (-\epsilon, \epsilon) \to X\), such that
+
+    \[\dot\gamma(t) = v(\gamma(t))\]
+\end{definition}
+
+\begin{definition}
+    [local flow]
+
+    A local flow of \(v\) is a smooth map \(\Phi : U \to X\), where
+
+    \begin{enumerate}
+        \item \(U \subseteq X \times \R\) is an open neighbourhood of \(X \times 0\), and \(U \cap \{p\} \times \R\) is connected for all \(p \in X\).
+        \item \(\Phi(\cdot, 0) = \id\),
+        \item \(\dv{t}\Phi(p, t) = v(\Phi(p, t))\) for all \((p, t) \in U\).
+    \end{enumerate}
+
+    We will write \(\Phi^t = \Phi(\cdot, t)\).
+\end{definition}
+
+\begin{lemma}
+    Local flows always exist.
+\end{lemma}
+
+\begin{lemma}
+    Any local flow \(\Phi : U \to X\) of \(v\) satisfies \(\Phi^s \circ \Phi^t = \Phi^{s + t}\), whenever this makes sense.
+\end{lemma}
+
+\begin{definition}
+    [complete vector field]
+
+    A vector field \(v\) is complete if it admits a global flow, i.e. a flow defined on \(X \times \R\).
+\end{definition}
+
+\begin{lemma}
+    Compactly supported vector fields are complete.
+\end{lemma}
+
+\subsection{Lie derivative}
+
+Let \(v\) be a vector field, with flow \(\Phi\).
+
+\begin{definition}
+    [Lie derivative]
+
+    The Lie derivative of a tensor \(T\) along \(v\) is
+
+    \[\mcL_vT = \dv{t}\bigg\vert_{t=0}(\Phi^t)^*T\]
+\end{definition}
+
+\begin{remark}
+    The brackets in the above expression is
+
+    \[\dv{t}\bigg\vert_{t=0}\left((\Phi^t)^*T\right)\]
+\end{remark}
+
+\begin{lemma}
+    For general \(t\), we have
+
+    \[\dv{t}(\Phi^t)^*T = (\Phi^t)^*\mcL_vT\]
+\end{lemma}
+
+\begin{lemma}
+    If \(f\) is a function on \(X\), then \(\mcL_v(f) = \dd f(v)\). If \(\alpha = \alpha_i \dd x^i\) is a \(1\)-form, then
+
+    \[\mcL_v\alpha = \left(v^j\pdv{\alpha_i}{x_j} + \alpha_j\pdv{v_j}{x^i}\right)\dd x^i\]
+\end{lemma}
+
+\begin{lemma}
+    For a vector field \(w\), and a \(1\)-form \(\alpha\), we have
+
+    \[\mcL_v(w^i\alpha_i) = (\mcL_v w)^i \alpha_i + w^i(\mcL_v\alpha)_i\]
+
+    and if \(S, T\) are tensors, then
+
+    \[\mcL_v(S \otimes T) = (\mcL_v S)\otimes T + S \otimes (\mcL_v T)\]
+\end{lemma}
+
+\begin{corollary}
+    If \(v, w\) are vector fields, then
+
+    \[\mcL_v(w) = \left(v^j \pdv{w^i}{x^j} - w^j\pdv{v^i}{x^j}\right)\dd x^i\]
+\end{corollary}
+
+\begin{definition}
+    [Lie bracket]
+
+    The Lie bracket of vector fields \(v, w\) is
+
+    \[[v, w] = \mcL_vw = -\mcL_w v\]
+
+    This makes the space of vector fields on \(X\) into a Lie algebra.
+\end{definition}
+
+\begin{lemma}
+    Let \(F : X \to Y\) be a diffeomorphism, \(v\) a vector field on \(Y\), \(T\) a tensor on \(Y\), then
+
+    \[F^*(\mcL_vT) = \mcL_{F^*v}(F^*T)\]
+\end{lemma}
+
+\begin{definition}
+    Given a vector field \(v\), and an \(r\)-form \(\alpha\), \(\iota_v\alpha\) or \(v\lrcorner\alpha\) is the \((r-1)\)-form defined by
+
+    \[(\iota_v\alpha)_{i_1\cdots i_{r-1}} = v^j\alpha_{ji_1\cdots i_{r-1}}\]
+\end{definition}
+
+\begin{proposition}
+    [Cartan's magic formula]
+
+    \[\mcL_v\alpha = \dd(\iota_v\alpha) + \iota_v(\dd\alpha)\]
+\end{proposition}

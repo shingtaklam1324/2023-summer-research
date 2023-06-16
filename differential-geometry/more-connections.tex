@@ -1,0 +1,79 @@
+\section{More connections}
+
+\subsection{Tangent bundle}
+
+Suppose \(\mcA\) is a connection on \(\TT X \to X\).
+
+\begin{definition}
+    [Coordinate trivialisations]
+
+    Given local coordinates \(x^1, \dots, x^n\) on \(X\), we have a corresponding trivialisation \(\partial_{x^1}, \dots, \partial_{x^n}\) of \(\TT X\), known as the coordinate trivialisation. We write the components of the local trivialisation \(1\)-form as \(\Gamma^i_{\phantom{i}jk}\), where the \({}_k\) is the \(1\)-form index, and \({}^i_{\phantom ij}\) are the \(\gl(n, \R)\) indices.
+\end{definition}
+
+\begin{remark}
+    The \(\Gamma^i_{\phantom ijk}\) do \emph{not} give a tensor of type \((1, 2)\).
+\end{remark}
+
+\begin{definition}
+    [Solder form] The Solder form is the \(\TT X\)-valued \(1\)-form \(\theta\), given by the fibrewise identity map, under the identification
+    
+    \[\TT X \otimes \TT^* X = \End(\TT X)\]
+
+    In coordinate trivialisations, \(\theta\) is given by \(e_i \otimes \dd x^i\).
+\end{definition}
+
+\begin{definition}
+    [torsion] The torsion \(T\) of \(\mcA\) is the \(E\)-valued \(2\)-form \(\dd^\mcA\theta\), given in coordinate trivialisations by
+
+    \[\dd(e_i \otimes \dd x^i) + A_\alpha \wedge (e_l \otimes \dd x^l) = \Gamma^{i}_{\phantom i lk}e_i\otimes \dd x^k \wedge \dd x^l\]
+
+    \(\mcA\) is torsion free if \(T = 0\).
+\end{definition}
+
+\begin{proposition}
+    [First Bianchi identity]
+
+    \[\dd^\mcA T = F\wedge\theta\]
+\end{proposition}
+
+\begin{definition}
+    [geodesic] A curve \(\gamma\) in \(X\) is a geodesic if \(\dot\gamma\) is horizontal as a section of \(\gamma^* \TT X\), i.e. if and only if the geodesic equation
+
+    \[\ddot\gamma^i + \Gamma^i_{\phantom ijk}\dot\gamma^j\dot\gamma^k = 0\]
+
+    holds.
+\end{definition}
+
+\subsection{Orthogonal vector bundles}
+
+Let \(E \to B\) be a vector bundle of rank \(k\).
+
+\begin{definition}
+    [inner product] An inner product on \(E\) is a section \(g\) of \(E^\vee \otimes E^\vee\), which is a fibrewise symmetric positive definite bilinear form.
+\end{definition}
+
+\begin{lemma}
+    \(E\) admits an inner product.
+\end{lemma}
+
+\begin{definition}
+    [orthogonal vector bundle, orthogonal trivialisation] An orthogonal vector bundle is a vector bundle with an inner product \(g\). An orthogonal trivialisation is a trivialisation where \(g\) is the standard inner product on \(\R^k\).
+\end{definition}
+
+Fix an inner product \(g\) on \(E\).
+
+\begin{lemma}
+    \(E\) can be covered by orthogonal trivialisations.
+\end{lemma}
+
+\begin{definition}
+    [orthogonal connection] A connection \(\mcA\) on \(E\) is orthogonal if \(g\) is covariantly constant using the induced connection on \(E^\vee \otimes E^\vee\).
+\end{definition}
+
+\begin{lemma}
+    Orthogonal connections exist, and form an affine space for \(\Omega^1(\mfo(E))\), where \(\mfo(E)\) is the bundle of skew-adjoint endomorphisms of the fibres of \(E\).
+\end{lemma}
+
+\begin{lemma}
+    The curvature of an orthogonal connection is an \(\mfo(E)\) valued \(2\)-form.
+\end{lemma}
