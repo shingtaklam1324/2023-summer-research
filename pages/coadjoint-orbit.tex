@@ -1,0 +1,310 @@
+\documentclass{article}
+
+\usepackage{../Style}
+
+\title{KKS forms on Lie groups}
+\author{Shing Tak Lam}
+
+\newcommand{\su}{\mfs\mfu}
+\renewcommand{\sl}{\mfs\mfl}
+\DeclareMathOperator{\SU}{SU}
+
+\DeclareMathOperator{\GA}{GA}
+\newcommand{\ga}{\mfg\mfa}
+
+\begin{document}
+
+\maketitle
+
+We compute some examples of the KKS form on some Lie groups.
+
+\section{\(\SU(2)\)}
+
+Define the following complex matrices
+
+\[\bf{1} = \begin{pmatrix}
+1 & 0 \\
+0 & 1
+\end{pmatrix} \quad \bf{i} = \begin{pmatrix}
+    0 & -1 \\
+    1 & 0
+\end{pmatrix} \quad \bf{j} = \begin{pmatrix}
+    0 & -i \\
+    -i & 0 
+\end{pmatrix} \quad \bf{k} = \begin{pmatrix}
+    i & 0 \\
+    0 & -i
+\end{pmatrix}\]
+
+Let \(\bb H = \Span_{\R}\left\{\bf 1, \bf i, \bf j, \bf k\right\}\) be the \emph{quaternions}. For \(q = w + x\bf i + y \bf j + z \bf k\), define \(\overline q = w - x\bf i - y \bf j - z \bf k\) for its \emph{conjugate}, and \(\abs{q} = \sqrt{q\overline q} = \sqrt{w^2 + x^2 + y^2 + z^2}\) for its absolute value.
+
+With this in mind, we have that \(\SU(2)\) is the unit ball in \(\bb H\), i.e.
+
+\[\SU(2) = \left\{q \in \bb H \mid \abs{q} = 1\right\} = \left\{\cos(\theta) + \sin(\theta)(x\bf i + y\bf j + z \bf k) \mid (x, y, z) \in S^2\right\}\]
+
+Let \(\su(2)\) be the Lie algebra of \(\SU(2)\). In fact,
+
+\[\su(2) = \Span_{\R}\{\bf i, \bf j, \bf k\}\]
+
+with the Lie bracket given by \([A, B] = AB - BA\). We can define an isomorphism \(\varphi : \R^3 \to \su(2)\) of vector spaces, by
+
+\[\varphi(x, y, z) = x\bf i + y\bf j + z\bf k\]
+
+Let \(e_1, e_2, e_3\) be the standard basis of \(\R^3\), and \(\wedge\) the standard vector product in \(\R^3\).
+
+\begin{proposition}
+    \leavevmode
+    \begin{enumerate}
+        \item For \(u, v \in \R^3\), \([\varphi(u), \varphi(v)] = 2\varphi(u \wedge v)\).
+        \item For \(u \in \R^3\), \(\norm{u}^2 = \det(\varphi(u))\),
+        \item For \(u, v \in \R^3\), with the standard Euclidean inner product, \(\inner{u, v} = \frac{1}{2}\tr(\varphi(u)^*\varphi(v))\).
+    \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    By standard quaternion relations.
+\end{proof}
+
+In particular, if we define an inner product on \(\su(2)\) by
+
+\[(A, B) = \frac{1}{2}\tr(A^*B)\]
+
+Then this defines an inner product, with the same norm as the one from the quaternions. Moreover, this makes \(\varphi\) into an isometry. Therefore, by the Riesz representation theorem (or equivalently, the dual space of a finite dimensional vector space), we know that the map \(R : \su(2) \to \su(2)^*\) given by
+
+\[R(A)(B) = (A, B)\]
+
+is a vector space isomorphism.
+
+With these identifications, we make the following convention: We use upper case letters (\(A, B, C, \dots\)) for elements of \(\su(2)\), lower case letters (\(a, b, c, \dots\)) for the corresponding (under \(\varphi\)) elements of \(\R^3\), and Greek letters (\(\alpha, \beta, \gamma, \dots\)) for elements of \(\su(2)^*\). If we have an equation where the left and right hand side belong two different spaces, we implicitly use the isomorphisms \(R\) and \(\varphi\) to identify them. \emph{However, within each formula, all the objects will belong to the same space, and we will use the isomorphisms explicitly.}
+
+\(g\) will denote an element of \(\SU(2)\).
+
+Next, we want to compute the coadjoint action of \(\SU(2)\) on \(\su(2)^*\). We know that the adjoint action is \(\Ad_g(A) = gA\overline g\). Given \(\alpha \in \su(2)^*\), \(g \in \SU(2)\), \(B \in \su(2)\), we have
+
+\[\Ad_g^*(\alpha)(B) = \alpha(\Ad_{g^{-1}}(B)) = (A, \Ad_{\overline g}(B)) = (A, \overline g B g)\]
+
+But
+
+\[(A, \overline g B g) = \frac{1}{2}\tr(A^*\overline g B g) = \frac{1}{2}\tr(gA^*\overline g B) = \frac{1}{2}\tr((gA\overline g)^*B) = (\Ad_g(A), B) = R(\Ad_g(A))(B)\]
+
+That is, \(\Ad_g^*(\alpha) = R(\Ad_g(A))\), or \(\Ad_g^* = R \circ \Ad_g \circ R^{-1}\). Hence the coadjoint orbits and the adjoint orbits in this case are the same, up to identification by \(R\).
+
+\begin{proposition}
+    For \(B \in \su(2)\), the (adjoint) orbit is
+
+    \[\mcO_B = \Orb(B) = \left\{C \in \su(2) \mid \det(B) = \det(C)\right\}\]
+
+    i.e. a sphere in \(\su(2) \simeq \R^3\).
+\end{proposition}
+
+\begin{proof}
+    Omitted. \(\subseteq\) is easy, for \(\supseteq\), we need some geometry about conjugation by quaternions and rotations.
+\end{proof}
+
+\begin{lemma}
+    For \(A, B \in \su(2)\), \(\ad_A(B) = [A, B] = 2 a \wedge b\).
+\end{lemma}
+
+Moreover, for \(A \in \su(2), \beta \in \su(2)^*\), \(\ad_A^*(\beta)(C) = \beta(-\ad_A(C)) = \beta(-[A, C])\). Therefore, if \(A \in \su(2), \beta \in \su(2)^*\), we have
+
+\[\ad_A^*(\beta) = (B, -[A, C]) = ([A, B], C) = R([A, B])(C)\]
+
+Hence if we define \(\ad_A^*(B) := \ad_A^*(\beta)\), then \(\ad_A^*(B) = [A, B] = 2a\wedge b\) as well.
+
+\begin{proposition}
+    Let \(A \in \su(2) \setminus 0\), \(r = \abs{A} = \norm{a}\). Let \(\omega\) be the KKS 2-form on \(\mcO_A\). That is, for \(B \in \mcO_A\), \(U, V \in T_B\mcO_A \subseteq \su(2)\),
+
+    \[\omega_B(\ad_U^*(B), \ad_V^*(B)) = (B, [U, V]) \tag{*}\]
+
+    Then in fact,
+
+    \[\omega_B(U, V) = -\frac{1}{2r}u \wedge v\]
+\end{proposition}
+
+\begin{proof}
+    Let \(B \in \mcO_A\). For \(U, V \in \su(2)\), (*) becomes
+
+    \[4\omega_B(u \wedge b, v \wedge b) = (B, [U, V]) = 2\inner{b, u \wedge v} \implies \omega_B(u\wedge b, v \wedge b) = \frac{1}{2}\inner{b, u \wedge v}\]
+
+    Let \(e_r = \frac{1}{r}b\) and \(e_\theta, e_\phi\) such that \(e_r, e_\theta, e_\phi\) is a positively oriented orthonormal basis of \(\R^3\). Now for \(U \in \su(2)\), \(\ad_U^*(B) = 2u\wedge b = 2ru \wedge e_r\). Therefore, we have that \(T_B\mcO_A = \Span\{E_\theta, E_\phi\}\). Let \(U, V \in T_B\mcO_A\), where \(U = u_\theta E_\theta + u_\phi E_\phi\) and \(V = v_\theta E_\theta + v_\phi E_\phi\). Then let
+
+    \[\tilde u = -\frac{u_\phi}{r}e_\theta + \frac{u_\theta}{r}e_\phi \qqtext{and}\tilde v = -\frac{v_\phi}{r}e_\theta + \frac{v_\theta}{r}e_\phi\]
+
+    With this, \(\tilde u \wedge b = u\) and \(\tilde v \wedge b = v\). Hence
+    
+    \[\omega_B(u, v) = \frac{1}{2}\inner{b, \tilde u \wedge \tilde v} = r\frac{-u_\phi v_\theta + u_\theta v_\phi}{2r^2} = -\frac{1}{2r}u \wedge v\]
+\end{proof}
+
+\section{\(\SL_2(\R)\)}
+
+Let \(\SL_2(\R)\) be the space of \(2 \times 2\) matrices with determinant \(1\). The Lie algebra \(\sl_2(\R)\) is the space of \(2 \times 2\) matrices with trace \(0\), with Lie bracket \([A, B] = AB - BA\). Define
+
+\[X = \begin{pmatrix}
+    1 & 0 \\ 0 & -1
+\end{pmatrix} \quad Y = \begin{pmatrix}
+    0 & 1 \\ 1 & 0
+\end{pmatrix} \quad Z = \begin{pmatrix}
+    0 & 1 \\ -1 & 0
+\end{pmatrix}\]
+
+Then \(X, Y, Z\) is a basis for \(\sl_2(\R)\). Define the isomorphism \(\varphi : \R^3 \to \sl_2(\R)\) by
+
+\[\varphi(a, b, c) = aX + bY + cZ\]
+
+\begin{lemma}
+    \begin{enumerate}
+        \item \(XY = -YX = Z, YZ = -ZY = X, ZX = -XZ = -Y, [X, Y] = 2Z, [Y, Z] = -2X, [Z, X] = -2Y\),
+        \item for all \(u, v\in \R^3\), \(\inner{u, v} = \frac{1}{2}\tr(\varphi(u)^\T \varphi(v))\).
+    \end{enumerate}
+\end{lemma}
+
+Therefore, we can define an inner product on \(\sl_2(\R)\) by
+
+\[(A, B) = \frac{1}{2}\tr(A^\T B)\]
+
+With this, \(\varphi\) becomes an isometry. Again by Riesz, we define the isomorphism \(R : \sl_2(\R) \to \sl_2(\R)^*\) by
+
+\[R(A)(B) = (A, B)\]
+
+With all of this, we will use the same convention as above. That is, \(A, B, C\) are elements of \(\sl_2(\R)\), \(a,b, c\) the corresponding elements (under \(\varphi\)) of \(\R^3\), and \(\alpha, \beta, \gamma\), the corresponding elements of \(\sl_2(\R)^*\). \(g\) will be an element of \(\SL_2(\R)\).
+
+Let \(g \in \SL_2(\R)\). Then
+
+\[\Ad_g^*(\alpha)(B) = \alpha(\Ad_{g^{-1}}(B)) = (A, \Ad_{g^{-1}}(B)) = (A, g^{-1}Bg)\]
+
+But
+
+\[(A, g^{-1}Bg) = \frac{1}{2}\tr(A^\T g^{-1}Bg) = \frac{1}{2}\tr(gA^\T g^{-1}B) = \frac{1}{2}\tr(((g^\T)^{-1}Ag^\T)^\T B) = (\Ad_{(g^\T)^{-1}}(A), B)\]
+
+So we have that
+
+\[\Ad_g^* = R \circ \Ad_{(g^\T)^{-1}} \circ R^{-1}\]
+
+Hence the adjoint and coadjoint orbits are the same in this case.
+
+\begin{lemma}
+    \begin{enumerate}
+        \item For all \(A \in \sl_2(\R)\), the (adjoint) orbit is
+        \[\mcO_A = \left\{gAg^{-1} \mid g \in \SL_2(\R)\right\}\]
+        \item for \(x, y, z \in \R^3\),
+        \[\det(xX + yY + zZ) = z^2 - x^2 - y^2\]
+        \item for \(g = \begin{pmatrix}
+            a & b \\ c & d
+        \end{pmatrix} \in \SL_2(\R)\),
+        \begin{align*}
+            gXg^{-1} &= (ad + cb)X + (cd - ab)Y - (ab + cd)Z \\
+            gYg^{-1} &= (-ac + bd)X + \frac{a^2 - b^2 - c^2 + d^2}{2}Y + \frac{a^2 + c^2 - b^2 - d^2}{2}Z \\
+            gZg^{-1} &= -(ac+bd)X + \frac{a^2 + b^2 - c^2 - d^2}{2}Y + \frac{a^2 + b^2 + c^2 + d^2}{2}Z
+        \end{align*}
+    \end{enumerate}
+\end{lemma}
+
+\begin{proposition}
+    The coadjoint orbits (up to identification by \(\varphi\)) are
+
+    \begin{enumerate}
+        \item \[\{x^2 + y^2 - z^2 = \lambda^2\} \quad \lambda > 0\]
+        \item \[\{x^2 + y^2 - z^2 = -\lambda^2, z > 0\} \quad \lambda \ge 0\]
+        \item \[\{x^2 + y^2 - z^2 = -\lambda^2, z < 0\} \quad \lambda \ge 0\]
+        \item \[\{0\}\]
+    \end{enumerate}
+\end{proposition}
+
+\begin{proposition}
+    Let \(A = xX + yY + zZ \in \sl_2(\R)\), and \(G_A\) be the stabiliser of the coadjoint action of \(\SL_2(\R)\). Then
+
+    \begin{enumerate}
+        \item If \(\det(A) < 0\), then \[G_A \simeq \left\{\begin{pmatrix}
+            r & 0 \\ 0 & r^{-1}
+        \end{pmatrix} \bigg\vert\ r \in \R^\times\right\} \simeq \R^\times\]
+        \item If \(\det(A) = 0\) and \(z = 0\), then \(G_A = \SL_2(\R)\),
+        \item If \(\det(A) = 0\) and \(z \ne 0\), then
+        \[G_A = \left\{\begin{pmatrix}
+            1 & a \\ 0 & 1
+        \end{pmatrix} \mid a \in \R\right\} \cup \begin{pmatrix}
+            -1 & a \\ 0 & 1
+        \end{pmatrix} \simeq \{\pm 1\} \times \R\]
+        \item if \(\det(A) > 0\), then
+        \[G_A = \left\{\begin{pmatrix}
+            \cos(\theta) & -\sin(\theta) \\
+            \sin(\theta) & \cos(\theta)
+        \end{pmatrix}\right\} \simeq S^1\]
+    \end{enumerate}
+\end{proposition}
+
+Note if \(U = xX + yY + zZ\), then \(U^\T = xX + yY - zZ\). Thus, for \(u= (x, y, z) \in \R^3\), we define \(u^t = (x, y, -z)\).
+
+\begin{lemma}
+    For \(A, B \in \sl_2(\R)\), \(\ad_A(B) = 2a^t \wedge b^t\), and \(\ad_A^*(\beta) = \ad_B(A^\T) = 2b^t \wedge a\).
+\end{lemma}
+
+We will abuse notation and define \(\ad_A^*(B) = \ad_A^*(\beta)\). Therefore, let \(A \in \sl_2(\R) \setminus 0\), and \(\omega\) be the KKS symplectic form, that is, for \(B \in \mcO_A\) and \(u, v \in T_B\mcO_A\),
+
+\[\omega_B(\ad_U^*(B), \ad_V^*(B)) = \inner{B, [U, V]}\]
+
+Say \(B = xX + yY + zZ\). Let \(r = \sqrt{x^2 + y^2}\), \(e_x, e_y, e_z\) the standard basis of \(\R^3\).
+
+If \(r \ne 0\), let \(e_r, e_\theta\) be such that \(e_r, e_\theta, e_z\) is a positively oriented orthonormal basis of \(\R^3\), and with \(B = re_r + ze_z\). Let
+
+\[\dd x = \inner{e_x, \cdot}, \dd y = \inner{e_y, \cdot}, \dd z = \inner{e_z, \cdot}, \dd r = \inner{e_r, \cdot}, \dd\theta = \frac{1}{r}\inner{e_\theta, \cdot}\]
+
+Then by a computation,
+
+\[\omega_B = \begin{cases}
+    \frac{1}{2}\dd z \wedge \dd\theta & \text{if }r \ne 0 \\
+    \frac{1}{2z} \dd x \wedge \dd y & \text{if }z \ne 0
+\end{cases}\]
+
+This is well defined, since we know that on the coadjoint orbits, \(r^2 - z^2 = c\), where \(c\) is a constant. Differentiating this, we get that, \(r\dd r = z \dd z\). Moreover, if we set
+
+\[x= r \cos(\theta + \theta_0) \quad y = r \sin(\theta + \theta_0) \quad z = z\]
+
+Then we get that \(\dd x \wedge \dd y = r \dd r \wedge \dd\theta = z \dd z \wedge \dd\theta\), so the definitions of \(\omega_B\) agree.
+
+\section{\(\GA(\R)\)}
+
+Let \(\GA(\R)\) be the affine group of \(\R\), that is, transformations of the form \(x \mapsto ax + b\), where \(a \ne 0\). We can identify \(\GA(\R)\) with \(\{(a, b) \in \R^2 \mid a \ne 0\}\), with group operations
+
+\[(a_1, b_1)\cdot (a_2, b_2) = (a_1a_1, a_1 b_2 + b_1) \quad (a, b)^{-1} = \left(\frac{1}{a}, -b\frac{b}{a}\right)\]
+
+The Lie algebra is \(\ga(\R) = \R^2\). Conjugation is given by
+
+\[C_{(a, b)}(c, d) = (c, ad - bc + b)\]
+
+Differentiating with respect to \((c, d)\) at \((1, 0)\) in the direction \((u, v) \in \ga(\R)\) gives the adjoint representation
+
+\[\Ad_{(a, b)}(u, v) = (u, av - bu)\]
+
+Differentiation this with respect to \((a, b)\) in the direction \((r, s)\) gives the Lie bracket
+
+\[[(r, s), (u, v)] = (0, rv - su)\]
+
+The adjoint orbit through \((u, v)\) is
+
+\[\begin{cases}
+    \{u\} \times \R & \text{if }(u, v) \ne (0, 0) \\
+    \{(0, 0)\} & \text{if }(u, v) = (0, 0)
+\end{cases}\]
+
+The adjoint orbit \(\{u\} \times \R\) can't be symplectic, since it is one-dimensional. Let \(e_1, e_2\) be the standard basis of \(\ga(\R) = \R^2\), and \(e^1, e^2\) be the dual basis. Computing the coadjoint orbits, we have\footnote{The inverses are by the definition of the coadjoint representation. Since we are interested in the coadjoint orbits, it won't affect anything.}
+
+\begin{align*}
+    \Ad_{(a, b)^{-1}}^*(\alpha)(ue_1 + ve_2) &= \alpha(\Ad_{(a, b)}(u, v)) \\
+    &= \alpha(u, av - bu) \\
+\end{align*}
+
+Setting \(\alpha = e^1\) and \(\alpha = e^2\), we get that
+
+\[\Ad_{(a,b)^{-1}}^*(\alpha e^1 + \beta e^2) = (\alpha - \beta b)e^1 + \beta ae^2\]
+
+Therefore, if \(\beta = 0\), then the coadjoint orbit through \(u = \alpha e^1 + \beta e^2\) is a since point. Otherwise, it is \(\R^2\) minus the \(e^2\)-axis.
+
+For \(\beta \ne 0\), \(\mu = \alpha e^1 + \beta e^2\), with \(\beta \ne 0\), the KKS formula gives\footnote{Note the \(-\)-sign.}
+
+\[\omega_\mu((r, s)_{\ga(\R)^*}(\mu), (u, v)_{\ga(\R)^*}(\mu)) = \mu([(r, s), (u, v)]) = -\beta(rv - su)\]
+
+In terms of local coordinates \((q, p)\) given by \(\ad^*\) (i.e. coordinates \((r, s) \mapsto (r, s)_{\ga(\R)^*}(\mu)\)\footnote{Computing, we find that \[(r, s)_{\ga(\R)^*}(\mu) = \beta r e^2 - \beta s e^1\]}), we have that
+
+\[\omega = \beta \dd q \wedge \dd p\]
+
+\end{document}

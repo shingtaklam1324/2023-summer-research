@@ -1,0 +1,72 @@
+\section{Exponential map}
+
+\subsection{One parameter group}
+
+Fix a Lie group \(G\), with Lie algebra \(\mfg\).
+
+\begin{lemma}
+    Any flow \(\Phi^t\) on \(G\) is complete.
+\end{lemma}
+
+\begin{definition}
+    [one parameter group] A one parameter group of a Lie group \(G\) is a homomorphism of Lie groups \(\alpha : \R \to G\).
+\end{definition}
+
+\begin{lemma}
+    The map \(\alpha \mapsto \dot\alpha(0) \in \mfg\) is a bijection.
+\end{lemma}
+
+\subsection{Exponential map}
+
+For \(\xi \in \mfg\), we have a corresponding left-invariant vector field \(\alpha_\xi\). That is, we have a one-parameter subgroup \(\alpha^\xi : \R \to G\), with \(\dot\alpha_\xi(0) = \xi\).
+
+\begin{definition}
+    [exponential map] The exponential map \(\exp : \mfg \to G\), \(\xi \mapsto \alpha_\xi(1)\), is called the exponential map.
+\end{definition}
+
+\begin{lemma}
+    \(\exp\) is differentiable, with \(\dd_0 \exp = \id\).
+\end{lemma}
+
+\begin{notation}
+    We will write
+
+    \[\exp(t\xi) = \alpha_\xi(t)\]
+\end{notation}
+
+\begin{corollary}
+    \(\exp\) is a local diffeomorphism near \(0\).
+\end{corollary}
+
+\begin{lemma}
+    [naturality] A homomorphism \(f : G \to H\) of Lie groups induces a commutative diagram
+
+    % https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXG1mZyJdLFsyLDAsIlxcbWZoIl0sWzAsMiwiRyJdLFsyLDIsIkgiXSxbMCwxLCJcXGRkXzBmIl0sWzAsMiwiXFxleHAiLDJdLFsxLDMsIlxcZXhwIl0sWzIsMywiZiIsMl1d
+\[\begin{tikzcd}
+	\mfg && \mfh \\
+	\\
+	G && H
+	\arrow["{\dd_ef}", from=1-1, to=1-3]
+	\arrow["\exp"', from=1-1, to=3-1]
+	\arrow["\exp", from=1-3, to=3-3]
+	\arrow["f"', from=3-1, to=3-3]
+\end{tikzcd}\]
+\end{lemma}
+
+\begin{proof}
+    \(f \circ \exp(t\xi)\) is a one-parameter group, with
+
+    \[\dd_0\left(f \circ \exp(t\xi)\right) = \dd_ef \circ \dd_0 \exp (\xi) = \dd_ef(\xi)\]
+\end{proof}
+
+\begin{corollary}
+    A homomorphism \(f : G \to H\) of connected Lie groups is determined by \(\dd_e f\).
+\end{corollary}
+
+\begin{theorem}
+    A connected abelian Lie group is of the form \(T^k \times \R^l\), where \(T^k\) is the \(k\)-torus.
+\end{theorem}
+
+\begin{corollary}
+    A compact abelian Lie group is of the form \(T^k \times G\), where \(G\) is a finie abelian group.
+\end{corollary}

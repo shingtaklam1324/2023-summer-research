@@ -1,0 +1,260 @@
+\documentclass{article}
+
+\usepackage{../Style}
+
+\title{Kirillov-Kostant-Souriau symplectic form}
+\author{Shing Tak Lam}
+
+\begin{document}
+
+\maketitle
+
+Throughout, let \(G\) be a Lie group, with Lie algebra \(\TT_eG = \mfg\).
+
+Let \(G\) act on itself by conjugation, that is, \(C_g(h) = ghg^{-1}\). This is a smooth map, with \(C_g(e) = e\). Taking the derivative, we have
+
+\[\Ad_g = \dd (C_g) : \mfg \to \mfg\]
+
+The map \(\Ad : G \to \GL(\mfg)\), \(\Ad(g) = \Ad_g\) is called the \emph{adjoint representation} of \(G\). Dualising, we get the \emph{coadjoint representation}, that is, \(\Ad^* : G \to \GL(\mfg^*)\), given by
+
+\[\Ad^*_g = (\Ad_{g^{-1}})^*\]
+
+On the other hand, if we differentiate \(\Ad\), we get \(\ad : \mfg \to \End(\mfg)\).
+
+\section{Infinitesimal action}
+
+Let \(M\) be a manifold, \(\Phi : G \times M \to M\) a smooth action.
+
+\begin{definition}
+    [proper action] The action \(\Phi\) is proper if the map
+
+    \[(g, x) \mapsto (\Phi(g, x), x)\]
+
+    is proper, i.e. the preimage of a compact set is compact.
+\end{definition}
+
+\begin{proposition}
+    Suppose \(\Phi\) is a free and proper action. Then the quotient \(M/G\) is a smooth manifold, and \(\pi : M \to M/G\) is a smooth submersion.
+\end{proposition}
+
+\begin{definition}
+    [infinitesimal action] Suppose \(\Phi : G \times M \to M\) is an action. For \(\xi \in \mfg\), define \(\Phi^\xi : \R \times M \to M\)
+
+    \[\Phi^\xi(t, m) = \Phi(\exp(t\xi), x)\]
+
+    Then \(\Phi^\xi\) defines an \(\R\)-action, i.e. \(\Phi^\xi(t, \cdot)\) is a flow on \(M\). The corresponding vector field
+
+    \[\xi_M(x) = \dv{t}\bigg\vert_{t = 0} \Phi^\xi(t, x)\]
+
+    is called the infinitesimal action of \(\xi\).
+\end{definition}
+
+In particular, for the (co)adjoint representation, we find that
+
+\[\xi_{\mfg}(\eta) = \dv{t}\bigg\vert_{t=0}\Ad_{\exp(t\xi)}(\eta) = \ad_\xi(\eta) = [\xi, \eta]\]
+
+and if \(\inner{,} : \mfg^* \times \mfg \to \R\) is the usual pairing, then
+
+\begin{align*}
+    \inner{\xi_{\mfg^*}(\alpha), \eta} &= \inner{\dv{t}\bigg\vert_{t=0}\Ad_{\exp(t\xi)}^*(\alpha), \eta} \\
+    &= \dv{t}\bigg\vert_{t=0}\inner{\Ad_{\exp(t\xi)}^*(\alpha), \eta} \\
+    &= \dv{t}\bigg\vert_{t=0}\inner{\alpha, \Ad_{\exp(-t\xi)}(\eta)} \\
+    &= \inner{\alpha, \dv{t}\bigg\vert_{t=0}\Ad_{\exp(-t\xi)}(\eta)} \\
+    &= \inner{\alpha, -[\xi, \eta]} \\
+    &= \inner{\alpha, -\ad_\xi(\eta)} \\
+    &= -\inner{(\ad_\xi)^*(\alpha), \eta}
+\end{align*}
+
+So \(\xi_{\mfg^*} = -(\ad_\xi)^*\), and \(\xi_{\mfg^*}(\alpha)(\eta) = -\inner{\alpha, [\xi, \eta]}\).
+
+\section{Coadjoint orbits}
+
+For \(\mu \in \mfg^*\), we'll write \(\Orb(\mu) = \{\Ad_g^*(\mu) \mid g \in G\}\) for the \emph{coadjoint orbit} of \(\mu\). We will assume without proof that this is a submanifold of \(\mfg^*\), which is diffeomorphic to \(G/G_\mu\), where \(G_\mu = \{g \in G \mid \Ad_g^*(\mu) = \mu\}\) is the \emph{isotropy} or \emph{stabiliser} of \(\mu\).
+
+\subsection{Tangent space}
+
+Let \(\mcO\) be a coadjoint orbit, \(\mu \in \mcO\). For \(\xi \in \mfg\), let \(g(t) = \exp(t\xi)\). Then \(g'(0) = \xi\). Now define
+
+\[\mu(t) = \Ad^*_{g(t)}\mu\]
+
+which is a curve in \(\mcO\) (which means it is a curve in the vector space \(\mfg^*\)), with \(\mu(0) = \mu\). By definition, for any \(\eta \in \mfg\),
+
+\[\inner{\mu(t), \eta} = \inner{\mu, \Ad_{g(t)^{-1}}\eta}\]
+
+We can differentiate this at \(t = 0\), to get
+
+\[\inner{\mu'(0), \eta} = -\inner{\mu, \ad_\xi(\eta)} = -\inner{(\ad_\xi)^*\mu, \eta}\]
+
+where as usual we use the isomorphism \(\mu'(0) \in \Hom(\TT_0\R, \TT_\mu\mfg^*) \simeq \mfg^*\). This then gives us that
+
+\[\TT_\mu\mcO = \left\{(\ad_\xi)^*(\mu) \mid \xi \in \mfg\right\}\]
+
+Moreover, this also gives us that the infinitesimal generator is
+
+\[\xi_{\mfg^*}(\mu) = -(\ad_\xi)^*(\mu)\]
+
+\section{Kirillov-Kostant-Souriau symplectic form}
+
+\begin{theorem}
+    Let \(G\) be a Lie group, \(\mcO \subseteq \mfg^*\) be a coadjoint orbit. Define the \(2\)-form \(\omega\) on \(\mcO\) by
+
+    \[\omega(\mu)(\xi_{\mfg^*}(\mu), \eta_{\mfg^*}(\mu)) = -\inner{\mu, [\xi, \eta]}\]
+
+    Then \(\omega\) and \(-\omega\) are symplectic forms on \(\mcO\).
+\end{theorem}
+
+We will only prove the result for \(\omega\). The proof for \(-\omega\) is similar.
+
+\subsection{\(\omega\) is well defined}
+
+First of all, we show that \(\omega\) is well defined. That is, it is independent of the choice of \(\xi, \eta \in \mfg\).
+
+Suppose \(\zeta \in \mfg\) is such that \(\zeta_{\mfg^*}(\mu) = \xi_{\mfg^*}(\mu)\). Then as \(\xi_{\mfg^*} = (\ad_\xi)^*\), we must have that
+
+\[\inner{\mu, [\xi, \eta]} = \inner{\mu, [\zeta, \eta]}\]
+
+for all \(\eta \in \mfg\).
+
+\subsection{\(\omega\) is non-degenerate}
+
+Since the pairing \(\inner{,}\) is non-degenerate, \(\omega(\mu)(\xi_{\mfg^*}(\mu), \eta_{\mfg^*}(\mu))\) for all \(\eta_{\mfg^*}(\mu)\) implies that \(\inner{\mu, [\xi, \eta]} = 0\), for all \(\eta\). But this then means that \(\xi_{\mfg^*}(\mu) = 0\), so \(\omega\) is non-degenerate.
+
+\subsection{\(\omega\) is closed}
+
+First of all, we will need some preliminary results.
+
+\begin{lemma}
+    \[(\Ad_\xi)_{\mfg^*} = \Ad_g^* \circ \xi_{\mfg^*} \circ \Ad_{g^{-1}}^*\]
+\end{lemma}
+
+\begin{proof}
+    Let \(h(t) = \exp(t\xi)\). Then
+
+    \begin{align*}
+        (\Ad_g\xi)_{\mfg^*}(\mu) &= \dv{t}\bigg\vert_{t=0}\Ad^*_{gh(t)g^{-1}}(\mu) \\
+        &= \dv{t}\bigg\vert_{t=0}\Ad^*_g\Ad^*_{h(t)}\Ad^*_{g^{-1}}(\mu) \\
+        &= \Ad_h^* \circ \left(\dv{t}\bigg\vert_{t=0}\Ad_{h(t)}^*\right) \circ \Ad_{g^{-1}}^*(\mu) \\
+        &= \Ad_h^* \circ \xi_{\mfg^*} \circ \Ad_{g^{-1}}^*(\mu)
+    \end{align*}
+
+    where we used the fact that \(\Ad_g^*\) is a linear map, so we can exchange it with the derivative operator.
+\end{proof}
+
+\begin{lemma}
+    \[\Ad_g([\xi, \eta]) = [\Ad_g(\xi), \Ad_g(\eta)]\]
+\end{lemma}
+
+\begin{proof}
+    First, notice that
+
+    \[C_g(C_h(k)) = ghkh^{-1}g^{-1}= C_g(h)C_g(k)C_g(h^{-1})\]
+
+    Differentiating this at \(h = e\) and \(k = e\) gives the result.
+\end{proof}
+
+\begin{lemma}
+    \(\Ad_g^* : \mcO \to \mcO\) preserves \(\omega\), that is,
+
+    \[(\Ad_g^*)^*\omega = \omega\]
+\end{lemma}
+
+\begin{proof}
+    Evaluating \((\Ad_\xi)_{\mfg^*} = \Ad_g^* \circ \xi_{\mfg^*} \circ \Ad_{g^{-1}}^*\) at \(\nu = \Ad_g^*(\mu)\), we get
+
+    \[(\Ad_g\xi)_{\mfg^*}(\nu) = \Ad_g^* \circ \xi_{\mfg^*}(\mu) = \dd_\mu\Ad_g^* \circ \xi_{\mfg^*}(\mu)\]
+
+    Therefore,
+
+    \begin{align*}
+        ((\Ad_g^*)^*\omega)(\mu)(\xi_{\mfg^*}(\mu), \eta_{\mfg^*}(\mu)) &= \omega(\nu)(\dd_\mu \Ad_g^* \cdot \xi_{\mfg^*}(\mu), \dd_\mu \Ad_g^* \cdot \eta_{\mfg^*}(\mu)) \\
+        &= \omega(\nu)((\Ad_g\xi)_{\mfg^*}(\nu), (\Ad_g\eta)_{\mfg^*}(\nu)) \\
+        &= -\inner{\nu, [\Ad_g\xi, \Ad_g\eta]} \\
+        &= -\inner{\nu, \Ad_g([\xi, \eta])} \\
+        &= -\inner{\Ad_{g^{-1}}^*(\nu), [\xi, \eta]} \\
+        &= -\inner{\mu, [\xi, \eta]} \\
+        &= \omega(\mu)(\xi_{\mfg^*}(\mu), \eta_{\mfg^*}(\mu))
+    \end{align*}
+\end{proof}
+
+For \(\nu \in \mfg^*\), define the left-invariant one-form
+
+\[\nu_\ell(g) = (\dd_g\ell_{g^{-1}})^*(\nu)\]
+
+for \(g \in G\). Similarly, for \(\xi \in \mfg\), let \(\xi_\ell\) be the corresponding left invariant vector field on \(G\). Then \(\nu_\ell(\xi_\ell) = \inner{\nu, \xi}\) at all \(g \in G\).
+
+Fix \(\nu \in \mcO\), and consider the map \(\varphi_\nu : G \to \mcO\), defined by
+
+\[\varphi_\nu(g) = \Ad_g^*(\nu)\]
+
+We can use this to pullback \(\sigma = (\varphi_\nu)^*\omega\) to a two form on \(G\).
+
+\begin{lemma}
+    \(\sigma\) is left invariant. That is, \(\ell_g^*\sigma = \sigma\) for all \(g \in G\).
+\end{lemma}
+
+\begin{proof}
+    First, notice that \(\varphi_\nu \circ \ell_g = \Ad_g^* \circ \varphi_\nu\), since
+
+    \[\varphi_\nu(\ell_g(h)) = \Ad_{gh}^*(\nu) = \Ad_g^*\circ \Ad_h^*(\nu) = \Ad_g^*(\varphi_\nu(h))\]
+
+    With this,
+
+    \[\ell_g^*\sigma = \ell_g^*\varphi^*\omega = (\varphi\circ\ell_g)^*\omega = (\Ad_g^* \circ \varphi_\nu)^*\omega = (\varphi_\nu)^*(\Ad_g^*)^*\omega = (\varphi_\nu)^*\omega = \sigma\]
+\end{proof}
+
+\begin{lemma}
+    \(\sigma(\xi_\ell, \eta_\ell) = -\inner{\nu_\ell, [\xi_\ell, \eta_\ell]}\).
+\end{lemma}
+
+\begin{proof}
+    By left invariance of both sides, suffices to show that the result holds at \(e\). First notice that
+
+    \[\dd_e\varphi_\nu(\eta) = \eta_{\mfg_*}(\nu)\]
+
+    Therefore, \(\varphi_\nu\) is a submersion at \(e\). By definition of the pullback,
+
+    \begin{align*}
+        \sigma(e)(\xi, \eta) &= (\varphi_\nu)^*\omega(e)(\xi, \eta)\\ 
+        &= \omega(\varphi_\nu(e))(\dd_e\varphi_\nu \cdot \xi, \dd_e\varphi_\nu\cdot\eta) \\
+        &= \omega(\nu)(\xi_{\mfg^*}(\nu), \eta_{\mfg^*}(\nu)) \\
+        &= -\inner{\nu, [\xi, \eta]}
+    \end{align*}
+
+    Hence
+
+    \[\sigma(\xi_\ell, \eta_\ell)(e) = \sigma(e)(\xi, \eta) = -\inner{\nu, [\xi, \eta]} = -\inner{\nu_\ell, [\xi_\ell, \eta_\ell]}(e)\]
+\end{proof}
+
+Now for a one form \(\alpha\), we have that
+
+\[\dd\alpha(X, Y) = X[\alpha(Y)] - Y[\alpha(X)] - \alpha([X, Y])\]
+
+where for a smooth function \(f : M \to \R\), and a vector field \(X\) on \(M\), \(X[f] := \dd f(X)\) is a smooth function \(M \to \R\).
+
+Since \(\nu_\ell(\xi_\ell)\) is constant, \(\eta_\ell[\nu_\ell(\xi_\ell)] = 0\). Similarly, \(\xi_\ell[\nu_\ell(\eta_\ell)] = 0\). Therefore, we have that
+
+\[\dd \nu_\ell(\xi_\ell, \eta_\ell) = -\nu_\ell([\xi_\ell, \eta_\ell]) = \sigma(\xi_\ell, \eta_\ell)\]
+
+Now suppose \(X, Y\) are vector fields on \(G\). We want to show that \(\sigma(X, Y) = \dd\nu_\ell(X, Y)\). As \(\sigma\) is left invariant,
+
+\begin{align*}
+    \sigma(X, Y)(g) &= (\ell_{g^{-1}}^* \sigma)(g)(X(g), Y(g)) \\
+    &= \sigma(e)(\underbrace{\dd \ell_{g^{-1}} \cdot X(g)}_{=\xi}, \underbrace{\dd \ell_{g^{-1}} \cdot Y(g)}_{=\eta}) \\
+    &= \sigma(e)(\xi, \eta) \\
+    &= \dd\nu_\ell(\xi_\ell, \eta_\ell)(e) \\
+    &= (\ell_g^*\dd\nu_\ell)(\xi_\ell, \eta_\ell)(e) \\
+    &= (\dd\nu_\ell)(g)(\dd\ell_g\cdot \xi_\ell(e), \dd\ell_g\cdot\eta_\ell(e)) \\
+    &= (\dd\nu_\ell)(g)(\dd \ell_g\cdot \xi, \dd\ell_g\cdot \eta) \\
+    &= (\dd\nu_\ell)(g)(X(g), Y(g)) \\
+    &= \dd\nu_\ell(X, Y)(g)
+\end{align*}
+
+With this, \(\dd\sigma = \dd^2\nu_\ell = 0\). Hence \((\varphi_\nu)^*\dd\omega = \dd((\varphi_\nu)^*\omega) = \dd\sigma = 0\). Since \(\varphi_\nu \circ \ell_g = \Ad_g^* \circ \ell_g\), and \(\varphi_\nu\) is a submersion at \(e\), it is infact a submersion everywhere. Moreover, \(\varphi_\nu\) is surjective, by definition.
+
+For \(\mu \in \mcO\), and \(X, Y \in T_\mu \mcO\), we have that
+
+\[\dd\omega(\mu)(X, Y) = \dd\omega_{\varphi_\nu(g)}(\dd\varphi_\nu(\xi), \dd\varphi_\nu(\eta)) = ((\varphi_\nu)^*\dd\omega)(g)(\xi, \eta) = 0\]
+
+where \(g \in G\) is such that \(\varphi_\nu(g) = \mu\), which exists by surjectivity, and \(\xi, \eta \in T_gG\) such that \(\dd\varphi_\nu(\xi) = X\) and \(\dd\varphi_\nu(\eta) = Y\), which exists as \(\varphi_\nu\) is a submersion. Thus, as \(\mu \in \mcO\) is arbitrary, \(\omega\) is closed.
+
+\end{document}
