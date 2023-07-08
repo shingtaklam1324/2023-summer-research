@@ -1,0 +1,241 @@
+\documentclass{article}
+
+\usepackage{../Style}
+
+\title{Semisimple Lie Algebras}
+\author{Shing Tak Lam}
+
+\DeclareMathOperator{\rad}{rad}
+% \newcommand{\gl}{\mfg\mfl}
+
+\begin{document}
+
+\maketitle
+
+This document sketches the definition of semisimple Lie algebras and the Killing form. In addition, we will look at representations, and the root space decomposition. The main reference is Humphreys' \emph{Introduction to Lie Algebras and Representation Theory}, where all of the skipped proofs can be found.
+
+Throughout, let \(F\) be an algebraically closed field, with \(\Char(F) = 0\), \(\mfg\) is a Lie algebra over \(F\).
+
+\section{Definitions}
+
+\begin{definition}
+    [Lie Algebra] Let \(\mfg\) be a vector space over \(F\). Suppose \([\cdot, \cdot] : \mfg \times \mfg \to \mfg\) is a bilinear form such that
+    \begin{enumerate}
+        \item \([x, x] = 0\) for all \(x \in \mfg\),
+        \item \emph{(Jacobi identity)} \([x, [y, z]] + [y, [z, x]] + [z, [x, y]] = 0\) for all \(x, y, z \in \mfg\). 
+    \end{enumerate}
+
+    Then \((\mfg, [\cdot, \cdot])\) is called a \emph{Lie algebra} over \(F\).
+\end{definition}
+
+\begin{definition}
+    [abelian] \(\mfg\) is called \emph{abelian} if \([x, y] = 0\) for all \(x, y \in \mfg\).
+\end{definition}
+
+\begin{definition}
+    [subalgebra] A subspace \(\mfh \subseteq \mfg\) is called a (Lie) \emph{subalgebra} if for all \(x, y \in \mfh\), \([x, y] \in \mfh\).
+\end{definition}
+
+\begin{definition}
+    [Ideal] A subspace \(I\) of \(\mfg\) is called an \emph{ideal} if for all \(x \in \mfg\) and \(y \in I\), \([x, y] \in I\).
+\end{definition}
+
+\begin{proposition}
+    Every ideal is a subalgebra.
+\end{proposition}
+
+\begin{definition}
+    [centre] The \emph{centre} of \(\mfg\) is the ideal
+
+    \[Z(\mfg) = \{x \in \mfg \mid [x, z] = 0 \text{ for all }z \in \mfg\}\]
+\end{definition}
+
+\begin{definition}
+    [derived algebra] The \emph{derived algebra} of \(\mfg\) is the ideal \([\mfg, \mfg]\).
+\end{definition}
+
+\begin{proposition}
+    The following are equivalent:
+
+    \begin{enumerate}
+        \item \(\mfg\) is abelian,
+        \item \(Z(\mfg) = \mfg\),
+        \item \([\mfg, \mfg] = 0\).
+    \end{enumerate}
+\end{proposition}
+
+\begin{definition}
+    [simple] Suppose \(\mfg\) is not simple, and the only ideals are \(0\) and \(\mfg\). Then we say \(\mfg\) is \emph{simple}.
+\end{definition}
+
+\begin{definition}
+    [homomorphism] Suppose \(\mfg, \mfh\) are Lie algebras over \(F\). Then a linear map \(\phi : \mfg \to \mfh\) is called a \emph{homomorphism} if for all \(x, y \in \mfg\), \(\phi([x, y]) = [\phi(x), \phi(y)]\).
+\end{definition}
+
+\begin{proposition}
+    Suppose \(\phi : \mfg \to \mfh\) is a homomorphism. Then \(\ker(\phi)\) is an ideal, and \(\im(\phi)\) is a subalgebra. Moreover, \(\mfg/\ker(\phi) \cong \im(\phi)\).
+\end{proposition}
+
+\section{Solvable Lie algebras}
+
+\begin{definition}
+    [Derived series, solvable] Define the sequence of ideals by
+
+    \[\mfg^{(0)} = \mfg \quad \mfg^{(i+1)} = [\mfg^{(i)}, \mfg^{(i)}]\]
+
+    The sequence \(\mfg^{(i)}\) is called the \emph{derived series} of \(\mfg\). We say that \(\mfg\) is solvable if \(\mfg^{(n)} = 0\) for some \(n\). 
+\end{definition}
+
+\begin{proposition}
+    \(\mfg\) has a unique maximal solvable ideal.
+\end{proposition}
+
+\begin{proof}
+    Existence follows by Zorn's lemma. Suppose \(S\) is a maximal solvable ideal for \(\mfg\), \(I\) is any solvable ideal. Then \(S + I\) is solvable, and \(S + I \supseteq S\), so \(S + I = S\). Thus \(I \subseteq S\), so \(S\) is unique.
+\end{proof}
+
+\begin{definition}
+    [radical, semisimple] The unique maximal solvable ideal of \(\mfg\) is called the \emph{radical} of \(\mfg\), denoted \(\rad(\mfg)\). We say that \(\mfg\) is \emph{semisimple} if \(\rad(\mfg) = 0\).
+\end{definition}
+
+\begin{lemma}
+    \(\mfg/\rad(\mfg)\) is semisimple.
+\end{lemma}
+
+\begin{proposition}
+    \(\mfg\) is semisimple if and only if it has no nonzero abelian ideals.
+\end{proposition}
+
+\begin{proof}
+    Any nonzero abelian ideal would be contained in \(\rad(\mfg)\), as any abelian Lie algebra is solvable. Conversely, suppose \(\rad(\mfg)\) is nonzero. Then the last nonzero term \(\rad(\mfg)^{(n-1)}\) of the derived series satisfies
+
+    \[[\rad(\mfg)^{(n-1)}, \rad(\mfg)^{(n-1)}] = \rad(\mfg)^{(n)} = 0\]
+
+    Moreover, \(\rad(\mfg)^{(n-1)}\) is an ideal of \(\mfg\).
+\end{proof}
+
+\section{Killing form}
+
+Suppose in addition that \(\mfg\) is finite dimensional.
+
+\begin{definition}
+    [adjoint representation] The \emph{adjoint representation} is the homomorphism \(\ad : \mfg \to \gl(\mfg)\) defined by \(\ad(x)(y) = [x, y]\).
+\end{definition}
+
+\begin{definition}
+    [Killing form] The \emph{Killing form} of \(\mfg\) is a symmetric bilinear form on \(\mfg\), defined by
+
+    \[\kappa(x, y) = \tr(\ad(x)\cdot\ad(y))\]
+\end{definition}
+
+\begin{proposition}
+    \(\kappa\) is associative, that is,
+
+    \[\kappa([x,y],z) = \kappa(x, [y, z])\]
+\end{proposition}
+
+\begin{lemma}
+    Let \(I\) be an ideal of \(\mfg\). Then \(I\) is a Lie algebra, with Killing form \(\kappa_I\). Then \(\kappa_I = \kappa\vert_{I \times I}\).
+\end{lemma}
+
+\begin{definition}
+    [radical, nondegenerate] Suppose \(\beta\) is a symmetric bilinear form on \(\mfg\). Define the \emph{radical} of \(\beta\) to be
+
+    \[\rad(\beta) = \{x \in \mfg \mid \beta(x, y) = 0 \text{ for all }y \in \mfg\}\]
+
+    Then \(\rad(\beta)\) is a subspace of \(\mfg\). We say that \(\beta\) is \emph{nondegenerate} if \(\rad(\beta) = 0\).
+\end{definition}
+
+\begin{proposition}
+    \(\rad(\kappa)\) is an ideal of \(\mfg\).
+\end{proposition}
+
+\begin{lemma}
+    Let \(x_1, \dots, x_n\) be a basis of \(\mfg\). Then \(\kappa\) is nondegenerate if and only if the matrix \((\kappa(x_i, x_j))\) is invertible.
+\end{lemma}
+
+\begin{theorem}
+    Let \(\mfg\) be a Lie algebra. Then \(\mfg\) is semisimple if and only if \(\kappa\) is nondegenerate.
+\end{theorem}
+
+\begin{theorem}
+    Let \(\mfg\) be a semisimple Lie algebra. Then there exists ideals \(I_1, \dots, I_r\) of \(\mfg\), such that
+    
+    \[\mfg = I_1 \oplus \cdot \oplus I_r\]
+
+    as vector spaces. Every simple ideal of \(\mfg\) is one of the \(I_j\), and the Killing form of \(I_j\) is \(\kappa\vert_{I_j \times I_j}\).
+\end{theorem}
+
+\begin{corollary}
+    If \(\mfg\) is semisimple, then \(\mfg = [\mfg,\mfg]\), and all ideals and quotients of \(\mfg\) are semisimple. Moreover, each ideal of \(\mfg\) is a direct sum of simple ideals in \(\mfg\).
+\end{corollary}
+
+\section{Representations}
+
+\begin{definition}
+    [representation] A \emph{representation} of \(\mfg\) is a homomorphism \(\phi : \mfg \to \gl(V)\), where \(V\) is a vector space over \(F\).
+\end{definition}
+
+\begin{definition}
+    [\(\mfg\)-module] Let \(V\) be a vector space, then \(V\) is a \emph{\(\mfg\)-module} if there exists a map \(\mfg \times V \to V\), \((x, v) \mapsto x\cdot v\), such that
+
+    \begin{enumerate}
+        \item \((ax + by)\cdot v = a(x\cdot v) + b(y\cdot v)\)
+        \item \(x\cdot (av + bw) = a(x\cdot v) + b(x\cdot w)\)
+        \item \([x, y]\cdot v = x\cdot(y\cdot v) - y\cdot(x\cdot v)\)
+    \end{enumerate}
+\end{definition}
+
+\begin{proposition}
+    Suppose \((\phi,V)\) is a representation of \(\mfg\). Then
+
+    \[x \cdot v = \phi(x)(v) \tag{*}\]
+
+    makes \(V\) into a \(\mfg\)-module. Conversely, if \(V\) is a \(\mfg\)-module, then \((*)\) defines a representation of \(\mfg\) on \(V\).
+\end{proposition}
+
+\begin{definition}
+    [homomorphism] A \emph{homomorphism} of \(\mfg\)-modules is a linear map \(\phi : V \to W\) such that \(x \cdot \phi(v) = \phi(x\cdot v)\).
+\end{definition}
+
+\begin{definition}
+    [irreducible] A \(\mfg\)-module \(V\) is \emph{irreducible} if it has precisely two \(\mfg\)-submodules, \(0\) and \(V\). Note in particular \(0\) is not irreducible.
+\end{definition}
+
+\begin{definition}
+    [completely reducible] A \(\mfg\)-module \(V\) is \emph{completely reducible} if it is a direct sum of irreducible \(\mfg\)-modules. Equivalently, for each \(\mfg\)-submodule \(W\) of \(V\), there exists a \(\mfg\)-submodule \(W'\) of \(V\) such that \(V = W \oplus W'\).
+\end{definition}
+
+\begin{lemma}
+    [Schur] Suppose \(\phi : \mfg \to \gl(V)\) is an irreducible representation, then the only endomorphisms of \(V\) commuting with all \(\phi(x)\) are scalar multiples of the identity.
+\end{lemma}
+
+\begin{definition}
+    [dual module] Let \(V\) be a \(\mfg\)-module. Then the dual vector space \(V^*\) is an \(\mfg\)-module, with action defined by
+
+    \[(x\cdot f)(v) = -f(x \cdot v)\]
+\end{definition}
+
+\begin{definition}
+    [tensor module] Let \(V, W\) be \(\mfg\)-modules. Then \(V \otimes W\) is a \(\mfg\)-module, with action defined by
+
+    \[x \cdot (v \otimes w) = (x \cdot v) \otimes w + v \otimes (x \cdot w)\]
+\end{definition}
+
+\begin{definition}
+    [\(\Hom\) module] Let \(V, W\) be \(\mfg\)-modules. Then \(\Hom(V, W) \simeq V^* \otimes W\) is a \(\mfg\)-module, with \(\mfg\) action defined by
+
+    \[(x \cdot f)(v) = x \cdot f(v) - f(x \cdot v)\]
+\end{definition}
+
+\subsection{Casimir element}
+
+Suppose \(\phi : \mfg \to \gl(V)\) is a faithful representation. Define a symmetric bilinear form
+
+\[\beta(x, y) = \tr(\phi(x) \cdot \phi(y))\]
+
+Then \(\beta\) is associative (as for the Killing form), and nondegenerate.
+
+Now suppose that \(\mfg\) is semisimple, \(\beta\) any nongenerate symmetric associative bilinear form on \(\mfg\). Let \(x_1, \dots, x_n\) be a basis of \(\mfg\), and \(x^1, \dots, x^n\) the \(\beta\)-dual basis of \(\mfg\)\footnote{\(\beta\) defines an inner product, therefore we can identify \(\mfg^*\) with \(\mfg\), using \(\beta\). More preceisely, \(\beta(x_i, x^j) = \delta_{ij}\).}.
+
+\end{document}
