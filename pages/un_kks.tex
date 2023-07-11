@@ -1,0 +1,211 @@
+\documentclass{article}
+
+\usepackage{../Style}
+
+\DeclareMathOperator{\U}{U}
+\renewcommand{\u}{\mfu}
+
+\title{K\"ahler structure on coadjoint orbits of \(\U(n)\)}
+\author{Shing Tak Lam}
+
+
+\begin{document}
+
+\maketitle
+
+\section{Adjoint and coadjoint representations}
+
+Let \(\U(n)\) denote the unitary group, that is,
+
+\[\U(n) = \left\{A \in M_n(\C) \mid A^\dagger A = I\right\}\]
+
+where \(A^\dagger = \overline{A^\T}\) is the conjugate transpose of \(A\). The Lie algebra of \(\U(n)\) is
+
+\[\u(n) = \left\{H \in M_n(\C) \mid H + H^\dagger = 0\right\}\]
+
+The adjoint representation \(\Ad : \U(n) \to \u(n)\) is given by
+
+\[\Ad_g(A) = gAg^{-1} = gAg^\dagger\]
+
+Define the bilinear form \(\inner{\cdot, \cdot}\) on \(\u(n)\) by
+
+\[\inner{A, B} = -\tr(AB) = \tr(A^\dagger B)\]
+
+\begin{lemma}
+    \(\inner{\cdot, \cdot}\) is a positive definite, \(\Ad\)-invariant, symmetric bilinear form on \(\u(n)\).
+\end{lemma}
+
+\begin{proof}
+    Symmetry and bilinearity are clear. Now note that
+
+    \[\inner{A, A} = \tr(A^\dagger A) = \sum_i (A^\dagger A)_{ii} = \sum_{i, j}\abs{A_{ij}}^2\]
+
+    Therefore, \(\inner{\cdot, \cdot}\) is positive definite. Finally, we show that for all \(g \in \U(n)\), \(\Ad_g\) is an isometry. But this follows from
+
+    \[\inner{\Ad_g(A), \Ad_g(B)} = -\tr(gAg^\dagger g Bg^\dagger) = -\tr(gABg^\dagger) = -\tr(AB) = \inner{A, B}\]
+\end{proof}
+
+Define \(R : \u(n) \to u(n)^*\) by
+
+\[R(A, B) = \inner{A, B}\]
+
+Then \(R\) defines an isomorphism of vector spaces. Suppose \(\alpha = R(A)\). Then the coadjoint representation \(\Ad^* : \U(n) \to \u(n)^*\) is given by
+
+\[\Ad_g^*(\alpha)(B) = \alpha(\Ad_{g^\dagger}(B)) = \inner{A, g^\dagger B g} = -\tr(Ag^\dagger B g) = -\tr(gAg^\dagger B) = \inner{\Ad_g(A), B}\]
+
+Therefore, up to identification by \(R\), \(\Ad^*\) and \(\Ad\) are the same.
+
+\section{Adjoint orbits}
+
+Let \(\xi \in \u(n)\). Then \(i\xi\) is Hermitian, therefore \(i\xi\) can be diagonalised by a unitary matrix, with all eigenvalues real. Therefore, each coadjoint orbit is the orbit of a diagonal matrix
+
+\[\xi = \begin{pmatrix}
+    i\xi_1 \\
+    & \ddots \\
+    && i\xi_n
+\end{pmatrix}\]
+
+where \(\xi_1, \dots, \xi_n\) real, and without loss of generality, \(\xi_1 \geq \dots \geq \xi_n\).
+
+\subsection{Stabiliser of \(\xi\)}
+
+Let \(n_1, \dots, n_d\) be the algebraic multiplicities of the eigenvalues. Then it is easy to see that the stabiliser of \(\xi\) is
+
+\[\Stab(\xi) = \U(n_1) \times \cdots \times \U(n_d) \le \U(n)\]
+
+the block diagonal subgroup.
+
+\subsection{Projection map}
+
+Let \(\pi : \U(n) \to \mcO\) be the projection map, that is,
+
+\[\pi(g) = \Ad_g(\xi) = g\xi g^\dagger\]
+
+A standard computation shows that
+
+\[T_g\U(n) = \left\{h \in M_n(\C) \mid h^\dagger g + g^\dagger h = 0\right\}\]
+
+and that
+
+\[\dd\pi_g(h) = h\xi g^\dagger + g\xi h^\dagger\]
+
+Set \(\mu = \pi(g) = g \xi g^\dagger\). Then \(\xi = g^\dagger \mu g\), and substituting into the above equation, we get
+
+\[\dd\pi_g(h) = hg^\dagger\mu g g^\dagger + g g^\dagger \mu g h^\dagger = hg^\dagger\mu + \mu gh^\dagger = \mu gh^\dagger - gh^\dagger\mu = [\mu, gh^\dagger]= [\mu, hg^\dagger]\]
+
+Moreover, as \(\pi\) is a surjective submersion, any form \(\alpha\) on \(\mcO\) is determined by its pullback \(\pi^*\alpha\) on \(\U(n)\).
+
+\section{Kirillov-Konstant-Souriau form}
+
+Let \(\mcO\) be an adjoint orbit in \(\u(n)\), and fix \(\xi \in \mcO\) as above. Recall that for \(\mu \in \mcO\),
+
+\[\TT_\mu\mcO = \left\{[\mu, A] \mid A \in \u(n)\right\}\]
+
+and the Kirillov-Konstant-Souriau form \(\omega\) is defined by
+
+\[\omega_\mu([\mu, A], [\mu, B]) = -\inner{\mu, [A, B]}\]
+
+\subsection{Computation at \(I\)}
+
+Computing the pullback, we find that \(\pi^*\omega\) at the identity is given by
+
+\[(\pi^*\omega)_I(A, B) = \omega_\xi([\mu, A], [\mu, B]) = -\inner{\xi, [A, B]}\]
+
+Computing this in terms of the coordinates, we find that it is
+
+\begin{align*}
+    -\inner{\xi, [A, B]} &= \tr(\xi[A, B]) \\
+    &= i\sum_{j, k}\xi_j(A_{jk}B_{kj} - B_{jk}A_{kj}) \\
+    &= i\sum_{j, k}\xi_j(A_{kj}\overline{B_{kj}} - \overline{A_{kj}}B_{kj}) \\
+    &= \frac{i}{2} \sum_{j,k}\xi_j(A_{kj}\overline{B_{kj}} - \overline{A_{kj}}B_{kj}) + \frac{i}{2}\sum_{j, k}\xi_k(A_{jk} \overline{B_{jk}} - \overline{A_{jk}}B_{jk}) \\
+    &= \frac{i}{2} \sum_{j,k}\xi_j(A_{kj}\overline{B_{kj}} - \overline{A_{kj}}B_{kj}) - \frac{i}{2}\sum_{j, k}\xi_k(A_{kj} \overline{B_{kj}} - \overline{A_{kj}}B_{kj}) \\
+    &= \frac{i}{2}\sum_{j, k}(\xi_j - \xi_k)(A_{kj}\overline{B_{kj}} - \overline{A_{kj}}B_{kj}) \\
+    &= i \sum_{k > j}(\xi_j - \xi_k)(A_{kj}\overline{B_{kj}} - \overline{A_{kj}}B_{kj})
+\end{align*}
+
+Let \((\theta_{jk})\) be the standard coordinate functions on \(\u(n)\), then
+
+\[(\pi^*\omega)_I = i \sum_{k > j}(\xi_j - \xi_k)\theta_{kj}\wedge \overline{\theta_{kj}}\]
+
+where \(\alpha \wedge \beta(v, w) = \alpha(v)\beta(w) - \alpha(w)\beta(v)\).
+
+\subsection{Computation at any \(g \in \U(n)\)}
+
+Now let \(\theta\) be the Maurer-Cartan form on \(\U(n)\). That is, it is the \(\u(n)\)-valued \(1\)-form on \(\U(n)\) given by
+
+\[\theta_g(u) = \dd (\ell_{g^{-1}})_g(u) \in \TT_e\U(n) = \u(n)\]
+
+Writing \(\theta = \sum_{j, k}\theta_{jk}\dd g^{jk}\) where \((g^{jk})\) are the matrix entries on \(\U(n)\), in fact we have that
+
+\[\pi^*\omega = i \sum_{k > j}(\xi_j - \xi_k)\theta_{kj}\wedge \overline{\theta_{kj}}\]
+
+Since\footnote{See Marsden-Ratiu \S14.4.} \(\pi^*\omega\) and \(\theta\) are both left invariant, and the above expressions agree at the identity, they must agree everywhere. Alternatively, we can compute this directly, as in the next section.
+
+\section{Hermitian structure}
+
+We will define a Hermitian metric \(h\) on \(\mcO\), using the fact that \(\pi\) is a surjective submersion. That is, we have
+
+\[\pi^*h = \sum_{k > j}2(\xi_j - \xi_k)\theta_{kj}\overline{\theta_{kj}}\]
+
+where \(\alpha\beta(v, w) = \alpha(v)\beta(w)\).
+
+\subsection{Computation at \(I\)}
+
+At \(\xi\), the above formula gives us that
+
+\[h_\xi([\xi, A], [\xi, B]) = \sum_{k > j}2(\xi_j - \xi_k)A_{kj}\overline{B_{kj}}\]
+
+which one can check defines a Hermitian metric (at least in the case when the \(\xi_j\) are distinct).
+
+\subsection{Computation at \(g \in \U(n)\)}
+
+In this case, if \(A, B \in \TT_g\U(n)\), then we can see that \(\theta(A) = g^\dagger A\) and \(\theta(B) = g^\dagger B\). Therefore, we have that
+
+\[\pi^*h(A, B) = \sum_{k > j}2(\xi_j - \xi_k)(g^\dagger A)_{kj}\overline{(g^\dagger B)_{kj}}\]
+
+However, by the definition of the pullback, we also have that
+
+\[\pi^*h(A, B) = h_{\pi(g)}(\dd \pi_g(A), \dd\pi_g(B))\]
+
+Set \(\mu = \pi(g)\), then we have that
+
+\[\pi^*h(A, B) = h_\mu([\mu, Ag^\dagger], [\mu, Bg^\dagger])\]
+
+Say \(A = Cg, B = Dg\), then we get that
+
+\[h_\mu([\mu, C], [\mu, D]) = \sum_{k > j}2(\xi_j - \xi_k)(g^\dagger Cg)_{kj}\overline{(g^\dagger Dg)_{kj}}\]
+
+Again, in the case the \(\xi_j\) are distinct, we can see that this defines a Hermitian metric on \(\mcO\).
+
+\section{Almost K\"ahler structure}
+
+With the explicit expressions for the symplectic form and the Hermitian metric, we can first check that they are compatible, as well as compute the Riemannian metric and the almost complex structure.
+
+First of all, we can see that
+
+\[\omega = \frac{i}{2}(h - \overline h)\]
+
+where the symplectic form is minus the imaginary part of \(h\). Next, we can compute the Riemannian metric, as it is the real part of the Hermitian metric. That is,
+
+\[g = \frac{1}{2}(h + \overline h)\]
+
+More explicitly, we have that
+
+\[g_\mu([\mu, A], [\mu, B]) = \sum_{k > j}(\xi_j - \xi_k)\left((g^\dagger A g)_{kj}\overline{(g^\dagger Bg)_{kj}} + \overline{(g^\dagger Ag)_{kj}}(g^\dagger Bg)_{kj}\right)\]
+
+In principle, we can recover the almost complex structure from the symplectic form and the Riemannian metric, via
+
+\[J = \tilde g^{-1} \circ \tilde\omega\]
+
+where \(\tilde\omega, \tilde g : \TT \U(n) \to \TT^*\U(n)\) are linear isomorphisms given by
+
+\begin{align*}
+    \tilde \omega(u)(v) &= \omega(u, v) \\
+    \tilde g(u)(v) &= g(u, v)
+\end{align*}
+
+This follows as we have that \(g(u, v) = \omega(u, Jv)\).
+
+Note however this does not give us a K\"ahler structure, since we don't know whether this is integrable.
+
+\end{document}

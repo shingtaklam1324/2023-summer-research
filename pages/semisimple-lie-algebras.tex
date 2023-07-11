@@ -7,6 +7,7 @@
 
 \DeclareMathOperator{\rad}{rad}
 % \newcommand{\gl}{\mfg\mfl}
+\renewcommand{\sl}{\mfs\mfl}
 
 \begin{document}
 
@@ -228,14 +229,41 @@ Suppose in addition that \(\mfg\) is finite dimensional.
     \[(x \cdot f)(v) = x \cdot f(v) - f(x \cdot v)\]
 \end{definition}
 
-\subsection{Casimir element}
+% \subsection{Casimir element}
 
-Suppose \(\phi : \mfg \to \gl(V)\) is a faithful representation. Define a symmetric bilinear form
+% Suppose \(\phi : \mfg \to \gl(V)\) is a faithful representation. Define a symmetric bilinear form
 
-\[\beta(x, y) = \tr(\phi(x) \cdot \phi(y))\]
+% \[\beta(x, y) = \tr(\phi(x) \cdot \phi(y))\]
 
-Then \(\beta\) is associative (as for the Killing form), and nondegenerate.
+% Then \(\beta\) is associative (as for the Killing form), and nondegenerate.
 
-Now suppose that \(\mfg\) is semisimple, \(\beta\) any nongenerate symmetric associative bilinear form on \(\mfg\). Let \(x_1, \dots, x_n\) be a basis of \(\mfg\), and \(x^1, \dots, x^n\) the \(\beta\)-dual basis of \(\mfg\)\footnote{\(\beta\) defines an inner product, therefore we can identify \(\mfg^*\) with \(\mfg\), using \(\beta\). More preceisely, \(\beta(x_i, x^j) = \delta_{ij}\).}.
+% Now suppose that \(\mfg\) is semisimple, \(\beta\) any nongenerate symmetric associative bilinear form on \(\mfg\). Let \(x_1, \dots, x_n\) be a basis of \(\mfg\), and \(x^1, \dots, x^n\) the \(\beta\)-dual basis of \(\mfg\)\footnote{\(\beta\) defines an inner product, therefore we can identify \(\mfg^*\) with \(\mfg\), using \(\beta\). More preceisely, \(\beta(x_i, x^j) = \delta_{ij}\).}.
+
+\subsection{Weyl's theorem}
+
+\begin{lemma}
+    Let \(\phi : \mfg \to \gl(V)\) be a representation of a semisimple Lie algebra. Then \(\phi(\mfg) \subseteq \sl(V)\). In particular, \(\mfg\) acts trivially on any one-dimensional \(\mfg\)-module.
+\end{lemma}
+
+\begin{theorem}
+    [Weyl] Let \(\phi : \mfg \to \gl(V)\) be a (f.d.) representation of a semisimple Lie algebra. Then \(\phi\) is completely reducible.
+\end{theorem}
+
+\section{Representations of \(\sl_2(F)\)}
+
+In this section, we will write \(\sl_2\) instead of \(\sl_2(F)\). Let
+
+\[x = \begin{pmatrix}
+    0 & 1 \\
+    0 & 0
+\end{pmatrix} \quad y = \begin{pmatrix}
+    0 & 0 \\
+    1 & 0
+\end{pmatrix} \quad h = \begin{pmatrix}
+    1 & 0 \\
+    0 & -1
+\end{pmatrix}\]
+
+be the standard basis of \(\sl_2\). Then \([h, x] = 2x\), \([h, y] = -2y\), \([x, y] = h\). 
 
 \end{document}

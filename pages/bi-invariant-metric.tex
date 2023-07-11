@@ -1,0 +1,148 @@
+\documentclass{article}
+
+\usepackage{../Style}
+
+\title{Bi-invariant metric on compact Lie groups}
+\author{Shing Tak Lam}
+
+\begin{document}
+
+\maketitle
+
+\section{Metrics on Lie groups}
+
+Let \(G\) be a Lie group, \(g\) be a metric on \(G\).
+
+\begin{definition}
+    [\{left, right, bi-\} invariant] \(g\) is left invariant if \(\ell_a^*g = g\) for all \(a \in G\). That is, for all \(a, b \in G\), \(u, v \in T_bG\),
+
+    \[g_b(u, v) = g_{ab}(\dd_b\ell_a(u), \dd_b\ell_a(v))\]
+
+    We can define right invariant similarly. \(g\) is bi-invariant if it is both left and right invariant.
+\end{definition}
+
+\begin{proposition}
+    There is a 1-1 correspondence
+
+    \[\{\text{left invariant metrics on }G\} \leftrightarrow \{\text{inner products on }\mfg\}\]
+\end{proposition}
+
+\begin{proof}
+    Any left invariant metric must satisfy
+
+    \[g_a(u, v) = g_e(\dd_a\ell_{a^{-1}}(u), \dd_a\ell_{a^{-1}}(v))\]
+
+    Conversely, given an inner product \(g_e\) on \(\mfg\), the above formula defines a left invariant metric on \(G\).
+\end{proof}
+
+\section{Bi-invariant metrics}
+
+Recall the adjoint representation of a Lie group is \(\Ad : G \to \GL(\mfg)\), defined by
+
+\[\Ad_a = \dd_e(r_{a^{-1}} \circ \ell_a) = \dd_a r_{a^{-1}} \circ \dd_e \ell_a\]
+
+\begin{definition}
+    [\(\Ad\)-invariant] An inner product on \(\mfg\) is \(\Ad\)-invariant if \(\Ad_a\) is an isometry for all \(a \in G\). That is,
+
+    \[\inner{\Ad_a(u), \Ad_a(v)} = \inner{u, v}\]
+\end{definition}
+
+\begin{proposition}
+    There is a 1-1 correspondence
+
+    \[\{\text{bi-invariant metrics on }G\} \leftrightarrow \{\text{\(\Ad\)-invariant inner products on }\mfg\}\]
+\end{proposition}
+
+\begin{proof}
+    It is clear that any bi-invarant metric \(g\) will give an \(\Ad\)-invariant inner product \(g_e\) on \(\mfg\). Conversely, suppose \(g_e\) is an \(\Ad\)-invariant inner product on \(\mfg\). Define \(g\) as in the left invariant case. Then it is easy to check that \(g\) is also right invariant.
+\end{proof}
+
+\begin{corollary}
+    Suppose \(G\) has a bi-invariant metric. Then \(\Ad(G) \subseteq \mathrm{O}(\mfg)\). In particular, \(\overline{\Ad(G)}\) is compact.
+\end{corollary}
+
+\section{Haar measure and Weyl's unitary trick}
+
+This section is all from Part II Representation Theory.
+
+\begin{theorem}
+    [Haar measure] Let \(G\) be a compact group, then there exists a unqiue regular Borel measure \(\mu\) which is
+
+    \begin{enumerate}[(i)]
+        \item translation invariant, i.e. \(\mu(gX) = \mu(X) = \mu(Xg)\) for any measurable set \(X\),
+        \item regular, i.e.
+        \[\mu(X) = \inf\{\mu(U) \mid X \subseteq U, U \text{ open}\} = \sup\{\mu(K) \mid K \subseteq X, K \text{ compact}\}\]
+        \item normalised, i.e. \(\mu(G) = 1\).
+    \end{enumerate}
+\end{theorem}
+
+In the remainder of this section, \(G\) is a compact Lie group, \(\mu\) is the Haar measure on \(G\).
+
+\begin{corollary}
+    In particular, for \(\gamma \in G\), \(f \in L^1(\mu)\),
+
+    \[\int_G f(\gamma x)\dd\mu(x) = \int_G f(x)\dd\mu(x) = \int_G f(x\gamma)\dd\mu(x)\]
+\end{corollary}
+
+Recall that if \(\rho : G \to \GL(V)\) is a representation, an inner product on \(V\) is \(G\)-invariant if \(\inner{\rho(\gamma)x, \rho(\gamma)y} = \inner{x, y}\) for all \(x, y \in V\), \(\gamma \in G\).
+
+\begin{theorem}
+    [Weyl's unitary trick]
+    Let \(G\) be a compact Lie group. Then for every representation \(\rho : G \to \GL(V)\), there exists a \(G\)-invariant inner product on \(V\).
+\end{theorem}
+
+\begin{proof}
+    First, fix any inner product \((\cdot, \cdot)\) on \(V\). Now define
+
+    \[\inner{u, v} = \int_G (\rho(\gamma)u, \rho(\gamma)v)\dd\mu(\gamma)\]
+
+    Using translation invariance of the integral, it follows that \(\inner{\cdot, \cdot}\) is \(G\)-invariant.
+\end{proof}
+
+\section{Bi-invariant metrics on compact Lie groups}
+
+\begin{theorem}
+    Let \(\rho : G \to \GL(V)\) be a representation of \(G\). Then there exists a \(G\)-invariant inner product on \(V\) if and only if \(\overline{\rho(G)} \subseteq \GL(V)\) is compact.
+\end{theorem}
+
+\begin{proof}
+    If there exists a \(G\)-invarant inner product, then each \(\rho(\gamma)\) is an isometry. Hence we have that \(\rho(G) \subseteq \mathrm{O}(V, \inner{\cdot, \cdot})\). As \(O(V, \inner{\cdot, \cdot})\) is compact, we have that \(\overline{\rho(G)}\) is compact.
+
+    Conversely, if \(H = \overline{\rho(G)}\) is compact, then it is a compact subgroup of \(\GL(V)\). Consider the inclusion representation \(H \hookrightarrow \GL(V)\). Therefore, we have an \(H\)-invariant inner product on \(V\). But if \(f = \rho(\gamma) \in H\), then
+
+    \[\inner{\rho(\gamma)u, \rho(\gamma)v} = \inner{f(u), f(v)} = \inner{u, v}\]
+
+    So \(\inner{\cdot, \cdot}\) is \(G\)-invariant.
+\end{proof}
+
+\begin{corollary}
+    Let \(G\) be a Lie group. Then an inner product \(\inner{\cdot, \cdot}\) on \(\mfg\) induces a bi-invariant metric on \(G\) if and only if \(\overline{\Ad(G)}\) is compact. In particular, every compact Lie group admits a bi-invariant metric.
+\end{corollary}
+
+Finally, recall the adjoint representation of \(\mfg\) is \(\ad : \mfg \to \gl(\mfg)\), \(\ad = \dd_e \Ad\). More explicitly, \(\ad_x(y) = [x, y]\). Then we have the following:
+
+\begin{proposition}
+    An inner product \(\inner{\cdot, \cdot}\) on \(\mfg\) induces a bi-invariant metric on \(G\) if and only if for all \(u, v, w \in \mfg\),
+
+    \[\inner{\ad_u(v), w} = -\inner{v, \ad_u(w)}\]
+
+    if and only if
+
+    \[\inner{[x, y], z} = \inner{x, [y, z]}\]
+
+    for all \(x, y, z\in \mfg\).
+\end{proposition}
+
+\begin{lemma}
+    A Lie group is simple if and only if the adjoint representation \(\Ad : G \to \GL(\mfg)\) is irreducible.
+\end{lemma}
+
+\begin{proposition}
+    Suppose \(G\) is a simple Lie group, then the bi-invariant metric on \(G\) is unique up to scaling, if it exists.
+\end{proposition}
+
+\begin{proof}
+    By Schur's lemma?
+\end{proof}
+
+\end{document}

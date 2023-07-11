@@ -1,0 +1,175 @@
+\documentclass{article}
+
+\usepackage{../Style}
+
+\title{Killing form}
+\author{Shing Tak Lam}
+
+\DeclareMathOperator{\rad}{rad}
+
+\begin{document}
+
+\maketitle
+
+\section{Solvability}
+
+In this section, let \(\mfg\) be a real Lie algebra.
+
+\begin{definition}
+    [ideal] A subspace \(I \subseteq \mfg\) is an \emph{ideal} if \([I, \mfg] \subseteq I\).
+\end{definition}
+
+\begin{remark}
+    Every ideal is a Lie subalgebra of \(\mfg\).
+\end{remark}
+
+\begin{definition}
+    [simple] \(\mfg\) is simple if \(\mfg \ne 0\), and the only ideals of \(\mfg\) are \(0\) and \(\mfg\).
+\end{definition}
+
+\begin{definition}
+    [derived series, solvable] The \emph{derived series} of \(\mfg\) is
+
+    \[\mfg^{(0)} = \mfg \qqtext{and} \mfg^{(i+1)} = [\mfg^{(i)}, \mfg^{(i)}]\]
+
+    Each \(\mfg^{(i)}\) is an ideal of \(\mfg\). We say that \(\mfg\) is \emph{solvable} if \(\mfg^{(n)} = 0\) for some \(n\).
+\end{definition}
+
+\begin{definition}
+    [radical, semisimple]
+
+    \(\mfg\) has a unique maximal solvable ideal, called the \emph{radical} of \(\mfg\), and denoted \(\rad(\mfg)\). We say that \(\mfg\) is \emph{semisimple} if \(\rad(\mfg) = 0\).
+\end{definition}
+
+\begin{lemma}
+    \label{lem:solv}
+    Suppose \(\mfg\) is a complex Lie algebra, \(\tr(\ad_x\ad_y) = 0\) for all \(x \in \mfg, y \in [\mfg, \mfg]\). Then \(\mfg\) is solvable.
+\end{lemma}
+
+\section{Killing form}
+
+In this section, \(\mfg\) is a finite dimensional complex Lie algebra.
+
+\begin{definition}
+    [Killing form] The \emph{Killing form} of \(\mfg\) is
+
+    \[\kappa(x, y) = \tr(\ad_x \ad_y)\]
+
+    where \(\ad_x(y) = [x, y]\), \(\ad : \mfg \to \gl(\mfg)\) is the adjoint representation of \(\mfg\).
+\end{definition}
+
+\begin{lemma}
+    \(\kappa\) defines a symmetric bilinear form on \(\mfg\). Moreover,
+
+    \[\kappa([x, y], z) = \kappa(x, [y, z])\]
+\end{lemma}
+
+\begin{definition}
+    [radical] The radical of \(\kappa\) is the ideal
+
+    \[\rad(\kappa) = \{x \in \mfg \mid \kappa(x, y) = 0 \text{ for all }y \in \mfg\}\]
+\end{definition}
+
+\begin{theorem}
+    The following are equivalent:
+
+    \begin{enumerate}[(i)]
+        \item \(\mfg\) is semisimple,
+        \item \(\kappa\) is non-degenerate, that is, \(\rad(\kappa) = 0\),
+        \item if \(x_1, \dots, x_n\) is a basis of \(\mfg\), then \(\det(\kappa(x_i, x_j)) \ne 0\).
+    \end{enumerate}
+\end{theorem}
+
+\begin{theorem}
+    Suppose \(\mfg\) is semisimple. Then there exists ideals \(I_1, \dots, I_t\) of \(\mfg\) which are simple (as Lie algebras), such that
+
+    \[\mfg = I_1 \oplus \cdots \oplus I_t\]
+
+    Moreover, each simple ideal of \(\mfg\) is one of the \(I_j\), and the Killing form of \(I_j\) is \(\kappa\vert_{I_j}\).
+\end{theorem}
+
+\subsection{Killing form over \(\R\)}
+
+Now suppose instead that \(\mfg\) is a real Lie algebra.
+
+\begin{definition}
+    [abelian] \(\mfg\) is abelian if \([x, y] = 0\) for all \(x, y \in \mfg\).
+\end{definition}
+
+\begin{lemma}
+    \(\mfg\) is semisimple if and only if there are no non-zero abelian ideals of \(\mfg\).
+\end{lemma}
+
+\begin{lemma}
+    Any abelian ideal of \(\mfg\) is contained in \(\rad(\kappa)\).
+\end{lemma}
+
+\begin{proof}
+    Let \(I \trianglelefteq \mfg\) be an abelian ideal, \(x \in I\), \(y \in \mfg\). We want to show that \(\kappa(x, y) = 0\). First, note that we have
+
+    % https://q.uiver.app/#q=WzAsNSxbMCwwLCJcXG1mZyJdLFsyLDAsIlxcbWZnIl0sWzQsMCwiSSJdLFs2LDAsIkkiXSxbOCwwLCIwIl0sWzAsMSwiXFxhZF95Il0sWzEsMiwiXFxhZF94Il0sWzIsMywiXFxhZF95Il0sWzMsNCwiXFxhZF94Il1d
+\[\begin{tikzcd}
+	\mfg && \mfg && I && I && 0
+	\arrow["{\ad_y}", from=1-1, to=1-3]
+	\arrow["{\ad_x}", from=1-3, to=1-5]
+	\arrow["{\ad_y}", from=1-5, to=1-7]
+	\arrow["{\ad_x}", from=1-7, to=1-9]
+\end{tikzcd}\]
+
+    as \(I\) is an ideal, and \(I\) is abelian. Therefore, we have that \((\ad_x\ad_y)^2 = 0\). As any nilpotent endomorphism is tracefree, we must have that \(\kappa(x, y) = 0\).
+\end{proof}
+
+\begin{theorem}
+    \(\mfg\) is semisimple if and only if \(\kappa\) is non-degenerate.
+\end{theorem}
+
+\begin{proof}
+    Suppose \(\kappa\) is non-degenerate. Then we've shown any abelian ideal is contained in \(\rad(\kappa) = 0\), therefore we must have that \(\rad(\mfg) = 0\), i.e. \(\mfg\) is semisimple.
+
+    On the other hand, suppose \(\rad(\kappa) \ne 0\). Let \(\mfh\) be any real Lie algebra. \(\mfh_\C = \mfh \otimes_\R \C\) be the complexification of \(\mfh\). We can make \(\mfh_\C\) into a complex Lie algebra via
+
+    \[[v \otimes \lambda, w \otimes \mu] = [v, w] \otimes (\lambda\mu)\]
+
+    With this, we can see that \(\mfh\) is abelian if and only if \(\mfh_\C\) is abelian, and as \([\mfh_\C, \mfh_\C] = [\mfh, \mfh]_\C\), \(\mfh\) is solvable if and only if \(\mfh_\C\) is solvable. Moreover, by the above definition of the Lie bracket, we can see that the Killing form of \(\mfg_\C\) is the complexification of the Killing form of \(\mfg\), i.e.
+
+    \[\kappa_\C(v \otimes \lambda, w \otimes \mu) = \lambda\mu \cdot \kappa(v, w)\]
+
+    Therefore, we get that \(\rad(\kappa_\C) = \rad(\kappa)_\C\). In particular, by \cref{lem:solv}, we see that \(\rad(\kappa)_\C\) is solvable, hence \(\rad(\kappa)\) is solvable. Therefore, \(\mfg\) is not semisimple.
+\end{proof}
+
+Moreover, we have a similar result to the complex case, in
+
+\begin{theorem}
+    Suppose \(\mfg\) is semisimple. Then there exists ideals \(I_1, \dots, I_t\) of \(\mfg\) which are simple (as Lie algebras), such that
+
+    \[\mfg = I_1 \oplus \cdots \oplus I_t\]
+
+    Moreover, each simple ideal of \(\mfg\) is one of the \(I_j\), and the Killing form of \(I_j\) is \(\kappa\vert_{I_j}\).
+\end{theorem}
+
+\subsection{Diagonalisation}
+
+Recall Sylvester's law of inertia:
+
+\begin{theorem}
+    [Sylvester's law of inertia]
+    Let \(A\) be a symmetric bilinear form on a finite dimensional real vector space \(V\). Then there exists a basis of \(V\) such that
+
+    \[[A] = \begin{pmatrix}
+        I_p \\ & -I_q \\ && 0
+    \end{pmatrix}\]
+\end{theorem}
+
+In the complex case, we can get
+
+\begin{corollary}
+    Let \(A\) be a symmetric bilinear form on a finite dimensional complex vector space \(V\). Then there exists a basis of \(V\) such that
+
+    \[[A] = \begin{pmatrix}
+        I_{p+q} \\ & 0
+    \end{pmatrix}\]
+\end{corollary}
+
+Note however a general symmetric bilinear form on a complex vector space will \emph{not} be positive definite, since \(A(iv, iv) = -A(v,v)\).
+
+\end{document}
