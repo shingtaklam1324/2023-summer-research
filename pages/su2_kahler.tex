@@ -1,0 +1,135 @@
+\documentclass{article}
+
+\usepackage{../Style}
+
+\DeclareMathOperator{\SU}{SU}
+\newcommand{\su}{\mfs\mfu}
+
+\title{K\"ahler structure on coadjoint orbits of \(\SU(2)\)}
+\author{Shing Tak Lam}
+
+\begin{document}
+
+\maketitle
+
+First, notice as every element in \(\su(2)\) can be diagonalised by an element of \(\SU(2)\), each coadjoint orbit \(\mcO\) contains precisely one element of the form
+
+\[A = \begin{pmatrix}
+    i\xi \\ & -i\xi
+\end{pmatrix}\]
+
+with \(\xi \ge 0\). We will use the following basis of \(\su(2)\):
+
+\[\mathbf i = \begin{pmatrix}
+    0 & -1 \\ 1 & 0
+\end{pmatrix} \quad \mathbf j = \begin{pmatrix}
+    0 & -i \\ -i & 0
+\end{pmatrix} \quad \mathbf k = \begin{pmatrix}
+    i & 0 \\ 0 & -i
+\end{pmatrix}\]
+
+Note that we have \([\mathbf i, \mathbf j] = 2\mathbf k\) and cyclic permutations of this.
+
+Fix \(\xi > 0\), and consider the coadjoint orbit
+
+\[\mcO = \{a\mathbf{i} + b \mathbf{j} + c\mathbf{k} \mid a^2 + b^2 + c^2 = \xi^2\}\]
+
+Fix \(B \in \mcO\), say \(B = a\mathbf{i} + b \mathbf{j} + c \mathbf {k}\). Let
+
+\begin{align*}
+    u &= [B, \mathbf{i}] = 2c\mathbf{j} - 2b \mathbf{k} \\
+    v &= [B, \mathbf{j}] = -2c \mathbf{i} + 2a \mathbf{k} \\
+    w &= [B, \mathbf{k}] = 2b \mathbf{i} - 2a \mathbf{j}
+\end{align*}
+
+Note that \(u, v, w\) span \(\TT_B\mcO\), and \(au + bv + cw = 0\). Assume without loss of generality that \(c \ne 0\). Then \(u, v\) form a basis of \(\TT_B\mcO\). The KKS symplectic form is
+
+\[\omega_B([B, X], [B, Y]) = -\inner{B, [X, Y]} = \tr(B[X, Y])\]
+
+In particular, this gives us that
+
+\[\omega_B(u, u) = \omega_B(v, v) = 0 \qqtext{and}\omega_B(u, v) = 2\tr(B\mathbf k) = -4c\]
+
+Hence \(\omega\) is represented by the matrix
+
+\[\omega = \begin{pmatrix}
+    0 & -4c \\ 4c & 0
+\end{pmatrix}\]
+
+with respect to the basis \(u, v\).
+
+Now suppose \(B = \gamma A\gamma^\dagger\), where \(\gamma = p\mathbf{1} + q\mathbf i + r\mathbf j + s\mathbf k \in \SU(2)\). Computing, we find that
+
+\begin{align*}
+    a &= 2\xi(pr + qs) \\
+    b &= 2\xi(rs - pq) \\
+    c &= \xi(p^2 - q^2 - r^2 + s^2)
+\end{align*}
+
+In this specific example, we have that the Hermitian metric is
+
+\[h(u, u) = 4\xi(\gamma\mathbf i \gamma^\dagger)_{21}\overline{(\gamma\mathbf i \gamma^\dagger)_{21}}\]
+
+and so on. This is independent of the choice of \(\gamma\), since any other choice would be \(\lambda \gamma\), where \(\lambda \in S^1 \subseteq \C\), and
+
+\[(\lambda \gamma)\xi(\lambda \gamma)^\dagger = \lambda \overline\lambda \gamma \xi \gamma^\dagger = \gamma\xi \gamma^\dagger\]
+
+Computing, we have that
+
+\begin{align*}
+    h(u, u) &= 4\xi\left(\frac{b^2+c^2}{\xi^2} + 16pqrs\right) \\
+    h(v, v) &= 4\xi\left(\frac{a^2 + c^2}{\xi^2} - 16pqrs\right) \\
+    h(u, v) &= 4\xi\left(\frac{ab}{\xi^2} + 8(p^2 - s^2)qr + i(\cdots)\right)
+\end{align*}
+
+where we use the fact that the Riemannian metric \(g\) is the real part of \(h\), and so we omit the imaginary part of \(h(u, v)\). Moreover, using the fact that
+
+\[\SU(2) = \left\{\begin{pmatrix}
+    \alpha & -\overline\beta \\
+    \beta & \overline\alpha
+\end{pmatrix} \big\vert \abs{\alpha}^2 + \abs{\beta}^2 = 1\right\}\]
+
+it is easy to see that for an appropriate choice of \(\lambda = e^{i\theta}\), we can set \(\beta\) pure imaginary, and so \(q = 0\). With this, we get that the Riemannian metric is
+
+\[g = \frac{4}{\xi}\begin{pmatrix}
+    b^2 + c^2 & ab \\
+    ab & a^2 + c^2
+\end{pmatrix}\]
+
+We can see that \(\det(g) = 16c^2 > 0\) by assumption that \(c\ne0\).
+
+Finally, we wish to compute the almost complex structure. We have that
+
+\[J = \tilde g^{-1}\tilde \omega\]
+
+where \(\tilde g, \tilde \omega : \TT_B \mcO \to \TT^*_B\mcO\) are the left maps, i.e.
+
+\[\tilde g(u)(v) = g(u, v) \quad \tilde\omega(u)(v) = \omega(u, v)\]
+
+If \(u^*, v^*\) is the dual basis of \(u, v\), then we have that
+
+\[[\tilde g] = [g]^\T = [g] \quad [\tilde\omega] = [\omega]^\T = -[\omega]\]
+
+Therefore, we have that
+
+\[J = \frac{1}{4\xi c}\begin{pmatrix}
+    a^2 + c^2 & -ab \\
+    -ab & b^2 + c^2
+\end{pmatrix}\begin{pmatrix}
+    0 & 4c \\ -4c & 0
+\end{pmatrix} = \frac{1}{c\xi}\begin{pmatrix}
+    ab & a^2 + c^2 \\
+    -(b^2 + c^2) & -ab
+\end{pmatrix}\]
+
+and
+
+\[J^2 = \frac{1}{\xi^2c^2}\begin{pmatrix}
+    -c^2(a^2 + b^2 + c^2) & 0 \\
+    0 & -c^2(a^2 + b^2 + c^2)
+\end{pmatrix} = \begin{pmatrix}
+    -1 & 0 \\ 0 & -1
+\end{pmatrix}\]
+
+
+\end{document}
