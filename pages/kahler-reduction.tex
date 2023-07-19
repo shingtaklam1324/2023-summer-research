@@ -1,0 +1,161 @@
+\documentclass{article}
+
+\usepackage{../Style}
+\usepackage{stmaryrd}
+
+\DeclareMathOperator{\SU}{SU}
+\newcommand{\su}{\mfs\mfu}
+
+\title{K\"ahler reduction}
+\author{Shing Tak Lam}
+
+\renewcommand{\tilde}{\widetilde}
+\newcommand{\surj}{\twoheadrightarrow}
+\DeclareMathOperator{\gr}{grad}
+
+\begin{document}
+
+\maketitle
+
+Throughout,
+
+\begin{enumerate}
+    \item \((M, \omega, g, I)\) is a K\"ahler manifold,
+    \item \(G\) is a compact Lie group acting on \(M\),
+    \item \((M, \omega, G, \mu)\) is a Hamiltonian \(G\)-space,
+    \item \(G\) acts by biholomorphisms on \(M\),
+    \item \(G\) acts freely on \(\mu^{-1}(0)\).
+\end{enumerate}
+
+In particular, as \(\omega(u, v) = g(I(u), v)\), \(I\) is an isometry on \(M\), \(G\) acts by isometries on \(M\). Let \(Z = \mu^{-1}(0)/G\). Let
+
+% https://q.uiver.app/#q=WzAsMyxbMCwwLCJcXG11XnstMX0oMCkiXSxbMCwyLCJaPVxcbXVeey0xfSgwKS9HIl0sWzIsMCwiTSJdLFswLDIsImkiLDAseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJob29rIiwic2lkZSI6InRvcCJ9fX1dLFswLDEsIlxccGkiLDIseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJlcGkifX19XV0=
+\[\begin{tikzcd}
+	{\mu^{-1}(0)} && M \\
+	\\
+	{Z=\mu^{-1}(0)/G}
+	\arrow["i", hook, from=1-1, to=1-3]
+	\arrow["\pi"', two heads, from=1-1, to=3-1]
+\end{tikzcd}\]
+
+be the natural inclusion and quotient maps. In particular, note that \(\pi\) is a surjective submersion. Therefore, any tensor \(\alpha\) of type \((0, r)\) on \(Z\) is determined by its pullback \(\pi^*\alpha\).
+
+The Marsden-Weinstein reduction theorem from symplectic geometry states that there exists a symplectic form \(\tilde\omega\) on \(Z\), such that
+
+\[\pi^*\tilde\omega = i^*\omega\]
+
+We will now construct the almost complex structure and Riemannian metric on \(Z\).
+
+Since \(\pi\) is a submersion, for \(p \in \mu^{-1}(0)\), \(z = \pi(p)\), we have
+
+\[\dd\pi_p : \TT_p\mu^{-1}(0) \surj \TT_zZ\]
+
+Let \(V_p = \ker(\dd\pi_p)\) be the vertical bundle, and \(H_p = V_p^\perp \le \TT_p\mu^{-1}(0)\) be the horizontal bundle. Therefore, we have an isomorphism
+
+\[\dd\pi_p\vert_{H_p} : H_p \cong \TT_zZ\]
+
+For brevity, we write this isomorphism as
+
+\begin{align*}
+    \dd\pi_p\vert_{H_p} : H_p &\to \TT_zZ \\
+    v &\mapsto v_* \\
+    w^* &\mapsfrom w
+\end{align*}
+
+With this, we can see that
+
+\[\tilde\omega(u, v) = \omega(u^*, v^*)\]
+
+and that
+
+\[\tilde g(u, v) = g(u^*, v^*)\]
+
+defines a Riemannian metric on \(Z\). Therefore, the almost complex structure we want must be given by
+
+\[\tilde I(u) = I(u^*)_*\]
+
+Assuming this is well defined, then we have that
+
+\begin{align*}
+    \tilde\omega(u, v) &= \omega(u^*, v^*) \\
+    &= g(I(u^*), v^*) \\
+    &= g(\tilde I(u)^*, v^*) \\
+    &= \tilde g(\tilde I(u), v)
+\end{align*}
+
+so \((\omega, g, I)\) is a compatible triple.
+
+\begin{lemma*}
+    \(I\) restricts to a map \(H_p \to H_p\).
+\end{lemma*}
+
+\begin{proof}
+    Let \(N_p = \left(\TT_p\mu^{-1}(0)\right)^\perp \le \TT_pM\) be the normal bundle of \(\mu^{-1}(0) \subseteq M\). This gives us an orthogonal direct sum
+
+    \[\TT_p M = N_p \oplus V_p \oplus H_p\]
+
+    Fix \(X \in \mfg\). Then for \(v \in \TT_pM\),
+
+    \[g(\gr(\mu^X), v) = \dd\mu^X(v) = \omega(X^\#, v) = g(I(X^\#), v)\]
+
+    where \(\gr(f)\) is the \(g\)-dual of \(\dd f\). In particular, this means that \(\gr(\mu^X) = I(X^\#)\). Let \(X_1, \dots, X_k\) be a basis  of \(\mfg\), with corresponding dual basis \(\xi^1, \dots, \xi^k\). Then the moment map can be written as
+
+    \[\mu(p) = \mu^{X_1}(p)\xi^1 + \dots + \mu^{X_k}(p)\xi^k\]
+
+    But this means that
+
+    \[\left\{\gr(\mu^{X_1}), \dots, \gr(\mu^{X_k})\right\} = \left\{I(X_1^\#), \dots, I(X_k^\#)\right\}\]
+
+    is a basis of \(N_p\). As \(X_1^\#, \dots, X_k^\#\) is a basis for \(V_p\), we have that \(I\) restricts to a map \(N_p \oplus V_p \to N_p \oplus V_p\). By orthogonality, this means that \(I\) restricts to a map \(H_p \to H_p\).
+\end{proof}
+
+Therefore, the map \(\tilde I\) as above is well defined. Finally, we need to show that we have a K\"ahler structure. That is, \(I\) is integrable.
+
+\begin{lemma*}
+    Let \(M\) be a manifold, \((\omega, g, I)\) a compatible triple on \(M\). Then \((M, \omega, g, I)\) is a K\"ahler manifold if and only if \(\nabla I = 0\), where \(\nabla\) is the Levi-Civita connection induced by \(g\).
+
+    Moreover, we have the expression
+
+    \[\nabla I(u) = \nabla(I(u)) - I(\nabla u)\]
+
+    and so \(\nabla I = 0\) if and only if \(\nabla(I(u)) = I(\nabla u)\) for all vector fields \(u\).
+\end{lemma*}
+
+\begin{proof}
+    See Huybrechts, \S 4.A. for the first part. For the second part, see Nicolaescu page 96.
+\end{proof}
+
+\begin{lemma*}
+    The Levi-Civita connection induced by \(\tilde g\) is
+
+    \[\tilde\nabla_XY = \pr_H\left(\nabla_{X^*}Y^*\right)_*\]
+
+    for vector fields \(X, Y\) on \(Z\), and we extend \(X^*, Y^*\) arbitrarily to a neighbourhood of \(\mu^{-1}(0) \subseteq M\). In addition, \(\pr_H : \TT_p M \to H_p\) is the orthogonal projection.
+\end{lemma*}
+
+\begin{proof}
+    Omitted.
+\end{proof}
+
+Finally, we note that since \(I\) respects the orthogonal decomposition
+
+\[\TT_pM = \left(N_p \oplus V_p\right) \oplus H_p\]
+
+\(\pr_H\) and \(I\) commute. With this, we can now compute \(\tilde\nabla\tilde I\).
+
+
+\begin{align*}
+    \left(\tilde\nabla_X\tilde I(Y)\right)^* &= \pr_H\left(\nabla_{X^*}\tilde I(Y)^*)\right) \\
+    &= \pr_H\left(\nabla_{X^*}I(Y^*)\right)\\
+    &= \pr_H\left(I(\nabla_{X^*}Y^*)\right) \\
+    &= I\left(\pr_H(\nabla_{X^*}Y^*)\right) \\
+    &= \tilde I(\tilde\nabla_XY)^*
+\end{align*}
+
+Hence we have that
+
+\[\tilde\nabla_X\tilde I(Y) = \tilde I(\tilde\nabla_XY)\]
+
+for any vector fields \(X, Y\) on \(Z\), and so \(\tilde\nabla\tilde I = 0\), and \((Z, \tilde\omega, \tilde g, \tilde I)\) is a K\"ahler manifold.
+
+\end{document}

@@ -1,0 +1,72 @@
+\documentclass{article}
+
+\usepackage{../Style}
+
+\title{K\"ahler structure on \(\TT^* G\)}
+\author{Shing Tak Lam}
+
+\begin{document}
+
+\maketitle
+
+Let \(G\) be a compact connected Lie group. We will show that \(\TT^*G\) is a K\"ahler manifold.
+
+\section{Tautological form and canonical symplectic form}
+
+Let \(M\) be any manifold. Suppose we have local coordinates \(x_1, \dots, x_n\) on \(M\). Then at each point \(p \in M\), \(\dd x_1, \dots, \dd x_n\) is a basis for \(\TT_p^*M\). In particular, for \(\xi \in \TT_p^* M\), we have that
+
+\[\xi = \sum_i \xi_i \dd x_i\]
+
+The coodinates \(x_1, \dots, x_n, \xi_1, \dots, \xi_n\) are called \emph{cotangent coordinates} on \(\TT^*M\). With this, define
+
+\[\alpha = \sum_i \xi_i \dd x_i\]
+
+which is a \(1\)-form, and let
+
+\[\omega = \sum_i \dd x_i \wedge \dd \xi_i = -\dd\alpha\]
+
+\(\alpha\) and \(\omega\) are intrinsically defined, that is, they are independent of the choice of coordinates. \(\alpha\) is called the \emph{tautological \(1\)-form} and \(\omega\) is called the \emph{canonical symplectic form} on \(\TT^*M\).
+
+\section{Complex structure on \(\TT^*G\)}
+
+First, we show that every Lie group is parallelisable, that is, we have a bundle isomorphism
+
+\[\TT G \cong G \times \mfg\]
+
+In particular, a bundle is trivial if and only if a collection of sections forming a fibrewise basis exists.
+
+Let \(x_1, \dots, x_n\) be local coordinates near \(e \in G\). So
+
+\[v_1 = \pdv{x_1}, \dots, v_n = \pdv{x_n}\]
+
+is a basis for \(\mfg\). Moreover, by considering the left translations \(\ell_g^*v_j\), we can see that these form a global frame for \(\TT G\). Hence we have a bundle isomorphism \(\TT G \cong \mfg \times G\).
+
+Next, we want to show that \(\TT^*G\) is also trivial. As \(G\) is compact, we can choose a bi-invariant Riemannian metric \(\gamma\) on \(G\). Suppose without loss of generality that \(v_1, \dots, v_n\) is an orthonormal basis of \(\mfg\). Then by bi-invariance, we have that \(\ell_g^*v_1, \dots, \ell_g^*v_n\) is an orthonormal basis of \(\TT_{g^{-1}}G\).
+
+Using the bi-invariant metric, we define
+
+\[\eta_j = \gamma(\ell_g^*v, \cdot)\]
+
+This is an orthonormal basis with respect to the induced metric on \(\TT^*G\), and so it defines an isomorphism \(\TT^*G \cong \TT G\). In particular, this gives us an isomorphism \(\TT^*G \cong G \times \mfg\).
+
+Finally, we note that we can put a complex structure on \(G \times \mfg\), by
+
+\[J(x, y) = (-\dd\ell_{g}y, \dd\ell_{g^{-1}} x)\]
+
+for \(x \in \TT_gG\), \(y \in \TT_z\mfg = \mfg\).
+
+\subsection{In cotangent coordinates}
+
+In cotangent coordinates about \(e \in G\), where we assume as above that the \(v_i\) are orthonormal, we find that \(\eta_j = \dd x_j\). Moreover, the isomorphism above is given by
+
+\[\TT^* G \ni (p, \xi) \mapsto (p, (\xi_1, \dots, \xi_n)) \in G \times \mfg\]
+
+Therefore, given \(v \in \TT_{(p, \xi)}\TT^*G\), say \(v = a + b\), where
+
+\[v = \left(\sum_i a_i \pdv{x_i}\right) + \left(\sum_j b_j \pdv{\xi_j}\right)\]
+
+we have that \(J(a, b) = (-b, a)\).
+
+
+
+\end{document}

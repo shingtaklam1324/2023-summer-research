@@ -1,0 +1,110 @@
+\documentclass{article}
+
+\usepackage{../Style}
+
+\renewcommand{\sl}{\mfs\mfl}
+
+\title{Coadjoint orbits of \(\SL(2, \C)\)}
+\author{Shing Tak Lam}
+
+\begin{document}
+
+\maketitle
+
+Let \(\SL(2, \C)\) denote the Lie group of \(2 \times 2\) complex matrices with determinant \(1\), and \(\sl(2, \C)\) its Lie algebra. The Killing form of \(\sl(2,\C)\) is
+
+\[\kappa(A, B) = \tr(AB)\]
+
+which is nondegenerate. Therefore, if we define \(R : \sl(2, \C) \to \sl(2, \C)^*\) by
+
+\[R(A)(B) = \kappa(A, B) = \tr(AB)\]
+
+Then \(R\) is injective, therefore, it is an isomorphism of vector spaces. We can use \(R\) to identify the adjoint and coadjoint orbits. In particular, if \(\alpha = R(A)\), then
+
+\[\Ad_g^*(\alpha)(B) = \alpha(\Ad_{g^{-1}}B) = \tr(Ag^{-1}Bg) = \tr(gAg^{-1}B) = R(gAg^{-1})(B) = R(\Ad_g(A))(B)\]
+
+That is, \(\Ad_g^* \circ R = R \circ \Ad_g\). Therefore, up to identification by \(R\), the adjoint and coadjoint orbits are the same.
+
+Let \(A \in \sl(2, \C)\). Note that we can put \(A\) into Jordan normal form by conjugating it by some \(g \in \SL(2, \C)\). Therefore, we can assume that \(A\) is in Jordan normal form. Suppose \(A \ne 0\). Then we must have
+
+\[A = \begin{pmatrix}
+    0 & 1 \\ 0 & 0 
+\end{pmatrix}\qqtext{or}A = \begin{pmatrix}
+    \alpha & 0 \\ 0 & -\alpha
+\end{pmatrix}\]
+
+\section{Nilpotent orbit}
+
+We will focus on the first case, i.e. the nilpotent orbit. In this case, if
+
+\[A = \begin{pmatrix}
+    \alpha & \beta \\ \gamma & -\alpha
+\end{pmatrix}\]
+
+we must have \(\det(A) = 0\), i.e. \(\alpha^2 + \beta\gamma = 0\). Define
+
+\[M = \left\{x^2 + yz = 0\right\} \setminus \{0\} \subseteq \C^3\]
+
+We restrict to the open submanifold, since the origin is a singular point. By the implicit function theorem, we can see that \(M\) is a complex surface. We want to study the topology of \(M\). First, notice that \(M\) is conical, that is, for \(t \in \R, t > 0\), \(tM = M\). Therefore, we want to first study
+
+\[Z = M \cap S^5\]
+
+where \(S^5 \subseteq \C^3\) is the unit ball, since topologically, we have that \(M \cong Z \times (0, \infty) \cong Z \times \R\).
+
+Let \(W = \C^2 \setminus 0 \subseteq \C^2\), and define \(\phi : W \to M\) by
+
+\[\phi(u, v) = (iuv, u^2, v^2)\]
+
+Note that \(\phi\) is a homogeneous polynomial of degree \(2\), therefore, for \(t \in \C\), we have that
+
+\[\phi(tu, tv) = t^2\phi(u, v) \tag{*}\]
+
+Therefore, suffices to consider the restriction of \(\phi\) to \(S^3\), since \(\phi(S^3)\) is homeomorphic to \(Z\). By (*), \(\phi(-u, -v) = \phi(u, v)\), and \(\phi\) is otherwise injective. Therefore, we get a bijective continuous map
+
+\[\tilde\phi : \R\bb P^3 \to Z\]
+
+from a compact space to a Hausdorff space, and so \(\tilde\phi\) is a homeomorphism. In particular, this means that \(M \cong \R\bb P^3 \times \R\).
+
+\section{Regular semisimple orbit}
+
+Now suppose we have \(A = \begin{pmatrix}
+    \alpha & 0 \\ 0 & -\alpha
+\end{pmatrix}\), with \(\alpha \ne 0\). In this case, we have that the stabiliser of \(A\) is the torus
+
+\[T = \left\{\begin{pmatrix}
+    \lambda & 0 \\ 0 & \lambda^{-1}
+\end{pmatrix} \bigg\vert\ \lambda \in \C^*\right\}\]
+
+In this case, it is easier to compute the orbit of \(A\) by computing the orbit space \(\SL(2, \C)/T\). Now
+
+\[\begin{pmatrix}
+    z_0 & z_1 \\ z_2 & z_3
+\end{pmatrix}\begin{pmatrix}
+    \lambda & 0 \\ 0 & \lambda^{-1}
+\end{pmatrix} = \begin{pmatrix}
+    \lambda z_0 & \lambda^{-1}z_1 \\ \lambda z_2 & \lambda^{-1}z_3
+\end{pmatrix}\]
+
+Therefore, we see that the ratios \(z_0 : z_2\) and \(z_1 : z_3\) are fixed. Therefore, we can define a map \(\phi : \SL(2, \C)/T \to \C\bb P^1 \times \C\bb P^1\) by
+
+\[\phi\left(\begin{pmatrix}
+    z_0 & z_1 \\ z_2 & z_3
+\end{pmatrix}\right) = ((z_0 : z_2), (z_1 : z_3))\]
+
+which has inverse on the open submanifold \(z_0z_3 - z_1z_2 \ne 0\) (which is well defined since this is a bihomogeneous polynomial) given by
+
+\[\psi((z_0:z_2), (z_1:z_3)) = \frac{1}{\sqrt{z_0z_3 - z_1z_2}}\begin{pmatrix}
+    z_0 & z_1 \\ z_2 & z_3
+\end{pmatrix}T\]
+
+which is well defined, since
+
+\[\psi((az_0:az_2),(bz_1:bz_3)) = \frac{1}{\sqrt{ab(z_0z_3 - z_1z_2)}}\begin{pmatrix}
+    az_0 & bz_1 \\ az_2 & bz_3
+\end{pmatrix}T = \psi((z_0:z_2), (z_1:z_3))\]
+
+since it is just multiplication the element of \(T\) given by \(\lambda = \sqrt{a/b}\). Hence \(\SL(2, \C)\) is homeomorphic to \(\{z_0z_3 - z_1z_2 \ne 0\} \subseteq \C\bb P^1 \times \C\bb P^1\), which by the Segre embedding\footnote{Which we take to be \[(Z_0:Z_1:Z_2:Z_3) = (z_0z_1:z_0z_3:z_2z_1:z_2z_3)\]}, is homeomorphic to an open submanifold of a projective quadric surface.
+
+\[\{Z_0Z_3 - Z_1Z_2 = 0, Z_1 - Z_2 \ne 0\} \subseteq \C \bb P^3\]
+
+\end{document}
