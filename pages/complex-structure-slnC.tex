@@ -1,0 +1,66 @@
+\documentclass{article}
+
+\title{Complex structure on \(\sl(n, \C)\) and coadjoint orbits of \(\SU(n)\)}
+\author{Shing Tak Lam}
+
+\usepackage{../Style}
+
+\DeclareMathOperator{\SU}{SU}
+\renewcommand{\sl}{\mfs\mfl}
+\newcommand{\su}{\mfs\mfu}
+\newcommand{\iinner}[1]{\left\langle\!\left\langle #1 \right\rangle\!\right\rangle}
+
+\begin{document}
+
+\maketitle
+
+First of all, notice that
+
+\[\sl(n, \C) = \{A \in M_n(\C) \mid \tr(A) = 0\}\]
+
+is naturally a complex vector space, and that we have the decomposition
+
+\[\sl(n, \C) = \su(n) \oplus i \su(n)\]
+
+With respect to this decomposition, the complex structure \(J\) on \(\sl(n, \C)\) is given by the matrix
+
+\[J = \begin{pmatrix}
+    0 & -I_n \\
+    I_n & 0
+\end{pmatrix}\]
+
+Next, let \(M = \SU(n) \times \su(n)\). The tangent space of \(M\) at \(p = (g, X)\) is
+
+\[\TT_pM = \TT_g\SU(n) \times \TT_X\su(n) = g\su(n) \times \su(n)\]
+
+Therefore, we have a natural isomorphism \(\TT_pM \cong \su(n) \oplus \su(n)\), given by
+
+\[(u, v) \mapsto (g^{-1}u, v)\]
+
+This then gives us a natural complex structure on \(\TT_pM\), by
+
+\[J(u, v) = (-gv, g^{-1}u) \in \TT_g\SU(n) \times \su(n)\]
+
+But we also have the symplectic form, coming from the isomorphism \(\TT^* \SU(n) \cong \SU(n) \times \su(n)^*\) as vector bundles, given at \(q = (g, \xi)\) by
+
+\[\omega_q((v, \phi), (w, \psi)) = -\phi(g^{-1}w) + \psi(g^{-1}v)+\xi([g^{-1}v, g^{-1}w])\]
+
+where \(v, w \in \TT_g\SU(n) = g\su(n)\), \(\phi, \psi \in \su(n)^*\). Next, as \(\SU(n)\) is compact, fix a bi-invariant metric \(\inner{\cdot, \cdot}\) on \(\SU(n)\). This gives us an isomorphism \(R : \su(n) \to \su(n)^*\) by
+
+\[R(X)(Y) = \inner{X, Y}\]
+
+For concreteness, we can take \(\inner{A, B} = -\tr(AB)\). Say \(\xi = R(X), \phi = R(y), \psi = R(z)\). Then we have that
+
+\[\omega_p((v, y), (w, z)) = -\inner{y, g^{-1}w} + \inner{z, g^{-1}v} + \inner{X, [g^{-1}v, g^{-1}w]}\]
+
+and this gives the Riemannian metric
+
+\begin{align*}
+    \iinner{(v, y), (w, z)} &= \omega_p((v, y), J(w, z)) \\
+    &= \omega_p((v, y), (-gz, g^{-1}w)) \\
+    &= \inner{y, z} + \inner{g^{-1}w, g^{-1}v} - \inner{X, [g^{-1}v, z]} \\
+    &= \inner{y, z} + \inner{w, v} - \inner{X, [g^{-1}v, z]}
+\end{align*}
+
+
+\end{document}

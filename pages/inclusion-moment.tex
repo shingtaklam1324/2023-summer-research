@@ -1,0 +1,58 @@
+\documentclass{article}
+
+\title{Inclusion map as a moment map}
+\author{Shing Tak Lam}
+
+\usepackage{../Style}
+
+\begin{document}
+
+\maketitle
+
+Let \(G\) be a Lie group, acting on \(\mfg^*\) by the coadjoint action. Fix \(\xi \in \mfg^*\), and let \(\mcO = G \cdot \xi\) be its orbit. Recall we have the Kirillov-Kostant symplectic form
+
+\[\omega_\xi(\ad_X^*(\xi), \ad_Y^*(\xi)) = \inner{\xi,[X, Y]}\]
+
+for \(X, Y \in \mfg\). We will show that the inclusion map \(i : \mcO \to \mfg^*\) is a moment map for the action of \(G\) on \(\mcO\). Equivariance is clear since the action is just the restriction of the coadjoint action. 
+
+For \(X \in \mfg\), define a vector field \(X^\#\) by
+
+\[X^\#_\mu = \dv{t}\bigg\vert_{t=0}\Ad_{\exp(tX)}^*\mu\]
+
+and the component of the inclusion map \(i\) is
+
+\[i^X(\mu) = \inner{i(\mu), X} = \inner{\mu, X}\]
+
+We want to show that \(\dd i^X = \iota_{X^\#}\omega\). For \(Y \in \mfg\), \(\mu \in \mcO\), we have that
+
+\begin{align*}
+    \dd i^X(Y^\#)(\mu) &= Y_\mu^\#\left(i^X\right) \\
+    &= \dv{t}\bigg\vert_{t=0}\left(\Ad_{\exp(tY)}^*\mu\right)i^X \\
+    &= \dv{t}\bigg\vert_{t=0}\inner{\Ad_{\exp(tY)}^*\mu, X} \\
+    &= \inner{Y_\mu^\#, X}
+\end{align*}
+
+\begin{lemma*}
+    \[\inner{Y_\mu^\#, X} = \inner{\mu, [X, Y]}\]
+
+    for all \(X, Y \in \mfg\).
+\end{lemma*}
+
+\begin{proof}
+    \begin{align*}
+        \inner{Y_\mu^\#, X} &= \inner{\dv{t}\bigg\vert_{t=0}\Ad_{\exp(tY)}^*\mu, X} \\
+        &= \dv{t}\bigg\vert_{t=0}\inner{\xi, \Ad_{\exp(-tY)}X} \\
+        &= \inner{\xi, \dv{t}\bigg\vert_{t=0}\Ad_{\exp(-tY)}X} \\
+        &= \inner{\xi, [X, Y]}
+    \end{align*}
+\end{proof}
+
+Therefore, we have that
+
+\[\dd i^X(Y^\#)(\mu) = \inner{\mu, [X, Y]}\]
+
+On the other hand, we have that
+
+\[\iota_{X^\#}\omega(Y^\#)(\mu) = \omega_\mu(X^\#, Y^\#) = \inner{\mu, [X, Y]}\]
+
+\end{document}

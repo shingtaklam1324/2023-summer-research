@@ -1,0 +1,179 @@
+\documentclass{article}
+
+\usepackage{../Style}
+
+\renewcommand{\sl}{\mfs\mfl}
+\DeclareMathOperator{\SU}{SU}
+\newcommand{\su}{\mfs\mfu}
+\newcommand{\rS}{\mathrm{S}}
+\newcommand{\rU}{\mathrm{U}}
+\DeclareMathOperator{\Gr}{Gr}
+
+\title{Coadjoint orbits of \(\SL(n, \C)\) and \(\SU(n)\)}
+\author{Shing Tak Lam}
+
+\begin{document}
+
+\maketitle
+
+In this note, we study the coadjoint orbits of \(\SU(n)\), and of its complexification \(\SL(n, \C)\).
+
+\section{Killing form}
+
+First of all, note that the bilinear form \(\beta\) on \(\sl(n, \C)\)
+
+\[\beta(A, B) = -\tr(AB)\]
+
+is non-degenerate. Therefore, we have an isomorphism \(R : \sl(n, \C) \to \sl(n, \C)^*\), given by
+
+\[R(A)(B) = \beta(A, B)\]
+
+With this, the coadjoint action of \(\SL(n, \C)\) on \(\sl(n, \C)^*\) is given by
+
+\[\Ad_g^*(R(A))(B) = R(A)(\Ad_{g^{-1}}(B)) = -\tr(Ag^{-1}Bg) = -\tr(gAg^{-1}B) = R(gAg^{-1})(B)\]
+
+Therefore, up to identification by \(R\), the adjoint and coadjoint orbits are the same. The same result holds for the restriction of \(\beta\) to \(\su(n)\). Therefore, in what follows, we will consider the adjoint orbits instead.
+
+\section{Adjoint orbits of \(\SU(n)\)}
+
+First of all, we note that
+
+\[\su(n) = \left\{A \in \Mat(n, \C) \mid A^\dagger + A = 0, \tr(A) = 0\right\}\]
+
+where \(A^\dagger\) is the conjugate transpose of \(A\). In particular, all elements of \(\su(n)\) are skew-hermitian, hence diagonalisable by an element of \(\SU(n)\)\footnote{From standard linear algebra arguments, we know that they are \(\rU(n)\)-diagonalisable. But if \(PAP^{-1}\) is diagonal, then so is \((\lambda P)A(\lambda P)^{-1}\), and by choosing \(\lambda\) appropriately, \(\lambda \in \SU(n)\).}. With this, we can classify the coadjoint orbits based off a diagonal element in the orbit. Consider
+
+\[A = \begin{pmatrix}
+    i\lambda_1 I_{m_1} \\
+    & \ddots \\
+    & & i\lambda_k I_{m_k}
+\end{pmatrix}\]
+
+where \(\lambda_j \in \R\), with \(\lambda_1 > \lambda_2 > \dots > \lambda_k\), \(m_1 + \dots + m_k = n\) and \(m_1\lambda_1 + \dots + m_k\lambda_k = 0\). In this case, we have that the orbit is
+
+\[\Orb(A) \cong \SU(n)/\Stab(A)\]
+
+where \(\Stab(A)\) is the stabiliser of \(A\) under the adjoint action. In this case, we have that the stabiliser is the block diagonal subgroup
+
+\[\Stab(A) = \rS\left(\rU(m_1) \times \dots \times \rU(m_k)\right)\]
+
+where we consider \(\rU(m_1) \times \cdots \times \rU(m_k) \le \rU(n)\) as the block diagonal subgroup, and
+
+\[\rS\left(\rU(m_1) \times \dots \times \rU(m_k)\right) = \left(\rU(m_1) \times \cdots \times \rU(m_k)\right) \cap \SU(n)\]
+
+the subgroup with determinant \(1\). Therefore, the coadjoint orbit is diffeomorphic to the flag manifold
+
+\[\mcF(m_1, \dots, m_k) = \frac{\SU(n)}{\rS\left(\rU(m_1) \times \cdots \times \rU(m_k)\right)}\]
+
+In particular, note that \(\mcF(p, n-p)\) is diffeomorphic to the Grassmannian \(\Gr(p, n)\) of \(p\)-dimensional subspaces of \(\C^n\). More generally, a generic element of \(\mcF(m_1, \dots, m_k)\) can be represented as \(V_1, \dots, V_k\), where \(V_j\) is a dimension \(m_j\) subspace of \(\C^n\), with \(V_j \perp V_k\) for all \(j \ne k\). This is because we can set \(V_j\) to be the \(\lambda_j\) eigenspace and vice versa.
+
+\section{Adjoint orbits of \(\SL(n, \C)\)}
+
+In this case, we have that the Lie algebra is
+
+\[\sl(n, \C) = \su(n)_\C = \left\{A \in \Mat(n, \C) \mid \tr(A) = 0\right\}\]
+
+Define the Jordan block
+
+\[J_n(\lambda) = \begin{pmatrix}
+    \lambda & 1 \\
+    & \ddots & \ddots \\
+    & & \ddots & 1 \\
+    & & & \lambda
+\end{pmatrix} = \lambda I + J_n \in \Mat(n, \C)\]
+
+where \(J_n = J_n(0)\). Then we know that every element of \(\sl(n, \C)\) is \(\SL(n, \C)\)-conjugate to a matrix in Jordan normal form, say
+
+\[A = \begin{pmatrix}
+    J_{m_1}(\lambda_1) \\
+    & \ddots \\
+    & & J_{m_k}(\lambda_k)
+\end{pmatrix}\]
+
+where \(m_1 + \dots + m_k = n\) and \(m_1\lambda_1 + \dots + m_k\lambda_k = 0\). As above, we would like to compute the stabiliser of \(A\) under the conjugation action.
+
+\subsection{Diagonalisable case}
+
+Suppose \(A\) was diagonalisable. By conjugating by a permutation matrix, we can assume that \(A\) is of the form
+
+\[A = \begin{pmatrix}
+    \lambda_1 I_{\ell_1} \\
+    & \ddots \\
+    & & \lambda_p I_{\ell_p}
+\end{pmatrix}\]
+
+with \(\lambda_1, \dots, \lambda_p\) distinct. In this case, we have that the stabiliser is
+
+\[\Stab(A) = \rS(\GL(\ell_1, \C) \times \cdots \times \GL(\ell_p, \C))\]
+
+where we consider \(\GL(\ell_1, \C) \times \cdots \times \GL(\ell_p, \C) \le \GL(n, \C)\) as the block diagonal subgroup, and
+
+\[\rS(\GL(\ell_1, \C) \times \cdots \times \GL(\ell_p, \C)) = \left(\GL(\ell_1, \C) \times \cdots \times \GL(\ell_p, \C)\right) \cap \SL(n, \C)\]
+
+\subsection{Jordan block}
+
+Now suppose \(A = J_n(\lambda)\). Since \(\tr(A) = 0\), we must have \(\lambda = 0\). In this case, it is easy to show that the stabiliser is the subgroup
+
+\[P = \left\{\left.\begin{pmatrix}
+    a_1 & a_2 & \cdots & \cdots & a_n \\
+    & a_1 & a_2 & &\ddots & \vdots \\
+    & & \ddots & \ddots & \vdots \\
+    & & & a_1 & a_2 \\
+    & & & & a_1
+\end{pmatrix}\ \right\vert\ a_1^n = 1, a_j \in \C \right\}\]
+
+of upper triangular Toeplitz matrices. In fact, we prove something more general in the next subsection.
+
+\subsection{General case}
+
+In general, for \(B \in \Mat(n, \C)\), the equation \(BA = AB\) becomes equations of the form
+
+\[J_\ell(\lambda)X = XJ_m(\mu)\]
+
+for some \(X \in \Mat(\ell \times m, \C)\). Assume without loss of generality that \(\ell \ge m\). Then note that
+
+\[J_\ell(\lambda - \mu)X = J_\ell(\lambda)X - \mu X = XJ_m(\mu) - \mu X = XJ_m(0) = X J_m\]
+
+\begin{lemma*}
+    Let \(X\) be a \(m \times n\) matrix, with \(J_mX = XJ_n\). Then \(X\) is strictly upper triangular and Toeplitz, and if \(m < n\), then the first \(n - m\) columns of \(X\) are zero.
+\end{lemma*}
+
+\begin{proof}
+    Say the entries of \(X\) are \((x_{ij})\). Then
+
+    \[x_{i+1, j+1} = e_i^\T J_m Xe_{j+1} = e_i^\T X J_n e_{j+1} = x_{i, j}\]
+
+    and so \(X\) is Toeplitz. Moreover,
+
+    \[J_m X e_1 = X J_n e_1 = 0\]
+
+    So \(x_{i, 1} = 0\) for all \(i > 1\). Similarly, we have that
+
+    \[J_m^\ell X e_\ell = X J_n^\ell e_\ell = 0\]
+
+    hence \(x_{i, j} = 0\) for \(i > j\). Therefore, \(X\) is upper triangular. Now suppose \(m \le n\). We will show that the last row is zero, since this will show the first \(n - m\) columns are zero, and that the Toeplitz part is strictly upper triangular. This follows from the fact that
+
+    \[x_{m, n-\ell} = e_m^\T X e_{n-\ell} =  e_m^\T X J_n^\ell e_n = e_m^\T J_m^\ell X e_n = 0\]
+\end{proof}
+
+This means that if \(\lambda = \mu\), then \(X\) must satisfy the conclusions of the lemma. On the other hand, if \(\lambda \ne \mu\), then we have that
+
+\[J_\ell(\lambda - \mu)^n X = X{J_m}^m = 0\]
+
+and so \(X = 0\).
+
+Therefore, we can write a generic matrix \(B\) with \(BA = AB\) blockwise as \(B_{ij}\), where \(B_{ij} \in \Mat(m_i \times m_j, \C)\), corresponding to \(J_{m_i}(\lambda_i)\) and \(J_{m_j}(\lambda_j)\). In particular, we have that
+
+\[B_{ij} = \begin{cases}
+    0 & \text{if }\lambda_j \ne \lambda_i \\
+    \begin{pmatrix}
+        T_{ij} \\ 0
+    \end{pmatrix} & \text{if } \lambda_j = \lambda_i \text{ and } m_i > m_j \\
+    \begin{pmatrix}
+        0 & T_{ij}
+    \end{pmatrix} & \text{if } \lambda_j = \lambda_i \text{ and } m_i < m_j \\
+    T_{ij} & \text{if } \lambda_j = \lambda_i \text{ and } m_i = m_j
+\end{cases}\]
+
+where \(T_{ij}\) is an upper triangular Toeplitz matrix, of size \(\min(m_i, m_j)\).
+
+\end{document}

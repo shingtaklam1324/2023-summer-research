@@ -1,0 +1,50 @@
+\documentclass{article}
+
+\title{K\"ahler structure on reduction via complex manifolds}
+\author{Shing Tak Lam}
+
+\usepackage{../Style}
+
+\newcommand{\sslash}{/\!/}
+\DeclareMathOperator{\gr}{grad}
+
+\begin{document}
+
+\maketitle
+
+Throughout, let \(M\) be a compact K\"ahler manifold, \(G\) a compact Lie group acting on \(X\) preserving the K\"ahler structure. Let \(\mu : M \to \mfg^*\) be the moment map for the action. Suppose in addition that \(G\) acts freely on \(\mu^{-1}(0)\). Then we have that
+
+\[M \sslash G := \mu^{-1}(0)/G\]
+
+has a K\"ahler structure. In this note, we show another way of thinking about this, which is that
+
+\[\mu^{-1}(0)/G \cong M^{\min} / G_\C\]
+
+where \(M^s\) is an open submanifold of \(M\), and \(G_\C\) is the complexification of \(G\). In this case, the fact that \(M\sslash G\) has a complex structure becomes clear.
+
+Fix a \(G\)-invariant Riemannian metric on \(M\), and define \(f : M \to \R\) by
+
+\[f(x) = \norm{\mu(x)}^2\]
+
+We want to consider \(f\) as a Morse function on \(M\). For \(x \in M\), define the curve \((x_t)_{t \ge 0}\) by
+
+\begin{align*}
+    x_0 &= x \\
+    \dv{x_t}{t} &= -\gr f(x_t)
+\end{align*}
+
+The set of limit points of the trajectory is
+
+\[\omega(x) = \left\{y \in M \mid \text{every neighbourhood of }y\text{ contains }x_t\text{ for }t\text{ arbitrarily large}\right\}\]
+
+With this, we define
+
+\[M^{\min} = \left\{x \in X \mid \omega(x) \subseteq \mu^{-1}(0)\right\}\]
+
+Then \(M^{\min}\) is a \(G_\C\) invariant open subset of \(M\), with \(\mu^{-1}(0) \subseteq M^{\min}\). The inclusion map induces a natural continuous map
+
+\[\mu^{-1}(0)/G \to M^{\min}/G_\C\]
+
+which is a homeomorphism. The proof of this relies on the fact that \(G \cdot \mu^{-1}(0) = M^{\min}\), hence the map is surjective. Another argument shows the map is bijective. Therefore it is a continuous bijection from a compact space to a Hausdorff space, hence a homeomorphism.
+
+\end{document}
