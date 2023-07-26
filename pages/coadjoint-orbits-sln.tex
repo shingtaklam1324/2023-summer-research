@@ -30,7 +30,7 @@ is non-degenerate. Therefore, we have an isomorphism \(R : \sl(n, \C) \to \sl(n,
 
 With this, the coadjoint action of \(\SL(n, \C)\) on \(\sl(n, \C)^*\) is given by
 
-\[\Ad_g^*(R(A))(B) = R(A)(\Ad_{g^{-1}}(B)) = -\tr(Ag^{-1}Bg) = -\tr(gAg^{-1}B) = R(gAg^{-1})(B)\]
+\[\Ad_g^*(R(A))(B) = R(A)(\Ad_{g^{-1}}(B)) = -\tr(Ag^{-1}Bg) = -\tr(gAg^{-1}B) = R(gAg^{-1})(B) = R(\Ad_g(A))(B)\]
 
 Therefore, up to identification by \(R\), the adjoint and coadjoint orbits are the same. The same result holds for the restriction of \(\beta\) to \(\su(n)\). Therefore, in what follows, we will consider the adjoint orbits instead.
 
@@ -64,7 +64,11 @@ the subgroup with determinant \(1\). Therefore, the coadjoint orbit is diffeomor
 
 \[\mcF(m_1, \dots, m_k) = \frac{\SU(n)}{\rS\left(\rU(m_1) \times \cdots \times \rU(m_k)\right)}\]
 
-In particular, note that \(\mcF(p, n-p)\) is diffeomorphic to the Grassmannian \(\Gr(p, n)\) of \(p\)-dimensional subspaces of \(\C^n\). More generally, a generic element of \(\mcF(m_1, \dots, m_k)\) can be represented as \(V_1, \dots, V_k\), where \(V_j\) is a dimension \(m_j\) subspace of \(\C^n\), with \(V_j \perp V_k\) for all \(j \ne k\). This is because we can set \(V_j\) to be the \(\lambda_j\) eigenspace and vice versa.
+In particular, note that \(\mcF(p, n-p)\) is diffeomorphic to the Grassmannian \(\Gr(p, n)\) of \(p\)-dimensional subspaces of \(\C^n\). More generally, a generic element of \(\mcF(m_1, \dots, m_k)\) can be represented as \((V_1, \dots, V_k)\), where \(V_j\) is a dimension \(m_j\) subspace of \(\C^n\), with \(V_j \perp V_k\) for all \(j \ne k\)\footnote{This may not be the usual definition of a (partial) flag manifold, which is a sequence of subspaces 
+
+\[0 = W_0 \subset W_1 \subset \cdots \subset W_k = \C^n\]
+
+However it is equivalent, since we can set \(W_0 = 0\), \(W_1 = V_1\), \(W_2 = V_1 \oplus V_2\) and so on. Moreover, the indexing is slightly different, since we are indexing using \(m_1, \dots, m_k\), instead of \(\dim(W_1) = m_1, \dim(W_2) = m_1 + m_2\) and so on. Again, it is easy to convert between the two definitions.}. This is because we can set \(V_j\) to be the \(i\lambda_j\) eigenspace and vice versa.
 
 \section{Adjoint orbits of \(\SL(n, \C)\)}
 
@@ -109,6 +113,48 @@ where we consider \(\GL(\ell_1, \C) \times \cdots \times \GL(\ell_p, \C) \le \GL
 
 \[\rS(\GL(\ell_1, \C) \times \cdots \times \GL(\ell_p, \C)) = \left(\GL(\ell_1, \C) \times \cdots \times \GL(\ell_p, \C)\right) \cap \SL(n, \C)\]
 
+In this case, we can compute the coadjoint orbits as well. In particular, a generic element \(B \in \Orb(A)\) is determined by its eigenspaces. One way to express this is as an open subset of
+
+\[\Gr(\ell_1, n) \times \cdots \times \Gr(\ell_p, n)\]
+
+where we require the subspaces to intersect trivially\footnote{Which is \emph{not} a flag manifold if we use the same trick as above, considering the sums of the eigenspaces, since without orthogonality we can't recover the eigenspaces from the sums. This is also not the same as the product
+
+\[\Gr(\ell_1, n) \times \Gr(\ell_2, n - \ell_1) \times \cdots \times \Gr(\ell_p, \ell_p)\]
+
+since we don't require the eigenspaces to be orthogonal.}. In the case where \(\ell_i = 1\), so the eigenvalues of \(A\) are distinct, then the orbit of \(A\) is precisely the space of all matrices with the same characteristic polynomial, i.e.
+
+\[\chi_B(t) = (t - \lambda_1)\cdots(t - \lambda_n)\]
+
+Which shows that \(\Orb(A)\) is a closed subvariety of \(\Mat(n, \C)\). Moreover, in this case, we get that the stabiliser is the diagonal subgroup
+
+\[\Stab(A) = \left\{\left.\begin{pmatrix}
+    b_1 & \\
+    & \ddots \\
+    & & b_n
+\end{pmatrix}\ \right\vert\ b_j \in \C^*, b_1\cdots b_n = 1 \right\} \cong (\C^*)^{n-1}\]
+
+Now notice that
+
+\[\begin{pmatrix}
+    \vert & & \vert \\
+    v_1 & \cdots & v_n \\
+    \vert & & \vert
+\end{pmatrix}\begin{pmatrix}
+    b_1 & \\
+    & \ddots \\
+    & & b_n
+\end{pmatrix} = \begin{pmatrix}
+    \vert & & \vert \\
+    b_1v_1 & \cdots & b_nv_n \\
+    \vert & & \vert
+\end{pmatrix}\]
+
+Which is another way of seeing that the orbit space in this case is an open subset of
+
+\[(\C \bb P^{n-1})^n\]
+
+since each \(v_j\) determines is a line in \(\C^n\), and we get a well defined function \(\SL(n, \C)/(\C^*)^{n-1} \to (\C \bb P^{n-1})^n\), which is injective.
+
 \subsection{Jordan block}
 
 Now suppose \(A = J_n(\lambda)\). Since \(\tr(A) = 0\), we must have \(\lambda = 0\). In this case, it is easy to show that the stabiliser is the subgroup
@@ -121,7 +167,11 @@ Now suppose \(A = J_n(\lambda)\). Since \(\tr(A) = 0\), we must have \(\lambda =
     & & & & a_1
 \end{pmatrix}\ \right\vert\ a_1^n = 1, a_j \in \C \right\}\]
 
-of upper triangular Toeplitz matrices. In fact, we prove something more general in the next subsection.
+of upper triangular Toeplitz matrices. In fact, we prove something more general in the next subsection. In this case, the orbit of \(J_n\) is
+
+\[\Orb(J_n) = \left\{B \in \Mat(n, \C) \mid B^n = 0, B^{n-1} \ne 0\right\}\]
+
+which is an open subset of a closed subvariety.
 
 \subsection{General case}
 
@@ -134,7 +184,7 @@ for some \(X \in \Mat(\ell \times m, \C)\). Assume without loss of generality th
 \[J_\ell(\lambda - \mu)X = J_\ell(\lambda)X - \mu X = XJ_m(\mu) - \mu X = XJ_m(0) = X J_m\]
 
 \begin{lemma*}
-    Let \(X\) be a \(m \times n\) matrix, with \(J_mX = XJ_n\). Then \(X\) is strictly upper triangular and Toeplitz, and if \(m < n\), then the first \(n - m\) columns of \(X\) are zero.
+    Let \(X\) be a \(m \times n\) matrix, with \(J_mX = XJ_n\). Then \(X\) is upper triangular and Toeplitz, and if \(m < n\), then the first \(n - m\) columns of \(X\) are zero.
 \end{lemma*}
 
 \begin{proof}
@@ -150,7 +200,7 @@ for some \(X \in \Mat(\ell \times m, \C)\). Assume without loss of generality th
 
     \[J_m^\ell X e_\ell = X J_n^\ell e_\ell = 0\]
 
-    hence \(x_{i, j} = 0\) for \(i > j\). Therefore, \(X\) is upper triangular. Now suppose \(m \le n\). We will show that the last row is zero, since this will show the first \(n - m\) columns are zero, and that the Toeplitz part is strictly upper triangular. This follows from the fact that
+    hence \(x_{i, j} = 0\) for \(i > j\). Therefore, \(X\) is upper triangular. Now suppose \(m < n\). We will show that the all the entries on the last row except the last one is zero, since this will show the first \(n - m\) columns are zero, and that the Toeplitz part is strictly upper triangular. This follows from the fact that
 
     \[x_{m, n-\ell} = e_m^\T X e_{n-\ell} =  e_m^\T X J_n^\ell e_n = e_m^\T J_m^\ell X e_n = 0\]
 \end{proof}
@@ -175,5 +225,79 @@ Therefore, we can write a generic matrix \(B\) with \(BA = AB\) blockwise as \(B
 \end{cases}\]
 
 where \(T_{ij}\) is a strictly upper triangular Toeplitz matrix, of size \(\min(m_i, m_j)\). Therefore, the stabiliser of \(A\) is the subgroup of \(\SL(n, \C)\) of the above form.
+
+\section{Nilporent orbits of \(\SL(n, \C)\) for small \(n\)}
+
+Throughout, we will study \emph{nonzero} nilpotent orbits. In particular, all eigenvalues are zero. Also note that
+
+\[\dim(\SL(n, \C)) = n^2 - 1\]
+
+For \(n = 2\), we only have one nilpotent orbit, given by the Jordan normal form
+
+\[A = \begin{pmatrix}
+    0 & 1 \\ 0 & 0
+\end{pmatrix}\]
+
+and the stabiliser is the subgroup elements of \(\SL(2, \C)\) of the form
+
+\[\pm\begin{pmatrix}
+    1 & b \\ 0 & 1
+\end{pmatrix}\]
+
+The complex dimension of the quotient is \(3 - 1 = 2\).
+
+For \(n = 3\), the possible Jordan normal forms are
+
+\[A_1 = \begin{pmatrix}
+    0 & 1 & 0 \\
+    0 & 0 & 1 \\
+    0 & 0 & 0
+\end{pmatrix} \quad A_2 = \begin{pmatrix}
+    0 & 1 & 0 \\
+    0 & 0 & 0 \\
+    0 & 0 & 0
+\end{pmatrix}\]
+
+and the corresponding stabilisers are
+
+\[\begin{pmatrix}
+    a & b & c \\
+    0 & a & b \\
+    0 & 0 & a
+\end{pmatrix} \qqtext{and} \begin{pmatrix}
+    a & b & c \\
+    0 & a & 0 \\
+    0 & d & e
+\end{pmatrix}\]
+
+The complex dimension of the orbit spaces are \(8 - 2 = 6\) and \(8 - 4 = 4\) respectively.
+
+For \(n=4\), we get Jordan decompositions \([4], [3, 1], [2, 2], [2, 1, 1]\). The corresponding stabilisers are
+
+\[\begin{pmatrix}
+    a & b & c & d \\
+    0 & a & b & c \\
+    0 & 0 & a & b \\
+    0 & 0 & 0 & a
+\end{pmatrix} \quad \begin{pmatrix}
+    a & b & c & d \\
+    0 & a & b & 0 \\
+    0 & 0 & a & 0 \\
+    0 & 0 & e & f
+\end{pmatrix} \quad \begin{pmatrix}
+    a & b & c & d \\
+    0 & a & 0 & c \\
+    e & f & g & h \\
+    0 & e & 0 & g
+\end{pmatrix} \quad \begin{pmatrix}
+    a & b & c & d \\
+    0 & a & 0 & 0 \\
+    0 & e & f & g \\
+    0 & h & i & j
+\end{pmatrix}\]
+
+The complex dimension of the orbit spaces are \(15 - 3 = 12\), \(15 - 5 = 10\), \(15 - 5 = 10\) and \(15 - 9 = 6\) respectively.
+
+Note in each case, the complex dimension is even, which is a necessary condition for there to be a hyperk\"ahler structure on the orbit space.
 
 \end{document}

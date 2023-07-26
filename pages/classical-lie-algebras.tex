@@ -1,0 +1,86 @@
+\documentclass{article}
+
+\usepackage{../Style}
+
+\renewcommand{\sl}{\mfs\mfl}
+\DeclareMathOperator{\SU}{SU}
+\newcommand{\su}{\mfs\mfu}
+\newcommand{\rS}{\mathrm{S}}
+\newcommand{\rU}{\mathrm{U}}
+\newcommand{\rO}{\mathrm{O}}
+\DeclareMathOperator{\Gr}{Gr}
+\newcommand{\so}{\mfs\mfo}
+\DeclareMathOperator{\Sp}{Sp}
+\renewcommand{\sp}{\mfs\mfp}
+\DeclareMathOperator{\SO}{SO}
+
+\title{Classical Lie algebras}
+\author{Shing Tak Lam}
+
+\begin{document}
+
+\maketitle
+
+In this document, we describe the classical Lie groups, and their associated Lie algebras. These are all matrix Lie groups, so the Lie brackets on the Lie algebras are given by the commutator of matrices.
+
+\section{Special linear Lie algebra}
+
+Consider the Lie group
+
+\[\SL(n, \C) = \left\{A \in \GL(n, \C) \mid \det(A) = 1\right\}\]
+
+This has associated Lie algebra
+
+\[\sl(n, \C) = \left\{A \in \gl(n, \C) \mid \tr(A) = 0\right\}\]
+
+\section{Orthogonal Lie algebra}
+
+Next, consider the Lie group
+
+\[\SO(n, \C) = \left\{A \in \GL(n, \C) \mid AA^\T = A^\T A = I, \det(A) = 1\right\}\]
+
+which has associated Lie algebra
+
+\[\so(n, \C) = \left\{A \in \gl(n, \C) \mid A + A^\T = 0\right\}\]
+
+\section{Symplectic Lie algebra}
+
+First, define the matrix
+
+\[\Omega = \begin{pmatrix}
+    0 & I_n \\
+    -I_n & 0
+\end{pmatrix}\]
+
+Then the symplectic group is 
+
+\[\Sp(2n, \C) = \left\{A \in \GL(2n, \C) \mid A^\T \Omega A = \Omega\right\}\]
+
+with the associated Lie algebra
+
+\[\sp(2n, \C) = \left\{A \in \gl(2n, \C) \mid \Omega A + A^\T \Omega = 0\right\}\]
+
+\subsection{Compact symplectic group}
+
+The compact symplectic group is
+
+\[\Sp(n) = \Sp(2n, \C) \cap \rU(2n) = \Sp(2n, \C) \cap \SU(2n)\]
+
+which is the group of \(n \times n\) quaternionic matrices preserving the standard Euclidean inner product on \(\bb H^n\). The Lie algebra of \(\Sp(n)\) is
+
+\[\sp(n) = \left\{A \in \Mat(n, \bb H) \mid A + A^\dagger = 0\right\}\]
+
+where \(A^\dagger\) is the conjugate transpose of \(A\).
+
+\section{Classical Lie algebras}
+
+In terms of the usual classification of Lie algebras, we have
+
+\begin{itemize}
+    \item \(A_n = \sl(n + 1, \C)\),
+    \item \(B_n = \so(2n + 1, \C)\),
+    \item \(C_n = \sp(2n, \C)\),
+    \item \(D_n = \so(2n, \C)\).
+\end{itemize}
+
+\end{document}
