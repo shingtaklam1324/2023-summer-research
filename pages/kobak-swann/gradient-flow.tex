@@ -1,0 +1,105 @@
+\documentclass{article}
+
+\usepackage{../../Style}
+\usepackage[english]{babel}
+\usepackage{biblatex}
+
+\addbibresource{../../bibliography.bib}
+
+\title{Gradient flow of moment map}
+
+\author{Shing Tak Lam}
+
+\begin{document}
+
+\maketitle
+
+On page 12 of \cite{kobak_classical_1996}, the authors prove that the gradient flow with respect to the square of a moment map is bounded because the norm of the moment map is bounded \emph{above} by the Euclidean norm. In fact, the inequality goes the other way, and this is the direction required to show that the trajectories are bounded.
+
+\section{Norm of moment map}
+
+The moment map in question is
+
+\[\mu_r = (\alpha_i\alpha_i^* - \beta_i^*\beta_i + \beta_{i+1}\beta_{i+1}^* - \alpha_{i+1}^*\alpha_{i+1})_{i=0}^{k-2} \in i\mfu(n_1) \oplus \cdots i\mfu(n_{k-1})\]
+
+where on each \(\mfu(n_j)\) factor, we have the inner product coming from the trace, i.e.
+
+\[\inner{x, y} = -\tr(xy)\]
+
+and we assume the direct sum is orthogonal. In this case, we can simplify to the case of
+
+\[\mu_r = \alpha_0\alpha_0^* - \beta_0^*\beta_0 + \beta_1\beta_1^* -\alpha_1^*\alpha_1\]
+
+Set
+
+\[w = \alpha_0\alpha_0^* \quad x = \beta_0^*\beta_0 \quad y = \beta_1\beta_1^* \quad z = \alpha_1^*\alpha_1 \]
+
+We want to show that
+
+\[\norm{\mu_r}^2 = \norm{w-x+y-z}^2 \ge \norm{w+x+y+z}^2\]
+
+Expanding, we see that this is true if and only if
+
+\[\inner{w+y, x + z} = \inner{w, x} + \inner{w, z} + \inner{y, x} + \inner{y, z} \le 0 \tag{*}\]
+
+In each case, using the cyclic property of trace, and the fact that \((ab)^* = b^*a^*\), we have that
+
+\begin{align*}
+    \inner{w, x} &= -\tr(\alpha_0\alpha_0^*\beta_0^*\beta_0) = -\tr((\beta_0\alpha_0)(\beta_0\alpha_0)^*) \\
+    \inner{w, z} &= -\tr(\alpha_0\alpha_0^*\alpha_1^*\alpha_1) = -\tr((\alpha_1\alpha_0)(\alpha_1\alpha_0)^*) \\
+    \inner{y, x} &= -\tr(\beta_1\beta_1^*\beta_0^*\beta_0) = -\tr((\beta_0\beta_1)(\beta_0\beta_1)^*) \\
+    \inner{y, z} &= -\tr(\beta_1\beta_1^*\alpha_1^*\alpha_1) = -\tr((\alpha_1\beta_1)(\alpha_1\beta_1)^*)
+\end{align*}
+
+But for any matrix \(A = (A_{ij})\), we have that (using the summation convention)
+
+\begin{align*}
+    \tr(AA^*) &= \left(AA^*\right)_{ii} \\
+    &= A_{ij}(A^*)_{ji} \\
+    &= A_{ij}\overline{A_{ij}} \\
+    &= \sum_{i, j}\abs{A_{ij}}^2 \\
+    &\ge 0
+\end{align*}
+
+Which shows that (*) is true, and hence
+
+\[\norm{\mu_r} \ge \norm{w+x+y+z}\]
+
+But we have the \(\ell^2\) norm on \(M\), which is
+
+\[\norm{(\alpha_j, \beta_j)}^2_{\ell^2} = \sum_{i=0}^{k-1}\left(\norm{\alpha_i}^2 + \norm{\beta_i}^2\right) = \sum_{i=0}^{k-1}\tr(\alpha_i\alpha_i^* + \beta_i\beta_i^*)\]
+
+In particular, by Cauchy-Schwarz, we have that
+
+\[\norm{w + x + y + z} \ge C' \cdot \inner{w+x+y+z, -I} = C \norm{(\alpha_j, \beta_j)}_{\ell^2}^2\]
+
+for some positive constants \(C, C'\). Note that as we are working in finite dimensions, all norms are equivalent, and also we sum over some of the terms more than once, so we absorb that into the constant \(C\). What this means is that we have
+
+\[\norm{\mu_r(p)} \ge C\norm{p}^2_{\ell^2}\]
+
+\section{Gradient flow}
+
+Define \(f : M \to \R\) by
+
+\[f(p) = \norm{\mu_r(p)}^2\]
+
+Then we have that \(f(p) \ge C^2\norm{p}_{\ell^2}^4\). For some fixed \(x_0 \in M\), the gradient flow of \(x\) is the function \(x : \Ico{0, \infty}\) given by
+
+\[\begin{cases}
+    \dv{t}{x} = -\grad f(x(t)) \\
+    x(0) = x_0
+\end{cases}\]
+
+In this case, we have that
+
+\[\dv{t}(f(x(t))) = \inner{\grad f, \dv{x}{t}} = -\norm{\grad(f(x(t)))}^2 \le 0\]
+
+Therefore, \(f(x(t))\) is a nonincreasing function. In particular, using this and the lower bound on \(f\), we must have that
+
+\[\norm{x(t)} \le \frac{f(x_0)^{1/4}}{C^{1/2}}\]
+
+for all \(t\). That is, the trajectories are bounded.
+
+\printbibliography
+
+\end{document}
