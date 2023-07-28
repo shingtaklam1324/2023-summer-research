@@ -1,0 +1,167 @@
+\documentclass{article}
+
+\usepackage{../../Style}
+\usepackage[english]{babel}
+\usepackage{biblatex}
+
+\DeclareMathOperator{\Sp}{Sp}
+\newcommand{\sslash}{/\!/}
+\newcommand{\ssslash}{/\!/\!/}
+
+\newcommand{\rU}{\mathrm{U}}
+\renewcommand{\sl}{\mfs\mfl}
+
+\DeclareMathOperator{\gr}{grad}
+
+\addbibresource{../../bibliography.bib}
+
+\title{Ideas from \citetitle{kobak_classical_1996}}
+
+\author{Shing Tak Lam}
+
+\begin{document}
+
+\maketitle
+
+In this note, we provide a high level overview for the paper \cite{kobak_classical_1996} by \citeauthor{kobak_classical_1996}. We will use the same notation and numbering as in the paper, but we will omit technical details from the proofs.
+
+\section{Introduction}
+
+Here, we define the hyperK\"ahler structure on \(\bb H^n\), where the complex structures are given by right multiplication by \(-i, -j, -k\) respectively, and the Riemannian metric is the Euclidean metric from the isomorphism \(\bb H^n \cong \R^{4n}\) of vector spaces. For a subgroup \(H\) of \(\Sp(N)\), \(H\) acts (on the left) on \(\bb H^n\), and the \emph{hyperK\"ahler moment map} for this action is an equivariant map
+
+\[\mu : \bb H^n \to \mfh^* \otimes \Im(\bb H) \cong \mfh \otimes \Im(\bb H)\]
+
+where \(\dd(\mu^X) = X\lrcorner \eta\), \(\eta = \omega_I i + \omega_J j + \omega_K k\) the quaternion values form given by the symplectic forms. What this means is that if we write
+
+\[\mu = \mu_I i + \mu_J j + \mu_K k\]
+
+then \(\mu_I\) is a moment map for the action of \(H\) on \(\bb H^n\) with respect to the complex structure \(I\), and so on.
+
+Throughout, we will have the moment map
+
+\[\mu^X(q) = -\overline q^\T X q\]
+
+for \(X \in \mfh\), which we consider to be an \(N \times N\) quaternionic matrix.
+
+\section{The Constructions}
+
+First of all, we reduce to the case where \(\mcO\) is an adjoint orbit of a classical simple Lie algebra over \(\C\), since in the general case we can take product/sums.
+
+In each case, we first specify a hyperK\"ahler vector space \(M\) and the group \(G\), then we prove that the complex symplectic quotient by \(G^\C\) is what we want, then we show that the complex quotient is the same as the hyperK\"ahler quotient.
+
+\subsection{The Special Linear Group}
+
+In this case, let \(V_0, \dots, V_k\) be Hermitian vector spaces, \(\dim(V_i) = n_i\), \(n_0 = 0\) and \(n_k = n\). Then we can define the vector space
+
+\[M = \bigoplus_{i=0}^{k-1} \left(\Hom(V_i, V_{i+1}) \oplus \Hom(V_{i+1}, V_i)\right)\]
+
+and we write each point \(p = (\alpha_i, \beta_i)\) as the diagram
+
+% https://q.uiver.app/#q=WzAsNSxbMCwwLCIwPVZfMCJdLFsyLDAsIlZfMSJdLFs0LDAsIlZfMiJdLFs2LDAsIlxcY2RvdHMiXSxbOCwwLCJWX2s9XFxDXm4iXSxbMCwxLCJcXGFscGhhXzAiLDAseyJvZmZzZXQiOi0xfV0sWzEsMiwiXFxhbHBoYV8xIiwwLHsib2Zmc2V0IjotMX1dLFsyLDMsIlxcYWxwaGFfMiIsMCx7Im9mZnNldCI6LTF9XSxbMyw0LCJcXGFscGhhX3trLTF9IiwwLHsib2Zmc2V0IjotMX1dLFs0LDMsIlxcYmV0YV97ay0xfSIsMCx7Im9mZnNldCI6LTF9XSxbMywyLCJcXGJldGFfMiIsMCx7Im9mZnNldCI6LTF9XSxbMiwxLCJcXGJldGFfMSIsMCx7Im9mZnNldCI6LTF9XSxbMSwwLCJcXGJldGFfMCIsMCx7Im9mZnNldCI6LTF9XV0=
+\[\begin{tikzcd}
+	{0=V_0} && {V_1} && {V_2} && \cdots && {V_k=\C^n}
+	\arrow["{\alpha_0}", shift left=1, from=1-1, to=1-3]
+	\arrow["{\alpha_1}", shift left=1, from=1-3, to=1-5]
+	\arrow["{\alpha_2}", shift left=1, from=1-5, to=1-7]
+	\arrow["{\alpha_{k-1}}", shift left=1, from=1-7, to=1-9]
+	\arrow["{\beta_{k-1}}", shift left=1, from=1-9, to=1-7]
+	\arrow["{\beta_2}", shift left=1, from=1-7, to=1-5]
+	\arrow["{\beta_1}", shift left=1, from=1-5, to=1-3]
+	\arrow["{\beta_0}", shift left=1, from=1-3, to=1-1]
+\end{tikzcd}\]
+
+We have a left \(\bb H\) action on \(M\), given by
+
+\[i(\alpha_i, \beta_i) = (i\alpha_i, i\beta_i) \quad j(\alpha_i, \beta_i) = (-\beta_i^*, \alpha_i^*)\]
+
+which makes \(M\) into a quaternionic vector space. In this case, the Lie group action of \(G = \rU(n_1) \times \cdots \times \rU(n_{k-1})\) on \(M\) is
+
+\begin{equation}
+    \label{eq:group-action}
+    \begin{split}
+        \alpha_i &\mapsto g_{i+1}\alpha_ig_i^{-1} \\
+        \beta_i &\mapsto g_i\beta_ig_{i+1}^{-1}
+    \end{split}
+\end{equation}
+
+where \(g_i \in U_{n_i}\), \(g_0 = g_k = 1\). The moment map in this case is \(\mu = i\mu_r + 2k\mu_c : M \to \mfg^* \otimes \Im(\bb H)\), where (up to identifying \(\mfg^*\) with \(\mfg\) via the Killing form),
+
+\begin{align*}
+    \mu_r &= (\alpha_{i-1}\alpha_{i-1}^* - \beta_{i-1}^*\beta_{i-1} + \beta_i\beta_i^* - \alpha_i^*\alpha_i)_{i=1}^{k-1} &\in \mfg \otimes i\R = i\mfg = i\mfu(n_1, \C) \oplus \cdots \oplus i\mfu(n_{k-1}, \C) \\
+    \mu_c &= (\alpha_{i-1}\beta_{i-1} - \beta_i\alpha_i)_{i=1}^{k-1} &\in \mfg \otimes \C = \gl(n_1, \C) \oplus \cdots \oplus \gl(n_{k-1}, \C)
+\end{align*}
+
+\subsubsection{The Complex Quotient}
+
+Fix a point \(p = (\alpha_i, \beta_i) \in \mu_c^{-1}(0)\). In this case, we can define \(X = \alpha_{k-1}\beta_{k-1} \in \End(\C^n)\). Then \(X^k = 0\), as \(p \in \mu_c^{-1}(0)\). Moreover, the action of \(G^\C = \GL(n_1, \C) \times \cdots \times \GL(n_{k-1}, \C)\) preserves \(X\), so we have a well defined map
+
+\begin{align*}
+    \Phi^c : \mu_c^{-1}(0) / G^\C &\to \mcN \\
+    (\alpha_i, \beta_i) &\mapsto \alpha_{k-1}\beta_{k-1}
+\end{align*}
+
+where \(\mcN\) is the nilpotent variety of \(\sl(n, \C)\)\footnote{Any nilpotent endomorphism necessarily has all eigenvalues being zero, and so it is trace free.}.
+
+\begin{theorem}
+    \label{thm:cx-quot-sln}
+    The map \(\Phi^c\), restricted to the set of closed \(G^\C\) orbits, is injective. Furthermore, its image consists of a union of closures of nilpotent orbits in \(\sl(n, \C)\). If there exists \(X \in \sl(n, \C)\) such that \(\rank(X^i) = n_{k-i}\) for all \(i\), then the image is precisely the closure of the nilpotent orbit containing \(X\).
+\end{theorem}
+
+\begin{proof}
+    [Proof sketch]
+\end{proof}
+
+\subsubsection{Equivalence of K\"ahler and Complex Quotients}
+
+We have the following result by Kirwan (paraphrased):
+
+\begin{theorem}
+    \label{thm:kirwan}
+    Let \(X\) be a K\"ahler manifold, \(G\) a compact Lie group acting on \(X\) preserving the K\"ahler structure, such that \(G^\C\) also acts holomorphically on \(X\). Let \(\mu\) be the K\"ahler moment map for the action of \(G\), satisfying condition \((\star)\). Let
+
+    \[X^{\min} = \left\{y\ \big\vert\ \text{ limit under steepest decent of }\norm{\mu}^2\text{ lies in }\mu^{-1}(0)\right\}\]
+
+    Then \(x \in G^\C\mu^{-1}(0)\) if and only if \(x \in X^{\min}\) and the orbit \(G^\C x\) is closed in \(X^{\min}\). In this case, the map
+
+    \[\mu^{-1}(0)/G \to G^\C\mu^{-1}(0)\sslash G^\C\]
+
+    is a homeomorphism, where \(G^\C\mu^{-1}(0)\sslash G^\C\) is the set of closed \(G^\C\) orbits in \(G^\C \mu^{-1}(0)\).
+\end{theorem}
+
+We will return to the condition \((\star)\) later, but for now, we will first assume that \((\star)\) holds in the cases which we want, and then prove that it holds later on.
+
+First, since \((M, \omega_I, \omega_J, \omega_K)\) is hyperK\"ahler, \((M, \omega_I)\) is K\"ahler. Moreover, the group \(G\) acts on \((M, \omega_I)\) preserving the K\"ahler structure, with moment map \(\mu_r\). Therefore, applying \cref{thm:kirwan}, we get that
+
+\[\mu_r^{-1}(0)/G \cong G^\C \mu_r^{-1}(0)\sslash G^\C\]
+
+Next, we assume \(M^{\min} = M\), so \(G^\C\mu_r^{-1}(0)\) is just the set of points for which the orbit \(G^\C x\) is closed. In this case, we have a natural inclusion
+
+\[X = \mu_c^{-1}(0) \cap G^\C \mu_r^{-1}(0) \subseteq G^\C\mu_r^{-1}(0)\]
+
+Since \(X\) is \(G^\C\) invariant, we have an induced map
+
+\[X/G^\C \hookrightarrow G^\C\mu_r^{-1}(0)\sslash G^\C \cong \mu_r^{-1}(0)/G\]
+
+Finally, we want to find the image of this map. But this is just \(\mu^{-1}(0)/G\), which is the hyperK\"ahler quotient. Therefore, all that remains is to show that \(M^{\min} = M\), and that \((\star)\) holds.
+
+\underline{\(M^{\min} = M\):} For this, it suffices to show that the critical points of \(\norm{\mu_r}^2\) are global minima. Since \(\mu_r^* = \mu_r\), we have that \(\gr\left(\norm{\mu_r}^2\right) = 2(\dd\mu_r)\mu_r\), which vanishes if and only if \(\mu_r = 0\) and so \(\norm{\mu_r}^2 = 0\).
+
+The condition \((\star)\) is that \underline{the trajectories of the gradient flow of \(\norm{\mu_r}^2\) are bounded}. In this case, we have that
+
+\[\norm{\mu_r(x)}^2 \le \norm{x}^4\]
+
+for all \(x \in M\). \textbf{The paper then claims that this implies each trajectory is bounded, but I don't see why this is true.}
+
+\subsection{Orthogonal and Symplectic Lie Algebras}
+
+\section{Consequences and Examples}
+
+\subsection{Quaternionic K\"ahler metrics}
+
+\subsection{Finite Quotients}
+
+\subsection{HyperK\"ahler Quotients}
+
+\printbibliography
+
+\end{document}
