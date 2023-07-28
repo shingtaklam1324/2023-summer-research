@@ -10,6 +10,7 @@
 
 \newcommand{\rU}{\mathrm{U}}
 \renewcommand{\sl}{\mfs\mfl}
+\renewcommand{\sp}{\mfs\mfp}
 
 \DeclareMathOperator{\gr}{grad}
 
@@ -109,6 +110,25 @@ where \(\mcN\) is the nilpotent variety of \(\sl(n, \C)\)\footnote{Any nilpotent
 
 \begin{proof}
     [Proof sketch]
+
+    First of all, notice that \cref{eq:group-action} defines a \(\GL(n, \C)\) action on \(M\), by taking \(g_k = g\), and \(g_i = 1\) for \(i < k\). This action preserves \(\mu_c^{-1}(0)\), and \(\Phi^c\) is equivariant with respect to this action\footnote{In fact, \(\Phi^c\) is a complex symplectic moment map for a \(\GL(n, \C)\) action on the quotient.}. Therefore, the image of \(\Phi^c\) is a union of nilpotent orbits.
+
+    To show the injectivity statement, we use the \(\GL(n, \C)\) action to assume without loss of generality that \(X\) is in Jordan normal form. In fact, we can assume that \(X\) is a Jordan block, each \(\beta_i\) is surjective and each \(\alpha_i\) is injective using the \(G^\C\) action and the fact that the orbits are closed. In this case, by an appropriate choice of basis, using the \(G^\C \times \GL(n, \C)\)-action, we can assume \(\beta\) has matrix
+
+    \[\begin{pmatrix}
+        0 & 1 & \cdots & 0 \\
+        \vdots & \ddots & \ddots & \vdots \\
+        0 & \cdots & \cdots & 1 \\
+    \end{pmatrix}\]
+
+    With this, \(\alpha_1\) is upper triangular, and by induction all \(\alpha_i\) are upper triangular, and we get uniqueness.
+
+    The rest of the statement follows from the facts that
+
+    \begin{enumerate}
+        \item If \(X\) is nilpotent, the numbers \(\rank(X^i)\) determines the Jordan normal form of \(X\), and so the nilpotent orbit of \(X\),
+        \item If \(X, Y\) are nilpotent, then \(Y\) is in the closure of the nilpotent orbit containing \(X\) if and only if \(\rank(Y^i) \le \rank(X^i)\) for all \(i\).
+    \end{enumerate}
 \end{proof}
 
 \subsubsection{Equivalence of K\"ahler and Complex Quotients}
@@ -152,11 +172,67 @@ The condition \((\star)\) is that \underline{the trajectories of the gradient fl
 
 for all \(x \in M\). \textbf{The paper then claims that this implies each trajectory is bounded, but I don't see why this is true.}
 
+\addtocounter{theorem}{4}
+
+\begin{theorem}
+    The hyperK\"ahler quotient of \(M\) by \(G\) is a union of nilpotent orbits in \(\sl(n, \C)\). If there is a nilpotent element \(X \in \sl(n, \C)\), with \(\rank(X^i) = n_{k-i}\) for all \(i\), then the quotient is isomorphic to the closure of the nilpotent orbit containing \(X\).
+\end{theorem}
+
 \subsection{Orthogonal and Symplectic Lie Algebras}
+
+For \(\mfo(n, \C)\) and \(\sp(n, \C)\), we write
+
+\begin{align*}
+    \mfo(n, \C) &= \mfc^\C_0\\
+    \sp(n, \C) &= \mfc^\C_1
+\end{align*}
+
+and the corresponding Lie groups \(C^\C_\delta\) are Lie groups acting on \(V = \C^{(1 + \delta) n}\) preserving a non-degenerate bilinear form \(B\) such that \(B(u, v) = (-1)^\delta B(v, u)\).
+
+If \(X \in \mfc_\delta^\C\) is nilpotent, with \(X^k = 0\), then \(X^{k-i}V\) has a bilinear form \(B_i\), with
+
+\begin{equation}
+    \label{eq:bilinear-form}
+    B_i(u, v) = (-1)^{k-i+\delta}B_i(v, u)
+\end{equation}
+
+As a matrix, \(B_{i-1} = XB_i\) restricted to \(X^{k-i}V\). Therefore, we consider the same construction as in the previous subsection, except we require each \(V_i\) to have a bilinear form \(B_i\) satisfying \cref{eq:bilinear-form}. Moreover, let \(A^\dagger\) be the adjoint of \(A\) with respect to \(B_i\), then we require that
+
+\[(A^*)^\dagger = (A^\dagger)^*\]
+
+Let \(M_\delta\) be the vector subspace of \(M\), given by
+
+\[\beta_i = \alpha_i^\dagger\]
+
+Note \((\alpha_i^\dagger)^\dagger = -\alpha_i\). Then \(M_\delta\) is also a flat hyperK\"ahler manifold. Let \(H = C_1 \times \cdots \times C_n\) be the subgroup of \(G\), where \(C_i\) preserves \(B_i\). In particular, \(C_i\) is \(\mathrm{O}(n_i)\) or \(\Sp(n_i/2)\). \(H\) acts on \(M_\delta\), and the moment map is the same as above, just with \(\beta_i = \alpha_i^\dagger\).
+
+\begin{theorem}
+    The hyperK\"ahler quotient of \(M_\delta\) by \(H\) is a union of closures of nilpotent orbits of \(C_\delta^\C\), where \(C_0^\C = \mathrm{O}(n, \C)\) and \(C_1^\C = \Sp(n/2, \C)\). Moreover, this quotient agrees with the algebraic quotient \(\mu_c^{-1}(0)\sslash H^\C\). If there is an \(X \in \mfc_\delta^\C\) with \(\rank(X^i) = n_{k-i}\) for all \(i\), then the hyperK\"ahler quotient is the closure of the nilpotent orbit containing \(X\).
+\end{theorem}
+
+\begin{proof}
+    [Proof sketch]
+
+    First, we note that nilpotent orbits in \(\mfo(n, \C)\) and \(\sp(n/2, \C)\) are the intersections of the \(\sl(n, \C)\) orbits with \(\mfc_\delta^\C\). Therefore, suffices to show that for any \(X \in \mfc_\delta^\C\), there exists \((\alpha_1, \dots, \alpha_{k-1})\) in a closed \(H^\C\)-orbit of \(\mu_c^{-1}(0) \cap M_\delta\), with \(\alpha_{k-1}\alpha_{k-1}^\dagger = X\). This is because we have natural maps
+
+    \[\frac{\mu_c^{-1}(0) \cap M_\delta}{H^\C} \to \frac{\mu_c^{-1}(0)}{G^\C} \stackrel{\Phi^c}{\to} \mcN\]
+
+    for which the composition is \([(\alpha_i)] \mapsto \alpha_{k-1}\alpha_{k-1}^\dagger\).
+
+    To prove the claim, we again consider Jordan blocks, and define the \(B_i\)s and \(\alpha_i\)s appropriately.
+\end{proof}
 
 \section{Consequences and Examples}
 
+\begin{lemma}
+    Let \(H\) be a Lie group acting on \(\bb H^N\) preserving the complex structures. Let a non-zero quaternion \(a \in \bb H^*\) act on \(q \in \bb H^N\) on the right, that is, \(q \mapsto qa^{-1}\), and on \(p \in \Im(\bb H)\) by conjugation. That is, \(p \mapsto apa^{-1}\). Then the map \(\mu : \bb H^N \to \mfh^* \otimes \Im(\bb H)\) defined as above is the unique moment map for the action of \(H\) on \(\bb H^N\) which is equivariant with respect to the action of \(\bb H^*\).
+\end{lemma}
+
+Using this, we get that the set \(\mu^{-1}(0)\) is \(\bb H^*\)-invariant, and if \(K\) is another Lie group so that \(H \times K\) also acts on \(\bb H^N\) preserving the complex structures, then the moment map for the action of \(H \times K\) is the direct sum of the moment maps for \(H\) and for \(K\), and the hyperK\"ahler quotient by \(H \times K\) is the hyperK\"ahler quotient by \(H\) followed by the hyperK\"ahler quotient by \(K\).
+
 \subsection{Quaternionic K\"ahler metrics}
+
+Omitted.
 
 \subsection{Finite Quotients}
 
