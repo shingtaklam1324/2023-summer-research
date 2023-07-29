@@ -21,6 +21,8 @@
 
 In this note, we will consider the coadjoint orbits of \(\SU(n)\), and show that they are K\"ahler manifolds.
 
+Sections 1-7 is an outline of the proof, appendices A, B, C contains the details of the proof. Section 8 contains an alternative proof, which have a few holes.
+
 \tableofcontents
 
 \section{Adjoint and Coadjoint Orbits}
@@ -111,7 +113,7 @@ and it is easy to check that \(\pi\) is a surjective submersion. In particular, 
 
 \section{Symplectic structure}
 
-For details in this section, see \texttt{kirillov-kostant.pdf} or Marsden-Ratiu Chapter 14.
+For details in this section, see the appendix where we consider the general case of the coadjoint orbits of any Lie group.
 
 The Kirillov-Kostant-Souriau form on \(\mcO^*\) is given by
 
@@ -128,7 +130,7 @@ Then \(\pi^*\omega = \dd\alpha_\ell\), where \(\alpha = \Phi(A)\), and \(\alpha_
 
 \[\alpha_\ell(g) = ((\dd\ell_{g^{-1}})_g)^*(\alpha)\]
 
-Using this, we get that \(\pi^*\dd\omega = \dd\pi^*\omega = \dd^2\alpha_\ell = 0\), and as \(\pi\) is a surjective submersion, \(\dd\omega = 0\). The facts that \cref{eq:kks-form} is well defined and non-degenerate are easy to check as well.
+Using this, we get that \(\pi^*\dd\omega = \dd\pi^*\omega = \dd^2\alpha_\ell = 0\), and as \(\pi\) is a surjective submersion, \(\dd\omega = 0\). The facts that \cref{eq:kks-form} is well defined and non-degenerate are easy to check as well. See the appendix for details.
 
 \section{Complex structure}
 
@@ -273,7 +275,7 @@ where \(\ell_g(x) = gx\) is the left multiplication map on \(\SU(n)\). Using the
 Moreover, the polar decomposition
 
 \begin{align*}
-    \rm U(n) \times \mfu(n) &\to \GL(n, \C) \\
+    \SU(n) \times \mfu(n) &\to \GL(n, \C) \\
     (U, X) &\mapsto U \exp(X)
 \end{align*}
 
@@ -295,6 +297,226 @@ Assuming this claim, then for \(\xi \in \su(n)^*\), \(\mu^{-1}(\xi)\) is a copy 
 
 \appendix
 
+\section{Kirillov-Kostant-Souriau form}
+
+This is mostly from \texttt{kirillov-kostant.tex}.
+
+Throughout, let \(G\) be a Lie group, with Lie algebra \(\TT_eG = \mfg\).
+
+\subsection{Infinitesimal action}
+
+Let \(M\) be a manifold, \(\Phi : G \times M \to M\) a smooth action.
+
+\begin{definition}
+    [proper action] The action \(\Phi\) is proper if the map
+
+    \[(g, x) \mapsto (\Phi(g, x), x)\]
+
+    is proper, i.e. the preimage of a compact set is compact.
+\end{definition}
+
+\begin{proposition}
+    Suppose \(\Phi\) is a free and proper action. Then the quotient \(M/G\) is a smooth manifold, and \(\pi : M \to M/G\) is a smooth submersion.
+\end{proposition}
+
+\begin{definition}
+    [infinitesimal action] Suppose \(\Phi : G \times M \to M\) is an action. For \(\xi \in \mfg\), define \(\Phi^\xi : \R \times M \to M\)
+
+    \[\Phi^\xi(t, m) = \Phi(\exp(t\xi), x)\]
+
+    Then \(\Phi^\xi\) defines an \(\R\)-action, i.e. \(\Phi^\xi(t, \cdot)\) is a flow on \(M\). The corresponding vector field
+
+    \[\xi_M(x) = \dv{t}\bigg\vert_{t = 0} \Phi^\xi(t, x)\]
+
+    is called the infinitesimal action of \(\xi\).
+\end{definition}
+
+In particular, for the (co)adjoint representation, we find that
+
+\[\xi_{\mfg}(\eta) = \dv{t}\bigg\vert_{t=0}\Ad_{\exp(t\xi)}(\eta) = \ad_\xi(\eta) = [\xi, \eta]\]
+
+and if \(\inner{,} : \mfg^* \times \mfg \to \R\) is the usual pairing, then
+
+\begin{align*}
+    \inner{\xi_{\mfg^*}(\alpha), \eta} &= \inner{\dv{t}\bigg\vert_{t=0}\Ad_{\exp(t\xi)}^*(\alpha), \eta} \\
+    &= \dv{t}\bigg\vert_{t=0}\inner{\Ad_{\exp(t\xi)}^*(\alpha), \eta} \\
+    &= \dv{t}\bigg\vert_{t=0}\inner{\alpha, \Ad_{\exp(-t\xi)}(\eta)} \\
+    &= \inner{\alpha, \dv{t}\bigg\vert_{t=0}\Ad_{\exp(-t\xi)}(\eta)} \\
+    &= \inner{\alpha, -[\xi, \eta]} \\
+    &= \inner{\alpha, -\ad_\xi(\eta)} \\
+    &= -\inner{(\ad_\xi)^*(\alpha), \eta}
+\end{align*}
+
+So \(\xi_{\mfg^*} = -(\ad_\xi)^*\), and \(\xi_{\mfg^*}(\alpha)(\eta) = -\inner{\alpha, [\xi, \eta]}\).
+
+\subsection{Coadjoint orbits}
+
+For \(\mu \in \mfg^*\), we'll write \(\Orb(\mu) = \{\Ad_g^*(\mu) \mid g \in G\}\) for the \emph{coadjoint orbit} of \(\mu\). We will assume without proof that this is a submanifold of \(\mfg^*\), which is diffeomorphic to \(G/G_\mu\), where \(G_\mu = \{g \in G \mid \Ad_g^*(\mu) = \mu\}\) is the \emph{isotropy} or \emph{stabiliser} of \(\mu\).
+
+\subsection{Kirillov-Kostant-Souriau symplectic form}
+
+\begin{theorem}
+    Let \(G\) be a Lie group, \(\mcO \subseteq \mfg^*\) be a coadjoint orbit. Define the \(2\)-form \(\omega\) on \(\mcO\) by
+
+    \[\omega(\mu)(\xi_{\mfg^*}(\mu), \eta_{\mfg^*}(\mu)) = -\inner{\mu, [\xi, \eta]}\]
+
+    Then \(\omega\) and \(-\omega\) are symplectic forms on \(\mcO\).
+\end{theorem}
+
+We will only prove the result for \(\omega\). The proof for \(-\omega\) is similar.
+
+\subsubsection{\(\omega\) is well defined}
+
+First of all, we show that \(\omega\) is well defined. That is, it is independent of the choice of \(\xi, \eta \in \mfg\).
+
+Suppose \(\zeta \in \mfg\) is such that \(\zeta_{\mfg^*}(\mu) = \xi_{\mfg^*}(\mu)\). Then as \(\xi_{\mfg^*} = (\ad_\xi)^*\), we must have that
+
+\[\inner{\mu, [\xi, \eta]} = \inner{\mu, [\zeta, \eta]}\]
+
+for all \(\eta \in \mfg\).
+
+\subsubsection{\(\omega\) is non-degenerate}
+
+Since the pairing \(\inner{,}\) is non-degenerate, \(\omega(\mu)(\xi_{\mfg^*}(\mu), \eta_{\mfg^*}(\mu))\) for all \(\eta_{\mfg^*}(\mu)\) implies that \(\inner{\mu, [\xi, \eta]} = 0\), for all \(\eta\). But this then means that \(\xi_{\mfg^*}(\mu) = 0\), so \(\omega\) is non-degenerate.
+
+\subsubsection{\(\omega\) is closed}
+
+First of all, we will need some preliminary results.
+
+\begin{lemma}
+    \[(\Ad_\xi)_{\mfg^*} = \Ad_g^* \circ \xi_{\mfg^*} \circ \Ad_{g^{-1}}^*\]
+\end{lemma}
+
+\begin{proof}
+    Let \(h(t) = \exp(t\xi)\). Then
+
+    \begin{align*}
+        (\Ad_g\xi)_{\mfg^*}(\mu) &= \dv{t}\bigg\vert_{t=0}\Ad^*_{gh(t)g^{-1}}(\mu) \\
+        &= \dv{t}\bigg\vert_{t=0}\Ad^*_g\Ad^*_{h(t)}\Ad^*_{g^{-1}}(\mu) \\
+        &= \Ad_h^* \circ \left(\dv{t}\bigg\vert_{t=0}\Ad_{h(t)}^*\right) \circ \Ad_{g^{-1}}^*(\mu) \\
+        &= \Ad_h^* \circ \xi_{\mfg^*} \circ \Ad_{g^{-1}}^*(\mu)
+    \end{align*}
+
+    where we used the fact that \(\Ad_g^*\) is a linear map, so we can exchange it with the derivative operator.
+\end{proof}
+
+\begin{lemma}
+    \[\Ad_g([\xi, \eta]) = [\Ad_g(\xi), \Ad_g(\eta)]\]
+\end{lemma}
+
+\begin{proof}
+    First, notice that
+
+    \[C_g(C_h(k)) = ghkh^{-1}g^{-1}= C_g(h)C_g(k)C_g(h^{-1})\]
+
+    Differentiating this at \(h = e\) and \(k = e\) gives the result.
+\end{proof}
+
+\begin{lemma}
+    \(\Ad_g^* : \mcO \to \mcO\) preserves \(\omega\), that is,
+
+    \[(\Ad_g^*)^*\omega = \omega\]
+\end{lemma}
+
+\begin{proof}
+    Evaluating \((\Ad_\xi)_{\mfg^*} = \Ad_g^* \circ \xi_{\mfg^*} \circ \Ad_{g^{-1}}^*\) at \(\nu = \Ad_g^*(\mu)\), we get
+
+    \[(\Ad_g\xi)_{\mfg^*}(\nu) = \Ad_g^* \circ \xi_{\mfg^*}(\mu) = \dd_\mu\Ad_g^* \circ \xi_{\mfg^*}(\mu)\]
+
+    Therefore,
+
+    \begin{align*}
+        ((\Ad_g^*)^*\omega)(\mu)(\xi_{\mfg^*}(\mu), \eta_{\mfg^*}(\mu)) &= \omega(\nu)(\dd_\mu \Ad_g^* \cdot \xi_{\mfg^*}(\mu), \dd_\mu \Ad_g^* \cdot \eta_{\mfg^*}(\mu)) \\
+        &= \omega(\nu)((\Ad_g\xi)_{\mfg^*}(\nu), (\Ad_g\eta)_{\mfg^*}(\nu)) \\
+        &= -\inner{\nu, [\Ad_g\xi, \Ad_g\eta]} \\
+        &= -\inner{\nu, \Ad_g([\xi, \eta])} \\
+        &= -\inner{\Ad_{g^{-1}}^*(\nu), [\xi, \eta]} \\
+        &= -\inner{\mu, [\xi, \eta]} \\
+        &= \omega(\mu)(\xi_{\mfg^*}(\mu), \eta_{\mfg^*}(\mu))
+    \end{align*}
+\end{proof}
+
+For \(\nu \in \mfg^*\), define the left-invariant one-form
+
+\[\nu_\ell(g) = (\dd_g\ell_{g^{-1}})^*(\nu)\]
+
+for \(g \in G\). Similarly, for \(\xi \in \mfg\), let \(\xi_\ell\) be the corresponding left invariant vector field on \(G\). Then \(\nu_\ell(\xi_\ell) = \inner{\nu, \xi}\) at all \(g \in G\).
+
+Fix \(\nu \in \mcO\), and consider the map \(\varphi_\nu : G \to \mcO\), defined by
+
+\[\varphi_\nu(g) = \Ad_g^*(\nu)\]
+
+We can use this to pullback \(\sigma = (\varphi_\nu)^*\omega\) to a two form on \(G\).
+
+\begin{lemma}
+    \(\sigma\) is left invariant. That is, \(\ell_g^*\sigma = \sigma\) for all \(g \in G\).
+\end{lemma}
+
+\begin{proof}
+    First, notice that \(\varphi_\nu \circ \ell_g = \Ad_g^* \circ \varphi_\nu\), since
+
+    \[\varphi_\nu(\ell_g(h)) = \Ad_{gh}^*(\nu) = \Ad_g^*\circ \Ad_h^*(\nu) = \Ad_g^*(\varphi_\nu(h))\]
+
+    With this,
+
+    \[\ell_g^*\sigma = \ell_g^*\varphi^*\omega = (\varphi\circ\ell_g)^*\omega = (\Ad_g^* \circ \varphi_\nu)^*\omega = (\varphi_\nu)^*(\Ad_g^*)^*\omega = (\varphi_\nu)^*\omega = \sigma\]
+\end{proof}
+
+\begin{lemma}
+    \(\sigma(\xi_\ell, \eta_\ell) = -\inner{\nu_\ell, [\xi_\ell, \eta_\ell]}\).
+\end{lemma}
+
+\begin{proof}
+    By left invariance of both sides, suffices to show that the result holds at \(e\). First notice that
+
+    \[\dd_e\varphi_\nu(\eta) = \eta_{\mfg_*}(\nu)\]
+
+    Therefore, \(\varphi_\nu\) is a submersion at \(e\). By definition of the pullback,
+
+    \begin{align*}
+        \sigma(e)(\xi, \eta) &= (\varphi_\nu)^*\omega(e)(\xi, \eta)\\ 
+        &= \omega(\varphi_\nu(e))(\dd_e\varphi_\nu \cdot \xi, \dd_e\varphi_\nu\cdot\eta) \\
+        &= \omega(\nu)(\xi_{\mfg^*}(\nu), \eta_{\mfg^*}(\nu)) \\
+        &= -\inner{\nu, [\xi, \eta]}
+    \end{align*}
+
+    Hence
+
+    \[\sigma(\xi_\ell, \eta_\ell)(e) = \sigma(e)(\xi, \eta) = -\inner{\nu, [\xi, \eta]} = -\inner{\nu_\ell, [\xi_\ell, \eta_\ell]}(e)\]
+\end{proof}
+
+Now for a one form \(\alpha\), we have that
+
+\[\dd\alpha(X, Y) = X[\alpha(Y)] - Y[\alpha(X)] - \alpha([X, Y])\]
+
+where for a smooth function \(f : M \to \R\), and a vector field \(X\) on \(M\), \(X[f] := \dd f(X)\) is a smooth function \(M \to \R\).
+
+Since \(\nu_\ell(\xi_\ell)\) is constant, \(\eta_\ell[\nu_\ell(\xi_\ell)] = 0\). Similarly, \(\xi_\ell[\nu_\ell(\eta_\ell)] = 0\). Therefore, we have that
+
+\[\dd \nu_\ell(\xi_\ell, \eta_\ell) = -\nu_\ell([\xi_\ell, \eta_\ell]) = \sigma(\xi_\ell, \eta_\ell)\]
+
+Now suppose \(X, Y\) are vector fields on \(G\). We want to show that \(\sigma(X, Y) = \dd\nu_\ell(X, Y)\). As \(\sigma\) is left invariant,
+
+\begin{align*}
+    \sigma(X, Y)(g) &= (\ell_{g^{-1}}^* \sigma)(g)(X(g), Y(g)) \\
+    &= \sigma(e)(\underbrace{\dd \ell_{g^{-1}} \cdot X(g)}_{=\xi}, \underbrace{\dd \ell_{g^{-1}} \cdot Y(g)}_{=\eta}) \\
+    &= \sigma(e)(\xi, \eta) \\
+    &= \dd\nu_\ell(\xi_\ell, \eta_\ell)(e) \\
+    &= (\ell_g^*\dd\nu_\ell)(\xi_\ell, \eta_\ell)(e) \\
+    &= (\dd\nu_\ell)(g)(\dd\ell_g\cdot \xi_\ell(e), \dd\ell_g\cdot\eta_\ell(e)) \\
+    &= (\dd\nu_\ell)(g)(\dd \ell_g\cdot \xi, \dd\ell_g\cdot \eta) \\
+    &= (\dd\nu_\ell)(g)(X(g), Y(g)) \\
+    &= \dd\nu_\ell(X, Y)(g)
+\end{align*}
+
+With this, \(\dd\sigma = \dd^2\nu_\ell = 0\). Hence \((\varphi_\nu)^*\dd\omega = \dd((\varphi_\nu)^*\omega) = \dd\sigma = 0\). Since \(\varphi_\nu \circ \ell_g = \Ad_g^* \circ \ell_g\), and \(\varphi_\nu\) is a submersion at \(e\), it is infact a submersion everywhere. Moreover, \(\varphi_\nu\) is surjective, by definition.
+
+For \(\mu \in \mcO\), and \(X, Y \in T_\mu \mcO\), we have that
+
+\[\dd\omega(\mu)(X, Y) = \dd\omega_{\varphi_\nu(g)}(\dd\varphi_\nu(\xi), \dd\varphi_\nu(\eta)) = ((\varphi_\nu)^*\dd\omega)(g)(\xi, \eta) = 0\]
+
+where \(g \in G\) is such that \(\varphi_\nu(g) = \mu\), which exists by surjectivity, and \(\xi, \eta \in T_gG\) such that \(\dd\varphi_\nu(\xi) = X\) and \(\dd\varphi_\nu(\eta) = Y\), which exists as \(\varphi_\nu\) is a submersion. Thus, as \(\mu \in \mcO\) is arbitrary, \(\omega\) is closed.
+
 \section{Stabilisers of the adjoint action of \(\SU(n)\) and \(\SL(n, \C)\)}
 
 This section has been copied from \texttt{coadjoint-orbits-sln.pdf}. It is included to provide some more details about the stabilisers of the adjoint action.
@@ -305,7 +527,7 @@ First of all, we note that
 
 \[\su(n) = \left\{A \in \Mat(n, \C) \mid A^\dagger + A = 0, \tr(A) = 0\right\}\]
 
-where \(A^\dagger\) is the conjugate transpose of \(A\). In particular, all elements of \(\su(n)\) are skew-hermitian, hence diagonalisable by an element of \(\SU(n)\)\footnote{From standard linear algebra arguments, we know that they are \(\rm U(n)\)-diagonalisable. But if \(PAP^{-1}\) is diagonal, then so is \((\lambda P)A(\lambda P)^{-1}\), and by choosing \(\lambda\) appropriately, \(\lambda \in \SU(n)\).}. With this, we can classify the coadjoint orbits based off a diagonal element in the orbit. Consider
+where \(A^\dagger\) is the conjugate transpose of \(A\). In particular, all elements of \(\su(n)\) are skew-hermitian, hence diagonalisable by an element of \(\SU(n)\)\footnote{From standard linear algebra arguments, we know that they are \(\SU(n)\)-diagonalisable. But if \(PAP^{-1}\) is diagonal, then so is \((\lambda P)A(\lambda P)^{-1}\), and by choosing \(\lambda\) appropriately, \(\lambda \in \SU(n)\).}. With this, we can classify the coadjoint orbits based off a diagonal element in the orbit. Consider
 
 \[A = \begin{pmatrix}
     i\lambda_1 I_{m_1} \\
@@ -321,7 +543,7 @@ where \(\Stab(A)\) is the stabiliser of \(A\) under the adjoint action. In this 
 
 \[\Stab(A) = \rm S\left(\rm U(m_1) \times \dots \times \rm U(m_k)\right)\]
 
-where we consider \(\rm U(m_1) \times \cdots \times \rm U(m_k) \le \rm U(n)\) as the block diagonal subgroup, and
+where we consider \(\rm U(m_1) \times \cdots \times \rm U(m_k) \le \SU(n)\) as the block diagonal subgroup, and
 
 \[\rm S\left(\rm U(m_1) \times \dots \times \rm U(m_k)\right) = \left(\rm U(m_1) \times \cdots \times \rm U(m_k)\right) \cap \SU(n)\]
 
@@ -565,149 +787,88 @@ The complex dimension of the orbit spaces are \(15 - 3 = 12\), \(15 - 5 = 10\), 
 
 Note in each case, the complex dimension is even, which is a necessary condition for there to be a hyperk\"ahler structure on the orbit space.
 
-\section{K\"ahler reduction}
+\section{Local coordinate computations}
 
-This section is copied from \texttt{kahler-reduction.tex}. It is included for completeness as the ``proof'' from \S 8 uses the K\"ahler reduction.
+\subsection{Kirillov-Konstant-Souriau form}
 
-Throughout,
+Let \(\mcO\) be an adjoint orbit in \(\su(n)\), and fix \(\xi \in \mcO\) as above. Recall that for \(\mu \in \mcO\),
 
-\begin{enumerate}
-    \item \((M, \omega, g, I)\) is a K\"ahler manifold,
-    \item \(G\) is a compact Lie group acting on \(M\),
-    \item \((M, \omega, G, \mu)\) is a Hamiltonian \(G\)-space,
-    \item \(G\) acts by biholomorphisms on \(M\),
-    \item \(G\) acts freely on \(\mu^{-1}(0)\).
-\end{enumerate}
+\[\TT_\mu\mcO = \left\{[\mu, A] \mid A \in \su(n)\right\}\]
 
-In particular, as \(\omega(u, v) = g(I(u), v)\), \(I\) is an isometry on \(M\), \(G\) acts by isometries on \(M\). Let \(Z = \mu^{-1}(0)/G\). Let
+and the Kirillov-Konstant-Souriau form \(\omega\) is defined by
 
-% https://q.uiver.app/#q=WzAsMyxbMCwwLCJcXG11XnstMX0oMCkiXSxbMCwyLCJaPVxcbXVeey0xfSgwKS9HIl0sWzIsMCwiTSJdLFswLDIsImkiLDAseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJob29rIiwic2lkZSI6InRvcCJ9fX1dLFswLDEsIlxccGkiLDIseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJlcGkifX19XV0=
-\[\begin{tikzcd}
-	{\mu^{-1}(0)} && M \\
-	\\
-	{Z=\mu^{-1}(0)/G}
-	\arrow["i", hook, from=1-1, to=1-3]
-	\arrow["\pi"', two heads, from=1-1, to=3-1]
-\end{tikzcd}\]
+\[\omega_\mu([\mu, A], [\mu, B]) = -\inner{\mu, [A, B]}\]
 
-be the natural inclusion and quotient maps. In particular, note that \(\pi\) is a surjective submersion. Therefore, any tensor \(\alpha\) of type \((0, r)\) on \(Z\) is determined by its pullback \(\pi^*\alpha\).
+\subsubsection{Computation at \(I\)}
 
-The Marsden-Weinstein reduction theorem from symplectic geometry states that there exists a symplectic form \(\tilde\omega\) on \(Z\), such that
+Computing the pullback, we find that \(\pi^*\omega\) at the identity is given by
 
-\[\pi^*\tilde\omega = i^*\omega\]
+\[(\pi^*\omega)_I(A, B) = \omega_\xi([\mu, A], [\mu, B]) = -\inner{\xi, [A, B]}\]
 
-We will now construct the almost complex structure and Riemannian metric on \(Z\).
-
-Since \(\pi\) is a submersion, for \(p \in \mu^{-1}(0)\), \(z = \pi(p)\), we have
-
-\[\dd\pi_p : \TT_p\mu^{-1}(0) \surj \TT_zZ\]
-
-Let \(V_p = \ker(\dd\pi_p)\) be the vertical bundle, and \(H_p = V_p^\perp \le \TT_p\mu^{-1}(0)\) be the horizontal bundle. Therefore, we have an isomorphism
-
-\[\dd\pi_p\vert_{H_p} : H_p \cong \TT_zZ\]
-
-For brevity, we write this isomorphism as
+Computing this in terms of the coordinates, we find that it is
 
 \begin{align*}
-    \dd\pi_p\vert_{H_p} : H_p &\to \TT_zZ \\
-    v &\mapsto v_* \\
-    w^* &\mapsfrom w
+    -\inner{\xi, [A, B]} &= \tr(\xi[A, B]) \\
+    &= i\sum_{j, k}\xi_j(A_{jk}B_{kj} - B_{jk}A_{kj}) \\
+    &= i\sum_{j, k}\xi_j(A_{kj}\overline{B_{kj}} - \overline{A_{kj}}B_{kj}) \\
+    &= \frac{i}{2} \sum_{j,k}\xi_j(A_{kj}\overline{B_{kj}} - \overline{A_{kj}}B_{kj}) + \frac{i}{2}\sum_{j, k}\xi_k(A_{jk} \overline{B_{jk}} - \overline{A_{jk}}B_{jk}) \\
+    &= \frac{i}{2} \sum_{j,k}\xi_j(A_{kj}\overline{B_{kj}} - \overline{A_{kj}}B_{kj}) - \frac{i}{2}\sum_{j, k}\xi_k(A_{kj} \overline{B_{kj}} - \overline{A_{kj}}B_{kj}) \\
+    &= \frac{i}{2}\sum_{j, k}(\xi_j - \xi_k)(A_{kj}\overline{B_{kj}} - \overline{A_{kj}}B_{kj}) \\
+    &= i \sum_{k > j}(\xi_j - \xi_k)(A_{kj}\overline{B_{kj}} - \overline{A_{kj}}B_{kj})
 \end{align*}
 
-With this, we can see that
+Let \((\theta_{jk})\) be the standard coordinate functions on \(\su(n)\), then
 
-\[\tilde\omega(u, v) = \omega(u^*, v^*)\]
+\[(\pi^*\omega)_I = i \sum_{k > j}(\xi_j - \xi_k)\theta_{kj}\wedge \overline{\theta_{kj}}\]
 
-and that
+where \(\alpha \wedge \beta(v, w) = \alpha(v)\beta(w) - \alpha(w)\beta(v)\).
 
-\[\tilde g(u, v) = g(u^*, v^*)\]
+\subsubsection{Computation at any \(g \in \SU(n)\)}
 
-defines a Riemannian metric on \(Z\). Therefore, the almost complex structure we want must be given by
+Now let \(\theta\) be the Maurer-Cartan form on \(\SU(n)\). That is, it is the \(\su(n)\)-valued \(1\)-form on \(\SU(n)\) given by
 
-\[\tilde I(u) = I(u^*)_*\]
+\[\theta_g(u) = \dd (\ell_{g^{-1}})_g(u) \in \TT_e\SU(n) = \su(n)\]
 
-Assuming this is well defined, then we have that
+Writing \(\theta = \sum_{j, k}\theta_{jk}\dd g^{jk}\) where \((g^{jk})\) are the matrix entries on \(\SU(n)\), in fact we have that
 
-\begin{align*}
-    \tilde\omega(u, v) &= \omega(u^*, v^*) \\
-    &= g(I(u^*), v^*) \\
-    &= g(\tilde I(u)^*, v^*) \\
-    &= \tilde g(\tilde I(u), v)
-\end{align*}
+\[\pi^*\omega = i \sum_{k > j}(\xi_j - \xi_k)\theta_{kj}\wedge \overline{\theta_{kj}}\]
 
-so \((\tilde\omega, \tilde g, \tilde I)\) is a compatible triple.
+Since\footnote{\S A.3.3} \(\pi^*\omega\) and \(\theta\) are both left invariant, and the above expressions agree at the identity, they must agree everywhere. Alternatively, we can compute this directly, as in the next section.
 
-\begin{lemma*}
-    \(I\) restricts to a map \(H_p \to H_p\).
-\end{lemma*}
+\subsection{Hermitian structure}
 
-\begin{proof}
-    Let \(N_p = \left(\TT_p\mu^{-1}(0)\right)^\perp \le \TT_pM\) be the normal bundle of \(\mu^{-1}(0) \subseteq M\). This gives us an orthogonal direct sum
+We will define a Hermitian metric \(h\) on \(\mcO\), using the fact that \(\pi\) is a surjective submersion. That is, we have
 
-    \[\TT_p M = N_p \oplus V_p \oplus H_p\]
+\[\pi^*h = \sum_{k > j}2(\xi_j - \xi_k)\theta_{kj}\overline{\theta_{kj}}\]
 
-    Fix \(X \in \mfg\). Then for \(v \in \TT_pM\),
+where \(\alpha\beta(v, w) = \alpha(v)\beta(w)\).
 
-    \[g(\gr(\mu^X), v) = \dd\mu^X(v) = \omega(X^\#, v) = g(I(X^\#), v)\]
+\subsubsection{Computation at \(I\)}
 
-    where \(\gr(f)\) is the \(g\)-dual of \(\dd f\). In particular, this means that \(\gr(\mu^X) = I(X^\#)\). Let \(X_1, \dots, X_k\) be a basis  of \(\mfg\), with corresponding dual basis \(\xi^1, \dots, \xi^k\). Then the moment map can be written as
+At \(\xi\), the above formula gives us that
 
-    \[\mu(p) = \mu^{X_1}(p)\xi^1 + \dots + \mu^{X_k}(p)\xi^k\]
+\[h_\xi([\xi, A], [\xi, B]) = \sum_{k > j}2(\xi_j - \xi_k)A_{kj}\overline{B_{kj}}\]
 
-    But this means that
+which one can check defines a Hermitian metric (at least in the case when the \(\xi_j\) are distinct).
 
-    \[\left\{\gr(\mu^{X_1}), \dots, \gr(\mu^{X_k})\right\} = \left\{I(X_1^\#), \dots, I(X_k^\#)\right\}\]
+\subsection{Computation at \(g \in \SU(n)\)}
 
-    is a basis of \(N_p\). As \(X_1^\#, \dots, X_k^\#\) is a basis for \(V_p\), we have that \(I\) restricts to a map \(N_p \oplus V_p \to N_p \oplus V_p\). By orthogonality, this means that \(I\) restricts to a map \(H_p \to H_p\).
-\end{proof}
+In this case, if \(A, B \in \TT_g\SU(n)\), then we can see that \(\theta(A) = g^\dagger A\) and \(\theta(B) = g^\dagger B\). Therefore, we have that
 
-Therefore, the map \(\tilde I\) as above is well defined. Finally, we need to show that we have a K\"ahler structure. That is, \(I\) is integrable.
+\[\pi^*h(A, B) = \sum_{k > j}2(\xi_j - \xi_k)(g^\dagger A)_{kj}\overline{(g^\dagger B)_{kj}}\]
 
-\begin{lemma*}
-    Let \(M\) be a manifold, \((\omega, g, I)\) a compatible triple on \(M\). Then \((M, \omega, g, I)\) is a K\"ahler manifold if and only if \(\nabla I = 0\), where \(\nabla\) is the Levi-Civita connection induced by \(g\).
+However, by the definition of the pullback, we also have that
 
-    Moreover, we have the expression
+\[\pi^*h(A, B) = h_{\pi(g)}(\dd \pi_g(A), \dd\pi_g(B))\]
 
-    \[\nabla I(u) = \nabla(I(u)) - I(\nabla u)\]
+Set \(\mu = \pi(g)\), then we have that
 
-    and so \(\nabla I = 0\) if and only if \(\nabla(I(u)) = I(\nabla u)\) for all vector fields \(u\).
-\end{lemma*}
+\[\pi^*h(A, B) = h_\mu([\mu, Ag^\dagger], [\mu, Bg^\dagger])\]
 
-\begin{proof}
-    See Huybrechts, \S 4.A. for the first part. For the second part, see Nicolaescu page 96.
-\end{proof}
+Say \(A = Cg, B = Dg\), then we get that
 
-\begin{lemma*}
-    The Levi-Civita connection induced by \(\tilde g\) is
+\[h_\mu([\mu, C], [\mu, D]) = \sum_{k > j}2(\xi_j - \xi_k)(g^\dagger Cg)_{kj}\overline{(g^\dagger Dg)_{kj}}\]
 
-    \[\tilde\nabla_XY = \pr_H\left(\nabla_{X^*}Y^*\right)_*\]
-
-    for vector fields \(X, Y\) on \(Z\), and we extend \(X^*, Y^*\) arbitrarily to a neighbourhood of \(\mu^{-1}(0) \subseteq M\). In addition, \(\pr_H : \TT_p M \to H_p\) is the orthogonal projection.
-\end{lemma*}
-
-\begin{proof}
-    Omitted.
-\end{proof}
-
-Finally, we note that since \(I\) respects the orthogonal decomposition
-
-\[\TT_pM = \left(N_p \oplus V_p\right) \oplus H_p\]
-
-\(\pr_H\) and \(I\) commute. With this, we can now compute \(\tilde\nabla\tilde I\).
-
-
-\begin{align*}
-    \left(\tilde\nabla_X\tilde I(Y)\right)^* &= \pr_H\left(\nabla_{X^*}\tilde I(Y)^*)\right) \\
-    &= \pr_H\left(\nabla_{X^*}I(Y^*)\right)\\
-    &= \pr_H\left(I(\nabla_{X^*}Y^*)\right) \\
-    &= I\left(\pr_H(\nabla_{X^*}Y^*)\right) \\
-    &= \tilde I(\tilde\nabla_XY)^*
-\end{align*}
-
-Hence we have that
-
-\[\tilde\nabla_X\tilde I(Y) = \tilde I(\tilde\nabla_XY)\]
-
-for any vector fields \(X, Y\) on \(Z\), and so \(\tilde\nabla\tilde I = 0\), and \((Z, \tilde\omega, \tilde g, \tilde I)\) is a K\"ahler manifold.
+Again, in the case the \(\xi_j\) are distinct, we can see that this defines a Hermitian metric on \(\mcO\).
 
 \end{document}
