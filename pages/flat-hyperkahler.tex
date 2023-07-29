@@ -1,0 +1,129 @@
+\documentclass{article}
+
+\usepackage{../Style}
+
+\newcommand{\bH}{\mathbb H}
+
+\title{HyperK\"ahler structure on \(\bH^n\)}
+
+\author{Shing Tak Lam}
+
+\begin{document}
+
+\maketitle
+
+Since \(\bH\) is not commutative, the left and right module structures are different. In this document, we will consider the left module structure. Even in this case, there are different choices which are made in the literature, for example there are two different choices of complex structures, namely
+
+\[I(x) = i \cdot x \quad J(x) = j \cdot x \quad K(x) = k\cdot x\]
+
+versus
+
+\[I(x) = x \cdot (-i) \quad J(x) = x \cdot (-j) \quad K(x) = x \cdot (-k)\]
+
+We will use the first in this note. The inner product structure on \(\bH^n\) will be given by the Euclidean inner product, i.e.
+
+\[g(p, q) = p^\dagger q\]
+
+\section{HyperK\"ahler structure on \(\bH\)}
+
+Since both the metric and the complex structures respect the decomposition
+
+\[\bH^n = \bH \oplus \cdots \oplus \bH\]
+
+we can consider the case \(n =1\) only. Moreover, in this case, we will choose the \(\R\)-basis \(\{1, i, j, k\}\) for \(\bb H\) to write things as \(4 \times 4\) matrices. With this, the inner product is given by the identity matrix matrix
+
+\[g = \begin{pmatrix}
+    1 & 0 & 0 & 0 \\
+    0 & 1 & 0 & 0 \\
+    0 & 0 & 1 & 0 \\
+    0 & 0 & 0 & 1
+\end{pmatrix}\]
+
+and the complex structures are given by matrices
+
+\[I = \begin{pmatrix}
+    0 & -1 & 0 & 0 \\
+    1 & 0  & 0 & 0\\
+    0 & 0  & 0 & -1\\
+    0 & 0  & 1 & 0\\
+\end{pmatrix} \quad J = \begin{pmatrix}
+    0 & 0 & -1 & 0 \\
+    0 & 0 & 0  & 1\\
+    1 & 0 & 0  & 0\\
+    0 & -1 & 0 & 0\\
+\end{pmatrix} \quad K = \begin{pmatrix}
+    0 & 0 & 0 & -1 \\
+    0 & 0 & -1 & 0\\
+    0 & 1 & 0 & 0\\
+    1 & 0 & 0 & 0\\
+\end{pmatrix}\]
+
+In particular, we have that \(I, J, K\) are isometries. Moreover, the symplectic form \(\omega_I\) is given by
+
+\[\omega_I(p, q) = g(Ip, q) = (Ip)^\T q = p^\T I^\T q\]
+
+hence \(\omega_I\) has matrix \(I^\T\) and so on. Now fix the complex structure \(I\), and consider the complex valued two form \(\omega_c = \omega_J + i\omega_K\). More concretely, \(\omega_C\) has matrix
+
+\[J^\T + iK^\T = \begin{pmatrix}
+    0 & 0 & 1 & i \\
+    0 & 0 & i & -1 \\
+    -1 & -i & 0 & 0 \\
+    -i & 1 & 0 & 0
+\end{pmatrix}\]
+
+We want to show that \(\omega_c\) is a \((2, 0)\) form. Since it is antisymmetric, suppose we have that
+
+\[\omega_c(I(p), q) = i\omega_c(p, q)\]
+
+Then we get that
+
+\[\omega_c(p, I(q)) = -\omega_c(I(q), p) = -i\omega_c(q, p) = i\omega_c(p, q)\]
+
+(i.e. since it is antisymmetric, it has to be a \((2, 0)\) form or a \((0, 2)\) form). But we know that \((p, q) \mapsto \omega_c(I(p), q)\) has matrix \(I^\T(J^\T + iK^\T)\), which is
+
+\[\begin{pmatrix}
+    0 & 0 & i & -1 \\
+    0 & 0 & -1 & -i \\
+    -i & 1 & 0 & 0 \\
+    1 & i & 0 & 0
+\end{pmatrix} = i(J^\T + iK^\T)\]
+
+so we must have that \(\omega_c(I(p), q) = i\omega_c(p, q)\). Therefore, if we choose complex coordinates using \(I\), we get that
+
+\[\omega_c = (\omega_c)_{1,2}\dd z^1 \wedge \dd z^2\]
+
+In fact, \(\omega_c = \dd z^1 \wedge \dd z^2\).
+
+\section{HyperK\"ahler vector spaces}
+
+In the above, we chose an explicit decomposition of the vector space, as well as the almost complex structures and the metric. We want to show that the results above are in fact independent of the choices that we made.
+
+Let \(V\) be a \(4n\) dimensional real vector space, with inner product \(g\), and compatible almost complex structures \(I, J, K\) satisfying the quaternionic relations.
+
+Choose a unit vector \(v \in V\), and let \(V_0 = \Span_\R\left\{v, I(v), J(v), K(v)\right\}\). Then we have an orthogonal decomposition
+
+\[V = V_0 \oplus W_0\]
+
+where \(W_0 = V_0^\perp\). We want to show that the almost complex stuctures \(I, J, K\) respect this decomposition. Let \(w \in W_0\), then for \(v \in V\),
+
+\[g(I(w), v) = g(I(w), I(-I(v))) = g(w, -I(v)) = 0\]
+
+since \(-I(v) \in V_0\). Similarly, \(g(J(w), v) = 0\) and \(g(K(w), v) = 0\). Therefore, \(I(w), J(w), K(w) \in W_0\) as well. With this in mind, we can now consider \(V_0\), i.e. \(n = 1\).
+
+With respect to the basis \(\{v, I(v), J(v), K(v)\}\), the almost complex structures \(I, J, K\) have the matrices as above. As we assumed \(v\) is a unit vector, and \(I, J, K\) are isometries, to show that \(g\) is given by the identity matrix, it suffices to show that \(g(I(v), v) = 0\) and the same for \(J, K\). But
+
+\[g(I(v), v) = g(I(I(v)), I(v)) = -g(v, I(v)) = -g(I(v), v)\]
+
+so \(g(I(v), v) = 0\).
+
+Therefore, the choices which we made in the previous section do not affect the results, since up to a change of basis, we can always assume the structures have the form in the previous section.
+
+\section{Complex symplectic form}
+
+Consider the form \(\omega_c = \omega_J + i\omega_K\) from above, and assume \(\dd\omega_J = \dd\omega_K = 0\). Then \(\dd\omega_c = \dd\omega_J + i\dd\omega_K = 0\), and it is non-degenerate since
+
+\[\omega_c(I(p), q) = g(JI(p), q) + ig(KI(p), q) = -g(K(p), q) + ig(J(p), q)\]
+
+so \(\Re(\omega_c(I(p), K(p))) < 0\) for all \(p \ne 0\). Since \(I, J, K\) are invertible, \(\omega_c\) is non-degenerate. So \(\omega_c\) is a complex symplectic form.
+
+\end{document}
