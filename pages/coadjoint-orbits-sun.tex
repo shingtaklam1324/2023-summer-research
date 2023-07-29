@@ -10,6 +10,7 @@
 \renewcommand{\tilde}{\widetilde}
 \newcommand{\surj}{\twoheadrightarrow}
 \DeclareMathOperator{\gr}{grad}
+\DeclareMathOperator{\Gr}{Gr}
 
 \title{Coadjoint Orbits of \(\SU(n)\)}
 \author{Shing Tak Lam}
@@ -139,7 +140,7 @@ and the quotient space is the flag manifold
 
 \[\mcF(n_1, \dots, n_k) = \frac{\SU(n)}{\Stab(A)}\]
 
-We won't discuss this any further, see \texttt{coadjoint-orbits-sln.pdf} for details. We will now focus on the generic case, where \(A\) has distinct eigenvalues. In this case, the stabiliser is the diagonal subgroup \(T\), which is isomorphic to the torus \(T^{n-1} = (S^1)^{n-1}\).
+We won't discuss this any further, see the appendix for details. We will now focus on the generic case, where \(A\) has distinct eigenvalues. In this case, the stabiliser is the diagonal subgroup \(T\), which is isomorphic to the torus \(T^{n-1} = (S^1)^{n-1}\).
 
 Let \(P\) be the subgroup of lower triangular matrices in \(\SL(n, \C)\). Consider the composition \(\varphi : \SU(n) \to \SL(n, \C)/P\) given by the composition 
 
@@ -242,9 +243,9 @@ is
 
 In particular, this means that the coadjoint orbits are K\"ahler.
 
-\section{Another proof}
+\section{Another proof?}
 
-\textbf{This section contains details which I have not checked. But assuming the claims are true, this should give another construction for the K\"ahler structure on coadjoint orbits of \(\SU(n)\).}
+\textbf{This section contains claims which I have not checked. But assuming the claims are true, this should give another construction for the K\"ahler structure on coadjoint orbits of \(\SU(n)\).}
 
 The idea here is that we can make \(\T^*\SU(n)\) into a K\"ahler manifold, and if we define an appropriate moment map, then we can use K\"ahler reduction (see appendix) to get a K\"ahler structure on coadjoint orbits.
 
@@ -293,6 +294,276 @@ Assuming this claim, then for \(\xi \in \su(n)^*\), \(\mu^{-1}(\xi)\) is a copy 
 \[\frac{\SU(n)}{\Stab(\xi)} \cong \Orb(\xi)\]
 
 \appendix
+
+\section{Stabilisers of the adjoint action of \(\SU(n)\) and \(\SL(n, \C)\)}
+
+This section has been copied from \texttt{coadjoint-orbits-sln.pdf}. It is included to provide some more details about the stabilisers of the adjoint action.
+
+\subsection{Adjoint orbits of \(\SU(n)\)}
+
+First of all, we note that
+
+\[\su(n) = \left\{A \in \Mat(n, \C) \mid A^\dagger + A = 0, \tr(A) = 0\right\}\]
+
+where \(A^\dagger\) is the conjugate transpose of \(A\). In particular, all elements of \(\su(n)\) are skew-hermitian, hence diagonalisable by an element of \(\SU(n)\)\footnote{From standard linear algebra arguments, we know that they are \(\rm U(n)\)-diagonalisable. But if \(PAP^{-1}\) is diagonal, then so is \((\lambda P)A(\lambda P)^{-1}\), and by choosing \(\lambda\) appropriately, \(\lambda \in \SU(n)\).}. With this, we can classify the coadjoint orbits based off a diagonal element in the orbit. Consider
+
+\[A = \begin{pmatrix}
+    i\lambda_1 I_{m_1} \\
+    & \ddots \\
+    & & i\lambda_k I_{m_k}
+\end{pmatrix}\]
+
+where \(\lambda_j \in \R\), with \(\lambda_1 > \lambda_2 > \dots > \lambda_k\), \(m_1 + \dots + m_k = n\) and \(m_1\lambda_1 + \dots + m_k\lambda_k = 0\). In this case, we have that the orbit is
+
+\[\Orb(A) \cong \SU(n)/\Stab(A)\]
+
+where \(\Stab(A)\) is the stabiliser of \(A\) under the adjoint action. In this case, we have that the stabiliser is the block diagonal subgroup
+
+\[\Stab(A) = \rm S\left(\rm U(m_1) \times \dots \times \rm U(m_k)\right)\]
+
+where we consider \(\rm U(m_1) \times \cdots \times \rm U(m_k) \le \rm U(n)\) as the block diagonal subgroup, and
+
+\[\rm S\left(\rm U(m_1) \times \dots \times \rm U(m_k)\right) = \left(\rm U(m_1) \times \cdots \times \rm U(m_k)\right) \cap \SU(n)\]
+
+the subgroup with determinant \(1\). Therefore, the coadjoint orbit is diffeomorphic to the flag manifold
+
+\[\mcF(m_1, \dots, m_k) = \frac{\SU(n)}{\rm S\left(\rm U(m_1) \times \cdots \times \rm U(m_k)\right)}\]
+
+In particular, note that \(\mcF(p, n-p)\) is diffeomorphic to the Grassmannian \(\Gr(p, n)\) of \(p\)-dimensional subspaces of \(\C^n\). More generally, a generic element of \(\mcF(m_1, \dots, m_k)\) can be represented as \((V_1, \dots, V_k)\), where \(V_j\) is a dimension \(m_j\) subspace of \(\C^n\), with \(V_j \perp V_k\) for all \(j \ne k\)\footnote{This may not be the usual definition of a (partial) flag manifold, which is a sequence of subspaces 
+
+\[0 = W_0 \subset W_1 \subset \cdots \subset W_k = \C^n\]
+
+However it is equivalent, since we can set \(W_0 = 0\), \(W_1 = V_1\), \(W_2 = V_1 \oplus V_2\) and so on. Moreover, the indexing is slightly different, since we are indexing using \(m_1, \dots, m_k\), instead of \(\dim(W_1) = m_1, \dim(W_2) = m_1 + m_2\) and so on. Again, it is easy to convert between the two definitions.}. This is because we can set \(V_j\) to be the \(i\lambda_j\) eigenspace and vice versa.
+
+\subsection{Adjoint orbits of \(\SL(n, \C)\)}
+
+In this case, we have that the Lie algebra is
+
+\[\sl(n, \C) = \su(n)_\C = \left\{A \in \Mat(n, \C) \mid \tr(A) = 0\right\}\]
+
+Define the Jordan block
+
+\[J_n(\lambda) = \begin{pmatrix}
+    \lambda & 1 \\
+    & \ddots & \ddots \\
+    & & \ddots & 1 \\
+    & & & \lambda
+\end{pmatrix} = \lambda I + J_n \in \Mat(n, \C)\]
+
+where \(J_n = J_n(0)\). Then we know that every element of \(\sl(n, \C)\) is \(\SL(n, \C)\)-conjugate to a matrix in Jordan normal form, say
+
+\[A = \begin{pmatrix}
+    J_{m_1}(\lambda_1) \\
+    & \ddots \\
+    & & J_{m_k}(\lambda_k)
+\end{pmatrix}\]
+
+where \(m_1 + \dots + m_k = n\) and \(m_1\lambda_1 + \dots + m_k\lambda_k = 0\). As above, we would like to compute the stabiliser of \(A\) under the conjugation action.
+
+\subsubsection{Diagonalisable case}
+
+Suppose \(A\) was diagonalisable. By conjugating by a permutation matrix, we can assume that \(A\) is of the form
+
+\[A = \begin{pmatrix}
+    \lambda_1 I_{\ell_1} \\
+    & \ddots \\
+    & & \lambda_p I_{\ell_p}
+\end{pmatrix}\]
+
+with \(\lambda_1, \dots, \lambda_p\) distinct. In this case, we have that the stabiliser is
+
+\[\Stab(A) = \rm S(\GL(\ell_1, \C) \times \cdots \times \GL(\ell_p, \C))\]
+
+where we consider \(\GL(\ell_1, \C) \times \cdots \times \GL(\ell_p, \C) \le \GL(n, \C)\) as the block diagonal subgroup, and
+
+\[\rm S(\GL(\ell_1, \C) \times \cdots \times \GL(\ell_p, \C)) = \left(\GL(\ell_1, \C) \times \cdots \times \GL(\ell_p, \C)\right) \cap \SL(n, \C)\]
+
+In this case, we can compute the coadjoint orbits as well. In particular, a generic element \(B \in \Orb(A)\) is determined by its eigenspaces. One way to express this is as an open subset of
+
+\[\Gr(\ell_1, n) \times \cdots \times \Gr(\ell_p, n)\]
+
+where we require the subspaces to intersect trivially\footnote{Which is \emph{not} a flag manifold if we use the same trick as above, considering the sums of the eigenspaces, since without orthogonality we can't recover the eigenspaces from the sums. This is also not the same as the product
+
+\[\Gr(\ell_1, n) \times \Gr(\ell_2, n - \ell_1) \times \cdots \times \Gr(\ell_p, \ell_p)\]
+
+since we don't require the eigenspaces to be orthogonal.}. In the case where \(\ell_i = 1\), so the eigenvalues of \(A\) are distinct, then the orbit of \(A\) is precisely the space of all matrices with the same characteristic polynomial, i.e.
+
+\[\chi_B(t) = (t - \lambda_1)\cdots(t - \lambda_n)\]
+
+Which shows that \(\Orb(A)\) is a closed subvariety of \(\Mat(n, \C)\). Moreover, in this case, we get that the stabiliser is the diagonal subgroup
+
+\[\Stab(A) = \left\{\left.\begin{pmatrix}
+    b_1 & \\
+    & \ddots \\
+    & & b_n
+\end{pmatrix}\ \right\vert\ b_j \in \C^*, b_1\cdots b_n = 1 \right\} \cong (\C^*)^{n-1}\]
+
+Now notice that
+
+\[\begin{pmatrix}
+    \vert & & \vert \\
+    v_1 & \cdots & v_n \\
+    \vert & & \vert
+\end{pmatrix}\begin{pmatrix}
+    b_1 & \\
+    & \ddots \\
+    & & b_n
+\end{pmatrix} = \begin{pmatrix}
+    \vert & & \vert \\
+    b_1v_1 & \cdots & b_nv_n \\
+    \vert & & \vert
+\end{pmatrix}\]
+
+Which is another way of seeing that the orbit space in this case is an open subset of
+
+\[(\C \bb P^{n-1})^n\]
+
+since each \(v_j\) determines is a line in \(\C^n\), and we get a well defined function \(\SL(n, \C)/(\C^*)^{n-1} \to (\C \bb P^{n-1})^n\), which is injective.
+
+\subsubsection{Jordan block}
+
+Now suppose \(A = J_n(\lambda)\). Since \(\tr(A) = 0\), we must have \(\lambda = 0\). In this case, it is easy to show that the stabiliser is the subgroup
+
+\[P = \left\{\left.\begin{pmatrix}
+    a_1 & a_2 & \cdots & \cdots & a_n \\
+    & a_1 & a_2 & &\ddots & \vdots \\
+    & & \ddots & \ddots & \vdots \\
+    & & & a_1 & a_2 \\
+    & & & & a_1
+\end{pmatrix}\ \right\vert\ a_1^n = 1, a_j \in \C \right\}\]
+
+of upper triangular Toeplitz matrices. In fact, we prove something more general in the next subsection. In this case, the orbit of \(J_n\) is
+
+\[\Orb(J_n) = \left\{B \in \Mat(n, \C) \mid B^n = 0, B^{n-1} \ne 0\right\}\]
+
+which is an open subset of a closed subvariety.
+
+\subsubsection{General case}
+
+In general, for \(B \in \Mat(n, \C)\), the equation \(BA = AB\) becomes equations of the form
+
+\[J_\ell(\lambda)X = XJ_m(\mu)\]
+
+for some \(X \in \Mat(\ell \times m, \C)\). Assume without loss of generality that \(\ell \ge m\). Then note that
+
+\[J_\ell(\lambda - \mu)X = J_\ell(\lambda)X - \mu X = XJ_m(\mu) - \mu X = XJ_m(0) = X J_m\]
+
+\begin{lemma*}
+    Let \(X\) be a \(m \times n\) matrix, with \(J_mX = XJ_n\). Then \(X\) is upper triangular and Toeplitz, and if \(m < n\), then the first \(n - m\) columns of \(X\) are zero.
+\end{lemma*}
+
+\begin{proof}
+    Say the entries of \(X\) are \((x_{ij})\). Then
+
+    \[x_{i+1, j+1} = e_i^\T J_m Xe_{j+1} = e_i^\T X J_n e_{j+1} = x_{i, j}\]
+
+    and so \(X\) is Toeplitz. Moreover,
+
+    \[J_m X e_1 = X J_n e_1 = 0\]
+
+    So \(x_{i, 1} = 0\) for all \(i > 1\). Similarly, we have that
+
+    \[J_m^\ell X e_\ell = X J_n^\ell e_\ell = 0\]
+
+    hence \(x_{i, j} = 0\) for \(i > j\). Therefore, \(X\) is upper triangular. Now suppose \(m < n\). We will show that the all the entries on the last row except the last one is zero, since this will show the first \(n - m\) columns are zero, and that the Toeplitz part is strictly upper triangular. This follows from the fact that
+
+    \[x_{m, n-\ell} = e_m^\T X e_{n-\ell} =  e_m^\T X J_n^\ell e_n = e_m^\T J_m^\ell X e_n = 0\]
+\end{proof}
+
+This means that if \(\lambda = \mu\), then \(X\) must satisfy the conclusions of the lemma. On the other hand, if \(\lambda \ne \mu\), then we have that
+
+\[J_\ell(\lambda - \mu)^n X = X{J_m}^m = 0\]
+
+and so \(X = 0\).
+
+Therefore, we can write a generic matrix \(B\) with \(BA = AB\) blockwise as \(B_{ij}\), where \(B_{ij} \in \Mat(m_i \times m_j, \C)\), corresponding to \(J_{m_i}(\lambda_i)\) and \(J_{m_j}(\lambda_j)\). In particular, we have that
+
+\[B_{ij} = \begin{cases}
+    0 & \text{if }\lambda_j \ne \lambda_i \\
+    \begin{pmatrix}
+        T_{ij} \\ 0
+    \end{pmatrix} & \text{if } \lambda_j = \lambda_i \text{ and } m_i > m_j \\
+    \begin{pmatrix}
+        0 & T_{ij}
+    \end{pmatrix} & \text{if } \lambda_j = \lambda_i \text{ and } m_i < m_j \\
+    T_{ij} & \text{if } \lambda_j = \lambda_i \text{ and } m_i = m_j
+\end{cases}\]
+
+where \(T_{ij}\) is a strictly upper triangular Toeplitz matrix, of size \(\min(m_i, m_j)\). Therefore, the stabiliser of \(A\) is the subgroup of \(\SL(n, \C)\) of the above form.
+
+\subsection{Nilporent orbits of \(\SL(n, \C)\) for small \(n\)}
+
+Throughout, we will study \emph{nonzero} nilpotent orbits. In particular, all eigenvalues are zero. Also note that
+
+\[\dim(\SL(n, \C)) = n^2 - 1\]
+
+For \(n = 2\), we only have one nilpotent orbit, given by the Jordan normal form
+
+\[A = \begin{pmatrix}
+    0 & 1 \\ 0 & 0
+\end{pmatrix}\]
+
+and the stabiliser is the subgroup elements of \(\SL(2, \C)\) of the form
+
+\[\pm\begin{pmatrix}
+    1 & b \\ 0 & 1
+\end{pmatrix}\]
+
+The complex dimension of the quotient is \(3 - 1 = 2\).
+
+For \(n = 3\), the possible Jordan normal forms are
+
+\[A_1 = \begin{pmatrix}
+    0 & 1 & 0 \\
+    0 & 0 & 1 \\
+    0 & 0 & 0
+\end{pmatrix} \quad A_2 = \begin{pmatrix}
+    0 & 1 & 0 \\
+    0 & 0 & 0 \\
+    0 & 0 & 0
+\end{pmatrix}\]
+
+and the corresponding stabilisers are
+
+\[\begin{pmatrix}
+    a & b & c \\
+    0 & a & b \\
+    0 & 0 & a
+\end{pmatrix} \qqtext{and} \begin{pmatrix}
+    a & b & c \\
+    0 & a & 0 \\
+    0 & d & e
+\end{pmatrix}\]
+
+The complex dimension of the orbit spaces are \(8 - 2 = 6\) and \(8 - 4 = 4\) respectively.
+
+For \(n=4\), we get Jordan decompositions \([4], [3, 1], [2, 2], [2, 1, 1]\). The corresponding stabilisers are
+
+\[\begin{pmatrix}
+    a & b & c & d \\
+    0 & a & b & c \\
+    0 & 0 & a & b \\
+    0 & 0 & 0 & a
+\end{pmatrix} \quad \begin{pmatrix}
+    a & b & c & d \\
+    0 & a & b & 0 \\
+    0 & 0 & a & 0 \\
+    0 & 0 & e & f
+\end{pmatrix} \quad \begin{pmatrix}
+    a & b & c & d \\
+    0 & a & 0 & c \\
+    e & f & g & h \\
+    0 & e & 0 & g
+\end{pmatrix} \quad \begin{pmatrix}
+    a & b & c & d \\
+    0 & a & 0 & 0 \\
+    0 & e & f & g \\
+    0 & h & i & j
+\end{pmatrix}\]
+
+The complex dimension of the orbit spaces are \(15 - 3 = 12\), \(15 - 5 = 10\), \(15 - 5 = 10\) and \(15 - 9 = 6\) respectively.
+
+Note in each case, the complex dimension is even, which is a necessary condition for there to be a hyperk\"ahler structure on the orbit space.
 
 \section{K\"ahler reduction}
 
