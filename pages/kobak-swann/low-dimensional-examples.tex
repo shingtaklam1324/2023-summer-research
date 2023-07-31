@@ -4,6 +4,8 @@
 \usepackage[english]{babel}
 \usepackage{biblatex}
 
+\newcommand{\rla}{\rightleftarrows}
+
 \addbibresource{../../bibliography.bib}
 
 \title{Low dimensional examples}
@@ -14,9 +16,31 @@
 
 \maketitle
 
-In this note, we study low dimensional examples of the construction in \cite{kobak_classical_1996}. We will use the notation as in \S 2 of the paper.
+In this note, we study low dimensional and short examples of the construction in \cite{kobak_classical_1996}. We will use the notation as in the paper. In addition, we will write
 
-\section{Case \(k=1\)}
+\begin{itemize}
+	\item \([a_1^{n_1}, \dots, a_{\ell}^{n_\ell}]\) for the Jordan type with \(n_i\) Jordan blocks of size \(a_i\).
+	\item \(\mcO\left(a_1^{n_1}, \dots, a_\ell^{n_\ell}\right)\) for the corresponding orbit.
+	\item \(\mcM\left(n_1, \dots, n_{k-1}\right)\) for the space of diagrams of the form
+	% https://q.uiver.app/#q=WzAsNixbMiwwLCJcXENee25fMX0iXSxbNCwwLCJcXENee25fMn0iXSxbNiwwLCJcXGNkb3RzIl0sWzgsMCwiXFxDXntuX3trLTF9fSJdLFsxMCwwLCJcXENebiJdLFswLDAsIjAiXSxbMCwxLCIiLDAseyJvZmZzZXQiOi0xfV0sWzEsMiwiIiwwLHsib2Zmc2V0IjotMX1dLFsyLDMsIiIsMCx7Im9mZnNldCI6LTF9XSxbMyw0LCIiLDAseyJvZmZzZXQiOi0xfV0sWzQsMywiIiwwLHsib2Zmc2V0IjotMX1dLFszLDIsIiIsMCx7Im9mZnNldCI6LTF9XSxbMiwxLCIiLDAseyJvZmZzZXQiOi0xfV0sWzEsMCwiIiwwLHsib2Zmc2V0IjotMX1dLFswLDUsIiIsMCx7Im9mZnNldCI6LTF9XSxbNSwwLCIiLDAseyJvZmZzZXQiOi0xfV1d
+	\[\begin{tikzcd}
+		0 && {\C^{n_1}} && {\C^{n_2}} && \cdots && {\C^{n_{k-1}}} && {\C^n}
+		\arrow[shift left=1, from=1-3, to=1-5]
+		\arrow[shift left=1, from=1-5, to=1-7]
+		\arrow[shift left=1, from=1-7, to=1-9]
+		\arrow[shift left=1, from=1-9, to=1-11]
+		\arrow[shift left=1, from=1-11, to=1-9]
+		\arrow[shift left=1, from=1-9, to=1-7]
+		\arrow[shift left=1, from=1-7, to=1-5]
+		\arrow[shift left=1, from=1-5, to=1-3]
+		\arrow[shift left=1, from=1-3, to=1-1]
+		\arrow[shift left=1, from=1-1, to=1-3]
+	\end{tikzcd}\]
+	and we will write \(\mathbf n = (n_1, \dots, n_{k-1})\).
+	\item \(\mcN(\mathbf n) = \mu_c^{-1}(0)/G_\C\) is the quotient space.
+\end{itemize}
+
+\section*{Case \(k=1\)}
 
 In this case, the diagram is
 
@@ -29,22 +53,50 @@ In this case, the diagram is
 
 So there is only one point in \(M\), which is \((0, 0)\). In this case, the image of \(\Phi^c\) is the zero orbit.
 
-\section{Case \(k=2\)}
+\section*{Case \(k=2\)}
 
 In this case, we have the diagram
 
-% https://q.uiver.app/#q=WzAsMyxbMCwwLCIwIl0sWzIsMCwiVl8xIl0sWzQsMCwiVl8yIl0sWzAsMSwiXFxhbHBoYV8wIiwwLHsib2Zmc2V0IjotMX1dLFsxLDAsIlxcYmV0YV8wIiwwLHsib2Zmc2V0IjotMX1dLFsxLDIsIlxcYWxwaGFfMSIsMCx7Im9mZnNldCI6LTF9XSxbMiwxLCJcXGJldGFfMSIsMCx7Im9mZnNldCI6LTF9XV0=
+% https://q.uiver.app/#q=WzAsMixbMCwwLCJcXENeayJdLFsyLDAsIlxcQ15uIl0sWzAsMSwiIiwwLHsib2Zmc2V0IjotMX1dLFsxLDAsIiIsMCx7Im9mZnNldCI6LTF9XV0=
 \[\begin{tikzcd}
-	0 && {V_1} && {V_2}
-	\arrow["{\alpha_0}", shift left=1, from=1-1, to=1-3]
-	\arrow["{\beta_0}", shift left=1, from=1-3, to=1-1]
-	\arrow["{\alpha_1}", shift left=1, from=1-3, to=1-5]
-	\arrow["{\beta_1}", shift left=1, from=1-5, to=1-3]
+	{\C^m} && {\C^n}
+	\arrow[shift left=1, from=1-1, to=1-3]
+	\arrow[shift left=1, from=1-3, to=1-1]
 \end{tikzcd}\]
 
-In this case, for a point \(p = (\alpha_1, \beta_1) \in \mu_c^{-1}(0)\)\footnote{We omit \(\alpha_0, \beta_0\) as they are zero.}, we have \(X = \alpha_1\beta_1\), and \(\beta_1\alpha_1 = 0\), so \(X^2 = 0\). Therefore, all of the Jordan blocks for \(X\) have size at most \(2\).
+which means that \(X\) has \(X^2 = 0\), and \(\rank(X) \le m\). Equality can be achieved if \(n \ge 2k\), and \(X\) has Jordan type \([2^m, 1^{n-2m}]\). In this case, the quotient space is
 
-Since \(\rank(X) = \rank(\alpha_1\beta_1) \le \min\left\{\rank(\alpha_1, \beta_1)\right\} \le \dim(V_1)\) , and \(\rank(X)\) is the number of nonzero Jordan blocks, this gives us a relation between the number of Jordan blocks and the dimension of \(V_1\).
+\[\bigcup_{\ell = 0}^m \mcO\left(2^\ell, 1^{n-2\ell}\right)\]
+
+\section*{Orderings}
+
+For the general case, we have the following statement:
+
+\begin{theorem*}
+	Let \(X, Y\) be nilpotent \(n \times n\) matrices. Then \(Y\) is in the closure of the orbit of \(X\) if and only if \(\rank(Y^i) \le \rank(X^i)\) for all \(i\).
+\end{theorem*}
+
+We can see that the \(k=2\) case above is a special case of this, and the theorem by \Citeauthor{kobak_classical_1996}.
+
+Moreover, we can see that if \(n_i \le m_i\) for all \(i\), then we have a natural embedding \(\mcM(\mathbf n) \le \mcM(\mathbf m)\). In addition, since
+
+\begin{theorem*}
+	If \(\rank(X^i) = n_{k-i}\) for all \(i\), then the quotient of \(\mcM(\mathbf n)\) is the closure of the orbit of \(X\).
+\end{theorem*}
+
+and the result is sharp, in the sense that if \(n_{k-i} < \rank(X^i)\), then \(X\) can't be in \(\mcN(\mathbf n)\), as \(X^i\) factors through \(\C^{n_{k-i}}\). Therefore, we can use this to explicitly write down \(\mcN(\mathbf n)\) as a union of orbits.
+
+A Mathematica notebook to compute the Hasse diagram for a fixed \(n\), and the ranks of the Jordan blocks is at \texttt{code/Hasse.nb}.
+
+\section*{Examples}
+
+We can use the above notebook to compute examples for small \(n\). For \(n \le 5\), we get a linear order. Since the maximal element is always the Jordan block, which comes from the diagram
+
+\[0 \rla \C \rla \C^2 \rla \cdots \rla \C^{n-1} \rla \C^n\]
+
+Therefore, all the other orbits can be constructed from ``sub-diagrams'' of the above.
+
+For \(n = 6\), we no longer get a linear order. \(\rank([4, 1^2]) = [3,2,1]\) and \(\rank([3,3]) = [4, 2]\).
 
 \printbibliography
 
