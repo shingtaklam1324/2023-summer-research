@@ -28,13 +28,33 @@ In this note, we will consider the coadjoint orbits of \(\SU(n)\), and show that
 
 \tableofcontents
 
+\section*{Notation}
+
+Throughout this document, we will use the following notation:
+
+\begin{itemize}
+    \item \(\SU(n)\) is the group of \(n \times n\) unitary matrices with determinant \(1\).
+    \item \(\su(n)\) is its Lie algebra.
+    \item \(\Ad : \SU(n) \to \GL(\su(n))\) is the adjoint representation.
+    \item \(\Ad^* : \SU(n) \to \GL(\su(n)^*)\) the coadjoint representaton.
+    \item \(\ad : \su(n) \to \gl(\su(n))\) the adjoint representation, given by \(\ad_X(Y) = [X, Y]\).
+    \item \(M\) will be a (co)adjoint orbit, \(A \in M\) a diagonal element.
+    \item \(\inner{\cdot, \cdot}\) will denote both the pairing \(\su(n)^* \times \su(n) \to \R\) and the inner product on \(\su(n)\),
+    \item \(\Phi : \su(n) \to \su(n)^*\) is the isomorphism induced by the inner product,
+    \item \(\ell_g(h) = gh\) is the left multiplication by \(g\) map,
+    \item \(\iinner{\cdot, \cdot}\) the Riemannian metric on the (co)adjoint orbit.
+\end{itemize}
+
 \section{Adjoint and Coadjoint Orbits}
 
 Define the Lie algebra
 
-\[\su(n) = \left\{A \in \Mat(n, \C) \mid A^* + A = 0, \tr(A) = 0\right\}\]
+\begin{equation}
+    \label{eq:sun-def}
+    \su(n) = \left\{X \in \Mat(n, \C) \mid X^* + X = 0, \tr(X) = 0\right\}
+\end{equation}
 
-where \(A^*\) is the conjugate transpose of \(A\), and with the Lie bracket being the matrix commutator. We can define the adjoint representation of \(\SU(n)\) as
+where \(X^*\) is the conjugate transpose of \(X\), and with the Lie bracket being the matrix commutator. We can define the adjoint representation of \(\SU(n)\) as
 
 \begin{align*}
     \Ad : \SU(n) &\to \GL(\su(n)) \\
@@ -45,23 +65,23 @@ Taking the dual representation, we get the coadjoint representation, which is
 
 \begin{align*}
     \Ad^* : \SU(n) &\to \GL(\su(n)^*) \\
-    \Ad^*_g(\alpha)(X) &= \inner{\alpha, \Ad_{g^{-1}}(X)}
+    \Ad^*_g(\beta)(X) &= \inner{\beta, \Ad_{g^{-1}}(X)}
 \end{align*}
 
 where \(\inner{\cdot, \cdot}\) is used here to denote the pairing \(\su(n)^* \times \su(n) \to \R\). We will use the same notation for the inner product on \(\su(n)\), which should not be an issue as the inner product defines a natural isomorphism. Now note that \(-\kappa\), where \(\kappa\) is the Killing form, defines an inner product
 
-\[\inner{A, B} = -\tr(AB) = \tr(AB^*)\]
+\[\inner{X, Y} = -\tr(XY) = \tr(XY^*)\]
 
 defines an inner product on \(\su(n)\)\footnote{In fact, \(\inner{A, B} = \tr(AB^*)\) defines a Hermitian inner product on the space of complex matrices.}, which means that we have a natural isomorphism
 
 \begin{align*}
     \Phi : \su(n) &\to \su(n)^* \\
-    A &\mapsto \inner{A, \cdot}
+    X &\mapsto \inner{X, \cdot}
 \end{align*}
 
-With this, suppose \(\alpha = \Phi(A)\), then
+With this, suppose \(\beta = \Phi(B)\), then
 
-\[\Ad_g^*(\alpha)(X) = \inner{A, \Ad_{g^{-1}}(X)} = -\tr(Ag^{-1}Xg) = -\tr(gAg^{-1}X) = \Phi(\Ad_g(A))(X)\]
+\[\Ad_g^*(\beta)(X) = \inner{B, \Ad_{g^{-1}}(X)} = -\tr(Bg^{-1}Xg) = -\tr(BAg^{-1}X) = \Phi(\Ad_g(B))(X)\]
 
 Therefore, the following diagram commutes
 
@@ -78,61 +98,39 @@ Therefore, the following diagram commutes
 
 or equivalently, \(\Phi\) defines an isomorphism of representations between \(\Ad\) and \(\Ad^*\).
 
+\section{Root decomposition}
+
+Consider the Lie algebra \(\sl(n, \C)\) of trace free \(n \times n\) complex matrices. Then we have the Cartan subalgebra \(\mft\) of diagonal matrices. Let \(E_{ij}\) be the standard basis matrices for \(\Mat(n, \C)\), \(B \in \mft\). Say
+
+\[B = \begin{pmatrix}
+    b_1 \\
+    & \ddots \\
+    & & b_n
+\end{pmatrix}\]
+
+Then \([B, E_{ij}] = (b_i - b_j)E_{ij}\). This means that we have the eigendecomposition
+
+\begin{equation}
+    \label{eq:sln-root}
+    \sl(n, \C) = \mft \oplus \bigoplus_{1 \le i, j \le n, i \ne j} \C E_{ij}
+\end{equation}
+
+In particular, if we restrict this to the subalgebra \(\su(n)\), we get the decomposition
+
+\begin{equation}
+    \label{eq:sun-root}
+    \su(n) = \tilde\mft \oplus \bigoplus_{1 \le i < j \le n} \left(\R(E_{ij} - E_{ji}) \oplus i\R (E_{ij} + E_{ji})\right)
+\end{equation}
+
+where \(\tilde \mft = \mft \cap \su(n)\) is the subalgebra of \(\su(n)\) of diagonal matrices. 
+
 \section{Tangent space and Diagonalisation}
 
-\subsection{Tangent space}
-
-Let \( M\) be a coadjoint orbit. For \(X \in \su(n)\), consider the curve \(g(t) = \exp(tX)\) in \(\SU(n)\). This has \(g'(0) = X\), and we have a curve
-
-\[\mu(t) = \Ad_{g(t)}^*(\mu)\]
-
-through \(\mu \in  M\). In particular, we have that for \(Y \in \su(n)\),
-
-\[\inner{\mu(t), Y} = \inner{\mu, \Ad_{g(t)^{-1}}(Y)}\]
-
-Differentiating this at \(t = 0\), we get
-
-\[\inner{\mu'(0), Y} = -\inner{\mu, \ad_X(Y)} = -\inner{(\ad_X)^*(\mu), Y}\]
-
-That is, \(\mu'(0) = -(\ad_X)^*(\mu)\). Hence we have that
-
-\[\T_\mu\left( M\right) = \left\{(\ad_X)^*(\mu) \mid X \in \su(n)\right\}\]
-
-If \(\alpha= \Phi(A)\), then
-
-\begin{align*}
-    \inner{(\ad_X)^*(\alpha), Y} &= \inner{\alpha, \ad_X(Y)} \\
-    &= \inner{A, [X, Y]} \\
-    &= -\tr(AXY - AYX) \\
-    &= -\tr(AXY - XAY) \\
-    &= \inner{[A, X], Y} \\
-    &= \inner{-\ad_X(A), Y}
-\end{align*}
-
-Therefore, we have that
-
-% https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXHN1KG4pIl0sWzIsMCwiXFxzdShuKSJdLFswLDIsIlxcc3UobileKiJdLFsyLDIsIlxcc3UobileKiJdLFswLDIsIlxcUGhpIiwyXSxbMSwzLCJcXFBoaSJdLFswLDEsIlxcYWRfWCJdLFsyLDMsIlxcYWRfWF4qIiwyXV0=
-\[\begin{tikzcd}
-	{\su(n)} && {\su(n)} \\
-	\\
-	{\su(n)^*} && {\su(n)^*}
-	\arrow["\Phi"', from=1-1, to=3-1]
-	\arrow["\Phi", from=1-3, to=3-3]
-	\arrow["{\ad_X}", from=1-1, to=1-3]
-	\arrow["{\ad_X^*}"', from=3-1, to=3-3]
-\end{tikzcd}\]
-
-Thus, in this case we have the tangent space to the corresponding adjoint orbit as
-
-\[T_A M = \left\{\ad_X(A) \mid X \in \su(n)\right\}\]
+\label{sec:tangent}
 
 \subsection{Diagonalisation and Stabilisers of the coadjoint action}
 
-First of all, we note that
-
-\[\su(n) = \left\{A \in \Mat(n, \C) \mid A^* + A = 0, \tr(A) = 0\right\}\]
-
-where \(A^*\) is the conjugate transpose of \(A\). In particular, all elements of \(\su(n)\) are skew-hermitian, hence diagonalisable by an element of \(\SU(n)\)\footnote{From standard linear algebra arguments, we know that they are \(\mathrm U(n)\)-diagonalisable. But if \(PAP^{-1}\) is diagonal, then so is \((\lambda P)A(\lambda P)^{-1}\), and by choosing \(\lambda\) appropriately, \(\lambda \in \SU(n)\).}. With this, we can classify the coadjoint orbits based off a diagonal element in the orbit. Consider
+First of all, we note that elements of \(\su(n)\) are skew-hermitian, hence diagonalisable by an element of \(\SU(n)\)\footnote{From standard linear algebra arguments, we know that they are \(\mathrm U(n)\)-diagonalisable. But if \(PBP^{-1}\) is diagonal, then so is \((\lambda P)B(\lambda P)^{-1}\), and by choosing \(\lambda\) appropriately, \(\lambda \in \SU(n)\).}. With this, we can classify the coadjoint orbits based off a diagonal element in the orbit. Consider
 
 \[A = \begin{pmatrix}
     i\lambda_1 I_{m_1} \\
@@ -153,6 +151,59 @@ where we consider \(\rm U(m_1) \times \cdots \times \rm U(m_k) \le \SU(n)\) as t
 \[\rm S\left(\rm U(m_1) \times \dots \times \rm U(m_k)\right) = \left(\rm U(m_1) \times \cdots \times \rm U(m_k)\right) \cap \SU(n)\]
 
 the subgroup with determinant \(1\).
+
+\subsection{Tangent space}
+
+Let \(M\) be an adjoint orbit. We will now focus on the generic case, that is, the eigenvalues of \(A\) are distinct. In this case, we have that
+
+\[\Stab(A) = T^{n-1}\]
+
+is the torus of diagonal matrices in \(\SU(n)\), and we have a diffeomorphism \(M \simeq \SU(n)/T\). Therefore, the tangent space at \(A\) is
+
+\[\TT_AM = \frac{\su(n)}{\tilde \mft} = \bigoplus_{1 \le i < j \le n} \left(\R(E_{ij} - E_{ji}) \oplus i\R (E_{ij} + E_{ji})\right) = \{\ad_A(X) \mid X \in \su(n)\}\]
+
+where the last equality follows from the fact that
+
+\[\ad_A(E_{ij}) = i(\lambda_i - \lambda_j)E_{ij}\]
+
+and that diagonal matrices commute. Next, for \(g \in \SU(n)\), \(\Ad_g : \su(n) \to \su(n)\) is an invertible linear map, hence a diffeomorphism. In particular, this means that if \(B = \Ad_g(A)\), then
+
+\begin{equation}
+    \label{eq:tangent-space}
+    \TT_B M = \Ad_g(\TT_A M) = \left\{\Ad_g(\ad_A(X)) \mid X \in \su(n)\right\} = \left\{\ad_B(X) \mid X \in \su(n)\right\}
+\end{equation}
+
+using the fact that
+
+\[\ad_{\Ad_g(A)} = \Ad_g \circ \ad_A \circ \Ad_{g^*}\]
+
+which we will show in the proof of \cref{lem:ad_Ad}, and that \(\Ad_{g^*}\) is a bijection. Moreover, if \(\beta= \Phi(B)\), then
+
+\begin{align*}
+    \inner{(\ad_X)^*(\beta), Y} &= \inner{\beta, \ad_X(Y)} \\
+    &= \inner{B, [X, Y]} \\
+    &= -\tr(BXY - BYX) \\
+    &= -\tr(BXY - XBY) \\
+    &= \inner{[B, X], Y} \\
+    &= \inner{-\ad_X(B), Y}
+\end{align*}
+
+Therefore, we have that the following diagram commutes.
+
+% https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXHN1KG4pIl0sWzIsMCwiXFxzdShuKSJdLFswLDIsIlxcc3UobileKiJdLFsyLDIsIlxcc3UobileKiJdLFswLDIsIlxcUGhpIiwyXSxbMSwzLCJcXFBoaSJdLFswLDEsIlxcYWRfWCJdLFsyLDMsIlxcYWRfWF4qIiwyXV0=
+\[\begin{tikzcd}
+	{\su(n)} && {\su(n)} \\
+	\\
+	{\su(n)^*} && {\su(n)^*}
+	\arrow["\Phi"', from=1-1, to=3-1]
+	\arrow["\Phi", from=1-3, to=3-3]
+	\arrow["{-\ad_X}", from=1-1, to=1-3]
+	\arrow["{\ad_X^*}"', from=3-1, to=3-3]
+\end{tikzcd}\]
+
+Thus, we have the tangent space to the corresponding coadjoint orbit is
+
+\[T_B \tilde M = \left\{\ad_X^*(B) \mid X \in \su(n)\right\}\]
 
 \section{Kirillov-Kostant-Souriau symplectic form}
 
@@ -198,7 +249,7 @@ First of all, we will need some preliminary results.
 \end{lemma}
 
 \begin{proof}
-    We will prove the corresponding statement for \(\Ad\) and \(\ad\), and the result will follow by conjuation with the isomorphism \(\Phi\).
+    We will prove the corresponding statement for \(\Ad\) and \(\ad\), and the result will follow by conjugation with the isomorphism \(\Phi\).
 
     \[\Ad_g \circ \ad_X \circ \Ad_{g^*}(Y)= gX g^* Y g g^* - g g^* Y g X g^* = [gX g^*, Y] = \ad_{\Ad_gX}(Y)\]
 \end{proof}
@@ -295,27 +346,27 @@ Since \(\nu_\ell(X_\ell)\) is constant, \(Y_\ell[\nu_\ell(X_\ell)] = 0\). Simila
 
 \[\dd \nu_\ell(X_\ell, Y_\ell) = -\nu_\ell([X_\ell, Y_\ell]) = \sigma(X_\ell, Y_\ell)\]
 
-Now suppose \(X, Y\) are vector fields on \(G\). We want to show that \(\sigma(X, Y) = \dd\nu_\ell(X, Y)\). As \(\sigma\) is left invariant,
+Now suppose \(U, V\) are vector fields on \(\SU(n)\). We want to show that \(\sigma(U, V) = \dd\nu_\ell(U, V)\). As \(\sigma\) is left invariant,
 
 \begin{align*}
-    \sigma(X, Y)_g &= (\ell_{g^{-1}}^* \sigma)_g(X(g), Y(g)) \\
-    &= \sigma_I(\underbrace{\dd \ell_{g^{-1}} \cdot X(g)}_{=:X}, \underbrace{\dd \ell_{g^{-1}} \cdot Y(g)}_{=:Y}) \\
+    \sigma(U, V)_g &= (\ell_{g^{-1}}^* \sigma)_g(U_g, V_g) \\
+    &= \sigma_I(\underbrace{\dd \ell_{g^{-1}} \cdot U_g}_{=:X}, \underbrace{\dd \ell_{g^{-1}} \cdot V_g}_{=:Y}) \\
     &= \sigma_I(X, Y) \\
     &= \dd\nu_\ell(X_\ell, Y_\ell)_I \\
     &= (\ell_g^*\dd\nu_\ell)(X_\ell, Y_\ell)_I \\
     &= (\dd\nu_\ell)_g(\dd\ell_g(X_\ell)_I, \dd\ell_g(Y_\ell)_I) \\
     &= (\dd\nu_\ell)_g(\dd \ell_g X, \dd\ell_g Y) \\
-    &= (\dd\nu_\ell)_g(X_g, Y_g) \\
-    &= \dd\nu_\ell(X, Y)_g
+    &= (\dd\nu_\ell)_g(U_g, V_g) \\
+    &= \dd\nu_\ell(U, V)_g
 \end{align*}
 
 With this, \(\dd\sigma = \dd^2\nu_\ell = 0\). Hence \(\pi^*\dd\omega = \dd(\pi^*\omega) = \dd\sigma = 0\). Since \(\pi \circ \ell_g = \Ad_g^* \circ \ell_g\), and \(\pi\) is a submersion at \(I\), it is in fact a submersion everywhere. Moreover, \(\pi\) is surjective, by definition.
 
 For \(\mu \in  M\), and \(X, Y \in T_\mu  M\), we have that
 
-\[\dd\omega(\mu)(X, Y) = \dd\omega_{\pi(g)}(\dd\pi(X), \dd\pi(Y)) = (\pi^*\dd\omega)(g)(X, Y) = 0\]
+\[\dd\omega_\mu(X, Y, Z) = \dd\omega_{\pi(g)}(\dd\pi(U), \dd\pi(V), \dd\pi(W)) = (\pi^*\dd\omega)_g(U, V, W) = 0\]
 
-where \(g \in \SU(n)\) is such that \(\pi(g) = \mu\), which exists by surjectivity, and \(X, Y \in T_g\SU(n)\) such that \(\dd\pi(X) = X\) and \(\dd\pi(Y) = Y\), which exists as \(\pi\) is a submersion. Thus, as \(\mu \in  M\) is arbitrary, \(\omega\) is closed.
+where \(g \in \SU(n)\) is such that \(\pi(g) = \mu\), which exists by surjectivity, and \(U, V, W \in T_g\SU(n)\) such that \(\dd\pi(U) = X, \dd\pi(V) = Y\) and \(\dd\pi(W) = Z\), which exists as \(\pi\) is a submersion. Thus, as \(\mu \in  M\) is arbitrary, \(\omega\) is closed.
 
 \subsection{\(\omega\) on adjoint orbits}
 
@@ -330,32 +381,6 @@ Using the isomorphism \(\Phi\), \cref{thm:kks} and the computation for \(\ad_X^*
 \end{theorem}
 
 This will be convenient for us since we can compute the right hand side directly from the matrices.
-
-\section{Root decomposition}
-
-Consider the Lie algebra \(\sl(n, \C)\) of trace free \(n \times n\) complex matrices. Then we have the Cartan subalgebra \(\mft\) of diagonal matrices. Let \(E_{ij}\) be the standard basis matrices for \(\Mat(n, \C)\), \(B \in \mft\). Say
-
-\[B = \begin{pmatrix}
-    b_1 \\
-    & \ddots \\
-    & & b_n
-\end{pmatrix}\]
-
-Then \([B, E_{ij}] = (b_i - b_j)E_{ij}\). This means that we have the eigendecomposition
-
-\begin{equation}
-    \label{eq:sln-root}
-    \sl(n, \C) = \mft \oplus \bigoplus_{1 \le i, j \le n, i \ne j} \C E_{ij}
-\end{equation}
-
-In particular, if we restrict this to the subalgebra \(\su(n)\), we get the decomposition
-
-\begin{equation}
-    \label{eq:sun-root}
-    \su(n) = \tilde\mft \oplus \bigoplus_{1 \le i < j \le n} \left(\R(E_{ij} - E_{ji}) \oplus i\R (E_{ij} + E_{ji})\right)
-\end{equation}
-
-where \(\tilde \mft = \mft \cap \su(n)\) is the subalgebra of \(\su(n)\) of diagonal matrices. 
 
 % Then the almost complex structure from multiplication by \(i\) in \cref{eq:sln-root} is given by
 
@@ -372,15 +397,7 @@ We have already constructed the Kirillov-Kostant-Souriau symplectic form \(\omeg
 
 \subsection{At a diagonal element}
 
-Let \(M\) be an adjoint orbit. We will now focus on the generic case, where elements of \(M\) have distinct eigenvalues. Let
-
-\[A = \begin{pmatrix}
-    i\lambda_1 \\
-    & \ddots \\
-    & & i\lambda_n
-\end{pmatrix}\]
-
-be the element in \(M\) with \(\lambda_i \in \R\), \(\lambda_1 > \lambda_2 > \dots > \lambda_n\). In this case, we have that the stabiliser of \(A\) is the torus \(T \cong T^{n-1}\) of diagonal matrices in \(\SU(n)\).
+Let \(M\) be an adjoint orbit. Recall from \cref{sec:tangent} that the stabiliser of \(A\) is the torus \(T \cong T^{n-1}\) of diagonal matrices in \(\SU(n)\).
 
 \[\T_A M = \bigoplus_{1 \le i < j \le n} \left(\R(E_{ij} - E_{ji}) \oplus i\R (E_{ij} + E_{ji})\right) \cong \frac{\su(n)}{\tilde t} \cong \T_{[1]}\left(\frac{\SU(n)}{T^{n-1}}\right)\]
 
@@ -513,18 +530,9 @@ From the proof of \cref{lem:left-inv}, we have that \(\pi \circ \ell_g = \Ad_g \
 
 We want to show that this is compatible with the Kirillov-Kostant-Souriau symplectic form.
 
-From the proof of \cref{lem:ad_Ad}, we have that
+Recall from \cref{eq:tangent-space} that
 
-\[\ad_{\Ad_g(A)} = \Ad_g \circ \ad_A \circ \Ad_{g^*}\]
-
-In particular, we have that
-
-\begin{align*}
-    \TT_B M &= \left\{\ad_B(X) \mid X \in \su(n)\right\} \\
-    &= \left\{\Ad_g(\ad_A(X)) \mid X \in \su(n)\right\} \\
-    &= \Ad_g(\TT_A M) 
-    % &= \bigoplus_{1 \le i < j \le n}\left(\R ge_{ij}g^* \oplus \R g f_{ij}g^*\right)
-\end{align*}
+\[\TT_BM = \Ad_g(\TT_A M)\]
 
 Then we have that
 
