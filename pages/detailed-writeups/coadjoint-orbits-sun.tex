@@ -12,6 +12,8 @@
 \DeclareMathOperator{\gr}{grad}
 \DeclareMathOperator{\Gr}{Gr}
 
+\newcommand{\iinner}[1]{\left\langle\!\left\langle #1 \right\rangle\!\right\rangle}
+
 \usepackage{biblatex}
 \addbibresource{../../bibliography.bib}
 
@@ -23,8 +25,6 @@
 \maketitle
 
 In this note, we will consider the coadjoint orbits of \(\SU(n)\), and show that they are K\"ahler manifolds.
-
-Sections 1-7 is an outline of the proof, appendices A, B, C contains the details of the proof. Section 8 contains an alternative proof, which have a few holes.
 
 \tableofcontents
 
@@ -152,67 +152,63 @@ where we consider \(\rm U(m_1) \times \cdots \times \rm U(m_k) \le \SU(n)\) as t
 
 \[\rm S\left(\rm U(m_1) \times \dots \times \rm U(m_k)\right) = \left(\rm U(m_1) \times \cdots \times \rm U(m_k)\right) \cap \SU(n)\]
 
-the subgroup with determinant \(1\). Therefore, the coadjoint orbit is diffeomorphic to the flag manifold
-
-\[\mcF(m_1, \dots, m_k) = \frac{\SU(n)}{\rm S\left(\rm U(m_1) \times \cdots \times \rm U(m_k)\right)}\]
-
-In particular, note that \(\mcF(p, n-p)\) is diffeomorphic to the Grassmannian \(\Gr(p, n)\) of \(p\)-dimensional subspaces of \(\C^n\). More generally, a generic element of \(\mcF(m_1, \dots, m_k)\) can be represented as \((V_1, \dots, V_k)\), where \(V_j\) is a dimension \(m_j\) subspace of \(\C^n\), with \(V_j \perp V_k\) for all \(j \ne k\)\footnote{This may not be the usual definition of a (partial) flag manifold, which is a sequence of subspaces 
-
-\[0 = W_0 \subset W_1 \subset \cdots \subset W_k = \C^n\]
-
-However it is equivalent, since we can set \(W_0 = 0\), \(W_1 = V_1\), \(W_2 = V_1 \oplus V_2\) and so on. Moreover, the indexing is slightly different, since we are indexing using \(m_1, \dots, m_k\), instead of \(\dim(W_1) = m_1, \dim(W_2) = m_1 + m_2\) and so on. Again, it is easy to convert between the two definitions.}. This is because we can set \(V_j\) to be the \(i\lambda_j\) eigenspace and vice versa.
+the subgroup with determinant \(1\).
 
 \section{Kirillov-Kostant-Souriau symplectic form}
+
+\label{sec:kks}
 
 This section is from \cite{marsden_ratiu} Chapter 14. The proof is slightly modified, since here we have an explicit isomorphism between the adjoint and coadjoint representation, which simplifies some of the arguments.
 
 \begin{theorem}
     \label{thm:kks}
+    [Kirillov-Kostant-Souriau, \cite[Theorem 14.4.1]{marsden_ratiu}]
     Let \(M \subseteq \su(n)^*\) be a coadjoint orbit. Define the \(2\)-form \(\omega\) on \( M\) by
 
-    \[\omega_\mu(\ad_\xi^*(\mu), \ad_\eta^*(\mu)) = -\inner{\mu, [\xi, \eta]}\]
+    \[\omega_\mu(\ad_X^*(\mu), \ad_Y^*(\mu)) = -\inner{\mu, [X, Y]}\]
 
     Then \(\omega\) is a symplectic form on \( M\).
 \end{theorem}
 
 \subsection{\(\omega\) is well defined}
 
-First of all, we show that \(\omega\) is well defined. That is, it is independent of the choice of \(\xi, \eta \in \su(n)\).
+First of all, we show that \(\omega\) is well defined. That is, it is independent of the choice of \(X, Y \in \su(n)\).
 
-Suppose \(\zeta \in \su(n)\) is such that \(\ad_\zeta^*(\mu) = \ad_\xi^*(\mu)\). Then we must have that
+Suppose \(Z \in \su(n)\) is such that \(\ad_Z^*(\mu) = \ad_X^*(\mu)\). Then we must have that
 
-\[\inner{\mu, [\xi, \eta]} = \inner{\mu, [\zeta, \eta]}\]
+\[\inner{\mu, [X, Y]} = \inner{\mu, [Z, Y]}\]
 
-for all \(\eta \in \su(n)\).
+for all \(Y \in \su(n)\).
 
 \subsection{\(\omega\) is non-degenerate}
 
-Since the pairing \(\inner{,}\) is non-degenerate, \(\omega(\mu)(\ad_\xi^*(\mu), \ad_\eta^*(\mu))\) for all \(\ad_\eta^*(\mu)\) implies that \(\inner{\mu, [\xi, \eta]} = 0\), for all \(\eta\). But this then means that \(\ad_\xi^*(\mu) = 0\), so \(\omega\) is non-degenerate.
+Suppose we have \(X \in \su(n)\) such that
+
+\[\omega_\mu(\ad_X^*(\mu), \ad_Y^*(\mu)) = \inner{\mu, [X, Y]} = 0\]
+
+for all \(Y\). But this is the same as \(\ad_X^*(\mu) = 0\). Therefore, \(\omega\) is non-degenerate.
 
 \subsection{\(\omega\) is closed}
 
 First of all, we will need some preliminary results.
 
 \begin{lemma}
-    \[\ad_{\Ad_g\xi}^* = \Ad_g^* \circ \ad_\xi^* \circ \Ad_{g^*}^*\]
+    \label{lem:ad_Ad}
+    \[\ad_{\Ad_gX}^* = \Ad_g^* \circ \ad_X^* \circ \Ad_{g^*}^*\]
 \end{lemma}
 
 \begin{proof}
     We will prove the corresponding statement for \(\Ad\) and \(\ad\), and the result will follow by conjuation with the isomorphism \(\Phi\).
 
-    \[\Ad_g \circ \ad_\xi \circ \Ad_g^*(X)= g\xi g^* X g g^* - g g^* X g \xi g^* = [g\xi g^*, X] = \ad_{\Ad_g\xi}(X)\]
+    \[\Ad_g \circ \ad_X \circ \Ad_{g^*}(Y)= gX g^* Y g g^* - g g^* Y g X g^* = [gX g^*, Y] = \ad_{\Ad_gX}(Y)\]
 \end{proof}
 
 \begin{lemma}
-    \[\Ad_g([\xi, \eta]) = [\Ad_g(\xi), \Ad_g(\eta)]\]
+    \[\Ad_g([X, Y]) = [\Ad_g(X), \Ad_g(Y)]\]
 \end{lemma}
 
 \begin{proof}
-    First, notice that
-
-    \[C_g(C_h(k)) = ghkh^{-1}g^{-1}= C_g(h)C_g(k)C_g(h^{-1})\]
-
-    Differentiating this at \(h = e\) and \(k = e\) gives the result.
+    Expand using the definition of \(\Ad\).
 \end{proof}
 
 \begin{lemma}
@@ -222,20 +218,20 @@ First of all, we will need some preliminary results.
 \end{lemma}
 
 \begin{proof}
-    Evaluating \((\Ad_\xi)_{\su(n)^*} = \Ad_g^* \circ \ad_\xi^* \circ \Ad_{g^{-1}}^*\) at \(\nu = \Ad_g^*(\mu)\), we get
+    Evaluating \(\ad^*_{\Ad_gX} = \Ad_g^* \circ \ad_X^* \circ \Ad_{g^{-1}}^*\) at \(\nu = \Ad_g^*(\mu)\), we get
 
-    \[(\Ad_g\xi)_{\su(n)^*}(\nu) = \Ad_g^* \circ \ad_\xi^*(\mu) = \dd_\mu\Ad_g^* \circ \ad_\xi^*(\mu)\]
+    \[\ad^*_{\Ad_gX}(\nu) = \Ad_g^* \circ \ad_X^*(\mu) = \dd_\mu\Ad_g^* \circ \ad_X^*(\mu)\]
 
     Therefore,
 
     \begin{align*}
-        ((\Ad_g^*)^*\omega)(\mu)(\ad_\xi^*(\mu), \ad_\eta^*(\mu)) &= \omega(\nu)(\dd_\mu \Ad_g^* \cdot \ad_\xi^*(\mu), \dd_\mu \Ad_g^* \cdot \ad_\eta^*(\mu)) \\
-        &= \omega(\nu)((\Ad_g\xi)_{\su(n)^*}(\nu), (\Ad_g\eta)_{\su(n)^*}(\nu)) \\
-        &= -\inner{\nu, [\Ad_g\xi, \Ad_g\eta]} \\
-        &= -\inner{\nu, \Ad_g([\xi, \eta])} \\
-        &= -\inner{\Ad_{g^{-1}}^*(\nu), [\xi, \eta]} \\
-        &= -\inner{\mu, [\xi, \eta]} \\
-        &= \omega(\mu)(\ad_\xi^*(\mu), \ad_\eta^*(\mu))
+        ((\Ad_g^*)^*\omega)_\mu(\ad_X^*(\mu), \ad_Y^*(\mu)) &= \omega_\nu(\dd_\mu \Ad_g^* \cdot \ad_X^*(\mu), \dd_\mu \Ad_g^* \cdot \ad_Y^*(\mu)) \\
+        &= \omega_\nu(\ad^*_{\Ad_gX}(\nu), \ad^*_{\Ad_gY}(\nu)) \\
+        &= -\inner{\nu, [\Ad_gX, \Ad_gY]} \\
+        &= -\inner{\nu, \Ad_g([X, Y])} \\
+        &= -\inner{\Ad_{g^{-1}}^*(\nu), [X, Y]} \\
+        &= -\inner{\mu, [X, Y]} \\
+        &= \omega_\mu(\ad_X^*(\mu), \ad_Y^*(\mu))
     \end{align*}
 \end{proof}
 
@@ -243,49 +239,50 @@ For \(\nu \in \su(n)^*\), define the left-invariant one-form
 
 \[\nu_\ell(g) = (\dd_g\ell_{g^{-1}})^*(\nu)\]
 
-for \(g \in G\). Similarly, for \(\xi \in \su(n)\), let \(\xi_\ell\) be the corresponding left invariant vector field on \(G\). Then \(\nu_\ell(\xi_\ell) = \inner{\nu, \xi}\) at all \(g \in G\).
+for \(g \in \SU(n)\). Similarly, for \(X \in \su(n)\), let \(X_\ell\) be the corresponding left invariant vector field on \(G\). Then \(\nu_\ell(X_\ell) = \inner{\nu, X}\) at all \(g \in \SU(n)\).
 
-Fix \(\nu \in  M\), and consider the map \(\varphi_\nu : G \to  M\), defined by
+Fix \(\nu \in  M\), and consider the map \(\pi : \SU(n) \to  M\), defined by
 
-\[\varphi_\nu(g) = \Ad_g^*(\nu)\]
+\[\pi(g) = \Ad_g^*(\nu)\]
 
-We can use this to pullback \(\sigma = (\varphi_\nu)^*\omega\) to a two form on \(G\).
+We can use this to pullback \(\sigma = \pi^*\omega\) to a two form on \(\SU(n)\).
 
 \begin{lemma}
-    \(\sigma\) is left invariant. That is, \(\ell_g^*\sigma = \sigma\) for all \(g \in G\).
+    \label{lem:left-inv}
+    \(\sigma\) is left invariant. That is, \(\ell_g^*\sigma = \sigma\) for all \(g \in \SU(n)\).
 \end{lemma}
 
 \begin{proof}
-    First, notice that \(\varphi_\nu \circ \ell_g = \Ad_g^* \circ \varphi_\nu\), since
+    First, notice that \(\pi \circ \ell_g = \Ad_g^* \circ \pi\), since
 
-    \[\varphi_\nu(\ell_g(h)) = \Ad_{gh}^*(\nu) = \Ad_g^*\circ \Ad_h^*(\nu) = \Ad_g^*(\varphi_\nu(h))\]
+    \[\pi(\ell_g(h)) = \Ad_{gh}^*(\nu) = \Ad_g^*\circ \Ad_h^*(\nu) = \Ad_g^*(\pi(h))\]
 
     With this,
 
-    \[\ell_g^*\sigma = \ell_g^*\varphi^*\omega = (\varphi\circ\ell_g)^*\omega = (\Ad_g^* \circ \varphi_\nu)^*\omega = (\varphi_\nu)^*(\Ad_g^*)^*\omega = (\varphi_\nu)^*\omega = \sigma\]
+    \[\ell_g^*\sigma = \ell_g^*\pi^*\omega = (\pi\circ\ell_g)^*\omega = (\Ad_g^* \circ \pi)^*\omega = \pi^*(\Ad_g^*)^*\omega = \pi^*\omega = \sigma\]
 \end{proof}
 
 \begin{lemma}
-    \(\sigma(\xi_\ell, \eta_\ell) = -\inner{\nu_\ell, [\xi_\ell, \eta_\ell]}\).
+    \(\sigma(X_\ell, Y_\ell) = -\inner{\nu_\ell, [X_\ell, Y_\ell]}\).
 \end{lemma}
 
 \begin{proof}
     By left invariance of both sides, suffices to show that the result holds at \(e\). First notice that
 
-    \[\dd_e\varphi_\nu(\eta) = \eta_{\su(n)_*}(\nu)\]
+    \[\dd_I\pi(Y) = -\ad_Y^*(\nu)\]
 
-    Therefore, \(\varphi_\nu\) is a submersion at \(e\). By definition of the pullback,
+    Therefore, \(\pi\) is a submersion at \(e\). By definition of the pullback,
 
     \begin{align*}
-        \sigma(e)(\xi, \eta) &= (\varphi_\nu)^*\omega(e)(\xi, \eta)\\ 
-        &= \omega(\varphi_\nu(e))(\dd_e\varphi_\nu \cdot \xi, \dd_e\varphi_\nu\cdot\eta) \\
-        &= \omega(\nu)(\ad_\xi^*(\nu), \ad_\eta^*(\nu)) \\
-        &= -\inner{\nu, [\xi, \eta]}
+        \sigma_I(X, Y) &= (\pi^*\omega)_I(X, Y)\\ 
+        &= \omega_{\pi(I)}(\dd_e\pi \cdot X, \dd_e\pi\cdot Y) \\
+        &= \omega_\nu(\ad_X^*(\nu), \ad_Y^*(\nu)) \\
+        &= -\inner{\nu, [X, Y]}
     \end{align*}
 
     Hence
 
-    \[\sigma(\xi_\ell, \eta_\ell)(e) = \sigma(e)(\xi, \eta) = -\inner{\nu, [\xi, \eta]} = -\inner{\nu_\ell, [\xi_\ell, \eta_\ell]}(e)\]
+    \[\sigma(X_\ell, Y_\ell)_I = \sigma_I(X, Y) = -\inner{\nu, [X, Y]} = -\inner{\nu_\ell, [X_\ell, Y_\ell]}_I\]
 \end{proof}
 
 Now for a one form \(\alpha\), we have that
@@ -294,35 +291,35 @@ Now for a one form \(\alpha\), we have that
 
 where for a smooth function \(f : M \to \R\), and a vector field \(X\) on \(M\), \(X[f] := \dd f(X)\) is a smooth function \(M \to \R\).
 
-Since \(\nu_\ell(\xi_\ell)\) is constant, \(\eta_\ell[\nu_\ell(\xi_\ell)] = 0\). Similarly, \(\xi_\ell[\nu_\ell(\eta_\ell)] = 0\). Therefore, we have that
+Since \(\nu_\ell(X_\ell)\) is constant, \(Y_\ell[\nu_\ell(X_\ell)] = 0\). Similarly, \(X_\ell[\nu_\ell(Y_\ell)] = 0\). Therefore, we have that
 
-\[\dd \nu_\ell(\xi_\ell, \eta_\ell) = -\nu_\ell([\xi_\ell, \eta_\ell]) = \sigma(\xi_\ell, \eta_\ell)\]
+\[\dd \nu_\ell(X_\ell, Y_\ell) = -\nu_\ell([X_\ell, Y_\ell]) = \sigma(X_\ell, Y_\ell)\]
 
 Now suppose \(X, Y\) are vector fields on \(G\). We want to show that \(\sigma(X, Y) = \dd\nu_\ell(X, Y)\). As \(\sigma\) is left invariant,
 
 \begin{align*}
-    \sigma(X, Y)(g) &= (\ell_{g^{-1}}^* \sigma)(g)(X(g), Y(g)) \\
-    &= \sigma(e)(\underbrace{\dd \ell_{g^{-1}} \cdot X(g)}_{=\xi}, \underbrace{\dd \ell_{g^{-1}} \cdot Y(g)}_{=\eta}) \\
-    &= \sigma(e)(\xi, \eta) \\
-    &= \dd\nu_\ell(\xi_\ell, \eta_\ell)(e) \\
-    &= (\ell_g^*\dd\nu_\ell)(\xi_\ell, \eta_\ell)(e) \\
-    &= (\dd\nu_\ell)(g)(\dd\ell_g\cdot \xi_\ell(e), \dd\ell_g\cdot\eta_\ell(e)) \\
-    &= (\dd\nu_\ell)(g)(\dd \ell_g\cdot \xi, \dd\ell_g\cdot \eta) \\
-    &= (\dd\nu_\ell)(g)(X(g), Y(g)) \\
-    &= \dd\nu_\ell(X, Y)(g)
+    \sigma(X, Y)_g &= (\ell_{g^{-1}}^* \sigma)_g(X(g), Y(g)) \\
+    &= \sigma_I(\underbrace{\dd \ell_{g^{-1}} \cdot X(g)}_{=:X}, \underbrace{\dd \ell_{g^{-1}} \cdot Y(g)}_{=:Y}) \\
+    &= \sigma_I(X, Y) \\
+    &= \dd\nu_\ell(X_\ell, Y_\ell)_I \\
+    &= (\ell_g^*\dd\nu_\ell)(X_\ell, Y_\ell)_I \\
+    &= (\dd\nu_\ell)_g(\dd\ell_g(X_\ell)_I, \dd\ell_g(Y_\ell)_I) \\
+    &= (\dd\nu_\ell)_g(\dd \ell_g X, \dd\ell_g Y) \\
+    &= (\dd\nu_\ell)_g(X_g, Y_g) \\
+    &= \dd\nu_\ell(X, Y)_g
 \end{align*}
 
-With this, \(\dd\sigma = \dd^2\nu_\ell = 0\). Hence \((\varphi_\nu)^*\dd\omega = \dd((\varphi_\nu)^*\omega) = \dd\sigma = 0\). Since \(\varphi_\nu \circ \ell_g = \Ad_g^* \circ \ell_g\), and \(\varphi_\nu\) is a submersion at \(e\), it is infact a submersion everywhere. Moreover, \(\varphi_\nu\) is surjective, by definition.
+With this, \(\dd\sigma = \dd^2\nu_\ell = 0\). Hence \(\pi^*\dd\omega = \dd(\pi^*\omega) = \dd\sigma = 0\). Since \(\pi \circ \ell_g = \Ad_g^* \circ \ell_g\), and \(\pi\) is a submersion at \(I\), it is in fact a submersion everywhere. Moreover, \(\pi\) is surjective, by definition.
 
 For \(\mu \in  M\), and \(X, Y \in T_\mu  M\), we have that
 
-\[\dd\omega(\mu)(X, Y) = \dd\omega_{\varphi_\nu(g)}(\dd\varphi_\nu(\xi), \dd\varphi_\nu(\eta)) = ((\varphi_\nu)^*\dd\omega)(g)(\xi, \eta) = 0\]
+\[\dd\omega(\mu)(X, Y) = \dd\omega_{\pi(g)}(\dd\pi(X), \dd\pi(Y)) = (\pi^*\dd\omega)(g)(X, Y) = 0\]
 
-where \(g \in G\) is such that \(\varphi_\nu(g) = \mu\), which exists by surjectivity, and \(\xi, \eta \in T_gG\) such that \(\dd\varphi_\nu(\xi) = X\) and \(\dd\varphi_\nu(\eta) = Y\), which exists as \(\varphi_\nu\) is a submersion. Thus, as \(\mu \in  M\) is arbitrary, \(\omega\) is closed.
+where \(g \in \SU(n)\) is such that \(\pi(g) = \mu\), which exists by surjectivity, and \(X, Y \in T_g\SU(n)\) such that \(\dd\pi(X) = X\) and \(\dd\pi(Y) = Y\), which exists as \(\pi\) is a submersion. Thus, as \(\mu \in  M\) is arbitrary, \(\omega\) is closed.
 
 \subsection{\(\omega\) on adjoint orbits}
 
-Using the isomorphism \(\Phi\), \cref{thm:kks} and the computation for \(\ad_\xi^*\), we get the following result.
+Using the isomorphism \(\Phi\), \cref{thm:kks} and the computation for \(\ad_X^*\), we get the following result.
 
 \begin{theorem}
     Let \(M \subseteq \su(n)\) be an adjoint orbit. Define the \(2\)-form \(\omega\) on \(M\) by
@@ -331,6 +328,8 @@ Using the isomorphism \(\Phi\), \cref{thm:kks} and the computation for \(\ad_\xi
 
     Then \(\omega\) is a symplectic form on \(M\).
 \end{theorem}
+
+This will be convenient for us since we can compute the right hand side directly from the matrices.
 
 \section{Root decomposition}
 
@@ -351,22 +350,126 @@ Then \([B, E_{ij}] = (b_i - b_j)E_{ij}\). This means that we have the eigendecom
 
 In particular, if we restrict this to the subalgebra \(\su(n)\), we get the decomposition
 
-\[\su(n) = \tilde\mft \oplus \bigoplus_{1 \le i < j \le n} \left(\R(E_{ij} - E_{ji}) \oplus i\R (E_{ij} + E_{ji})\right)\]
+\begin{equation}
+    \label{eq:sun-root}
+    \su(n) = \tilde\mft \oplus \bigoplus_{1 \le i < j \le n} \left(\R(E_{ij} - E_{ji}) \oplus i\R (E_{ij} + E_{ji})\right)
+\end{equation}
 
-where \(\tilde \mft = \mft \cap \su(n)\) is the subalgebra of \(\su(n)\) of diagonal matrices. In particular, we have that (assuming the eigenvalues of \(A\) are distinct)
+where \(\tilde \mft = \mft \cap \su(n)\) is the subalgebra of \(\su(n)\) of diagonal matrices. 
 
-\[\T_A M \cong \T_{[1]}\left(\frac{\SU(n)}{T^{n-1}}\right) \cong \frac{\su(n)}{\tilde t} = \bigoplus_{1 \le i < j \le n} \left(\R(E_{ij} - E_{ji}) \oplus i\R (E_{ij} + E_{ji})\right)\]
+% Then the almost complex structure from multiplication by \(i\) in \cref{eq:sln-root} is given by
 
-Then the almost complex structure from multiplication by \(i\) in \cref{eq:sln-root} is given by
+% \begin{align*}
+%     \R(E_{ij} - E_{ji}) &\mapsto i\R(E_{ij} + E_{ji}) \\
+%     i\R(E_{ij} + E_{ji}) &\mapsto -\R(E_{ij} - E_{ji})
+% \end{align*}
+
+\section{K\"ahler structure}
+
+In this section, we construct the K\"ahler structure on adjoint orbits of \(\SU(n)\). In principle, we only need two of \((\omega, g, J)\) as we can recover the third. See \Citeauthor{cannas_da_silva} \cite[\S 13.2]{cannas_da_silva} for a table which summarises the relations and the required conditions if we only have two of the three.
+
+We have already constructed the Kirillov-Kostant-Souriau symplectic form \(\omega\). In the following, we will construct the Riemannian metric \(\iinner{\cdot, \cdot}\)\footnote{Quite often \(g\) will be used for an element of \(\SU(n)\), and so we will use \(\iinner{\cdot, \cdot}\) to denote the inner product.} and the almost complex structure \(J\). Once we have shown that these form a compatible triple, since \(\omega\) is closed and \(J\) comes from a diffeomorphism between the adjoint orbit and a complex manifold, we will have that \(\omega\) is in fact a K\"ahler form.
+
+\subsection{At a diagonal element}
+
+Let \(M\) be an adjoint orbit. We will now focus on the generic case, where elements of \(M\) have distinct eigenvalues. Let
+
+\[A = \begin{pmatrix}
+    i\lambda_1 \\
+    & \ddots \\
+    & & i\lambda_n
+\end{pmatrix}\]
+
+be the element in \(M\) with \(\lambda_i \in \R\), \(\lambda_1 > \lambda_2 > \dots > \lambda_n\). In this case, we have that the stabiliser of \(A\) is the torus \(T \cong T^{n-1}\) of diagonal matrices in \(\SU(n)\).
+
+\[\T_A M = \bigoplus_{1 \le i < j \le n} \left(\R(E_{ij} - E_{ji}) \oplus i\R (E_{ij} + E_{ji})\right) \cong \frac{\su(n)}{\tilde t} \cong \T_{[1]}\left(\frac{\SU(n)}{T^{n-1}}\right)\]
+
+where the isomorphism is induced by the quotient map
 
 \begin{align*}
-    \R(E_{ij} - E_{ji}) &\mapsto i\R(E_{ij} + E_{ji}) \\
-    i\R(E_{ij} + E_{ji}) &\mapsto -\R(E_{ij} - E_{ji})
+    \pi : \SU(n) &\to M \\
+    g &\mapsto \Ad_g(A) = gAg^*
 \end{align*}
 
-\section{Complex structure}
+Let \(e_{ij} = E_{ij} - E_{ji}\) and \(f_{ij} = i(E_{ij} + E_{ji})\).
 
-We will now focus on the generic case, where \(A\) has distinct eigenvalues. In this case, the stabiliser is the diagonal subgroup \(T\), which is isomorphic to the torus \(T^{n-1} = (S^1)^{n-1}\).
+\begin{lemma}
+    \begin{enumerate}
+        \item For any \(X, Y, Z \in \su(n)\), \(\inner{X, [Y, Z]} = \inner{[X, Y], Z}\),
+        \item \([A, E_{ij}] = i(\lambda_i - \lambda_j)E_{ij}\)
+        \item \(E_{ij}E_{kl} = \delta_{jk}E_{il}\)
+        \item \(\inner{\cdot, \cdot}\) is \(\C\)-bilinear.
+    \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+    Expand.
+\end{proof}
+
+Using these, we have that
+
+\begin{align*}
+    \inner{A, [E_{ij}, E_{kl}]} &= \inner{[A, E_{ij}], E_{kl}} \\
+    &= i(\lambda_i - \lambda_j)\inner{E_{ij}, E_{kl}} \\
+    &= -i(\lambda_i - \lambda_j)\delta_{jk}\tr(E_{il}) \\
+    &= -i(\lambda_i - \lambda_j)\delta_{jk}\delta_{il} \\
+    &= i(\lambda_j - \lambda_i)\delta_{il}\delta_{jk}
+\end{align*}
+
+and so,
+
+\begin{align*}
+    \inner{A, [e_{ij}, e_{kl}]} &= \inner{A, [E_{ij}, E_{kl}]} - \inner{A, [E_{ji}, E_{kl}]} - \inner{A, [E_{ij}, E_{lk}]} + \inner{A, [E_{ji}, E_{lk}]} \\
+    &= i(\lambda_j - \lambda_i)\delta_{il}\delta_{jk} - i(\lambda_i - \lambda_j)\delta_{jl}\delta_{ik} - i(\lambda_j - \lambda_i)\delta_{ik}\delta_{jl} + i(\lambda_i - \lambda_j)\delta_{jk}\delta_{il} \\
+    &= 0
+\end{align*}
+
+and
+
+\begin{align*}
+    -\inner{A, [f_{ij}, f_{kl}]} &= \inner{A, [E_{ij}, E_{kl}]} + \inner{A, [E_{ji}, E_{kl}]} + \inner{A, [E_{ij}, E_{lk}]} + \inner{A, [E_{ji}, E_{lk}]} \\
+    &= i(\lambda_j - \lambda_i)\delta_{il}\delta_{jk} + i(\lambda_i - \lambda_j)\delta_{jl}\delta_{ik} + i(\lambda_j - \lambda_i)\delta_{ik}\delta_{jl} + i(\lambda_i - \lambda_j)\delta_{jk}\delta_{il} \\
+    &= 0
+\end{align*}
+
+Finally, we have that
+
+\begin{align*}
+    -i\inner{A, [e_{ij}, f_{kl}]} &= \inner{A, [E_{ij}, E_{kl}]} - \inner{A, [E_{ji}, E_{kl}]} + \inner{A, [E_{ij}, E_{lk}]} - \inner{A, [E_{ji}, E_{lk}]} \\
+    &= i(\lambda_j - \lambda_i)\delta_{il}\delta_{jk} - i(\lambda_i - \lambda_j)\delta_{jl}\delta_{ik} + i(\lambda_j - \lambda_i)\delta_{ik}\delta_{jl} - i(\lambda_i - \lambda_j)\delta_{jk}\delta_{il} \\
+    &= 2i(\lambda_j - \lambda_i)(\delta_{il}\delta_{jk} + \delta_{ik}\delta_{jl}) \\
+    &= 2i(\lambda_j - \lambda_i)\delta_{ik}\delta_{jl}
+\end{align*}
+
+where the last line is because we require \(i < j\) and \(k < l\). Hence we have that
+
+\begin{align*}
+    \omega_A(e_{ij}, e_{kl}) &= 0 \\
+    \omega_A(f_{ij}, f_{kl}) &= 0 \\
+    \omega_A(e_{ij}, f_{ij}) &= 2(\lambda_i - \lambda_j) \\
+    \omega_A(e_{ij}, f_{kl}) &= 0 \text{ for }(i, j) \ne (k, l)
+\end{align*}
+
+We can then define an an almost complex structure on \(\TT_AM\) by
+
+\begin{equation}
+    \label{eq:cx-str-vector}
+    J_A(e_{ij}) = f_{ij} \quad J_A(f_{ij}) = -e_{ij}
+\end{equation}
+
+Moreover, we can define an inner product on \(\TT_AM\) by
+
+\[\iinner{e_{ij}, e_{ij}}_A = \iinner{f_{ij}, f_{ij}}_A = 2(\lambda_i - \lambda_j)\]
+
+and requiring \(e_{ij}, f_{ij}\) to form an orthogonal basis. This is positive definite since we required \(\lambda_i > \lambda_j\) for \(i < j\). Using this, we find that
+
+\[\omega_A(e_{ij}, f_{ij}) = 2(\lambda_i - \lambda_j) = \iinner{f_{ij}, f_{ij}}_A = \iinner{J_A(e_{ij}), f_{ij}}_A\]
+
+and \(J\) defines an isometry. Hence \((\omega_A, \iinner{\cdot, \cdot}_A, J_A)\) define a compatible triple on the vector space \(\TT_AM\).
+
+\subsection{Complex quotient}
+
+\label{sec:cx-quot}
 
 Let \(P\) be the subgroup of lower triangular matrices in \(\SL(n, \C)\). Consider the composition \(\varphi : \SU(n) \to \SL(n, \C)/P\) given by the composition 
 
@@ -377,140 +480,106 @@ Let \(P\) be the subgroup of lower triangular matrices in \(\SL(n, \C)\). Consid
 	\arrow[two heads, from=1-3, to=1-5]
 \end{tikzcd}\]
 
-Suppose \(\varphi(g) = \varphi(h)\). That is, \(gP = hP\). This is true if and only if there exists \(p \in P\), such that \(h = gp\). In this case, \(p = g^{-1}h \in \SU(n)\), therefore, \(p \in \SU(n) \cap P = T\), since \(p^* = p^{-1}\) is also lower triangular. This means that \(\varphi\) induces a homeomorphism \(\SU(n)/T \cong \SL(n, \C)/P\). The right hand side is a complex manifold \((\SL(n, \C))\) quotiented by a complex Lie group \(P\), so it is a complex manifold. Using the above, we can get a complex structure on \(\SU(n)/T \cong  M\).
+Suppose \(\varphi(g) = \varphi(h)\). That is, \(gP = hP\). This is true if and only if there exists \(p \in P\), such that \(h = gp\). In this case, \(p = g^{-1}h \in \SU(n)\), therefore, \(p \in \SU(n) \cap P = T\), since \(p^* = p^{-1}\) is also lower triangular. This means that \(\varphi\) induces a homeomorphism \(\SU(n)/T \cong \SL(n, \C)/P\). The right hand side is a complex manifold \((\SL(n, \C))\) quotiented by a complex Lie group \(P\), so it is a complex manifold. Using the above, we can get a complex structure on \(\SU(n)/T \cong M\).
 
-\section{Local coordinates}
+Using the root decompositions \cref{eq:sln-root} for \(\sl(n, \C)\) and \cref{eq:sun-root} for \(\su(n)\), we can see that the almost complex structure we defined in \cref{eq:cx-str-vector} is the same as the action of multiplication by \(i\).
 
-This section
+\subsection{At a general \(B \in M\)}
 
-Let \(\theta\) be the Maurer-Cartan form on \(\SU(n)\). That is, it is the \(\su(n)\)-valued \(1\)-form on \(\SU(n)\) given by
+Fix \(g \in \SU(n)\), and let \(B = \Ad_g(A)\). Let \(\varphi : \SU(n)/T \to \SL(n, \C)/P\) be the diffeomorphism from above, which is given by \(\varphi([g]) = \llbracket g\rrbracket\), where \([g] = gT \in \SU(n)/T\) and \(\llbracket g \rrbracket = gP \in \SL(n, \C)/P\).
 
-\[\theta_g(u) = \dd (\ell_{g^{-1}})_g(u) \in \TT_e\SU(n) = \su(n)\]
+First of all, \(\SL(n, \C)\) is a complex Lie group, so left multiplication is holomorphic. That is, \(\dd \ell_g(iv) = i\dd\ell_g(v)\). If \(\tilde J\) denotes the complex structure on \(\SL(n, \C)\), then we have that
 
-Writing \(\theta = \sum_{j, k}\theta_{jk}\dd g^{jk}\) where \((g^{jk})\) are the matrix entries on \(\SU(n)\). Then we have that
+\[\tilde J_g = \dd \ell_g \circ \tilde J_I \circ \dd\ell_{g^{-1}}\]
 
-\[\pi^*\omega = i \sum_{k > j}(\lambda_j - \lambda_k)\theta_{kj}\wedge \overline{\theta_{kj}}\]
+\(\ell_g\) descends to a biholomorphism on \(\SL(n, \C)/P \cong \SU(n)/T\), and so the corresponding almost complex structure \(\overline J\) on \(\SU(n)/T\) is given by
 
-and the Hermitian metric \(h\) on \( M\) is given by
+\begin{equation}
+    \label{eq:cx-str-quot}
+    \overline J_{[g]} = \dd\ell_g \circ \overline J_{[I]} \circ \dd\ell_{g^*}
+\end{equation}
 
-\[\pi^*h = \sum_{k > j}2(\lambda_j - \lambda_k)\theta_{kj}\overline{\theta_{kj}}\]
-
-Using the fact that
-
-\[\TT_g\SU(n) = g\su(n)\]
-
-and that
-
-\[\dd\pi_g(h) = hAg^* + gAh^*\]
-
-we get that
-
-\[\dd\pi_g(h) = [B, hg^*]\]
-
-where \(B = \pi(g) = gAg^*\). With this, we can recover the hermitian metric, as
-
-\[h_B([B, C], [B, D]) = \sum_{k > j}2(\lambda_j - \lambda_k)(g^* Cg)_{kj}\overline{(g^* Dg)_{kj}}\]
-
-With this, we can see that \(\omega = -\Im(h)\), and that the real part \(g = \Re(h)\)\footnote{The usual notation for a Riemannian metric is \(g\), but I've also used \(g\) as the element of \(\SU(n)\). Hopefully it should be clear from context which one is which.} defines a Riemannian metric.
-
-Moreover, we can recover the almost complex structure from the symplectic form and the Riemannian metric, via
-
-\[J = \tilde g^{-1} \circ \tilde\omega\]
-
-where \(\tilde\omega, \tilde g : \TT \SU(n) \to \TT^*\SU(n)\) are linear isomorphisms given by
+Since the diffeomorphism \(\SU(n)/T\) is induced by the map \(\pi(g) = \Ad_g(A)\), we have that
 
 \begin{align*}
-    \tilde \omega(u)(v) &= \omega(u, v) \\
-    \tilde g(u)(v) &= g(u, v)
+    J_B &= \dd\pi \circ \overline J_{[g]} \circ \dd\pi^{-1} \\
+    &= \dd\pi \circ \dd \ell_g \circ \overline J_{[I]} \circ \dd \ell_{g^*} \circ \dd \pi^{-1} \\
+    &= \dd(\pi \circ \ell_g \circ \pi^{-1}) \circ J_A \circ \dd(\pi \circ \ell_{g^*} \circ \pi^{-1}) \\
 \end{align*}
 
-This follows as we have that \(g(u, v) = \omega(u, Jv)\).
+From the proof of \cref{lem:left-inv}, we have that \(\pi \circ \ell_g = \Ad_g \circ \pi\). Moreover, since \(\Ad_g\) is a linear map, \(\dd \Ad_g = \Ad_g\). Therefore, we have that the almost complex structure is given by
 
-\appendix
+\[J_B = \Ad_g \circ J_A \circ \Ad_{g^*}\]
 
-\section{Local coordinate computations}
+We want to show that this is compatible with the Kirillov-Kostant-Souriau symplectic form.
 
-\subsection{Kirillov-Konstant-Souriau form}
+From the proof of \cref{lem:ad_Ad}, we have that
 
-Let \( M\) be an adjoint orbit in \(\su(n)\), and fix \(\xi \in  M\) as above. Recall that for \(\mu \in  M\),
+\[\ad_{\Ad_g(A)} = \Ad_g \circ \ad_A \circ \Ad_{g^*}\]
 
-\[\TT_\mu M = \left\{[\mu, A] \mid A \in \su(n)\right\}\]
-
-and the Kirillov-Konstant-Souriau form \(\omega\) is defined by
-
-\[\omega_\mu([\mu, A], [\mu, B]) = -\inner{\mu, [A, B]}\]
-
-\subsubsection{Computation at \(I\)}
-
-Computing the pullback, we find that \(\pi^*\omega\) at the identity is given by
-
-\[(\pi^*\omega)_I(A, B) = \omega_\xi([\mu, A], [\mu, B]) = -\inner{\xi, [A, B]}\]
-
-Computing this in terms of the coordinates, we find that it is
+In particular, we have that
 
 \begin{align*}
-    -\inner{\xi, [A, B]} &= \tr(\xi[A, B]) \\
-    &= i\sum_{j, k}\xi_j(A_{jk}B_{kj} - B_{jk}A_{kj}) \\
-    &= i\sum_{j, k}\xi_j(A_{kj}\overline{B_{kj}} - \overline{A_{kj}}B_{kj}) \\
-    &= \frac{i}{2} \sum_{j,k}\xi_j(A_{kj}\overline{B_{kj}} - \overline{A_{kj}}B_{kj}) + \frac{i}{2}\sum_{j, k}\xi_k(A_{jk} \overline{B_{jk}} - \overline{A_{jk}}B_{jk}) \\
-    &= \frac{i}{2} \sum_{j,k}\xi_j(A_{kj}\overline{B_{kj}} - \overline{A_{kj}}B_{kj}) - \frac{i}{2}\sum_{j, k}\xi_k(A_{kj} \overline{B_{kj}} - \overline{A_{kj}}B_{kj}) \\
-    &= \frac{i}{2}\sum_{j, k}(\xi_j - \xi_k)(A_{kj}\overline{B_{kj}} - \overline{A_{kj}}B_{kj}) \\
-    &= i \sum_{k > j}(\xi_j - \xi_k)(A_{kj}\overline{B_{kj}} - \overline{A_{kj}}B_{kj})
+    \TT_B M &= \left\{\ad_B(X) \mid X \in \su(n)\right\} \\
+    &= \left\{\Ad_g(\ad_A(X)) \mid X \in \su(n)\right\} \\
+    &= \Ad_g(\TT_A M) 
+    % &= \bigoplus_{1 \le i < j \le n}\left(\R ge_{ij}g^* \oplus \R g f_{ij}g^*\right)
 \end{align*}
 
-Let \((\theta_{jk})\) be the standard coordinate functions on \(\su(n)\), then
+Then we have that
 
-\[(\pi^*\omega)_I = i \sum_{k > j}(\xi_j - \xi_k)\theta_{kj}\wedge \overline{\theta_{kj}}\]
+\begin{align*}
+    \omega_B([B, X], [B, Y]) &= -\inner{B, [X, Y]} \\
+    &= -\inner{\Ad_g(A), \Ad_g([\Ad_{g^*}(X), \Ad_{g^*}(Y)])} \\
+    &= -\inner{A, [\Ad_{g^*}(X), \Ad_{g^*}(Y)]} \\
+    &= \omega_A([A, \Ad_{g^*}(X)], [A, \Ad_{g^*}(X)]) \\
+    &= \omega_A(\Ad_{g^*}([B, X]), \Ad_{g^*}([B, Y]))
+\end{align*}
 
-where \(\alpha \wedge \beta(v, w) = \alpha(v)\beta(w) - \alpha(w)\beta(v)\).
+Note this also follows from \cref{lem:left-inv} where we showed \(\pi^*\omega\) is left invariant. Therefore, the Riemannian metric is given by
 
-\subsubsection{Computation at any \(g \in \SU(n)\)}
+\[\iinner{X, Y}_B = \iinner{\Ad_{g^*}(X), \Ad_{g^*}(Y)}_A\]
 
-Now let \(\theta\) be the Maurer-Cartan form on \(\SU(n)\). That is, it is the \(\su(n)\)-valued \(1\)-form on \(\SU(n)\) given by
+% and the \(\tilde e_{ij}, \tilde f_{ij}\) forming an orthonormal basis. Equivalently, we have
 
-\[\theta_g(u) = \dd (\ell_{g^{-1}})_g(u) \in \TT_e\SU(n) = \su(n)\]
+% \begin{align}
+%     \label{eq:cx-str-direct}
+%     J_B(X) &= \Ad_g(J_A(\Ad_{g^*}(X))) \\
+%     \iinner{X, Y}_B &= \iinner{\Ad_{g^*}(X), \Ad_{g^*}(Y)}_A \nonumber
+% \end{align}
 
-Writing \(\theta = \sum_{j, k}\theta_{jk}\dd g^{jk}\) where \((g^{jk})\) are the matrix entries on \(\SU(n)\), in fact we have that
+% Finally, we want to show that this is the almost complex structure that we get from the complex quotient. 
 
-\[\pi^*\omega = i \sum_{k > j}(\xi_j - \xi_k)\theta_{kj}\wedge \overline{\theta_{kj}}\]
+% Then we have that
 
-Since\footnote{\S A.3.3} \(\pi^*\omega\) and \(\theta\) are both left invariant, and the above expressions agree at the identity, they must agree everywhere. Alternatively, we can compute this directly, as in the next section.
+% \[\TT_g\SU(n) = g\su(n)\]
 
-\subsection{Hermitian structure}
+% using the fact that left translation is a diffeomorphism. Let
 
-We will define a Hermitian metric \(h\) on \( M\), using the fact that \(\pi\) is a surjective submersion. That is, we have
+% \begin{align*}
+%     \pi : \SU(n) &\to M \\
+%     g &\mapsto \Ad_g(A) = gAg^*
+% \end{align*}
 
-\[\pi^*h = \sum_{k > j}2(\xi_j - \xi_k)\theta_{kj}\overline{\theta_{kj}}\]
+% be the quotient map. Then
 
-where \(\alpha\beta(v, w) = \alpha(v)\beta(w)\).
+% \[\dd\pi_g(gX) = gXAg^* + gAX^*g^* = gXAg^* - gAXg^*\]
 
-\subsubsection{Computation at \(I\)}
+% Let \(B = \pi(g)\), then \(A = g^*Bg\), and
 
-At \(\xi\), the above formula gives us that
+% \[\dd\pi_g(gX) = gXg^*Bgg^* - gg^*BgXg^* = gXg^*B - BgXg^* = -[B, gXg^*] = -[B, \Ad_g(X)]\]
 
-\[h_\xi([\xi, A], [\xi, B]) = \sum_{k > j}2(\xi_j - \xi_k)A_{kj}\overline{B_{kj}}\]
+% and so the pullback of \(\omega\) is
 
-which one can check defines a Hermitian metric (at least in the case when the \(\xi_j\) are distinct).
+% \begin{align*}
+%     (\pi^*\omega)_g(gX, gY) &= \omega_B(\dd\pi_g(gX), \dd\pi_g(gY)) \\
+%     &= \omega_B([B, \Ad_g(X)], [B, \Ad_g(Y)]) \\
+%     &= -\inner{B, [\Ad_g(X), \Ad_g(Y)]} \\
+%     &= -\inner{\Ad_g(A), \Ad_g([X, Y])} \\
+%     &= -\inner{A, [X, Y]}
+% \end{align*}
 
-\subsection{Computation at \(g \in \SU(n)\)}
-
-In this case, if \(A, B \in \TT_g\SU(n)\), then we can see that \(\theta(A) = g^* A\) and \(\theta(B) = g^* B\). Therefore, we have that
-
-\[\pi^*h(A, B) = \sum_{k > j}2(\xi_j - \xi_k)(g^* A)_{kj}\overline{(g^* B)_{kj}}\]
-
-However, by the definition of the pullback, we also have that
-
-\[\pi^*h(A, B) = h_{\pi(g)}(\dd \pi_g(A), \dd\pi_g(B))\]
-
-Set \(\mu = \pi(g)\), then we have that
-
-\[\pi^*h(A, B) = h_\mu([\mu, Ag^*], [\mu, Bg^*])\]
-
-Say \(A = Cg, B = Dg\), then we get that
-
-\[h_\mu([\mu, C], [\mu, D]) = \sum_{k > j}2(\xi_j - \xi_k)(g^* Cg)_{kj}\overline{(g^* Dg)_{kj}}\]
-
-Again, in the case the \(\xi_j\) are distinct, we can see that this defines a Hermitian metric on \( M\).
+% where we use the fact that \(\Ad_g\) is an isometry with respect to \(\inner{\cdot, \cdot}\). Equivalently, this is just the left invariance of the pullback we proved in \cref{lem:left-inv}.
 
 \printbibliography
 
