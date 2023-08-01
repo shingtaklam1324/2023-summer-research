@@ -100,6 +100,8 @@ or equivalently, \(\Phi\) defines an isomorphism of representations between \(\A
 
 \section{Root decomposition}
 
+In this section, we will consider the root decomposition of \(\sl(n, \C)\) and use this to derive the root decomposition of \(\su(n)\). \Citeauthor{humphreys} \cite[\S 8]{humphreys} contains this, and much more.
+
 Consider the Lie algebra \(\sl(n, \C)\) of trace free \(n \times n\) complex matrices. Then we have the Cartan subalgebra \(\mft\) of diagonal matrices. Let \(E_{ij}\) be the standard basis matrices for \(\Mat(n, \C)\), \(B \in \mft\). Say
 
 \[B = \begin{pmatrix}
@@ -212,13 +214,15 @@ Thus, we have the tangent space to the corresponding coadjoint orbit is
 This section is from \cite{marsden_ratiu} Chapter 14. The proof is slightly modified, since here we have an explicit isomorphism between the adjoint and coadjoint representation, which simplifies some of the arguments.
 
 \begin{theorem}
-    \label{thm:kks}
-    [Kirillov-Kostant-Souriau, \cite[Theorem 14.4.1]{marsden_ratiu}]
+    [Kirillov-Kostant-Souriau, {\cite[Theorem 14.4.1]{marsden_ratiu}}]
+    
     Let \(M \subseteq \su(n)^*\) be a coadjoint orbit. Define the \(2\)-form \(\omega\) on \( M\) by
 
     \[\omega_\mu(\ad_X^*(\mu), \ad_Y^*(\mu)) = -\inner{\mu, [X, Y]}\]
 
-    Then \(\omega\) is a symplectic form on \( M\).
+    Then \(\omega\) is a symplectic form on \(M\).
+
+    \label{thm:kks}
 \end{theorem}
 
 \subsection{\(\omega\) is well defined}
@@ -244,8 +248,8 @@ for all \(Y\). But this is the same as \(\ad_X^*(\mu) = 0\). Therefore, \(\omega
 First of all, we will need some preliminary results.
 
 \begin{lemma}
-    \label{lem:ad_Ad}
     \[\ad_{\Ad_gX}^* = \Ad_g^* \circ \ad_X^* \circ \Ad_{g^*}^*\]
+    \label{lem:ad_Ad}
 \end{lemma}
 
 \begin{proof}
@@ -263,6 +267,7 @@ First of all, we will need some preliminary results.
 \end{proof}
 
 \begin{lemma}
+    [{\cite[Lemma 14.4.2]{marsden_ratiu}}]
     \(\Ad_g^* :  M \to  M\) preserves \(\omega\), that is,
 
     \[(\Ad_g^*)^*\omega = \omega\]
@@ -299,8 +304,9 @@ Fix \(\nu \in  M\), and consider the map \(\pi : \SU(n) \to  M\), defined by
 We can use this to pullback \(\sigma = \pi^*\omega\) to a two form on \(\SU(n)\).
 
 \begin{lemma}
-    \label{lem:left-inv}
+    [{\cite[Lemma 14.4.3]{marsden_ratiu}}]
     \(\sigma\) is left invariant. That is, \(\ell_g^*\sigma = \sigma\) for all \(g \in \SU(n)\).
+    \label{lem:left-inv}
 \end{lemma}
 
 \begin{proof}
@@ -314,6 +320,7 @@ We can use this to pullback \(\sigma = \pi^*\omega\) to a two form on \(\SU(n)\)
 \end{proof}
 
 \begin{lemma}
+    [{\cite[Lemma 14.4.4]{marsden_ratiu}}]
     \(\sigma(X_\ell, Y_\ell) = -\inner{\nu_\ell, [X_\ell, Y_\ell]}\).
 \end{lemma}
 
@@ -370,7 +377,7 @@ where \(g \in \SU(n)\) is such that \(\pi(g) = \mu\), which exists by surjectivi
 
 \subsection{\(\omega\) on adjoint orbits}
 
-Using the isomorphism \(\Phi\), \cref{thm:kks} and the computation for \(\ad_X^*\), we get the following result.
+Using the isomorphism \(\Phi\), \cref{thm:kks} and the computation for \(\ad_X^*\), we get the following result for adjoint orbits.
 
 \begin{theorem}
     Let \(M \subseteq \su(n)\) be an adjoint orbit. Define the \(2\)-form \(\omega\) on \(M\) by
@@ -380,7 +387,7 @@ Using the isomorphism \(\Phi\), \cref{thm:kks} and the computation for \(\ad_X^*
     Then \(\omega\) is a symplectic form on \(M\).
 \end{theorem}
 
-This will be convenient for us since we can compute the right hand side directly from the matrices.
+We will be using the adjoint orbit result from now on.
 
 % Then the almost complex structure from multiplication by \(i\) in \cref{eq:sln-root} is given by
 
