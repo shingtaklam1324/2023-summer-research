@@ -138,7 +138,7 @@ First of all, we note that elements of \(\su(n)\) are skew-hermitian, hence diag
     & & i\lambda_k I_{m_k}
 \end{pmatrix}\]
 
-where \(I_m\) is the \(m \times m\) identity matrix, \(\lambda_j \in \R\), with \(\lambda_1 > \lambda_2 > \dots > \lambda_k\), \(m_1 + \dots + m_k = n\) and \(m_1\lambda_1 + \dots + m_k\lambda_k = 0\). In this case, we have that the orbit is
+where \(I_m\) is the \(m \times m\) identity matrix, \(\lambda_j \in \R\), with \(\lambda_1 < \lambda_2 < \dots < \lambda_k\), \(m_1 + \dots + m_k = n\) and \(m_1\lambda_1 + \dots + m_k\lambda_k = 0\). In this case, we have that the orbit is
 
 \[\Orb(A) \cong \SU(n)/\Stab(A)\]
 
@@ -463,7 +463,7 @@ where the last line is because we require \(i < j\) and \(k < l\). Hence we have
 \begin{align*}
     \omega_A(e_{ij}, e_{kl}) &= 0 \\
     \omega_A(f_{ij}, f_{kl}) &= 0 \\
-    \omega_A(e_{ij}, f_{ij}) &= 2(\lambda_i - \lambda_j) \\
+    \omega_A(e_{ij}, f_{ij}) &= 2(\lambda_j - \lambda_i) \\
     \omega_A(e_{ij}, f_{kl}) &= 0 \text{ for }(i, j) \ne (k, l)
 \end{align*}
 
@@ -476,13 +476,13 @@ We can then define an an almost complex structure on \(\TT_AM\) by
 
 Moreover, we can define an inner product on \(\TT_AM\) by
 
-\[\iinner{e_{ij}, e_{ij}}_A = \iinner{f_{ij}, f_{ij}}_A = 2(\lambda_i - \lambda_j)\]
+\[\iinner{e_{ij}, e_{ij}}_A = \iinner{f_{ij}, f_{ij}}_A = 2(\lambda_j - \lambda_i)\]
 
-and requiring \(e_{ij}, f_{ij}\) to form an orthogonal basis. This is positive definite since we required \(\lambda_i > \lambda_j\) for \(i < j\). Using this, we find that
+and requiring \(e_{ij}, f_{ij}\) to form an orthogonal basis. This is positive definite since we required \(\lambda_i < \lambda_j\) for \(i < j\). Using this, we find that
 
-\[\omega_A(e_{ij}, f_{ij}) = 2(\lambda_i - \lambda_j) = \iinner{f_{ij}, f_{ij}}_A = \iinner{J_A(e_{ij}), f_{ij}}_A\]
+\[\omega_A(e_{ij}, f_{ij}) = 2(\lambda_j - \lambda_i) = \iinner{f_{ij}, f_{ij}}_A = \iinner{J_A(e_{ij}), f_{ij}}_A\]
 
-and \(J\) defines an isometry. Hence \((\omega_A, \iinner{\cdot, \cdot}_A, J_A)\) define a compatible triple on the vector space \(\TT_AM\).
+and that \(J\) defines an isometry. Hence \((\omega_A, \iinner{\cdot, \cdot}_A, J_A)\) define a compatible triple on the vector space \(\TT_AM\).
 
 \subsection{Complex quotient}
 
@@ -497,7 +497,7 @@ Let \(P\) be the subgroup of lower triangular matrices in \(\SL(n, \C)\). Consid
 	\arrow[two heads, from=1-3, to=1-5]
 \end{tikzcd}\]
 
-Suppose \(\varphi(g) = \varphi(h)\). That is, \(gP = hP\). This is true if and only if there exists \(p \in P\), such that \(h = gp\). In this case, \(p = g^{-1}h \in \SU(n)\), therefore, \(p \in \SU(n) \cap P = T\), since \(p^* = p^{-1}\) is also lower triangular. This means that \(\varphi\) induces a homeomorphism \(\SU(n)/T \cong \SL(n, \C)/P\). The right hand side is a complex manifold \((\SL(n, \C))\) quotiented by a complex Lie group \(P\), so it is a complex manifold. Using the above, we can get a complex structure on \(\SU(n)/T \cong M\).
+Suppose \(\varphi(g) = \varphi(h)\). That is, \(gP = hP\). This is true if and only if there exists \(p \in P\), such that \(h = gp\). In this case, \(p = g^{-1}h \in \SU(n)\), therefore, \(p \in \SU(n) \cap P = T\), since \(p^* = p^{-1}\) is also lower triangular. This means that \(\varphi\) induces a homeomorphism \(\SU(n)/T \cong \SL(n, \C)/P\). The right hand side is a complex manifold \(\SL(n, \C)\) quotiented by a complex Lie group \(P\), so it is a complex manifold. Using the above, we can get a complex structure on \(\SU(n)/T \cong M\).
 
 Using the root decompositions \cref{eq:sln-root} for \(\sl(n, \C)\) and \cref{eq:sun-root} for \(\su(n)\), we can see that the almost complex structure we defined in \cref{eq:cx-str-vector} is the same as the action of multiplication by \(i\).
 
