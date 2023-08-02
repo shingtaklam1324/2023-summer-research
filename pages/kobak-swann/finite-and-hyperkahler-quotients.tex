@@ -1,0 +1,69 @@
+\documentclass{article}
+
+\usepackage{../../Style}
+\usepackage{biblatex}
+
+\DeclareMathOperator{\Sp}{Sp}
+\newcommand{\sslash}{/\!/}
+\newcommand{\ssslash}{/\!/\!/}
+
+\newcommand{\rU}{\mathrm{U}}
+\renewcommand{\sl}{\mfs\mfl}
+\renewcommand{\sp}{\mfs\mfp}
+
+\newcommand{\rla}{\rightleftarrows}
+% \renewcommand{\rm}[1]{\mathrm{#1}}
+
+\DeclareMathOperator{\gr}{grad}
+\DeclareMathOperator{\SO}{SO}
+
+\addbibresource{../../bibliography.bib}
+
+\title{Finite and hyperK\"ahler quotients in \citetitle{kobak_classical_1996}}
+
+\author{Shing Tak Lam}
+
+\begin{document}
+
+\maketitle
+
+In this note, we study in detail sections 3.2 and 3.3 of \citetitle{kobak_classical_1996} \cite{kobak_classical_1996}.
+
+\begin{lemma*}
+    [{\cite[Lemma 3.1]{kobak_classical_1996}}] Let \(H\) be a Lie group acting on \(\bb H^N\) preserving the complex structures. Let \(\bb H^*\) act on \(\bb H^N\) by right multiplication, and \(\Im(\bb H)\) by conjugation. Then the map
+
+    \begin{align*}
+        \mu : \bb H^N &\to \mfh^* \otimes \Im(\bb H)
+        \mu^X(q) = -\overline q^t X q
+    \end{align*}
+
+    is the unique moment map for this action which is equivariant with respect to the \(\bb H^*\) action.
+\end{lemma*}
+
+We will use the notation from \cite[p. 19]{kobak_classical_1996} that for Lie groups \(G, H\), \(G \sim H\) if some finite covers of \(G, H\) are isomorphic Lie groups.
+
+\section*{\(\rm O(2)\) as a double cover of \(\rm U(1)\)}
+
+First of all, notice that we can always assume without loss of generality that \(n_1 < \dots < n_k\). In this case, \(\rm U(1)\) and \(\rm O(2)\) can only occur as the smallest groups in the diagrams for orbits. Moreover, we never have \(\rm U(m) \sim \Sp(n)\), so the diagrams have length \(2\). That is, we have the diagram
+
+\[\C \rla \C^m\]
+
+for an \(\sl(m, \C)\) orbit, and the diagram
+
+\[\C^2 \rla \C^{2n}\]
+
+for an \(\sp(n, \C)\) orbit. We also want the flat spaces to have the same dimension, which is \(2m\) in the \(\sl(M, \C)\) case, and \(4n\) in the \(\sp(N, \C)\) case. Therefore, we must have that \(m = 2n\).
+
+The smallest nontrivial nilpotent orbit in \(\sl(2n, \C)\) is the orbit with Jordan type \([2, 1^{2n - 2}]\), which has rank \(1\). This is given by the \(U(1)\) quotient of the diagram
+
+\[\C \rla \C^{2n}\]
+
+Similarly, if we take the \(\rm O(2)\) quotient of the diagram
+
+\[\C^2 \rla \C^{2n}\]
+
+we get a nilpotent orbit in \(\sp(n, \C)\). As groups acting on \(\C \cong \R^2\), we have that \(\rm U(1) \cong \SO(2) \le \rm O(2)\).
+
+\printbibliography
+
+\end{document}

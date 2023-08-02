@@ -1,0 +1,136 @@
+\documentclass{article}
+
+\usepackage{../../Style}
+\usepackage{biblatex}
+\addbibresource{../../bibliography.bib}
+
+
+\title{Length reduction in diagrams in \citetitle{kobak_classical_1996}}
+
+\author{Shing Tak Lam}
+
+\begin{document}
+
+\maketitle
+On page 23 of \cite{kobak_classical_1996}, there is an example of constructing a two step diagram from a three step one, and showing that the first is a quotient of the second. In this note, we will go through the details of this construction.
+
+For simplicity, let us first consider the case of \(\SL(n, \C)\) orbits. We start off with a diagram of the form
+
+% https://q.uiver.app/#q=WzAsMyxbMCwwLCJcXENeYSJdLFsxLDAsIlxcQ157YStifSJdLFsyLDAsIlxcQ157YStiK2N9Il0sWzAsMSwiXFxhbHBoYV8xIiwwLHsib2Zmc2V0IjotMX1dLFsxLDIsIlxcYWxwaGFfMiIsMCx7Im9mZnNldCI6LTF9XSxbMiwxLCJcXGJldGFfMiIsMCx7Im9mZnNldCI6LTF9XSxbMSwwLCJcXGJldGFfMSIsMCx7Im9mZnNldCI6LTF9XV0=
+\begin{equation}
+    \label{eq:three-step}
+    \begin{tikzcd}
+        {\C^a} & {\C^{a+b}} & {\C^{a+b+c}}
+        \arrow["{\alpha_1}", shift left=1, from=1-1, to=1-2]
+        \arrow["{\alpha_2}", shift left=1, from=1-2, to=1-3]
+        \arrow["{\beta_2}", shift left=1, from=1-3, to=1-2]
+        \arrow["{\beta_1}", shift left=1, from=1-2, to=1-1]
+    \end{tikzcd}
+\end{equation}
+
+We can then use this diagram to construct a two step diagram
+
+% https://q.uiver.app/#q=WzAsMixbMCwwLCJcXENee2ErYn0iXSxbMiwwLCJcXENeYSBcXG9wbHVzIFxcQ157YStiK2N9Il0sWzAsMSwiXFxiZWdpbntwbWF0cml4fVxcYmV0YV8xIFxcXFwgXFxhbHBoYV8yXFxlbmR7cG1hdHJpeH0iLDAseyJvZmZzZXQiOi0xfV0sWzEsMCwiXFxiZWdpbntwbWF0cml4fVxcYWxwaGFfMSAmIC1cXGJldGFfMlxcZW5ke3BtYXRyaXh9IiwwLHsib2Zmc2V0IjotMX1dXQ==
+\begin{equation}
+    \label{eq:two-step}
+    \begin{tikzcd}[ampersand replacement=\&]
+        {\C^{a+b}} \&\& {\C^a \oplus \C^{a+b+c}}
+        \arrow["{\begin{pmatrix}\beta_1 \\ \alpha_2\end{pmatrix}}", shift left=1, from=1-1, to=1-3]
+        \arrow["{\begin{pmatrix}-\alpha_1 & \beta_2\end{pmatrix}}", shift left=1, from=1-3, to=1-1]
+    \end{tikzcd}
+\end{equation}
+
+\section*{Dimensions}
+
+The dimension of the flat space (as a complex vector space) in the first case is
+
+\[2a(a+b) + 2(a+b)(a+b+c)\]
+
+and in the second case, it is
+
+\[2(a + (a + b + c))(a + b)\]
+
+and these are equal.
+
+\section*{Group actions}
+
+In \cref{eq:three-step}, we have a \(\rm U(a) \times \rm U(a + b)\) action, by
+
+\begin{equation}
+    \label{eq:three-step-action}
+    (g_1, g_2) \cdot (\alpha_1, \beta_1, \alpha_2, \beta_2) = (g_2\alpha_1g_1^{-1}, g_1\beta_1g_2^{-1}, \alpha_2g_2^{-1}, g_1\beta_2)
+\end{equation}
+
+and the corresponding moment map is given by
+
+\begin{align*}
+    \mu_c &= (-\beta_1\alpha_1, \alpha_1 \beta_1 - \beta_2\alpha_2) \\
+    \mu_r &= (\beta_1\beta_1^* - \alpha_1^*\alpha_1, \alpha_1\alpha_1^* - \beta_1^*\beta_1 + \beta_2\beta_2^* - \alpha_2^*\alpha_2)
+\end{align*}
+
+In \cref{eq:two-step}, we have a \(\rm U(a + b)\) action, by
+
+\begin{equation}
+    \label{eq:two-step-action}
+    g \cdot \left(\begin{pmatrix}
+        \beta_1 \\ \alpha_2
+    \end{pmatrix}, \begin{pmatrix}
+        -\alpha_1 & \beta_2
+    \end{pmatrix}\right) = \left(\begin{pmatrix}
+        \beta_1 \\ \alpha_2
+    \end{pmatrix} \cdot g^{-1}, g \cdot \begin{pmatrix}
+        -\alpha_1 & \beta_2
+    \end{pmatrix}\right) = \left(\begin{pmatrix}
+        \beta_1g^{-1} \\ \alpha_2g^{-1}
+    \end{pmatrix}, \begin{pmatrix}
+        -g\alpha_1 & g\beta_2
+    \end{pmatrix}\right)
+\end{equation}
+
+Which we can also see is \cref{eq:three-step-action} with \(g_1 = 1, g_2 = g\). In this case, the moment map is
+
+\begin{align*}
+    \tilde \mu_c &= -\begin{pmatrix}
+        -\alpha_1 & \beta_2
+    \end{pmatrix}\begin{pmatrix}
+        \beta_1 \\ \alpha_2
+    \end{pmatrix} = \alpha_1\beta_2 - \beta_2\alpha_2 \\
+    \tilde \mu_r &= \begin{pmatrix}
+        -\alpha_1 & \beta_2
+    \end{pmatrix}\begin{pmatrix}
+        -\alpha_1 & \beta_2
+    \end{pmatrix}^* - \begin{pmatrix}
+        \beta_1 \\ \alpha_2
+    \end{pmatrix}^*\begin{pmatrix}
+        \beta_1 \\ \alpha_2
+    \end{pmatrix} = \alpha_1\alpha_1^* - \beta_1^*\beta_1 + \beta_2\beta_2^* - \alpha_2^*\alpha_2
+\end{align*}
+
+Moreover, we can consider the \(\rm U(a)\) action coming from \cref{eq:three-step-action}, i.e. 
+
+\[g \cdot \left(\begin{pmatrix}
+    \beta_1 \\ \alpha_2
+\end{pmatrix}, \begin{pmatrix}
+    -\alpha_1 & \beta_2
+\end{pmatrix}\right) = \left(\begin{pmatrix}
+    g\beta_1 \\ \alpha_2
+\end{pmatrix}, \begin{pmatrix}
+    -\alpha_1 g^{-1} & \beta_2
+\end{pmatrix}\right)\]
+
+and the moment map is
+
+\begin{align*}
+    \overline \mu_c &= -\beta_1\alpha_1 \\
+    \overline \mu_r &= \beta_1\beta_1^* - \alpha_1^*\alpha_1
+\end{align*}
+
+With all of these, we can see that
+
+\[\frac{\mu^{-1}(0)}{\rm U(a) \times \rm U(a + b)} \cong \frac{\tilde \mu^{-1}(0)/\rm U(a + b)}{\rm U(a)}\]
+
+i.e. the hyperK\"ahler quotient of \cref{eq:three-step} is the hyperK\"ahler quotient by \(\rm U(a)\) of the hyperK\"ahler quotient of \cref{eq:two-step}.
+
+\printbibliography
+
+\end{document}
