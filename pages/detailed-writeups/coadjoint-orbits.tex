@@ -1,0 +1,715 @@
+\documentclass{article}
+
+\usepackage{../../Style}
+\usepackage{stmaryrd}
+
+\DeclareMathOperator{\SU}{SU}
+\newcommand{\su}{\mathfrak{su}}
+\renewcommand{\sl}{\mathfrak{sl}}
+% \newcommand{\rm}[1]{\mathrm{#1}}
+\renewcommand{\tilde}{\widetilde}
+\newcommand{\surj}{\twoheadrightarrow}
+\DeclareMathOperator{\gr}{grad}
+\DeclareMathOperator{\Gr}{Gr}
+
+\newcommand{\iinner}[1]{\left\langle\!\left\langle #1 \right\rangle\!\right\rangle}
+
+\usepackage{biblatex}
+\addbibresource{../../bibliography.bib}
+
+\title{K\"ahler structures on coadjoint orbits of \(\SU(n)\) and \(\SL(n, \C)\)}
+\author{Shing Tak Lam}
+
+\begin{document}
+
+\maketitle
+
+In this note, we will consider coadjoint orbits of \(\SU(n)\) and \(\SL(n, \C)\), and show that they are K\"ahler manifolds.
+
+\tableofcontents
+
+\section{Adjoint and Coadjoint Representations}
+
+\label{sec:adjoint}
+
+Define the Lie algebra
+
+\begin{equation}
+    \label{eq:sun-def}
+    \su(n) = \left\{X \in \Mat(n, \C) \mid X^* + X = 0, \tr(X) = 0\right\}
+\end{equation}
+
+where \(X^*\) is the conjugate transpose of \(X\), and with the Lie bracket being the matrix commutator. We can define the adjoint representation of \(\SU(n)\) as
+
+\begin{align*}
+    \Ad : \SU(n) &\to \GL(\su(n)) \\
+    \Ad_a(X) &= aXa^{-1}
+\end{align*}
+
+Taking the dual representation, we get the coadjoint representation, which is
+
+\begin{align*}
+    \Ad^* : \SU(n) &\to \GL(\su(n)^*) \\
+    \Ad^*_a(\beta)(X) &= \inner{\beta, \Ad_{a^{-1}}(X)}
+\end{align*}
+
+where \(\inner{\cdot, \cdot}\) is used here to denote the pairing \(\su(n)^* \times \su(n) \to \R\). The definition above is used to ensure that \(\Ad^*\) is a group homomorphism, i.e.
+
+\[\Ad^*_{ab} = \Ad_a^* \circ \Ad_b^*\]
+
+whereas if we simply take the dual map, we would get \((\Ad_{ab})^* = (\Ad_b)^* \circ (\Ad_a)^*\).
+
+We will use the same notation for the inner product on \(\su(n)\), which should not be an issue as the inner product defines a natural isomorphism. Now note that \(-\kappa\), where \(\kappa\) is the Killing form, defines an inner product
+
+\[\inner{X, Y} = -\tr(XY) = \tr(XY^*)\]
+
+on \(\su(n)\)\footnote{In fact, \(\inner{A, B} = \tr(AB^*)\) defines a Hermitian inner product on the space of complex matrices.}, which means that we have a natural isomorphism
+
+\begin{align*}
+    \Phi : \su(n) &\to \su(n)^* \\
+    X &\mapsto \inner{X, \cdot}
+\end{align*}
+
+With this, suppose \(\beta = \Phi(B)\), then
+
+\[\Ad_a^*(\beta)(X) = \inner{B, \Ad_{a^{-1}}(X)} = -\tr(Ba^{-1}Xa) = -\tr(aBa^{-1}X) = \Phi(\Ad_a(B))(X)\]
+
+Therefore, the following diagram commutes
+
+% https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXHN1KG4pIl0sWzIsMCwiXFxzdShuKSJdLFswLDIsIlxcc3UobileKiJdLFsyLDIsIlxcc3UobileKiJdLFsyLDMsIlxcQWRfZ14qIl0sWzAsMSwiXFxBZF9nIl0sWzAsMiwiXFxQaGkiLDJdLFsxLDMsIlxcUGhpIl1d
+\[\begin{tikzcd}
+	{\su(n)} && {\su(n)} \\
+	\\
+	{\su(n)^*} && {\su(n)^*}
+	\arrow["{\Ad_a^*}", from=3-1, to=3-3]
+	\arrow["{\Ad_a}", from=1-1, to=1-3]
+	\arrow["\Phi"', from=1-1, to=3-1]
+	\arrow["\Phi", from=1-3, to=3-3]
+\end{tikzcd}\]
+
+or equivalently, \(\Phi\) defines an isomorphism of representations between \(\Ad\) and \(\Ad^*\). This means that in the remainder of this note, we will focus on the adjoint representation instead.
+
+If we differentiate \(\Ad\) at the identity, we get the representation
+
+\begin{align*}
+    \ad : \su(n) &\to \gl(\su(n))\\
+    \ad_X(Y) &= [X, Y]
+\end{align*}
+
+Some properties of \(\Ad, \ad\) and the inner product which we will need, and are easy to verify are:
+
+\begin{itemize}
+    \item \(\Ad_g\) is an isometry, that is, for all \(X, Y \in \su(n)\), \[\inner{\Ad_g(X), \Ad_g(Y)} = \inner{X, Y}\]
+    \item The Jacobi idenity, if \(X, Y, Z \in \su(n)\), then \[[X, [Y, Z]] + [Y, [X, Z]] + [Z, [X, Y]] = 0\]
+    \item Associativity, i.e. for \(X, Y, Z \in \su(n)\), \(\inner{X, [Y, Z]} = \inner{[X, Y], Z}\).
+\end{itemize}
+
+\section{K\"ahler manifolds}
+
+Let \(M\) be a manifold. In this section, we will define what a K\"ahler structure on \(M\) is.
+
+Throughout, if \(V, W\) are vector spaces,
+
+\begin{enumerate}
+    \item \(V \otimes W\) is the tensor product of \(V\) with \(W\),
+    \item \(vw := v \otimes w + w \otimes v\) is the symmetric product of \(v\) and \(w\), \(S^2V\) is the subspace of \(V \otimes V\) spanned by \(\{vw \mid v, w \in V\}\),
+    \item \(v \wedge w := v \otimes w - w\otimes v\) is the exterior product of \(v\) and \(w\), \(\Lambda^2 V\) is the subspace of \(V \otimes V\) spanned by \(\{v \wedge w \mid v, w \in V\}\),
+    \item \(V^* \otimes W^*\) defines a bilinear form on \(V \times W\), via 
+    \[(\alpha \otimes \beta)(v, w) = \alpha(v)\beta(w)\]
+    In particular, \(S^2V^*\) is the space of symmetric bilinear forms, \(\Lambda^2 V^*\) is the space of alternating bilinear forms.
+\end{enumerate}
+
+\subsection{Cotangent space, forms and exterior derivative}
+
+Let \(p \in M\) be a point, \(x_1, \dots, x_n\) be local coordinates near \(p\). Then we have the tangent space \(\TT_p M\), which has basis
+
+\[\pdv{x_1}, \dots, \pdv{x_n}\]
+
+In particular, if \(\phi\) is a parametrisation of \(M\) with local coordinates \(x_1, \dots, x_n\), then we have
+
+\[\pdv{x_j} := \pdv{\phi}{x_j}\]
+
+\begin{definition}
+    [cotangent space] The contangent space of \(M\) at \(p\) is \(\TT_p^*M\), which is the dual space to \(\TT_pM\). We will write \(\dd x^j\) for the dual basis to \(\pdv{x_j}\).
+\end{definition}
+
+\begin{definition}
+    [k-form] A 1-form \(\alpha\) on \(M\) is a smooth field of cotangent vectors. That is, for each \(p \in M\), we have \(\alpha_p \in \TT_pM^*\). More generally, a \(k\)-form \(\alpha\) has \(\alpha_p \in \Lambda^k \TT_p^*M\).
+\end{definition}
+
+If \(\alpha\) is a \(1\) form, \(V\) is a vector field on \(M\), then we define the smooth function \(\alpha(V) : M \to \R\) by
+
+\[(\alpha(V))(p) = \alpha_p(V_p)\]
+
+and we can make a similar definition with \(k\)-forms and \(k\) vector fields.
+
+\subsection{Exterior derivative}
+
+In terms of local coordinates, a \(1\)-form \(\alpha\) can be written as
+
+\begin{equation}
+    \label{eq:1-form}
+    \alpha_p = \sum_{j=1}^n f_j(p)\dd x_j
+\end{equation}
+
+where \(f_j : M \to \R\) are smooth. In the remainder of this subsection, we will define objects in terms of local coordinates. We will omit the proofs that these are independent of the choice of coordinates.
+
+Let \(f : M \to \R\) be a smooth map. Then the exterior derivative of \(f\) is the \(1\)-form \(\dd f\), given in local coordinates by
+
+\[(\dd f)_p = \sum_{j=1}^n \pdv{f}{x_j}(p)\dd x_j\]
+
+Suppose \(X\) is a vector field. Then we write \(X(f) := \dd f(X)\) for the smooth function \(M \to \R\). If \(\alpha\) is a \(1\)-form as in \cref{eq:1-form}, then \(\dd\alpha\) is the \(2\)-form defined by
+
+\[(\dd\alpha)_p = \sum_{j=1}^n\sum_{k=1}^n \pdv{f_j}{x_k}(p)\dd x_k \wedge \dd x_j\]
+
+We will also need the exterior derivative of a \(2\)-form, which is defined similarly to the above, but we will not need it explicitly.
+
+\begin{definition}
+    [Lie bracket of vector fields]
+
+    Suppose we have vector fields \(V, W\), which is given by
+
+    \[[V, W](f) = V(W(f)) - W(V(f))\]
+
+    for all \(f : M \to \R\) smooth.
+\end{definition}
+
+We will only need this definition for the following result.
+
+\begin{lemma}
+    \label{lem:deriv-2-form}
+    Let \(\alpha\) be a \(2\) form on \(M\), \(U, V, W\) vector fields on \(M\). Then at all \(p \in M\),
+
+    \begin{align*}
+        \dd\alpha(U, V, W) &= U(\alpha(V, W)) - V(\alpha(U, W)) + W(\alpha(U, V)) \\
+        &- \alpha([U, V], W) + \alpha([U, W], V) - \alpha([V, W], U)
+    \end{align*}
+\end{lemma}
+
+\subsection{Riemannian metric and symplectic form}
+
+\begin{definition}
+    [Riemannian metric] A Riemannian metric \(g\) on \(M\) is given on each \(\TT_pM\) by a positive definite symmetric bilinear form
+
+    \[g_p \in S^2 \TT_p^*M\]
+\end{definition}
+
+\begin{definition}
+    [Symplectic form] A symplectic form \(\omega\) on \(M\) is a non-degenerate \(2\)-form, i.e. on each \(\TT_pM\), we have a non-degenerate alternating bilinear form
+
+    \[\omega_p \in \Lambda^2 \TT_p^*M\]
+
+    Moreover, we require that \(\omega\) is closed, i.e. \(\dd\omega = 0\).
+\end{definition}
+
+\subsection{Complex structure}
+
+Now suppose in addition that \(M\) is even dimensional, that we have local coordinates \(x_1, \dots, x_n, y_1, \dots, y_n\), such that if we have a change of coordinates
+
+\[(\tilde x_j, \tilde y_j) = F(x_j, y_j)\]
+
+Then \(F\) is a holomorphic function in terms of the complex coordinates
+
+\[z_j = x_j + iy_j \quad\quad \tilde z_j = \tilde x_j + i\tilde y_j\]
+
+Equivalently, the change of coordinates satisfies the Cauchy-Riemann equations
+
+\[\pdv{\tilde x_j}{x_k} = \pdv{\tilde y_j}{y_k} \quad \pdv{\tilde x_j}{y_k} = -\pdv{\tilde y_j}{x_k}\]
+
+for all \(j, k = 1, \dots, n\). In this case, we call \(M\) a \emph{complex manifold}, and \(z_j\) the local complex coordinates.
+
+\begin{definition}
+    [almost complex structure] The almost complex structure \(J\) is for each \(p \in M\), a linear map \(J_p : \TT_pM \to \TT_pM\) for each \(p \in M\), sending
+
+    \[J_p\left(\pdv{x_j}\right) = \pdv{y_j} \qquad J_p\left(\pdv{y_j}\right) = -\pdv{x_j}\]
+\end{definition}
+
+In fact, \(J\) is independent of the choice of local coordinates.
+
+\subsection{K\"ahler structure}
+
+\begin{definition}
+    [K\"ahler manifold] A K\"ahler manifold \(M\) is a complex manifold, with a Riemannian metric \(g\), symplectic form \(\omega\) and almost complex structure \(J\), such that
+
+    \[\omega_p(u, v) = g_p(J_p(u), v)\]
+
+    for all \(p \in M, u, v \in \T_pM\).
+\end{definition}
+
+\section{Quotient manifolds}
+
+\label{sec:quotient}
+
+Let \(G \subseteq \GL(n, \C)\) be a matrix Lie group, \(P\) a closed Lie subgroup. We would like to show that \(G/P\), with the quotient topology, is a manifold.
+
+Choose local coordinates \(x_1, \dots, x_k\) for \(P\) near \(I\), and extend this to local coordinates \(x_1, \dots, x_k, y_1, \dots, y_\ell\) for \(G\) near \(I\). Let \(Y = \{x_1 = \dots = x_k = 0\}\). Then \(Y\) is a submanifold of \(G\), with local coordinates \(y_1, \dots, y_\ell\). We will show that there exists a neighbourhood \(V\) of \(I\) in \(Y\), such that \(VP = \left\{vP \mid v \in V\right\}\) is open in \(G\).
+
+For this, consider the map
+
+\begin{align*}
+    m :Y \times P &\to G \\
+    m(y, p) &= yp
+\end{align*}
+
+Then
+
+\[\dd m_{(I, I)}(X, Y) = (Y, X)\]
+
+where we use the isomorphism
+
+\[\TT_I G = \TT_I P \oplus \TT_I Y\]
+
+Hence by the inverse function theorem, we have an open neighbourhood \(V \times W\) of \((I, I)\) in \(Y \times P\), such that \(m\) is a diffeomorphism onto its image. But then this means that
+
+\[VP = \bigcup_{p \in P}m(V \times W)p\]
+
+is an open subset of \(G\).
+
+Let \(\pi : G \to G/P\) denote the quotient map. Let \(\tilde V = \pi(V)\). Then \(\tilde V\) is open, and \(\pi : V \to \tilde V\) is a homeomorphism. In particular, this means that \(y_1 , \dots, y_\ell\) induce local coordinates on \(G/P\) on \(\tilde V \ni P\).
+
+Next, notice that \(G\) acts on \(G/P\) by left multiplication, i.e. \(h \cdot (gP) = hgP\). The \(G\) action is by homeomorphisms, therefore by left translation we can define local coordinates on \(G/P\) on \(g \tilde V \ni gP\). We need to show that the transition maps are smooth.
+
+We can assume without loss of generality that one of the charts is \(\tilde V\). Let \(g \in G\), and suppose \(g \tilde V \cap \tilde V\) is nonempty. But in this case, by the definition of the charts, we have that the transition map is the same as the local coordinate representation of left multiplication by \(g\), which is smooth. An immediate result from the definition of the charts is
+
+\begin{proposition}
+    \label{prop:quot-mfd-left-diffeos} The action of \(G\) on \(G/P\) by left multiplication is by diffeomorphisms.
+\end{proposition}
+
+\subsection{Matrix Lie Groups}
+
+\label{sec:matrix-lie-groups}
+
+Moreover, suppose \(\mfg\) is the Lie algebra of \(G\), \(\mfp\) the Lie algebra of \(P\). Choose a vector space complement \(Z\) of \(\mfp\) in \(\mfg\), i.e. \(\mfg = \mfp \oplus Z\). Then
+
+\begin{align*}
+    \exp : \mfg &\to G \\
+    X &\mapsto \sum_{k=0}^\infty \frac{X^k}{k!}
+\end{align*}
+
+is a diffeomorphism between neighbourhoods of \(0 \in \mfg\) and \(I \in G\). This means that \(\pi \circ \exp : Z \to G/P\) defines local coordinates on \(G/P\) near \(P\). We will show that this is the same as the local coordinates induced by the charts. 
+
+\subsection{Orbits}
+
+Now suppose \(G\) acts on a manifold \(M\) by diffeomorphisms. Then by the orbit stabiliser theorem, we have a bijection
+
+\[\Orb(m) \leftrightarrow G/\Stab(m)\]
+
+Let \(\alpha(g) = g \cdot m\) be the map \(G \to M\) from the \(G\) action, and \(\tilde\alpha : G/\Stab(m) \to M\) the induced map. We would like to show \(\ker(\dd\alpha_I) = \mfs\), where \(\mfs\) is the Lie algebra for \(\Stab(m)\). This would then imply that \(\tilde\alpha\) is an immersion. \(\mfs \subseteq \ker(\dd\alpha_I)\) is clear, since \(\alpha\vert_{\Stab(m)}\) is constant.
+
+Now suppose \(X \in \ker(\dd\alpha_I)\). Consider \(f(t) = \alpha(\exp(tX))\). Then \(\dd f_0 = \dd \alpha_I(X) = 0\), and so \(f(t) = m\) for all \(t\), i.e. \(\exp(tX) \in \Stab(m)\) for all \(m\). So \(X \in \mfs\). 
+
+As \(\tilde\alpha\) is also a bijection, it must then be a diffeomorphism.
+
+Using the same notation as in \cref{sec:matrix-lie-groups}, this means that we have a (local) parametrisation of the orbits, given by
+
+\begin{equation}
+    \label{eq:param}
+    \tilde\alpha \circ \pi \circ \exp = \alpha \circ \exp : Z \to \Orb(m)
+\end{equation}
+
+\section{Root decomposition}
+
+In this section, we will consider the root decomposition of \(\sl(n, \C)\) and use this to derive the root decomposition of \(\su(n)\). \Citeauthor{humphreys} \cite[\S 8]{humphreys} contains this, and much more.
+
+Consider the Lie algebra \(\sl(n, \C)\) of trace free \(n \times n\) complex matrices. Then we have the Cartan subalgebra \(\mft\) of diagonal matrices. Let \(E_{ij}\) be the standard basis matrices for \(\Mat(n, \C)\), \(B \in \mft\). Say
+
+\[B = \begin{pmatrix}
+    b_1 \\
+    & \ddots \\
+    & & b_n
+\end{pmatrix}\]
+
+Then \([B, E_{ij}] = (b_i - b_j)E_{ij}\). This means that we have the eigendecomposition
+
+\begin{equation}
+    \label{eq:sln-root}
+    \sl(n, \C) = \mft \oplus \bigoplus_{1 \le i, j \le n, i \ne j} \C E_{ij}
+\end{equation}
+
+In particular, if we restrict this to the subalgebra \(\su(n)\), we get the decomposition
+
+\begin{equation}
+    \label{eq:sun-root}
+    \su(n) = \tilde\mft \oplus \bigoplus_{1 \le i < j \le n} \left(\R(E_{ij} - E_{ji}) \oplus i\R (E_{ij} + E_{ji})\right)
+\end{equation}
+
+where \(\tilde \mft = \mft \cap \su(n)\) is the subalgebra of \(\su(n)\) of diagonal matrices. 
+
+\section{Tangent space and Diagonalisation}
+
+\label{sec:tangent}
+
+\subsection{Diagonalisation and Stabilisers of the adjoint action}
+
+First of all, we note that elements of \(\su(n)\) are skew-hermitian, hence diagonalisable by an element of \(\SU(n)\)\footnote{From standard linear algebra arguments, we know that they are \(\mathrm U(n)\)-diagonalisable. But if \(PBP^{-1}\) is diagonal, then so is \((\lambda P)B(\lambda P)^{-1}\), and by choosing \(\lambda\) appropriately, \(\lambda \in \SU(n)\).}. With this, we can classify the coadjoint orbits based off a diagonal element in the orbit. Consider
+
+\[A = \begin{pmatrix}
+    i\lambda_1 I_{m_1} \\
+    & \ddots \\
+    & & i\lambda_k I_{m_k}
+\end{pmatrix}\]
+
+where \(I_m\) is the \(m \times m\) identity matrix, \(\lambda_j \in \R\), with \(\lambda_1 < \lambda_2 < \dots < \lambda_k\), \(m_1 + \dots + m_k = n\) and \(m_1\lambda_1 + \dots + m_k\lambda_k = 0\). In this case, by the orbit stabiliser theorem, we have a bijection
+
+\[\Orb(A) \leftrightarrow \SU(n)/\Stab(A)\]
+
+where \(\Stab(A)\) is the stabiliser of \(A\) under the adjoint action. In this case, we have that the stabiliser is the block diagonal subgroup
+
+\[\Stab(A) = \rm S\left(\rm U(m_1) \times \dots \times \rm U(m_k)\right)\]
+
+where we consider \(\rm U(m_1) \times \cdots \times \rm U(m_k) \le \SU(n)\) as the block diagonal subgroup, and
+
+\[\rm S\left(\rm U(m_1) \times \dots \times \rm U(m_k)\right) = \left(\rm U(m_1) \times \cdots \times \rm U(m_k)\right) \cap \SU(n)\]
+
+the subgroup with determinant \(1\).
+
+\subsection{Tangent space}
+
+Let \(M\) be an adjoint orbit. We will now focus on the generic case, that is, the eigenvalues of \(A\) are distinct. In this case, we have that
+
+\[\Stab(A) \cong T^{n-1}\]
+
+is the torus of diagonal matrices in \(\SU(n)\). In this case, the parametrisation \cref{eq:param} is given by
+
+\[\phi(X) = \exp(X)A\exp(X)^{-1}\]
+
+and we find that \(\dd\phi_0(X) = XA - AX = -\ad_A(X)\). Using the root decomposition from \cref{eq:sun-root}, we have that
+
+\[\ad_A(\tilde \mft) = 0 \qquad \ad_A(E_{ij}) = i(\lambda_i - \lambda_j)E_{ij}\]
+
+and so, the tangent space is given by
+
+\[\TT_AM = \frac{\su(n)}{\tilde \mft} = \bigoplus_{1 \le i < j \le n} \left(\R(E_{ij} - E_{ji}) \oplus i\R (E_{ij} + E_{ji})\right) = \{\ad_A(X) \mid X \in \su(n)\}\]
+
+For \(a \in \SU(n)\), \(\Ad_a : \su(n) \to \su(n)\) is a diffeomorphism. Therefore, if \(B = \Ad_a(A)\), then
+
+\[\T_B M = \Ad_a(\T_AM) = \{\ad_B(X) \mid X \in \su(n)\}\]
+
+where we use the fact that
+
+\[\ad_{\Ad_a(A)} = \Ad_a \circ \ad_A \circ \Ad_{a^{-1}}\]
+
+and that \(\Ad_{a^{-1}}\) is a bijection.
+
+\section{Kirillov-Kostant-Souriau symplectic form}
+
+\label{sec:kks}
+
+The statement here is from \cite{marsden_ratiu} Chapter 14. The proof is from \cite[Section II.1.d]{audin}, where we use the Jacobi identity to show that the form is closed.
+
+\begin{theorem}
+    [Kirillov-Kostant-Souriau, {\cite[Theorem 14.4.1]{marsden_ratiu}}]
+    
+    Let \(M \subseteq \su(n)\) be an adjoint orbit. Define the \(2\)-form \(\omega\) on \( M\) by
+
+    \begin{equation}
+        \label{eq:kks}
+        \omega_B(\ad_X(B), \ad_Y(B)) = -\inner{B, [X, Y]}
+    \end{equation}
+
+    for all \(B \in M, X, Y \in \su(n)\). Then \(\omega\) is a symplectic form on \(M\).
+
+    \label{thm:kks}
+\end{theorem}
+
+From the definition, we can see that \(\omega_B\) is antisymmetric, so all we need to check is that it is well defined, non-degenerate and closed.
+
+\subsection{\(\omega\) is well defined}
+
+The adjoint representiation \(\ad\) of \(\su(n)\) may have a nontrivial kernel, which means that we need to check that \cref{eq:kks} is independent of the choice of \(X, Y\). Suppose we have \(Z \in \su(n)\) such that \(\ad_X(B) = \ad_Z(B)\), i.e. \([X, B] = [Z, B]\). Then for all \(Y \in \su(n)\), we have that
+
+\[\inner{B, [X, Y]} = \inner{[B, X], Y} = \inner{[B, Z], Y} = \inner{B, [Z, Y]}\]
+
+and so \(\omega\) is independent of the choice of \(X\).
+
+\subsection{\(\omega\) is non-degenerate}
+
+Now suppose \(X \in \su(n)\) is such that \(\omega_B(\ad_X(B), \ad_Y(B)) = 0\) for all \(Y \in \su(n)\). That is,
+
+\[\inner{B, [X, Y]} = 0\]
+
+for all \(Y \in \su(n)\). But by associativity,
+
+\[\inner{B, [X, Y]} = \inner{[B, X], Y} = -\inner{\ad_X(B), Y}\]
+
+Therefore, we must then have that \(\ad_X(B) = 0\).
+
+\subsection{\(\omega\) is closed}
+
+For \(X \in \su(n)\), we will write \(X_B^\# = \ad_X(B)\) for the vector field generated by \(X\).
+
+\begin{lemma}
+    \[[X, Y]^\# = [X^\#, Y^\#]\]
+\end{lemma}
+
+\begin{proof}
+    To show that the two vector fields are the same, suffices to show they act on functions in the same way. Moreover, for \(C \in \su(n)\), we can define \(f : \su(n) \to \R\), by 
+    
+    \[f(B) = \inner{C, B}\]
+    
+    In this case, \(\gr(f) = C\). In particular, this means that we only need to check that the vector fields act the same way on functions of the above form. \(f : \su(n) \to \R\) is linear, therefore we have that
+    
+    \[\dd f_B(H) = \inner{C, H}\]
+
+    and so \(X^\#(f)(B) = \inner{C, [X, B]}\). Moreover, the function
+
+    \[B \mapsto \inner{C, [X, B]}\]
+
+    is also linear, so we have that
+
+    \[\dd(X^\#(f))_B(H) = \inner{C, [X, H]}\]
+
+    Combining these, we need to show
+
+    \[\inner{C, [[X, Y], B]} = \inner{C, [[Y, X], B]} - \inner{C, [[X, Y], B]}\]
+
+    But
+
+    \[[Y, [X, B]] - [X, [Y, B]] = [Y, [X, B]] + [X, [B, Y]] \stackrel{(*)}{=} -[B, [Y, X]] = [B, [X, Y]]\]
+
+    where \((*)\) follows from the Jacobi identity.
+\end{proof}
+
+Using this, and \cref{lem:deriv-2-form}, we have that
+
+\begin{align*}
+    \dd\omega_B(X^\#, Y^\#, Z^\#) &= X^\#(\omega_B(Y^\#, Z^\#)) - Y^\#(\omega_B(X^\#, Z^\#)) + Z^\#(\omega_B(X^\#, Y^\#)) \\
+    &- \omega_B([X^\#, Y^\#], Z^\#) + \omega_B([X^\#, Z^\#], Y^\#) - \omega_B([Y^\#, Z^\#], X^\#) \\
+\end{align*}
+
+For the first line, notice that the function
+
+\begin{align*}
+    \mfg &\to \R \\
+    B &\mapsto \omega_B(Y^\#, Z^\#) = -\inner{B, [Y, Z]}
+\end{align*}
+
+is linear, and so its derivative is itself. Hence this means that
+
+\begin{align*}
+    X^\#(\omega_B(Y^\#, Z^\#)) &= -\inner{X^\#, [Y, Z]} \\
+    &= -\inner{[X, B], [Y, Z]} \\
+    &= -\inner{-[B, X], [Y, Z]} \\
+    &= -\inner{B, [-X, [Y, Z]]} \\
+    &= -\inner{B, [[Y, Z], X]}
+\end{align*}
+
+For the second line, we have that
+
+\[\omega_B([X^\#, Y^\#], Z^\#) = \omega_B([X, Y]^\#, Z^\#) = -\inner{B, [[X, Y], Z]}\]
+
+With all of these, we get
+
+\begin{align*}
+    \dd\omega_B(X^\#, Y^\#, Z^\#) &= -\inner{B, [[Y, Z], X] - [[X, Z], Y] + [[X, Y], Z]} \\
+    &+\inner{B, [[X, Y], Z] - [[X, Z], Y] + [[Y, Z], X]}
+\end{align*}
+
+Both lines are zero by the Jacobi identity, hence \(\dd\omega_B = 0\).
+
+\section{K\"ahler structure}
+
+In this section, we will construct the K\"ahler structure on the adjoint orbits of \(\SU(n)\). We have already constructed the symplectic form \(\omega\) in \cref{thm:kks}. We will now construct the Riemannian metric \(g\) and the almost complex structure \(J\).
+
+\subsection{Complex quotient}
+
+First, we note that \(\SL(n, \C)\) is a complex manifold, and if \(P\) is the subgroup of upper triangular matrices, a variant of the proof in \cref{sec:quotient} shows that \(\SL(n, \C)/P\) is a complex manifold, with complex coordinates given by the exponential map.
+
+Consider the composition \(\varphi : \SU(n) \to \SL(n, \C)/P\) given by the composition 
+
+% https://q.uiver.app/#q=WzAsMyxbMCwwLCJcXFNVKG4pIl0sWzIsMCwiXFxTTChuKSJdLFs0LDAsIlxcU0wobiwgXFxDKS9QIl0sWzAsMSwiIiwwLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XSxbMSwyLCIiLDAseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJlcGkifX19XV0=
+\[\begin{tikzcd}
+	{\SU(n)} && {\SL(n)} && {\SL(n, \C)/P}
+	\arrow[hook, from=1-1, to=1-3]
+	\arrow[two heads, from=1-3, to=1-5]
+\end{tikzcd}\]
+
+Suppose \(\varphi(g) = \varphi(h)\). That is, \(gP = hP\). This is true if and only if there exists \(p \in P\), such that \(h = gp\). In this case, \(p = g^{-1}h \in \SU(n)\), therefore, \(p \in \SU(n) \cap P = T\), since \(p^* = p^{-1}\) is also lower triangular. This means that \(\varphi\) induces a homeomorphism \(\tilde\varphi : \SU(n)/T \to \SL(n, \C)/P\), as it is a continuous bijection from a compact space to a Hausdorff space. Moreover, this is in fact a diffeomorphism.
+
+To see this, consider the natural embedding \(\psi : \SU(n) \hookrightarrow \SL(n, \C)\). The derivative at the identity gives a linear map
+
+\[\dd\psi_I : \su(n) \to \sl(n, \C)\]
+
+By \cite[Theorem 3.32]{warner}, the following diagram commutes
+
+% https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXFNVKG4pIl0sWzIsMCwiXFxTTChuLFxcQykiXSxbMCwyLCJcXHN1KG4pIl0sWzIsMiwiXFxzbChuLCBcXEMpIl0sWzIsMywiXFxkZFxccHNpX0kiXSxbMCwxLCJcXHBzaSJdLFsyLDAsIlxcZXhwIl0sWzMsMSwiXFxleHAiLDJdXQ==
+\[\begin{tikzcd}[ampersand replacement=\&]
+	{\SU(n)} \&\& {\SL(n,\C)} \\
+	\\
+	{\su(n)} \&\& {\sl(n, \C)}
+	\arrow["{\dd\psi_I}", from=3-1, to=3-3]
+	\arrow["\psi", from=1-1, to=1-3]
+	\arrow["\exp", from=3-1, to=1-1]
+	\arrow["\exp"', from=3-3, to=1-3]
+\end{tikzcd}\]
+
+Therefore, if \(\mft\) is the Lie algebra of \(T\) and \(\mfp\) the Lie algebra of \(P\), then \(\dd\psi_I\) induces a linear isomorphism \(\su(n)/\mft \to \sl(n, \C)/\mfp\). Therefore, \(\tilde\varphi\) is a diffeomorphism near \(I\). But \(\SU(n)\) acts on both spaces transitively by diffeomorphisms, and so \(\tilde\varphi\) is a diffeomorphism everywhere.
+
+Using the above, we can get a complex structure on \(\SU(n)/T \cong M\).
+
+\subsection{At a diagonal element}
+
+Recall from \cref{sec:tangent} that the stabiliser of \(A\) is the torus \(T \cong T^{n-1}\) of diagonal matrices in \(\SU(n)\).
+
+\[\T_A M = \bigoplus_{1 \le i < j \le n} \left(\R(E_{ij} - E_{ji}) \oplus i\R (E_{ij} + E_{ji})\right) \cong \frac{\su(n)}{\tilde t} \cong \T_{[I]}\left(\frac{\SU(n)}{T^{n-1}}\right)\]
+
+where the isomorphism is induced by the quotient map
+
+\begin{align*}
+    \pi : \SU(n) &\to M \\
+    a &\mapsto \Ad_a(A) = aAa^{-1}
+\end{align*}
+
+Let \(e_{ij} = E_{ij} - E_{ji}\) and \(f_{ij} = i(E_{ij} + E_{ji})\). We will show that with respect to this basis, \(\omega_A\) is block diagonal.
+
+\begin{proposition}
+    \label{prop:omega-block-diag}
+    \begin{align*}
+        \omega_A(e_{ij}, e_{kl}) &= 0 \\
+        \omega_A(f_{ij}, f_{kl}) &= 0 \\
+        \omega_A(e_{ij}, f_{ij}) &= 2(\lambda_j - \lambda_i) \\
+        \omega_A(e_{ij}, f_{kl}) &= 0 \text{ for }(i, j) \ne (k, l)
+    \end{align*}
+\end{proposition}
+
+One can show that the Lie algebra of \(P\) is the Lie algebra of upper triangular matrices, with trace zero
+
+\[\mfp = \sl(n, \C) \cap \bigoplus_{i \le j}\C E_{ij}\]
+
+Which gives the decomposition
+
+\[\sl(n, \C) = \mfp \oplus \bigoplus_{i > j}\C E_{ij}\]
+
+Therefore, we have an isomorphism
+
+\[\TT_{[I]}\left(\SL(n, \C)/P\right) = \bigoplus_{i > j}\C E_{ij} = \bigoplus_{i > j}\left(\R E_{ij} \oplus i\R E_{ij}\right)\]
+
+With respect to this basis, and the basis \(e_{ij}, f_{ij}\) for \(\T_AM\), we have that the isomorphism \(\dd\tilde\varphi_{[I]}\) is given by
+
+\[\dd\tilde\varphi(e_{ij}) = -E_{ji} \qquad \dd\tilde\varphi(f_{ij}) = iE_{ji}\]
+
+Using this, we can define a complex structure on \(\TT_AM\) by multiplication by \(-i\)\footnote{Throughout there were occasions where we had a choice of signs. If we chose \(-\omega\) instead of \(\omega\), then the complex structure would be the one coming from multiplication by \(i\). Similarly, if we required the eigenvalues to be decreasing, rather than increasing this would flip the signs as well.}. That is,
+
+\[J(e_{ij}) = f_{ij} \qquad J(f_{ij}) = -e_{ij}\]
+
+
+% We can then define an an almost complex structure on \(\TT_AM\) using the action of multiplication by \(i\), which is
+
+% \begin{equation}
+%     \label{eq:cx-str-vector}
+%     J_A(e_{ij}) = f_{ij} \quad J_A(f_{ij}) = -e_{ij}
+% \end{equation}
+
+Moreover, we can define an inner product on \(\TT_AM\) by
+
+\[g_A(e_{ij}, e_{ij}) = g_A(f_{ij}, f_{ij}) = 2(\lambda_j - \lambda_i)\]
+
+and requiring \(e_{ij}, f_{ij}\) to form an orthogonal basis. This is positive definite since we required \(\lambda_i < \lambda_j\) for \(i < j\). Using this, we find that
+
+\[\omega_A(e_{ij}, f_{ij}) = 2(\lambda_j - \lambda_i) = g_A(f_{ij}, f_{ij}) = g_A(J_A(e_{ij}), f_{ij})\]
+
+and that \(J\) defines an isometry.
+
+\begin{proof}
+    [Proof of \cref{prop:omega-block-diag}]
+    \begin{align*}
+\inner{A, [E_{ij}, E_{kl}]} &= \inner{[A, E_{ij}], E_{kl}} \\
+&= i(\lambda_i - \lambda_j)\inner{E_{ij}, E_{kl}} \\
+    &= -i(\lambda_i - \lambda_j)\delta_{jk}\tr(E_{il}) \\
+    &= -i(\lambda_i - \lambda_j)\delta_{jk}\delta_{il} \\
+    &= i(\lambda_j - \lambda_i)\delta_{il}\delta_{jk}
+\end{align*}
+
+and so,
+
+\begin{align*}
+    \inner{A, [e_{ij}, e_{kl}]} &= \inner{A, [E_{ij}, E_{kl}]} - \inner{A, [E_{ji}, E_{kl}]} - \inner{A, [E_{ij}, E_{lk}]} + \inner{A, [E_{ji}, E_{lk}]} \\
+    &= i(\lambda_j - \lambda_i)\delta_{il}\delta_{jk} - i(\lambda_i - \lambda_j)\delta_{jl}\delta_{ik} - i(\lambda_j - \lambda_i)\delta_{ik}\delta_{jl} + i(\lambda_i - \lambda_j)\delta_{jk}\delta_{il} \\
+    &= 0
+\end{align*}
+
+and
+
+\begin{align*}
+    -\inner{A, [f_{ij}, f_{kl}]} &= \inner{A, [E_{ij}, E_{kl}]} + \inner{A, [E_{ji}, E_{kl}]} + \inner{A, [E_{ij}, E_{lk}]} + \inner{A, [E_{ji}, E_{lk}]} \\
+    &= i(\lambda_j - \lambda_i)\delta_{il}\delta_{jk} + i(\lambda_i - \lambda_j)\delta_{jl}\delta_{ik} + i(\lambda_j - \lambda_i)\delta_{ik}\delta_{jl} + i(\lambda_i - \lambda_j)\delta_{jk}\delta_{il} \\
+    &= 0
+\end{align*}
+
+Finally, we have that
+
+\begin{align*}
+    -i\inner{A, [e_{ij}, f_{kl}]} &= \inner{A, [E_{ij}, E_{kl}]} - \inner{A, [E_{ji}, E_{kl}]} + \inner{A, [E_{ij}, E_{lk}]} - \inner{A, [E_{ji}, E_{lk}]} \\
+    &= i(\lambda_j - \lambda_i)\delta_{il}\delta_{jk} - i(\lambda_i - \lambda_j)\delta_{jl}\delta_{ik} + i(\lambda_j - \lambda_i)\delta_{ik}\delta_{jl} - i(\lambda_i - \lambda_j)\delta_{jk}\delta_{il} \\
+    &= 2i(\lambda_j - \lambda_i)(\delta_{il}\delta_{jk} + \delta_{ik}\delta_{jl}) \\
+    &= 2i(\lambda_j - \lambda_i)\delta_{ik}\delta_{jl}
+\end{align*}
+
+where the last line is because we require \(i < j\) and \(k < l\).
+
+\end{proof}
+
+\subsection{General case}
+
+In fact, at this point we have already done the vast majority of the work. \(\SU(n)\) acts transitively via left multiplication on both \(\SU(n)/T\) and \(\SL(n, \C)/P\) by diffeomorphisms. Let \(\ell_a\) denote the left multiplication map in both cases, and suppose \(B = \Ad_a(A)\).
+
+First of all, note that \(\dd \ell_a(Jv) = J\dd\ell_a(v)\). If \(\tilde J\) denotes the complex structure on \(\SL(n, \C)\), then we have that
+
+\[\tilde J_a = \dd \ell_a \circ \tilde J_I \circ \dd\ell_{a^{-1}}\]
+
+\(\ell_g\) descends to a biholomorphism on \(\SL(n, \C)/P \cong \SU(n)/T\), and so the corresponding almost complex structure \(\overline J\) on \(\SU(n)/T\) is given by
+
+\begin{equation}
+    \label{eq:cx-str-quot}
+    \overline J_{[a]} = \dd\ell_a \circ \overline J_{[I]} \circ \dd\ell_{a^*}
+\end{equation}
+
+Since the diffeomorphism \(\SU(n)/T \cong M\) is induced by the map \(\pi(g) = \Ad_g(A)\), we have that
+
+\begin{align*}
+    J_B &= \dd\pi \circ \overline J_{[a]} \circ \dd\pi^{-1} \\
+    &= \dd\pi \circ \dd \ell_a \circ \overline J_{[I]} \circ \dd \ell_{a^*} \circ \dd \pi^{-1} \\
+    &= \dd(\pi \circ \ell_a \circ \pi^{-1}) \circ J_A \circ \dd(\pi \circ \ell_{a^*} \circ \pi^{-1}) \\
+\end{align*}
+
+It is easy to see that \(\pi \circ \ell_a = \Ad_a \circ \pi\). Moreover, since \(\Ad_a : \su(n) \to \su(n)\) is a linear map, its restriction to \(M\) has \(\dd \Ad_a = \Ad_a\). Therefore, we have that the almost complex structure is given by
+
+\[J_B = \Ad_a \circ J_A \circ \Ad_{a^*}\]
+
+We want to show that this is compatible with the Kirillov-Kostant-Souriau symplectic form.
+
+Recall from that
+
+\[\TT_BM = \Ad_a(\TT_A M)\]
+
+Then we have that
+
+\begin{align*}
+    \omega_B([B, X], [B, Y]) &= -\inner{B, [X, Y]} \\
+    &= -\inner{\Ad_a(A), \Ad_a([\Ad_{a^*}(X), \Ad_{a^*}(Y)])} \\
+    &= -\inner{A, [\Ad_{a^*}(X), \Ad_{a^*}(Y)]} \\
+    &= \omega_A([A, \Ad_{a^*}(X)], [A, \Ad_{a^*}(X)]) \\
+    &= \omega_A(\Ad_{a^*}([B, X]), \Ad_{a^*}([B, Y]))
+\end{align*}
+
+Therefore, the Riemannian metric is given by
+
+\[\iinner{X, Y}_B = \iinner{\Ad_{a^*}(X), \Ad_{a^*}(Y)}_A\]
+
+\section{\(\SL(n, \C)\) orbits}
+
+First we will sketch how to generalise what we have shown so far to \(\SL(n, \C)\). The same formulae as in \cref{sec:adjoint} can be used to define the adjoint and coadjoint representations of \(\SL(n, \C)\), and the same inner product can be used to show that the two are isomorphic.
+
+% Sec 4 the same, as we already did the root decomp of sl(n, C)
+% Sec 5 different, since the stabiliser gets more complicated, as we may not be able to diagonalise
+% Maybe consider just the diagonalisable case with distinct eigenvalues?
+% Sec 6 same formulae works
+% Sec 7 - the coadjoint orbits already have a complex structure. Check that its compatible with the symplectic form
+
+% Also, try nilpotent case? Maybe consider the simplest case of either a rank 1 matrix, or the maximal jordan block?
+
+% \Cref{sec:tangent}
+
+\printbibliography
+
+\end{document}
