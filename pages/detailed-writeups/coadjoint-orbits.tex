@@ -565,6 +565,53 @@ Therefore, if \(\mft\) is the Lie algebra of \(T\) and \(\mfp\) the Lie algebra 
 
 Using the above, we can get a complex structure on \(\SU(n)/T \cong M\).
 
+\subsection{Reduction to a diagonal element}
+
+We will now show that it suffices to show that \(\omega\) and \(J\) are compatible at \(A \in M\). \(\SU(n)\) acts transitively via left multiplication on both \(\SU(n)/T\) and \(\SL(n, \C)/P\) by diffeomorphisms. Let \(\ell_a\) denote the left multiplication map in both cases, and suppose \(B = \Ad_a(A)\).
+
+If \(\tilde J\) denotes the complex structure on \(\SL(n, \C)\), note that \(\dd \ell_a(\tilde Jv) = \tilde J\dd\ell_a(v)\) and we have that
+
+\[\tilde J_a = \dd \ell_a \circ \tilde J_I \circ \dd\ell_{a^{-1}}\]
+
+\(\ell_g\) descends to a biholomorphism on \(\SL(n, \C)/P \cong \SU(n)/T\), and so the corresponding almost complex structure \(\overline J\) on \(\SU(n)/T\) is given by
+
+\begin{equation}
+    \label{eq:cx-str-quot}
+    \overline J_{[a]} = \dd\ell_a \circ \overline J_{[I]} \circ \dd\ell_{a^*}
+\end{equation}
+
+Since the diffeomorphism \(\SU(n)/T \cong M\) is induced by the map \(\pi(g) = \Ad_g(A)\), we have that
+
+\begin{align*}
+    J_B &= \dd\pi \circ \overline J_{[a]} \circ \dd\pi^{-1} \\
+    &= \dd\pi \circ \dd \ell_a \circ \overline J_{[I]} \circ \dd \ell_{a^*} \circ \dd \pi^{-1} \\
+    &= \dd(\pi \circ \ell_a \circ \pi^{-1}) \circ J_A \circ \dd(\pi \circ \ell_{a^*} \circ \pi^{-1}) \\
+\end{align*}
+
+It is easy to see that \(\pi \circ \ell_a = \Ad_a \circ \pi\). Moreover, since \(\Ad_a : \su(n) \to \su(n)\) is a linear map, its restriction to \(M\) has \(\dd \Ad_a = \Ad_a\). Therefore, we have that the almost complex structure is given by
+
+\[J_B = \Ad_a \circ J_A \circ \Ad_{a^*}\]
+
+We want to show that this is compatible with the Kirillov-Kostant-Souriau symplectic form.
+
+Recall from that
+
+\[\TT_BM = \Ad_a(\TT_A M)\]
+
+Then we have that
+
+\begin{align*}
+    \omega_B([B, X], [B, Y]) &= -\inner{B, [X, Y]} \\
+    &= -\inner{\Ad_a(A), \Ad_a([\Ad_{a^*}(X), \Ad_{a^*}(Y)])} \\
+    &= -\inner{A, [\Ad_{a^*}(X), \Ad_{a^*}(Y)]} \\
+    &= \omega_A([A, \Ad_{a^*}(X)], [A, \Ad_{a^*}(X)]) \\
+    &= \omega_A(\Ad_{a^*}([B, X]), \Ad_{a^*}([B, Y]))
+\end{align*}
+
+Therefore, \(\omega_B\) is \(\Ad\)-invariant, and thus compatible with \(J\). The Riemannian metric is given by
+
+\[g_B(X, Y) = g_A(\Ad_{a^*}(X), \Ad_{a^*}(Y))\]
+
 \subsection{At a diagonal element}
 
 Recall from \cref{sec:tangent} that the stabiliser of \(A\) is the torus \(T \cong T^{n-1}\) of diagonal matrices in \(\SU(n)\).
@@ -681,53 +728,6 @@ Using this, we get that
 \end{align*}
 
 \end{proof}
-
-\subsection{At a generic point}
-
-In fact, at this point we have already done the vast majority of the work. \(\SU(n)\) acts transitively via left multiplication on both \(\SU(n)/T\) and \(\SL(n, \C)/P\) by diffeomorphisms. Let \(\ell_a\) denote the left multiplication map in both cases, and suppose \(B = \Ad_a(A)\).
-
-First of all, note that \(\dd \ell_a(Jv) = J\dd\ell_a(v)\). If \(\tilde J\) denotes the complex structure on \(\SL(n, \C)\), then we have that
-
-\[\tilde J_a = \dd \ell_a \circ \tilde J_I \circ \dd\ell_{a^{-1}}\]
-
-\(\ell_g\) descends to a biholomorphism on \(\SL(n, \C)/P \cong \SU(n)/T\), and so the corresponding almost complex structure \(\overline J\) on \(\SU(n)/T\) is given by
-
-\begin{equation}
-    \label{eq:cx-str-quot}
-    \overline J_{[a]} = \dd\ell_a \circ \overline J_{[I]} \circ \dd\ell_{a^*}
-\end{equation}
-
-Since the diffeomorphism \(\SU(n)/T \cong M\) is induced by the map \(\pi(g) = \Ad_g(A)\), we have that
-
-\begin{align*}
-    J_B &= \dd\pi \circ \overline J_{[a]} \circ \dd\pi^{-1} \\
-    &= \dd\pi \circ \dd \ell_a \circ \overline J_{[I]} \circ \dd \ell_{a^*} \circ \dd \pi^{-1} \\
-    &= \dd(\pi \circ \ell_a \circ \pi^{-1}) \circ J_A \circ \dd(\pi \circ \ell_{a^*} \circ \pi^{-1}) \\
-\end{align*}
-
-It is easy to see that \(\pi \circ \ell_a = \Ad_a \circ \pi\). Moreover, since \(\Ad_a : \su(n) \to \su(n)\) is a linear map, its restriction to \(M\) has \(\dd \Ad_a = \Ad_a\). Therefore, we have that the almost complex structure is given by
-
-\[J_B = \Ad_a \circ J_A \circ \Ad_{a^*}\]
-
-We want to show that this is compatible with the Kirillov-Kostant-Souriau symplectic form.
-
-Recall from that
-
-\[\TT_BM = \Ad_a(\TT_A M)\]
-
-Then we have that
-
-\begin{align*}
-    \omega_B([B, X], [B, Y]) &= -\inner{B, [X, Y]} \\
-    &= -\inner{\Ad_a(A), \Ad_a([\Ad_{a^*}(X), \Ad_{a^*}(Y)])} \\
-    &= -\inner{A, [\Ad_{a^*}(X), \Ad_{a^*}(Y)]} \\
-    &= \omega_A([A, \Ad_{a^*}(X)], [A, \Ad_{a^*}(X)]) \\
-    &= \omega_A(\Ad_{a^*}([B, X]), \Ad_{a^*}([B, Y]))
-\end{align*}
-
-Therefore, \(\omega_B\) is \(\Ad\)-invariant, and thus compatible with \(J\). The Riemannian metric is given by
-
-\[g_B(X, Y) = g_A(\Ad_{a^*}(X), \Ad_{a^*}(Y))\]
 
 \subsection{General case}
 
