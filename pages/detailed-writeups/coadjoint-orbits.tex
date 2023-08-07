@@ -413,7 +413,7 @@ and in general,
 
 \label{sec:kks}
 
-The statement here is from \cite{marsden_ratiu} Chapter 14. The proof is from \cite[Section II.1.d]{audin}, where we use the Jacobi identity to show that the form is closed.
+The statement here is from \cite{marsden_ratiu} Chapter 14, although modified to define \(\omega\) on an adjoint orbit, instead of a coadjoint orbit. The proof is from \cite[Section II.1.d]{audin}, where we use the Jacobi identity to show that the form is closed.
 
 \begin{theorem}
     [Kirillov-Kostant-Souriau, {\cite[Theorem 14.4.1]{marsden_ratiu}}]
@@ -422,7 +422,7 @@ The statement here is from \cite{marsden_ratiu} Chapter 14. The proof is from \c
 
     \begin{equation}
         \label{eq:kks}
-        \omega_B(\ad_X(B), \ad_Y(B)) = -\inner{B, [X, Y]}
+        \omega_B(\ad_X(B), \ad_Y(B)) = -\inner{B, [X, Y]} = \tr(B[X,Y])
     \end{equation}
 
     for all \(B \in M, X, Y \in \su(n)\). Then \(\omega\) is a symplectic form on \(M\).
@@ -749,9 +749,9 @@ The same formulae can be used to define the adjoint and coadjoint representation
 
 \[\inner{A, B} = -\tr(AB)\]
 
-for the bilinear form \(\sl(n, \C) \times \sl(n, \C) \to \C\). Note in particular any complex bilinear form cannot be positive definite. However, it is still nondegenerate. In fact, \((A, B) \mapsto \Re(\inner{A, B})\) defines an inner product on \(\sl(n, \C)\). Using this, we still have an isomorphism between the adjoint and coadjoint orbits.
+for the bilinear form \(\sl(n, \C) \times \sl(n, \C) \to \C\). Note that any complex bilinear form cannot be positive definite. However, it is still nondegenerate. In fact, \((A, B) \mapsto \Re(\inner{A, B})\) defines an inner product on \(\sl(n, \C)\). Using this, we still have an isomorphism between the adjoint and coadjoint orbits.
 
-The identities at the end of the section still hold for \(\sl(n, \C)\), as we only did not need the fact that \(\inner{\cdot, \cdot}\) is positive definite.
+The identities at the end of the section still hold for \(\sl(n, \C)\), as we did not need the fact that \(\inner{\cdot, \cdot}\) is positive definite for \(\su(n)\).
 
 \subsection*{Section 4}
 
