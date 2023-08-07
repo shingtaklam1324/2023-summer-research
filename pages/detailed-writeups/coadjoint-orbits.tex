@@ -286,19 +286,17 @@ Moreover, suppose \(\mfg\) is the Lie algebra of \(G\), \(\mfp\) the Lie algebra
     X &\mapsto \sum_{k=0}^\infty \frac{X^k}{k!}
 \end{align*}
 
-is a diffeomorphism between neighbourhoods of \(0 \in \mfg\) and \(I \in G\). This means that \(\pi \circ \exp : Z \to G/P\) defines local coordinates on \(G/P\) near \(P\). We will show that this is the same as the local coordinates induced by the charts. 
+is a diffeomorphism between neighbourhoods of \(0 \in \mfg\) and \(I \in G\). By the above ,this means that \(\pi \circ \exp : Z \to G/P\) defines local coordinates on \(G/P\) near \(P\).
 
 \subsection{Orbits}
 
-Now suppose \(G\) acts on a manifold \(M\) by diffeomorphisms. Then by the orbit stabiliser theorem, we have a bijection
+Now suppose \(G\) acts on a manifold \(M\) by diffeomorphisms, such that \(\Stab(m)\) is a Lie subgroup of \(G\). Then by the orbit stabiliser theorem, we have a bijection
 
 \[\Orb(m) \leftrightarrow G/\Stab(m)\]
 
 Let \(\alpha(g) = g \cdot m\) be the map \(G \to M\) from the \(G\) action, and \(\tilde\alpha : G/\Stab(m) \to M\) the induced map. We would like to show \(\ker(\dd\alpha_I) = \mfs\), where \(\mfs\) is the Lie algebra for \(\Stab(m)\). This would then imply that \(\tilde\alpha\) is an immersion. \(\mfs \subseteq \ker(\dd\alpha_I)\) is clear, since \(\alpha\vert_{\Stab(m)}\) is constant.
 
-Now suppose \(X \in \ker(\dd\alpha_I)\). Consider \(f(t) = \alpha(\exp(tX))\). Then \(\dd f_0 = \dd \alpha_I(X) = 0\), and so \(f(t) = m\) for all \(t\), i.e. \(\exp(tX) \in \Stab(m)\) for all \(m\). So \(X \in \mfs\). 
-
-As \(\tilde\alpha\) is also a bijection, it must then be a diffeomorphism.
+Now suppose \(X \in \ker(\dd\alpha_I)\). Consider \(f(t) = \alpha(\exp(tX))\). Then \(\dd f_0 = \dd \alpha_I(X) = 0\), and so \(f(t) = m\) for all \(t\), i.e. \(\exp(tX) \in \Stab(m)\) for all \(m\). So \(X \in \mfs\). As \(\tilde\alpha\) is also a bijection, it must then be a diffeomorphism onto its image.
 
 Using the same notation as in \cref{sec:matrix-lie-groups}, this means that we have a (local) parametrisation of the orbits, given by
 
