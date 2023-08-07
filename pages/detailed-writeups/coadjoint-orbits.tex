@@ -96,12 +96,12 @@ If we differentiate \(\Ad\) at the identity, we get the representation
     \ad_X(Y) &= [X, Y]
 \end{align*}
 
-Some properties of \(\Ad, \ad\) and the inner product which we will need, and are easy to verify are:
+Some properties of \(\Ad, \ad\) and the inner product which we will need are:
 
 \begin{itemize}
     \item \(\Ad_g\) is an isometry, that is, for all \(X, Y \in \su(n)\), \[\inner{\Ad_g(X), \Ad_g(Y)} = \inner{X, Y}\]
-    \item The Jacobi idenity, if \(X, Y, Z \in \su(n)\), then \[[X, [Y, Z]] + [Y, [X, Z]] + [Z, [X, Y]] = 0\]
-    \item Associativity, i.e. for \(X, Y, Z \in \su(n)\), \(\inner{X, [Y, Z]} = \inner{[X, Y], Z}\).
+    \item The Jacobi idenity: if \(X, Y, Z \in \su(n)\), then \[[X, [Y, Z]] + [Y, [X, Z]] + [Z, [X, Y]] = 0\]
+    \item Associativity: for \(X, Y, Z \in \su(n)\), \(\inner{X, [Y, Z]} = \inner{[X, Y], Z}\).
 \end{itemize}
 
 \section{K\"ahler manifolds}
@@ -945,7 +945,73 @@ In this case, we will only assume that the orbits are diagonalisable. This means
 
 \[\T_AM = \bigoplus_{(i, j) \in S}\C E_{ij}\]
 
-where \(S = \left\{(i, j) \mid 1 \le i < j \le n, z_i \ne z_j\right\}\). With this, the same formulae hold, and define a hyperK\"ahler structure on \(M\).
+where \(S = \left\{(i, j) \mid 1 \le i j \le n, z_i \ne z_j\right\}\). With this, the same formulae hold, and define a hyperK\"ahler structure on \(M\).
+
+\subsection{\(2 \times 2\) nilpotent case}
+
+Now consider the orbit \(M\) of rank \(1\) matrices in \(\sl(2, \C)\). That is, matrices with Jordan normal form
+
+\[A = \begin{pmatrix}
+    0 & 1 \\
+    0 & 0
+\end{pmatrix}\]
+
+The stabiliser of \(A\) is 
+
+\[\Stab(A) = \left\{\pm \begin{pmatrix}
+    1 & \lambda \\
+    0 & 1
+\end{pmatrix}\ \bigg\vert\ \lambda \in \C\right\}\]
+
+which has Lie algebra
+
+\[\mfs = \C E_{12}\]
+
+and so, we have the decomposition
+
+\[\sl(2, \C) = \mfs \oplus \C(E_{11} - E_{22}) \oplus \C E_{21}\]
+
+Set \(e = E_{11} - E_{22}\) and \(f = E_{21}\). Then
+
+\[e^\# = \ad_e(A) = \begin{pmatrix}
+    0 & -2 \\ 0 & 0
+\end{pmatrix} \qquad f^\# = \ad_f(A) = \begin{pmatrix}
+    -1 & 0 \\ 0 & 1
+\end{pmatrix}\]
+
+is a basis for \(\TT_A M\). We can define
+
+\[\omega_A(\ad_X(A), \ad_Y(A)) = -\inner{A, [X, Y]}\]
+
+as before. In particular, we have that
+
+\begin{align*}
+    \omega_A(e^\#, e^\#) = \omega_A(f^\#, f^\#) &= 0 \\
+    \omega_A(e^\#, f^\#) &= 2
+\end{align*}
+
+Define \(\omega_J = \Re(\omega_A)\) and \(\omega_K = \Im(\omega_A\)). We have a real basis \(e^\#, ie^\#, f^\#, if^\#\) for \(\TT_A M\). With respect to this basis, we have that
+
+\[\omega_J = \begin{pmatrix}
+    0 & 0 & -2 & 0 \\
+    0 & 0 & 0 & 2 \\
+    2 & 0 & 0 & 0 \\
+    0 & -2 & 0 & 0
+\end{pmatrix} \qquad \omega_K = \begin{pmatrix}
+    0 & 0 & 0 & -2 \\
+    0 & 0 & -2 & 0 \\
+    0 & 2 & 0 & 0 \\
+    2 & 0 & 0 & 0
+\end{pmatrix}\]
+
+Defining the \(4 \times 4\) matrices \(I, J, K\) as above, we see that \(\omega_J = 2J\) and \(\omega_K = 2K\). Thus, by the same reasoning as in the semisimple case, \(M\) is a hyperK\"ahler manifold, with metric
+
+\[g_A = \begin{pmatrix}
+    2 & 0 & 0 & 0 \\
+    0 & 2 & 0 & 0 \\
+    0 & 0 & 2 & 0 \\
+    0 & 0 & 0 & 2
+\end{pmatrix}\]
 
 % From the proof of \cref{prop:omega-block-diag}, we have that
 
