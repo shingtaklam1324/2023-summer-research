@@ -106,7 +106,7 @@ Some properties of \(\Ad, \ad\) and the inner product which we will need, and ar
 
 \section{K\"ahler manifolds}
 
-Let \(M\) be a manifold. In this section, we will define what a K\"ahler structure on \(M\) is.
+Let \(M\) be a manifold. In this section, we will define a K\"ahler structure on \(M\).
 
 Throughout, if \(V, W\) are vector spaces,
 
@@ -309,6 +309,8 @@ Using the same notation as in \cref{sec:matrix-lie-groups}, this means that we h
 
 \section{Root decomposition}
 
+\label{sec:root}
+
 In this section, we will consider the root decomposition of \(\sl(n, \C)\) and use this to derive the root decomposition of \(\su(n)\). \Citeauthor{humphreys} \cite[\S 8]{humphreys} contains this, and much more.
 
 Consider the Lie algebra \(\sl(n, \C)\) of trace free \(n \times n\) complex matrices. Then we have the Cartan subalgebra \(\mft\) of diagonal matrices. Let \(E_{ij}\) be the standard basis matrices for \(\Mat(n, \C)\), \(B \in \mft\). Say
@@ -349,7 +351,7 @@ First of all, we note that elements of \(\su(n)\) are skew-hermitian, hence diag
     & & i\lambda_k I_{m_k}
 \end{pmatrix}\]
 
-where \(I_m\) is the \(m \times m\) identity matrix, \(\lambda_j \in \R\), with \(\lambda_1 < \lambda_2 < \dots < \lambda_k\), \(m_1 + \dots + m_k = n\) and \(m_1\lambda_1 + \dots + m_k\lambda_k = 0\). In this case, by the orbit stabiliser theorem, we have a bijection
+where \(I_m\) is the \(m \times m\) identity matrix, \(\lambda_j \in \R\), with \(\lambda_1 > \lambda_2 > \dots > \lambda_k\), \(m_1 + \dots + m_k = n\) and \(m_1\lambda_1 + \dots + m_k\lambda_k = 0\). In this case, by the orbit stabiliser theorem, we have a bijection
 
 \[\Orb(A) \leftrightarrow \SU(n)/\Stab(A)\]
 
@@ -364,6 +366,8 @@ where we consider \(\rm U(m_1) \times \cdots \times \rm U(m_k) \le \SU(n)\) as t
 the subgroup with determinant \(1\).
 
 \subsection{Tangent space}
+
+\label{subsec:tangent}
 
 Let \(M\) be an adjoint orbit. We will now focus on the generic case, that is, the eigenvalues of \(A\) are distinct. In this case, we have that
 
@@ -390,6 +394,20 @@ where we use the fact that
 \[\ad_{\Ad_a(A)} = \Ad_a \circ \ad_A \circ \Ad_{a^{-1}}\]
 
 and that \(\Ad_{a^{-1}}\) is a bijection.
+
+\subsection{General case}
+
+If we do not assume the eigenvalues are distinct, then \(\Stab(A)\) will have Lie algebra
+
+\[\mfs = \left(\mfu(m_1) \oplus \cdot \oplus \mfu(m_k)\right) \cap \su(n)\]
+
+In particular, we will still have that
+
+\[\TT_A M = \frac{\su(n)}{\mfs}\]
+
+and in general,
+
+\[\TT_B M = \left\{\ad_B(X) \mid X \in \su(n)\right\}\]
 
 \section{Kirillov-Kostant-Souriau symplectic form}
 
@@ -432,7 +450,7 @@ for all \(Y \in \su(n)\). But by associativity,
 
 \[\inner{B, [X, Y]} = \inner{[B, X], Y} = -\inner{\ad_X(B), Y}\]
 
-Therefore, we must then have that \(\ad_X(B) = 0\).
+for all \(Y \in \su(n)\). Therefore, we must then have that \(\ad_X(B) = 0\).
 
 \subsection{\(\omega\) is closed}
 
@@ -509,6 +527,8 @@ Both lines are zero by the Jacobi identity, hence \(\dd\omega_B = 0\).
 
 \section{K\"ahler structure}
 
+\label{sec:kahler}
+
 In this section, we will construct the K\"ahler structure on the adjoint orbits of \(\SU(n)\). We have already constructed the symplectic form \(\omega\) in \cref{thm:kks}. We will now construct the Riemannian metric \(g\) and the almost complex structure \(J\).
 
 \subsection{Complex quotient}
@@ -567,7 +587,7 @@ Let \(e_{ij} = E_{ij} - E_{ji}\) and \(f_{ij} = i(E_{ij} + E_{ji})\). We will sh
     \begin{align*}
         \omega_A(e_{ij}, e_{kl}) &= 0 \\
         \omega_A(f_{ij}, f_{kl}) &= 0 \\
-        \omega_A(e_{ij}, f_{ij}) &= 2(\lambda_j - \lambda_i) \\
+        \omega_A(e_{ij}, f_{ij}) &= \frac{2}{\lambda_i - \lambda_j} \\
         \omega_A(e_{ij}, f_{kl}) &= 0 \text{ for }(i, j) \ne (k, l)
     \end{align*}
 \end{proposition}
@@ -602,11 +622,11 @@ Using this, we can define a complex structure on \(\TT_AM\) by multiplication by
 
 Moreover, we can define an inner product on \(\TT_AM\) by
 
-\[g_A(e_{ij}, e_{ij}) = g_A(f_{ij}, f_{ij}) = 2(\lambda_j - \lambda_i)\]
+\[g_A(e_{ij}, e_{ij}) = g_A(f_{ij}, f_{ij}) = \frac{2}{\lambda_i - \lambda_j}\]
 
-and requiring \(e_{ij}, f_{ij}\) to form an orthogonal basis. This is positive definite since we required \(\lambda_i < \lambda_j\) for \(i < j\). Using this, we find that
+and requiring \(e_{ij}, f_{ij}\) to form an orthogonal basis. This is positive definite since we required \(\lambda_i > \lambda_j\) for \(i < j\). Using this, we find that
 
-\[\omega_A(e_{ij}, f_{ij}) = 2(\lambda_j - \lambda_i) = g_A(f_{ij}, f_{ij}) = g_A(J_A(e_{ij}), f_{ij})\]
+\[\omega_A(e_{ij}, f_{ij}) = \frac{2}{\lambda_i - \lambda_j} = g_A(f_{ij}, f_{ij}) = g_A(J_A(e_{ij}), f_{ij})\]
 
 and that \(J\) defines an isometry.
 
@@ -636,7 +656,7 @@ and
     &= 0
 \end{align*}
 
-Finally, we have that
+Therefore, we have that
 
 \begin{align*}
     -i\inner{A, [e_{ij}, f_{kl}]} &= \inner{A, [E_{ij}, E_{kl}]} - \inner{A, [E_{ji}, E_{kl}]} + \inner{A, [E_{ij}, E_{lk}]} - \inner{A, [E_{ji}, E_{lk}]} \\
@@ -645,11 +665,26 @@ Finally, we have that
     &= 2i(\lambda_j - \lambda_i)\delta_{ik}\delta_{jl}
 \end{align*}
 
-where the last line is because we require \(i < j\) and \(k < l\).
+where the last line is because we require \(i < j\) and \(k < l\). Finally, note that
+
+\begin{align*}
+    \ad_{e_{ij}}(A) &= -[A, E_{ij} + E_{ji}] = (\lambda_j - \lambda_i)f_{ij} \\
+    \ad_{f_{ij}}(A) &= -i[A, E_{ij} - E_{ji}] = (\lambda_i - \lambda_j)e_{ij}
+\end{align*}
+
+Using this, we get that
+
+\begin{align*}
+    \omega_A(e_{ij}, f_{ij}) &= \frac{1}{(\lambda_j - \lambda_i)^2}\omega_A(\ad_{e_{ij}}(A), \ad_{f_{ij}}(A)) \\
+    &= -\frac{1}{(\lambda_j - \lambda_i)^2}\inner{A, [e_{ij}, f_{ij}]} \\
+    &= -\frac{1}{(\lambda_j - \lambda_i)^2}2(\lambda_j - \lambda_i) \\
+    &= -\frac{2}{\lambda_j - \lambda_i} \\
+    &= \frac{2}{\lambda_i - \lambda_j}
+\end{align*}
 
 \end{proof}
 
-\subsection{General case}
+\subsection{At a generic point}
 
 In fact, at this point we have already done the vast majority of the work. \(\SU(n)\) acts transitively via left multiplication on both \(\SU(n)/T\) and \(\SL(n, \C)/P\) by diffeomorphisms. Let \(\ell_a\) denote the left multiplication map in both cases, and suppose \(B = \Ad_a(A)\).
 
@@ -692,14 +727,231 @@ Then we have that
     &= \omega_A(\Ad_{a^*}([B, X]), \Ad_{a^*}([B, Y]))
 \end{align*}
 
-Therefore, the Riemannian metric is given by
+Therefore, \(\omega_B\) is \(\Ad\)-invariant, and thus compatible with \(J\). The Riemannian metric is given by
 
-\[\iinner{X, Y}_B = \iinner{\Ad_{a^*}(X), \Ad_{a^*}(Y)}_A\]
+\[g_B(X, Y) = g_A(\Ad_{a^*}(X), \Ad_{a^*}(Y))\]
+
+\subsection{General case}
+
+In this case, we can write
+
+\[\su(n) = \mfs \oplus \bigoplus_{(i, j) \in S}\left(\R e_{ij} \oplus \R f_{ij}\right)\]
+
+where \(S = \left\{(i, j) \mid 1 \le i < j \le n, \lambda_i \ne \lambda_j\right\}\). Then the same formulae as above hold, and defines a K\"ahler structure on \(M\). 
 
 \section{\(\SL(n, \C)\) orbits}
 
-First we will sketch how to generalise what we have shown so far to \(\SL(n, \C)\). The same formulae as in \cref{sec:adjoint} can be used to define the adjoint and coadjoint representations of \(\SL(n, \C)\), and the same inner product can be used to show that the two are isomorphic.
+First of all, we will sketch how to modify sections 1, 4, 5 and 6 for \(\SL(n, \C)\) orbits.
 
+\subsection*{Section 1}
+
+The same formulae can be used to define the adjoint and coadjoint representations of \(\SL(n, \C)\). We will use the same notation
+
+\[\inner{A, B} = -\tr(AB)\]
+
+for the bilinear form \(\sl(n, \C) \times \sl(n, \C) \to \C\). Note in particular any complex bilinear form cannot be positive definite. However, it is still nondegenerate. In fact, \((A, B) \mapsto \Re(\inner{A, B})\) defines an inner product on \(\sl(n, \C)\). Using this, we still have an isomorphism between the adjoint and coadjoint orbits.
+
+The identities at the end of the section still hold for \(\sl(n, \C)\), as we only did not need the fact that \(\inner{\cdot, \cdot}\) is positive definite.
+
+\subsection*{Section 4}
+
+In this case, since we already needed the root decomposition of \(\sl(n, \C)\), no changes are necessary in this case.
+
+\subsection*{Section 5}
+
+In general, elements of \(\sl(n, \C)\) won't be diagonalisable, and for a matrix in Jordan normal form, the stabiliser can get very complicated. Therefore, we will now focus on the case where the matrix is diagonalisable. In fact, we will assume that the matrix has distinct eigenvalues. In this case, the stabiliser of
+
+\[A = \begin{pmatrix}
+    z_1 \\
+    & \ddots \\
+    & & z_n
+\end{pmatrix}\]
+
+is the complex torus \(T = T^{n-1}\) of diagonal matrices in \(\SL(n, \C)\). A similar argument as in \cref{subsec:tangent} shows that
+
+\[\TT_A M = \bigoplus_{i \ne j}\C E_{ij}\]
+
+and more generally, the formula
+
+\[\TT_B M = \left\{\ad_X(B) \mid X \in \sl(n, \C)\right\}\]
+
+holds, even for non-diagonalisable orbits.
+
+\subsection*{Section 6}
+
+The only modification we will need to make in this section is because \(\inner{\cdot, \cdot}\) is complex valued, and we used the real part to define the isomorphism \(\sl(n, \C) \cong \sl(n, \C)^*\). Therefore, the formula in \cref{thm:kks} becomes
+
+\[\omega_B(\ad_X(B), \ad_Y(B)) = -\Re\inner{B, [X, Y]}\]
+
+Note however our choice of the real part was arbitrary, and we could have chosen the imaginary part instead. In fact, we can combine the real and imaginary parts, to get
+
+\[\tilde \omega_B(\ad_X(B), \ad_Y(B)) = -\inner{B, [X, Y]} = \tr(B[X,Y])\]
+
+which is a \emph{complex valued} non-degenerate, closed \(2\)-form.
+
+% First we will sketch how to generalise what we have shown so far to \(\SL(n, \C)\). 
+
+% \begin{itemize}
+%     \item The same formulae as in \cref{sec:adjoint} can be used to define the adjoint and coadjoint representations of \(\SL(n, \C)\). The pairing \((A, B) \mapsto -\tr(AB)\) will now be complex valued, and so we will define
+%     \[\inner{A, B} = -\Re \tr(AB)\]
+%     instead. The same identities will hold. In particular, \(\inner{\cdot, \cdot}\) still defines an isomorphism \(\sl(n, \C) \to \sl(n, \C)^*\), and an isomorphism between \(\Ad\) and \(\Ad^*\).
+%     \item \Cref{sec:root} will be the same, since we already did the root decomposition of \(\sl(n, \C)\).
+%     \item \Cref{sec:tangent} will be different, since its no longer true that every element in the stabiliser will be diagonalisable. The different Jordan normal forms will give us different results.
+%     \item \Cref{sec:kks} will be the same, where the same formulae works for \(\SL(n, \C)\), and the proof works as is.
+%     \item \Cref{sec:kahler} will be different, since we will show that \(\SL(n, \C)\) orbits have a complex structure already, and so we need to check that this is compatible with the symplectic form.
+% \end{itemize}
+
+\subsection{Semisimple case}
+
+The first case we will consider is for semisimple orbits. That is, orbits with distinct eigenvalues. Let \(M\) be such an orbit, and fix a diagonal element
+
+\[A = \begin{pmatrix}
+    z_1 \\
+    & \ddots \\
+    & & z_n
+\end{pmatrix}\]
+
+where \(z_j = x_j + iy_j\). In this case, the stabiliser will be the torus \(T = T^{n-1}\) of diagonal matrices in \(\SL(n, \C)\). Therefore, by the same argument as in \cref{sec:tangent}, we have that
+
+\[\T_AM = \frac{\sl(n, \C)}{\mft} = \bigoplus_{i \ne j}\C E_{ij}\]
+
+For \(i < j\), let \(e_{ij} = E_{ij} + E_{ji}\) and \(f_{ij} = E_{ij} - E_{ji}\). Then \(e_{ij}, f_{ij}\) is a \(\C\)-basis for \(\T_A M\).
+
+The same computation as in \cref{prop:omega-block-diag} shows that
+
+\[\inner{A, [e_{ij}, e_{kl}]} = \inner{A, [f_{ij}, f_{kl}]} = 0\]
+
+and
+
+\[\inner{A, [e_{ij}, f_{kl}]} = 2(z_i - z_j)\delta_{ik}\delta_{jl}\]
+
+Moreover, if we define
+
+\[\omega_B(\ad_X(B), \ad_Y(B)) = -\inner{B, [X, Y]}\]
+
+as in \cref{thm:kks}, then we have a complex valued, nondegenerate, closed \(2\)-form \(\omega\) on \(M\). Set \(e_{ij}^\# = [e_{ij}, A] = (z_j - z_i)f_{ij}\) and \(f_{ij}^\# = [f_{ij}, A] = (z_j - z_i)e_{ij}\). Then we have that with respect to the basis \(e_{ij}^\#, f_{ij}^\#\), \(\omega\) is given by
+
+\begin{align*}
+    \omega_A(e_{ij}^\#, e_{kl}^\#) &= 0 \\
+    \omega_A(f_{ij}^\#, f_{kl}^\#) &= 0 \\
+    \omega_A(e_{ij}^\#, f_{ij}^\#) &= 2(z_j - z_i) \\
+    \omega_A(e_{ij}^\#, f_{kl}^\#) &= 0 \text{ for }(i, j) \ne (k, l)
+\end{align*}
+
+Set \(\omega_J = \Re(\omega_A), \omega_K = \Im(\omega_A)\). Then \(\omega_J, \omega_K\) are symplectic forms on \(M\). Since \(\omega_A\) above is block diagonal, so are \(\omega_J, \omega_K\). Therefore, we can assume without loss of generality that \(n = 2\), since we can define the complex structures and the Riemannian metric to be block diagonal. In this case, we have a basis \(e := e_{12}^\#, f := f_{12}^\#\) for \(\TT_AM\), and
+
+\begin{align*}
+    \omega_A(e, e) = \omega_A(f, f) &= 0 \\
+    \omega_A(e, f) &= 2(z_2 - z_1)
+\end{align*}
+
+Let \(\theta \in \R\) be such that \(\Im(e^{i\theta}(z_2 - z_1)) = 0\) and \(\Re(e^{i\theta}(z_2 - z_1)) > 0\). Then \(e, v = e^{i\theta}f\) is a \(\C\)-basis for \(\TT_A M\), with
+
+\begin{align*}
+    \omega_A(e, e) = \omega_A(v, v) &= 0 \\
+    \omega_A(e, v) &= 2e^{i\theta}(z_2 - z_1)
+\end{align*}
+
+Therefore, without loss of generality we may assume that \(\theta = 0\), i.e. \(y_1 = y_2\) and \(a = 2(x_2 - x_1) > 0\). Next, note that \(e, ie, f, if\) form a \(\R\)-basis for \(\TT_A M\), and with respect to this basis, we have that:
+
+\[\omega_J = \begin{pmatrix}
+    0 & 0 & -a & 0 \\
+    0 & 0 & 0 & a \\
+    a & 0 & 0 & 0 \\
+    0 & -a & 0 & 0
+\end{pmatrix} \qquad \omega_K = \begin{pmatrix}
+    0 & 0 & 0 & -a \\
+    0 & 0 & -a & 0 \\
+    0 & a & 0 & 0 \\
+    a & 0 & 0 & 0
+\end{pmatrix}\]
+
+Define matrices
+
+\[I = \begin{pmatrix}
+    0 & -1 & 0 & 0 \\
+    1 & 0 & 0 & 0 \\
+    0 & 0 & 0 & -1 \\
+    0 & 0 & 1 & 0
+\end{pmatrix} \quad J = \begin{pmatrix}
+    0 & 0 & -1 & 0 \\
+    0 & 0 & 0 & 1 \\
+    1 & 0 & 0 & 0 \\
+    0 & -1 & 0 & 0
+\end{pmatrix} \quad K = \begin{pmatrix}
+    0 & 0 & 0 & -1 \\
+    0 & 0 & -1 & 0 \\
+    0 & 1 & 0 & 0 \\
+    1 & 0 & 0 & 0
+\end{pmatrix}\]
+
+Then we have that
+
+\begin{enumerate}
+    \item \(I, J, K\) satisfy the quaternionic relations \(I^2 = J^2 = K^2 = IJK = -1\),
+    \item \(\omega_J = aJ, \omega_K = aK\)
+\end{enumerate}
+
+and \(g = \begin{pmatrix}
+    a \\ & a \\
+    && a\\
+    &&& a
+\end{pmatrix}\) defines an inner product on \(\TT_AM\), as \(a > 0\). 
+
+Finally, as in \cref{sec:kahler}, \(\SL(2, \C)\) acts transitively on \(M\) by diffeomorphisms, preserving the complex structure \(I\) from the complex manifold structure, and the \(2\)-form \(\omega\). In particular, the Riemannian metric \(g\) is given by
+
+\[g_B(\Ad_{a}(X), \Ad_{a}(Y)) = g_A(X, Y)\]
+
+where \(B = \Ad_a(X)\).
+
+\begin{definition}
+    [hyperK\"ahler manifold]
+
+    A hyperK\"ahler manifold \(M\) is a manifold, with 
+    
+    \begin{itemize}
+        \item (almost) complex structures \(I, J, K\) satisfying the quaternionic relations \(I^2 = J^2 = IJK = -1\), 
+        \item a Riemannian metric \(g\),
+        \item symplectic forms \(\omega_I, \omega_J, \omega_K\)
+    \end{itemize}
+
+    such that \((M, g, \omega_I, I), (M, g, \omega_J, J), (M, g, \omega_K, K)\) are K\"ahler manifolds.
+\end{definition}
+
+Finally, we will show that \((M, g, \omega_I, \omega_J, \omega_K)\) is a hyperK\"ahler manifold. By \cite[Page 64]{hitchin_monopoles}, it suffices to show that the forms \(\omega_I, \omega_J, \omega_K\) are closed. \(\omega_J, \omega_K\) are symplectic forms, and so are closed. Therefore, suffices to show that \(\omega_I\) is closed. Define
+
+\begin{align*}
+    \psi : \sl(n, \C) &\to M \\
+    X &\mapsto \Ad_{\exp(X)}A = \exp(X)A\exp(-X)
+\end{align*}
+
+By the chain rule, we have that
+
+\[\dd\psi_X(Y) = \Ad_{\exp(X)}(\ad_Y(A))\]
+
+Recall from \cref{sec:quotient} that if we have \(\sl(n, \C) = \mft \oplus V\), then \(\psi : V \to M\) defines a parametrisation from a neighbourhood of \(0\) to a neighbourhood of \(A\). But by definition of the \(\SL(n, \C)\) action,
+
+\[(\omega_I)_{\exp(X)}(\Ad_{\exp(X)}(\ad_Y(A)), \Ad_{\exp(X)}(\ad_Z(A))) = (\omega_I)_A(\ad_Y(A), \ad_Z(A))\]
+
+Therefore, in terms of the local coordinates \(x_{ij}\) coming from \(\psi\),
+
+\[\omega_I = \sum_{i, j, k, l}c_{ijkl}\dd x_{ij} \wedge \dd x_{kl}\]
+
+where \(c_{ijkl}\) are constants. Hence \(\dd \omega_I = 0\) in a neighbourhood of \(A\). Using the \(\SL(n, \C)\) action, \(\dd\omega_I = 0\) on all of \(M\).
+
+\subsection{Diagonalisable case}
+
+In this case, we will only assume that the orbits are diagonalisable. This means that we have
+
+\[\T_AM = \bigoplus_{(i, j) \in S}\C E_{ij}\]
+
+where \(S = \left\{(i, j) \mid 1 \le i < j \le n, z_i \ne z_j\right\}\). With this, the same formulae hold, and define a hyperK\"ahler structure on \(M\).
+
+% From the proof of \cref{prop:omega-block-diag}, we have that
+
+% \[\inner{A, [E_{ij}, E_{kl}]} = \Re(z_j - z_i)\delta_{il}\delta_{jk} = (x_j - x_i)\delta_{il}\delta_{jk}\]
+
+% and 
 % Sec 4 the same, as we already did the root decomp of sl(n, C)
 % Sec 5 different, since the stabiliser gets more complicated, as we may not be able to diagonalise
 % Maybe consider just the diagonalisable case with distinct eigenvalues?
