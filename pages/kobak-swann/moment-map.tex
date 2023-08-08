@@ -104,6 +104,26 @@ Note also that \(IX = XI\) and \(JX = XJ\), and that \(I, J, K=IJ\) define isome
 
 \[\iinner{q, X \cdot (-J)q} = \iinner{Jq, Xq}\]
 
+\section{How does this work?}
+
+Now for simplicity, consider the case of \(\bb H\). In this case, we can write \(p \in \bb H\) as \(p = z_0 + jz_1\), where \(z_0, z_1 \in \C\). Then the hermitian inner product is given by
+
+\[\inner{z_0 + jz_1, w_0 + jw_1} = \overline z_0 w_0 + \overline z_1 w_1\]
+
+Writing \(z_0 = a+bi, z_1 = c+ di\), \(p = a + bi + cj - dk\). Then the quaternionic conjugate is \(\overline p = a - bi - cj + dk = \overline z_0 - jz_1\). This means that
+
+\begin{align*}
+    \overline pq &= (\overline z_0 - jz_1)(w_0 + jw_1) \\
+    &= \overline z_0w_0 + \overline z_0jw_1 - jz_1w_0 - jz_1jw_1
+\end{align*}
+
+Next, if \(z_0 = a + bi\), then \(z_0j = aj + bk = j(a - bi) = j\overline z_0\). Using this, we get that
+
+\[\overline p q = (\overline z_0w_0 + \overline z_1w_1) + j(z_0w_1 - z_1w_0)\]
+
+Next, notice that \(pj =  -\overline z_1 + j \overline z_0\), and so
+
+\[\inner{pj, q} = -z_1 w_0 + z_0w_1\]
 \printbibliography
 
 \end{document}
