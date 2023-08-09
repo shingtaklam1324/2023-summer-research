@@ -1,0 +1,187 @@
+\documentclass{article}
+
+\usepackage{../../Style}
+\usepackage{biblatex}
+\addbibresource{../../bibliography.bib}
+\newcommand{\rla}{\rightleftarrows}
+
+\renewcommand{\sl}{\mfs\mfl}
+
+\title{Computation of hyperK\"ahler metric on nilpotent \(\SL(2, \C)\) orbits}
+\author{Shing Tak Lam}
+
+\begin{document}
+
+\maketitle
+
+In this note, we will compute explicitly the hyperK\"ahler metric on the nilpotent \(\SL(2, \C)\) orbit using \cite{kobak_classical_1996}.
+
+In this case, the only nonzero nilpotent orbit is the orbit of
+
+\[A = \begin{pmatrix}
+    0 & 1 \\
+    0 & 0
+\end{pmatrix}\]
+
+which corresponds to the diagram
+
+\[0 \rla \C \rla \C^2\]
+
+Choosing a basis for \(\C\) and \(\C^2\), we can identify \(M = \C^4\), with
+
+\[\alpha = \begin{pmatrix}
+    \alpha_1 \\ \alpha_2
+\end{pmatrix} \qquad \beta = \begin{pmatrix}
+    \beta_1 & \beta_2
+\end{pmatrix}\]
+
+The complex moment map in this case is
+
+\[\mu_c(\alpha, \beta) = \beta\alpha = \alpha_1 \beta_1 + \alpha_2\beta_2\]
+
+The action of the group \(\rm U(1) \cong S^1\) on \(M\) is given by
+
+\[g \vdot (\alpha, \beta) = (\alpha g^{-1}, g\beta)\]
+
+In terms of the components, this is given by
+
+\[\lambda \cdot (\alpha_1, \alpha_2, \beta_1, \beta_2) = (\lambda^{-1}\alpha_1, \lambda^{-1}\alpha_2, \lambda\beta_1, \lambda\beta_2)\]
+
+Define the map \(\Phi : M \to \mcN\) by
+
+\[\Phi(\alpha, \beta) = \alpha\beta = \begin{pmatrix}
+    \alpha_1\beta_1 & \alpha_1\beta_2 \\
+    \alpha_2\beta_1 & \alpha_2\beta_2
+\end{pmatrix}\]
+
+where \(\mcN\) is the nilpotent variety of \(\sl(2, \C)\). In particular, as we are interested in the nonzero orbit, we will want to consider the restriction of \(\Phi\) to \(M\setminus \{0\}\). In particular, \(\Phi\) factors as
+
+% https://q.uiver.app/#q=WzAsMyxbMCwwLCJcXG11X2Neey0xfSgwKSJdLFswLDIsIlxcbXVfY157LTF9KDApL0deXFxDIl0sWzIsMiwiXFxtY04iXSxbMCwxLCJcXHBpIiwyLHsic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoiZXBpIn19fV0sWzEsMiwiXFxvdmVybGluZVxcUGhpIiwyXSxbMCwyLCJcXFBoaSJdXQ==
+\[\begin{tikzcd}[ampersand replacement=\&]
+	{\mu_c^{-1}(0)} \\
+	\\
+	{\mu_c^{-1}(0)/G^\C} \&\& \mcN
+	\arrow["\pi"', two heads, from=1-1, to=3-1]
+	\arrow["\overline\Phi"', from=3-1, to=3-3]
+	\arrow["\Phi", from=1-1, to=3-3]
+\end{tikzcd}\]
+
+From \cite[Theorem 2.7]{kobak_classical_1996}, \(\overline\Phi\) defines a diffeomorphism onto its image. In particular, this means that we can compute the hyperK\"ahler metric on the adjoint orbit of \(A\).
+
+Let \(\Orb(A)\) denote the adjoint orbit of \(A\). Then we have that
+
+\[\T_A\Orb(A) = \Span_\C\left\{e, f\right\}\]
+
+where
+
+\[e = \begin{pmatrix}
+    0 & -2 \\
+    0 & 0
+\end{pmatrix} \qquad f = \begin{pmatrix}
+    -1 & 0 \\
+    0 & 1
+\end{pmatrix}\]
+
+If \(\omega_c = \omega_J + i\omega_K\) is the complex-symplectic form on \(M\), and \(\hat\omega_c\) is the complex-symplectic form on \(\mu_c^{-1}(0)\), then we have that
+
+\[\pi^*\hat\omega_c = i^*\omega_c\]
+
+where \(i : \mu_c^{-1}(0) \to M\) is the inclusion map. In particular, if we transport across the diffeomorphism \(\overline\Phi\), and let \(\tilde \omega_c\) be the complex-symplectic form on \(\Orb(A)\), then we have that
+
+\[\Phi^*\tilde\omega_c = i^*\omega_c\]
+
+We would like to compute \(\tilde\omega_c\) at \(A\). One preimage is \((1, 0, 0, 1) \in M\). Computing \(\dd\Phi\) at \((1, 0, 0, 1)\), we find that
+
+\[\dd\Phi_{(1, 0, 0, 1)}(h_1, h_2, k_1, k_2) = \begin{pmatrix}
+    k_1 & h_1 + k_2 \\
+    0 & h_2
+\end{pmatrix}\]
+
+Next, using standard arguments, we find that
+
+\[\T_{(1, 0, 0, 1)}\mu_c^{-1}(0) = \left\{k_1 + h_2 = 0\right\}\]
+
+In particular, setting
+
+\[\hat e = (-2, 0, 0, 0) \qquad \hat f = (0, 1, -1, 0)\]
+
+we have that \(\dd\Phi(\hat e) = e\) and \(\dd\Phi(\hat f) = f\). Therefore, to compute \(\tilde\omega_c\), all we need to do is compute \(\omega_c(\hat e, \hat f)\).
+
+In terms of the coordinates, the complex structure \(J\) is given by
+
+\[J(\alpha_1, \alpha_2, \beta_1, \beta_2) = (-\overline \beta_1, -\overline\beta_2, \overline \alpha_1, \overline \alpha_2)\]
+
+and so
+
+\[\omega_J(\hat e, \hat f) = g(J(-2, 0, 0, 0), (0, 1, -1, 0)) = g((0, 0, -2, 0), (0, 1, -1, 0)) = 2\]
+
+where \(g\) is the standard Riemannian metric on \(\C^4 \cong \R^8\). Next, we have that
+
+\[\omega_K(\hat e, \hat f) = g(IJ(-2, 0, 0, 0), (0, 1, -1, 0)) = g((0, 0, -2i, 0), (0, 1, -1, 0)) = 0\]
+
+Therefore, \(\tilde \omega_c(e, f) = 2\). \(\SL(2, \C)\) acts on \(\mu_c^{-1}(0)\) via
+
+\[\gamma \cdot (\alpha, \beta) = (\gamma\alpha, \beta \gamma^{-1})\]
+
+which means that
+
+\[\Phi(\gamma \cdot (\alpha, \beta)) = \gamma\Phi(\alpha, \beta)\gamma^{-1}\]
+
+i.e. if \(\psi_\gamma(\alpha, \beta) = (\gamma\alpha, \beta \gamma^{-1})\), then
+
+% https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXG11X2Neey0xfSgwKSJdLFsyLDAsIlxcbXVfY157LTF9KDApIl0sWzAsMiwiXFxPcmIoQSkiXSxbMiwyLCJcXE9yYihBKSJdLFswLDIsIlxcUGhpIiwyXSxbMSwzLCJcXFBoaSJdLFswLDEsIlxccHNpX1xcZ2FtbWEiXSxbMiwzLCJcXEFkX1xcZ2FtbWEiLDJdXQ==
+\[\begin{tikzcd}[ampersand replacement=\&]
+	{\mu_c^{-1}(0)} \&\& {\mu_c^{-1}(0)} \\
+	\\
+	{\Orb(A)} \&\& {\Orb(A)}
+	\arrow["\Phi"', from=1-1, to=3-1]
+	\arrow["\Phi", from=1-3, to=3-3]
+	\arrow["{\psi_\gamma}", from=1-1, to=1-3]
+	\arrow["{\Ad_\gamma}"', from=3-1, to=3-3]
+\end{tikzcd}\]
+
+commutes. We would like to show that \(\Ad_\gamma^*\tilde\omega_c = \tilde\omega_c\). Since \(\Phi\) is a surjective submersion, it suffices to show that
+
+\[\Phi^*\tilde\omega_c = \Phi^*\Ad_g^*\tilde\omega_c\]
+
+i.e.
+
+\[\psi_\gamma^*i^*\omega_c = i^*\omega_c\]
+
+That is,
+
+\[\omega_c(\dd\psi_\gamma(u), \dd\psi_\gamma(v)) = \omega_c(u, v)\]
+
+for all \(u, v \in \T_{(1,0,0,1)}\mu_c^{-1}(0)\). In particular, we need to check this on the subspace spanned by \(\hat e, \hat f\). This means that all we need to compute is
+
+\[\omega_c(\dd\psi_\gamma(\hat e), \dd\psi_\gamma(\hat f))\]
+
+Since \(\psi_\gamma\) gives a linear map \(M \to M\), \(\dd\psi_\gamma = \psi_\gamma\). If \(\gamma = \begin{pmatrix}
+    a & b \\ c & d
+\end{pmatrix}\), then it is easy to show that
+
+\[\dd\psi_\gamma(\hat e) = (-2a, -2c, 0, 0) \qquad \dd\psi_\gamma(\hat f) = (b, d, -d, b)\]
+
+This then shows that
+
+\begin{align*}
+    \omega_J(\dd\psi_\gamma(\hat e), \dd\psi_\gamma(\hat f)) &= g(J(-2a, -2c, 0, 0), (b, d, -d, b)) \\
+    &= g((0, 0, -2a, -2c), (b, d, -d, b)) \\
+    &= \Re(2ad - 2bc) \\
+    &= 2
+\end{align*}
+
+and
+
+\begin{align*}
+    \omega_K(\dd\psi_\gamma(\hat e), \dd\psi_\gamma(\hat f)) &= g(IJ(-2a, -2c, 0, 0), (b, d, -d, b)) \\
+    &= g((0, 0, -2ai, -2ci), (b, d, -d, b)) \\
+    &= \Re((2ad - 2bc)i) \\
+    &= 0
+\end{align*}
+
+Therefore, we have that \(\tilde\omega_c\) is invariant under the adjoint action of \(\SL(2, \C)\).
+
+\printbibliography
+
+\end{document}
