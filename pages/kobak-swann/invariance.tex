@@ -4,6 +4,9 @@
 \usepackage{biblatex}
 \addbibresource{../../bibliography.bib}
 
+\renewcommand{\tilde}{\widetilde}
+\DeclareMathOperator{\SU}{SU}
+
 \title{Invariance of the hyperK\"ahler metric}
 \author{Shing Tak Lam}
 
@@ -13,56 +16,65 @@
 
 In this note, we will investigate the invariance of the hyperK\"ahler metric from \cite{kobak_classical_1996}. We will use the same notation as in section 2.
 
-\textbf{Nope, this doesn't work...}
+Let \(g\) denote the Riemannian metric, that is,
 
-Let \(g\) denote the Riemannian metric on \(M\). That is,
+\[g((\alpha_j, \beta_j), (\tilde\alpha_j, \tilde\beta_j)) = \sum_{j=0}^{k-1}\left(\Re\tr(\alpha_j^*\tilde\alpha_j) + \Re\tr(\beta_j^*\tilde\beta_j)\right)\]
 
-\[g((\alpha_j, \beta_j), (\tilde\alpha_j, \tilde\beta_j)) = \sum_{j=0}^{k-1}\Re\tr(\alpha_j^*\tilde\alpha_j + \beta_j\tilde\beta_j^*)\]
-
-We have a \(\SL(n, \C)\) acton on \(M\), by
-
-\[\psi_\gamma(\alpha_j, \beta_j) = (\alpha_0, \dots, \alpha_{k-2}, \gamma\alpha_{k-1}, \beta_0, \dots, \beta_{k-2}, \beta_{k-1}\gamma^{-1})\]
-
-Since \(\psi_\gamma : M \to M\) is linear, \(\dd\psi_\gamma = \psi_\gamma\). In particular, for
+Therefore, we have that
 
 \begin{align*}
-    \omega_J((\alpha_j, \beta_j), (\tilde\alpha_j, \tilde\beta_j)) &= g(J(\alpha_j, \beta_j), (\tilde\alpha_j, \tilde\beta_j)) \\
-    &= \sum_{j=0}^{k-1}\Re\tr(-(\beta_j^*)^*\tilde\alpha_j + \alpha_j^*\tilde\beta_j^*) \\
-    &= \sum_{j=0}^{k-1}\Re\tr(-\beta_j\tilde\alpha_j + \alpha_j^*\tilde\beta_j^*) \\
+    \omega_J((\alpha_j, \beta_j), (\tilde\alpha_j, \tilde\beta_j)) &= g(J(\alpha_j, \beta_j), (\tilde\alpha_j, \tilde\beta_j))\\
+    &= g((-\beta_j^*, \alpha_j^*), (\tilde\alpha_j, \tilde\beta_j)) \\
+    &= \sum_{j=0}^{k-1}\left(\Re\tr(-\beta_j\tilde\alpha_j) + \Re\tr(\alpha_j\tilde\beta_j)\right)
 \end{align*}
 
-We will need to show that
+We also have a \(\SL(n, \C)\) action on \(M\), given by
 
+\[\psi_\gamma (\alpha_j, \beta_j) = (\alpha_0, \dots, \alpha_{k-2}, \gamma\alpha_{k-1}, \beta_0, \dots, \beta_{k-2}, \beta_{k-1}\gamma^{-1})\]
 
+\(\psi_\gamma : M \to M\) is linear, therefore the derivative is itself. In particular,
 
-But trace is conjugation invariant. Hence \(\psi_g^*\omega_J = \omega_J\). Similarly, we have that \(\psi_g^*\omega_K = \omega_K\). Therefore, the complex symplectic form \(\omega_c = \omega_J + i\omega_K\) is \(\psi_g\)-invariant. Now notice that if \(\tilde\Phi = \Phi^c \circ \pi\), then \(\tilde\Phi\) is a surjective submersion, and
+\begin{align*}
+    \psi_\gamma^*\omega_J((\alpha_j, \beta_j), (\tilde\alpha_j, \tilde\beta_j)) &= \sum_{j=0}^{k-2}\left(\Re\tr(-\beta_j\tilde\alpha_j) + \Re\tr(\alpha_j\tilde\beta_j)\right) + \Re\tr(-\beta_{k-1}\gamma^{-1}\gamma\tilde\alpha_{k-1}) + \Re\tr(\gamma\alpha_{k-1}\tilde\beta_{k-1}\gamma^{-1}) \\
+    &= \omega_J((\alpha_j, \beta_j), (\tilde\alpha_j, \tilde\beta_j))
+\end{align*}
 
-% https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXG11X2Neey0xfSgwKSJdLFsyLDAsIlxcbXVfY157LTF9KDApIl0sWzAsMiwiXFxPcmIoQSkiXSxbMiwyLCJcXE9yYihBKSJdLFswLDIsIlxcUGhpIiwyXSxbMSwzLCJcXFBoaSJdLFswLDEsIlxccHNpX1xcZ2FtbWEiXSxbMiwzLCJcXEFkX1xcZ2FtbWEiLDJdXQ==
+using the fact that trace is conjugation invariant. Similarly, \(\psi_\gamma^*\omega_K = \omega_K\) as trace is \(\C\)-linear, and so the \(\Re\) becomes \(-\Im\).
+
+Define \(\omega_c = \omega_J + i\omega_K\) for the complex symplectic form on \(M\). Let \(\Phi = \Phi^c \circ \pi : \mu_c^{-1}(0) \to \mcN\) be defined by
+
+\[\Phi(\alpha_j, \beta_j) = \alpha_{k-1}\beta_{k-1}\]
+
+Let \(N\) be the image of \(\Phi\). Using the results from \cite{kobak_classical_1996}, \(N\) has a hyperK\"ahler metric \(\tilde\omega_c\), satisfying
+
+\[\Phi^*\tilde\omega_c = i^*\omega_c\]
+
+where \(i : \mu_c^{-1}(0) \to M\) is the inclusion. Since \(\Phi : \mu_c^{-1}(0) \to N\) is a surjective submersion, this completely determines \(\tilde\omega_c\). We would like to show \((\Ad_\gamma)^*\tilde\omega_c = \tilde\omega_c\) for all \(\gamma \in \SL(n, \C)\). As
+
+% https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXG11X2Neey0xfSgwKSJdLFsyLDAsIlxcbXVfY157LTF9KDApIl0sWzAsMiwiXFxPcmIoQSkiXSxbMiwyLCJcXE9yYihBKSJdLFsyLDMsIlxcQWRfXFxnYW1tYSIsMl0sWzAsMiwiXFxQaGkiLDJdLFsxLDMsIlxcUGhpIl0sWzAsMSwiXFxwc2lfXFxnYW1tYSJdXQ==
 \[\begin{tikzcd}[ampersand replacement=\&]
 	{\mu_c^{-1}(0)} \&\& {\mu_c^{-1}(0)} \\
 	\\
 	{\Orb(A)} \&\& {\Orb(A)}
+	\arrow["{\Ad_\gamma}"', from=3-1, to=3-3]
 	\arrow["\Phi"', from=1-1, to=3-1]
 	\arrow["\Phi", from=1-3, to=3-3]
 	\arrow["{\psi_\gamma}", from=1-1, to=1-3]
-	\arrow["{\Ad_\gamma}"', from=3-1, to=3-3]
 \end{tikzcd}\]
 
-commutes. This means that the complex-symplectic form \(\tilde\omega_c\) is \(\Ad_\gamma\)-invariant. To see this, first note that \(\Phi^*\tilde\omega_c\) is the restriction of \(\omega_c\) to \(\mu_c^{-1}(0)\). In this case,
+commutes,
+
+\[\Phi^*(\Ad_\gamma)^*\tilde\omega_c = \psi_\gamma^*\Phi^*\tilde\omega_c = \psi_\gamma^*i^*\omega_c = i^*\omega_c = \Phi^*\tilde\omega_c\]
+
+Therefore, we have that \(\tilde\omega_c\) is invariant under the \(\SL(n, \C)\) action.
+
+Moreover, the Riemannian metric is invariant under the action of the compact subgroup \(\SU(n)\). To see this,
 
 \begin{align*}
-    \Phi^*\Ad_\gamma^*\tilde\omega_c &= \psi_\gamma^*\Phi^*\tilde\omega_c \\
-    &= \psi_\gamma^*i^*\omega_c \\
-    &= i^*\omega_c \\
-    &= \Phi^*\tilde\omega_c
+    \psi_\gamma^*g((\alpha_j, \beta_j), (\tilde\alpha_j, \tilde\beta_j)) &= \sum_{j=0}^{k-2}\left(\Re\tr(\alpha_j^*\tilde\alpha_j) + \Re\tr(\beta_j^*\tilde\beta_j)\right) + \Re\tr(\alpha_j\gamma^*\gamma\tilde\alpha_j) + \Re\tr(\gamma\beta_j^*\tilde\beta_j\gamma^*) \\
+    &= g((\alpha_j, \beta_j), (\tilde\alpha_j, \tilde\beta_j))
 \end{align*}
 
-As \(\Phi^*\) is injective, \(\Ad_\gamma^*\tilde\omega_c = \tilde\omega_c\).
-
-Note however that
-
-\begin{align*}
-    \psi_\gamma^*g((\alpha_j, \beta_j), (\tilde\alpha_j, \tilde\beta_j)) &= g(\psi_\gamma(\alpha_j, \beta_j), \psi_\gamma(\tilde\alpha_j, \tilde\beta_j)) \\
-\end{align*}
+\printbibliography
 
 \end{document}
