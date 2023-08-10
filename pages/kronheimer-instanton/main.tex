@@ -1,0 +1,350 @@
+\documentclass{article}
+
+\usepackage{../../Style}
+\usepackage{biblatex}
+\addbibresource{../../bibliography.bib}
+
+\DeclareMathOperator{\SU}{SU}
+\newcommand{\su}{\mathfrak{su}}
+
+\renewcommand{\sl}{\mathfrak{sl}}
+
+\DeclareMathOperator{\gr}{grad}
+
+\title{\citetitle{kronheimer_instantons_1990} by \Citeauthor{kronheimer_instantons_1990}}
+\author{Shing Tak Lam}
+
+\begin{document}
+
+\maketitle
+
+In this document, we will discuss the paper \cite{kronheimer_instantons_1990}. For concreteness, instead of general Lie groups and Lie algebras, we will focus on the case
+
+\[G = \SU(n) \qquad \mfg = \su(n)\]
+
+which has complexification
+
+\[G^c = \SL(n, \C) \qquad \mfg^c = \sl(n, \C)\]
+
+\section{Introduction}
+
+The inner product on \(\su(n)\) is given by \(-\kappa\), where \(\kappa\) is the Killing form. That is,
+
+\[\inner{A, B} = -\tr(AB)\]
+
+Define
+
+\begin{align*}
+    \varphi : \su(n) \times \su(n) \times \su(n) &\to \R \\
+    \varphi(A_1, A_2, A_3) &= \sum_{j=1}^3 \inner{A_j, A_j} + \inner{A_1, [A_2, A_3]}
+\end{align*}
+
+We are interested in studying the gradient flow of \(\varphi\). That is, \(A_1, A_2, A_3 : I \to \su(n)\) such that
+
+\begin{equation}
+    \label{eq:gradient-flow}
+    (\dot A_1, \dot A_2, \dot A_3) = -\grad \varphi(A_1, A_2, A_3)
+\end{equation}
+
+First of all, notice that
+
+\[\varphi(A_1 + H_1, A_2, A_3) = \varphi(A_1, A_2, A_3) + 2\inner{H_1, A_1} + \inner{H_1, [A_2, A_3]}\]
+
+and that \(\inner{A_1, [A_2, A_3]} = \inner{A_2, [A_3, A_1]} = \inner{A_3, [A_1, A_2]}\). Therefore, \cref{eq:gradient-flow} becomes
+
+\begin{equation}
+    \label{eq:gradient-flow-system}
+    \begin{split}
+        \dot A_1 &= -2A_1 - [A_2, A_3] \\
+        \dot A_2 &= -2A_2 - [A_3, A_1] \\
+        \dot A_3 &= -2A_3 - [A_1, A_2]
+    \end{split}
+\end{equation}
+
+The critical points of \cref{eq:gradient-flow-system} are triples \((A_1, A_2, A_3)\) satisfying
+
+\[[A_1, A_2] = -2A_3 \quad [A_2, A_3] = -A_1 \quad [A_3, A_1] = -2A_2\]
+
+Recall that the Lie algebra \(\su(2)\) has basis
+
+\[e_1 = \begin{pmatrix}
+    -i & 0 \\
+    0 & i
+\end{pmatrix} \quad e_2 = \begin{pmatrix}
+    0 & 1 \\
+    -1 & 0
+\end{pmatrix} \quad e_3 = \begin{pmatrix}
+    0 & -i \\
+    -i & 0
+\end{pmatrix}\]
+
+satifying the above relations. Therefore, critical points of \cref{eq:gradient-flow-system} correspond to Lie algebra homomorphisms \(\rho : \su(2) \to \su(n)\). From this, we see that at all critical points of \cref{eq:gradient-flow-system}, \(\varphi\) is nonnegative, and it is zero only at \((0, 0, 0)\).
+
+Next, we will identify \(\su(n) \times \su(n) \times \su(n) \cong \rm L(\su(2), \su(n))\), the space of linear maps \(\su(2) \to \su(n)\), sending \((A_1, A_2, A_3)\) to the linear map \(A\) given by \(e_i \mapsto A_i\).
+
+The adjoint action of \(\SU(n)\) on \(\su(n)\) is given by
+
+\[\Ad_g(A) = gAg^{-1}\]
+
+and this induces an action on \(\rm L(\su(2), \su(n))\) by
+
+\[g \cdot A : e_i \mapsto gA_ig^{-1}\]
+
+For any Lie algebra homomorphism \(\rho : \su(2) \to \su(n)\), define
+
+\[C(\rho) = \left\{g \cdot \rho \mid g \in \SU(n)\right\}\]
+
+for the critical manifold of all homomorphisms which are conjugate to \(\rho\) via the adjoint action. For Lie algebra homomorphisms \(\rho_-, \rho_+ : \su(2) \to \su(n)\), define \(M(\rho_-, \rho_+)\) for the space of solutions \(A(t)\) to \cref{eq:gradient-flow-system}, with boundary conditions
+
+\begin{equation}
+    \label{eq:boundary-conditions}
+    \begin{split}
+        \lim_{t\to-\infty}A(t) &\in C(\rho_-) \\
+        \lim_{t\to\infty}A(t) &= \rho_+
+    \end{split}
+\end{equation}
+
+Note that we are considering parametrised trajectories, therefore there is a natural \(\R\)-action sending \(A(t)\) to \(A(t+c)\).
+
+For a Lie algebra homomorphism \(\rho : \su(2) \to \su(n)\), we can extend it to a Lie algebra homomorphism \(\rho : \sl(2, \C) \to \sl(n, \C)\), and define
+
+\[H = \rho\begin{pmatrix}
+    1 & 0 \\
+    0 & -1
+\end{pmatrix}\quad X = \rho\begin{pmatrix}
+    0 & 1 \\
+    0 & 0
+\end{pmatrix} \quad Y = \rho\begin{pmatrix}
+    0 & 0 \\
+    1 & 0
+\end{pmatrix}\]
+
+We will then define \(\mcN(\rho)\) for the nilpotent orbit of \(Y\) in \(\sl(n, \C)\), and the affine subspace
+
+\[S(\rho) = Y + Z(X)\]
+
+where \(Z(X) = \left\{A \in \sl(n, \C) \mid [A, X] = 0\right\}\). Using this, we have
+
+\begin{theorem}
+    For any pair of homomorphisms \(\rho_-, \rho_+\), there is a diffeomorphism
+
+    \[M(\rho_-, \rho_+) \cong \mcN(\rho_-) \cap S(\rho_+)\]
+\end{theorem}
+
+If \(\rho_+ = 0\), then \(S(\rho_+) = \sl(n, \C)\), and in this case, we have a diffeomorphism
+
+\[M(\rho_-, 0) \cong \mcN(\rho_-)\]
+
+Moreover, every nilpotent orbit is \(\mcN(\rho)\) for some homomorphism \(\rho : \su(2) \to \su(n)\), which means that we have a description of all nilpotent orbits in \(\sl(n, \C)\).
+
+\section{Complex trajectories}
+
+\subsection{Nahm's equations}
+
+Consider the change of variables
+
+\[T_i = e^{2t}A_i \qquad s = -\frac12e^{-2t}\]
+
+Using this, \cref{eq:gradient-flow-system} becomes
+
+\begin{align*}
+    \dv{T_1}{s} &= -[T_2, T_3] \\
+    \dv{T_2}{s} &= -[T_3, T_1] \\
+    \dv{T_3}{s} &= -[T_1, T_2]
+\end{align*}
+
+which are Nahm's equations.
+
+\subsection{Gauge group}
+
+First of all, we will extend \cref{eq:gradient-flow-system} by considering \(A_0, \dots, A_3 : \R \to \su(n)\), satisfying the equations
+
+\begin{equation}
+    \label{eq:gradient-flow-system-extended}
+    \begin{split}
+        \dot A_1 &= -2A_1 - [A_0, A_1] - [A_2, A_3] \\
+        \dot A_2 &= -2A_2 - [A_0, A_2] + [A_1, A_3] \\
+        \dot A_3 &= -2A_3 - [A_0, A_3] - [A_1, A_2] \\
+    \end{split}
+\end{equation}
+
+Define the group
+
+\[\mcG = \left\{g : \R \to \SU(n)\right\}\]
+
+with pointwise operations. Then \(\mcG\) acts \(A = (A_0, \dots, A_3)\) by
+
+\begin{equation}
+    \label{eq:action}
+    (g \vdot A)(t) = \left(g(t)A_0(t)g(t)^{-1} - \dv{g}{t}(t) \cdot g(t)^{-1}, g(t)A_1(t)g(t)^{-1}, g(t)A_2(t)g(t)^{-1}, g(t)A_3(t)g(t)^{-1}\right)
+\end{equation}
+
+For brevity, when clear, we will write this as
+
+\[g \vdot A = (gA_0g^{-1} - \dot g g^{-1}, gA_1g^{-1}, gA_2g^{-2}, gA_3g^{-1})\]
+
+Note that \(\dot g(t) \in \TT_{g(t)}\SU(n) = g(t)\su(n)\), and so \(\dot g(t)g(t)^{-1} \in g(t)\su(n)g(t)^{-1} = \su(n)\). First, we will show that \cref{eq:gradient-flow-system-extended} is invariant under the action \cref{eq:action}. To see this, the transformed right hand side (for the first equation) is
+
+\begin{align*}
+    -2gA_1g^{-1} - [gA_0g^{-1} - \dot g g^{-1}, gA_1g^{-1}] - [gA_2g^{-1}, gA_3g^{-1}] &= g(-2A_1 - [A_0, A_1] - [A_2, A_3])g^{-1} + [\dot g g^{-1}, gA_1g^{-1}] \\
+    &= g\dot A_1g^{-1} + \dot g A_1 g^{-1} - gA_1g^{-1}\dot g g^{-1} \\
+\end{align*}
+
+which is precisely \(\dv{t}(gA_1g^{-1})\). Moreover, in \cref{eq:action}, we can always choose \(g\) to make \(A_0 = 0\), by considering the linear ODE
+
+\[\dot g = gA_0\]
+
+Therefore, we don't change the problem much by considering \cref{eq:gradient-flow-system-extended}. 
+
+\subsection{Complex equations}
+
+Next, we will break the symmetry in the equations, by choosing \(A_1\) to be `special'. More precisely, we will consider \(\alpha, \beta : \R \to \sl(n, \C)\), defined by
+
+\[\alpha = \frac{1}{2}(A_0 + iA_1) \qquad \beta = \frac{1}{2}(A_2 + iA_3)\]
+
+In this case, we have the followiing expressions:
+
+\begin{align*}
+    \alpha^* &= \frac{1}{2}(-A_0 + iA_1) \\
+    \alpha + \alpha^* &= iA_1 \\
+    [\alpha, \alpha^*] &= \frac12i[A_0, A_1] \\
+    [\beta, \beta^*] &= \frac12i[A_2, A_3]
+\end{align*}
+
+and so the first equation in \cref{eq:gradient-flow-system-extended} can be written as the \emph{real equation}
+
+\begin{equation}
+    \label{eq:real-equation}
+    \dv{t}(\alpha + \alpha^*) + 2(\alpha + \alpha^*) + 2([\alpha, \alpha^*] + [\beta, \beta^*]) = 0
+\end{equation}
+
+and using
+
+\[[\alpha, \beta] = \frac14\left([A_0, A_2] + [A_3, A_1]\right) + \frac14i\left([A_0, A_3] + [A_1, A_2]\right)\]
+
+the second equation in \cref{eq:gradient-flow-system-extended} becomes the \emph{complex equation}
+
+\begin{equation}
+    \label{eq:complex-equation}
+    \dv{\beta}{t} + 2\beta + 2[\alpha, \beta] = 0
+\end{equation}
+
+As above, the real equation is invariant under the action of \(\mcG\). But in this case, the complex equation is invariant under the action of the complex gauge group
+
+\[\mcG^c = \left\{\R \to \SL(n, \C)\right\}\]
+
+via \cref{eq:action}. In particular, the action is given by
+
+\[g \vdot (\alpha, \beta) = \left(g\alpha g^{-1} - \frac{1}{2}\dot g g^{-1}, g\beta g^{-1}\right)\]
+
+and so substituting into \cref{eq:complex-equation}, we get
+
+\begin{align*}
+    \dot g \beta g^{-1} + g\dot\beta g^{-1} - g\beta g^{-1}\dot g g^{-1} + 2 g\beta g^{-1} + 2 g[\alpha, \beta]g^{-1} - [\dot g g^{-1}, g\beta g^{-1}] = g\left(\dot\beta + 2\beta + 2[\alpha,\beta]\right)g^{-1}
+\end{align*}
+
+\subsection{Complex trajectories}
+
+Let \(\rho_+, \rho_- : \su(2) \to \su(n)\) be Lie algebra homomorphisms. Extend them to Lie algebra homomorphisms \(\sl(2, \C) \to \sl(n, \C)\), and define
+
+\[H_{\pm} = \rho_\pm\begin{pmatrix}
+    1 & 0 \\
+    0 & -1
+\end{pmatrix} \qquad X_\pm = \rho_\pm \begin{pmatrix}
+    0 & 1 \\
+    0 & 0
+\end{pmatrix} \qquad Y_\pm = \rho_\pm \begin{pmatrix}
+    0 & 0 \\
+    1 & 0
+\end{pmatrix}\]
+
+\begin{definition}
+    [complex trajectory] A \emph{complex trajectory} associated to \(\rho_+, \rho_-\) is a pair of smooth functions \(\alpha, \beta : \R \to \sl(n, \C)\), which satisfy the complex equation \cref{eq:complex-equation}, and the boundary conditions
+
+    \begin{equation}
+        \label{eq:complex-trajectory-boundary-conditions}
+        \begin{split}
+            \lim_{t \to \infty}2\alpha(t) &= H_+ \\
+            \lim_{t \to -\infty}2\alpha(t) &= gH_-g^{-1} \\
+            \lim_{t \to \infty}\beta(t) &= Y_+ \\
+            \lim_{t \to -\infty}\beta(t) &= gY_-g^{-1}
+        \end{split}
+    \end{equation}
+
+    for some \(g \in \SU(n)\). Moreover, we require that the convergence in \cref{eq:complex-trajectory-boundary-conditions} is exponential, that is,
+
+    \[\norm{2\alpha(t) - H_+} < Ke^{-\eta t}\]
+
+    for some \(\eta, K > 0\) and so on.
+\end{definition}
+
+Now define the subgroup \(\mcG^c_0\) of \(\mcG^c\) by
+
+\[\mcG^c_0 = \left\{g \in \mcG^c \mid g \text{ bounded}, \lim_{t \to \infty}g(t) = 1\right\}\]
+
+Using the operator norm, which satisfies \(\norm{gh} \le \norm{g}\norm{h}\), it is clear that \(\mcG_0^c\) is closed under multiplication. Therefore, all we need to show is that it is closed under inverses. One proof is as follows:
+
+By Cayley-Hamilton, we have coefficients \(c_1(t), \dots, c_{n-1}(t)\) such that
+
+\[g(t)^n + c_{n-1}g(t)^{n-1} + \dots + c_1(t)g(t) + 1 = 0\]
+
+Multiplying by \(g(t)^{-1}\), we get
+
+\[g(t)^{-1} = -\left(g(t)^{n-1} + c_{n-1}g(t)^{n-2} + \dots + c_1(t)\right)\]
+
+The \(c_i(t)\) are the elementary symmetric functions in the eigenvalues of \(g(t)\), and the eigenvalues of \(g(t)\) are bounded, since any eigenvalue \(\lambda\) of \(g(t)\) necessarily satisfies \(\abs{\lambda} \le \norm{g(t)}\). Therefore, the coefficients on the right hand side are bounded. Hence by the triangle inequality, we have a bound on \(\norm{g(t)^{-1}}\).
+
+\begin{definition}
+    [equivalent] We say that two complex trajectories \((\alpha, \beta)\) and \((\alpha', \beta')\) are \emph{equivalent} if there exists \(g \in \mcG^c_0\) such that
+
+    \[(\alpha', \beta') = g \vdot (\alpha, \beta)\]
+
+    i.e. they are in the same \(\mcG_0^c\) orbit.
+\end{definition}
+
+\subsection{Classification of complex trajectories}
+
+First of all, note that under the \(\mcG^c\) action, we can always make \(\alpha = 0\). In particular, we need
+
+\[\dot g = 2g\alpha\]
+
+Assuming this, the complex equation \cref{eq:complex-equation} becomes
+
+\[\dv{\beta}{t} + 2\beta = 0\]
+
+which has solution
+
+\[\beta(t) = e^{-2t}\beta_0\]
+
+for some \(\beta_0\). Therefore, the only local invariant under the \(\mcG^c\) (and \(\mcG^c_0\)) action is the conjugacy class of \(\beta_0\). Reversing the \(\mcG^c\) action, we find that a generic local solution is
+
+\begin{align*}
+    \alpha = \frac{1}{2}g^{-1}\dot g \\
+    \beta = e^{-2t}g^{-1}\beta_0g
+\end{align*}
+
+As a consequence of this, we have
+
+\begin{lemma}
+    If \((\alpha, \beta)\) and \((\alpha', \beta')\) are complex trajectories which are equal outside of some compact set \(K \subseteq \R\), then \((\alpha, \beta)\) and \((\alpha', \beta')\) are equivalent.
+\end{lemma}
+
+\begin{proof}
+    Without loss of generality, we may assume \(K = [-M, M]\) for some \(M > 0\). Using the \(\mcG^c\) action, we may assume that
+
+    \[\alpha(t) = 0 \qquad \beta(t) = e^{-2t}\beta_0\]
+
+    Now let \(g \in \mcG_0^c\) be such that
+
+    \[g \vdot (\alpha', \beta') = (0, e^{-2t}\beta_0')\]
+
+    In particular, as
+
+    \[\dot g = 2g\alpha'\]
+
+    \(\dot g = 0\) for \(t \notin [-M, M]\), and so \(g\) is constant outside of \([-M, M]\). Say \(g = g_-\) for \(t < -M\) and \(g = g_+\) for \(t > M\). By the boundary condition \(g(t) \to 1\) as \(t \to \infty\), \(g_+ = 1\). This means that for \(t > M\), \(\beta'(t) = e^{-2t}\beta_0'\). But in this case \(\beta = \beta'\), so \(\beta_0 = \beta_0'\). Hence \(g \cdot (\alpha', \beta') = (\alpha, \beta)\), and so they are equivalent.
+\end{proof}
+
+\printbibliography
+
+\end{document}
