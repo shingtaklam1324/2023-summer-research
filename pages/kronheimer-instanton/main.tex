@@ -139,22 +139,6 @@ Moreover, every nilpotent orbit is \(\mcN(\rho)\) for some homomorphism \(\rho :
 
 \section{Complex trajectories}
 
-\subsection{Nahm's equations}
-
-Consider the change of variables
-
-\[T_i = e^{2t}A_i \qquad s = -\frac12e^{-2t}\]
-
-Using this, \cref{eq:gradient-flow-system} becomes
-
-\begin{align*}
-    \dv{T_1}{s} &= -[T_2, T_3] \\
-    \dv{T_2}{s} &= -[T_3, T_1] \\
-    \dv{T_3}{s} &= -[T_1, T_2]
-\end{align*}
-
-which are Nahm's equations.
-
 \subsection{Gauge group}
 
 First of all, we will extend \cref{eq:gradient-flow-system} by considering \(A_0, \dots, A_3 : \R \to \su(n)\), satisfying the equations
@@ -275,7 +259,7 @@ Let \(\rho_+, \rho_- : \su(2) \to \su(n)\) be Lie algebra homomorphisms. Extend 
 
     \[\norm{2\alpha(t) - H_+} < Ke^{-\eta t}\]
 
-    for some \(\eta, K > 0\) and so on.
+    for some \(\eta, K > 0\) and so on. Note the choice of norm here does not matter, as all norms on \(\sl(n, \C)\) are equivalent.
 \end{definition}
 
 Now define the subgroup \(\mcG^c_0\) of \(\mcG^c\) by
@@ -326,6 +310,8 @@ for some \(\beta_0\). Therefore, the only local invariant under the \(\mcG^c\) (
 As a consequence of this, we have
 
 \begin{lemma}
+    \label{lem:complex-trajectory-equal}
+
     If \((\alpha, \beta)\) and \((\alpha', \beta')\) are complex trajectories which are equal outside of some compact set \(K \subseteq \R\), then \((\alpha, \beta)\) and \((\alpha', \beta')\) are equivalent.
 \end{lemma}
 
@@ -334,7 +320,7 @@ As a consequence of this, we have
 
     \[\alpha(t) = 0 \qquad \beta(t) = e^{-2t}\beta_0\]
 
-    Now let \(g \in \mcG_0^c\) be such that
+    Now let \(g \in \mcG^c\) be such that
 
     \[g \vdot (\alpha', \beta') = (0, e^{-2t}\beta_0')\]
 
@@ -342,8 +328,520 @@ As a consequence of this, we have
 
     \[\dot g = 2g\alpha'\]
 
-    \(\dot g = 0\) for \(t \notin [-M, M]\), and so \(g\) is constant outside of \([-M, M]\). Say \(g = g_-\) for \(t < -M\) and \(g = g_+\) for \(t > M\). By the boundary condition \(g(t) \to 1\) as \(t \to \infty\), \(g_+ = 1\). This means that for \(t > M\), \(\beta'(t) = e^{-2t}\beta_0'\). But in this case \(\beta = \beta'\), so \(\beta_0 = \beta_0'\). Hence \(g \cdot (\alpha', \beta') = (\alpha, \beta)\), and so they are equivalent.
+    \(\dot g = 0\) for \(t \notin [-M, M]\), and so \(g\) is constant outside of \([-M, M]\). Say \(g = g_-\) for \(t < -M\) and \(g = g_+\) for \(t > M\). By left multiplication by \(g_+^{-1}\), we can assume \(g_+ = 1\). This means that for \(t > M\), \(e^{-2t}\beta'(t) = e^{-2t}\beta_0'\). But in this case \(\beta = \beta'\), so \(\beta_0 = \beta_0'\). Hence \(g \cdot (\alpha', \beta') = (\alpha, \beta)\), and so they are equivalent.
 \end{proof}
+
+\begin{lemma}
+    \label{lem:complex-trajectory-convergence-negative}
+
+    Let \((\alpha, \beta)\) be a solution of the complex equation \cref{eq:complex-equation}, satisfying the boundary equations \cref{eq:complex-trajectory-boundary-conditions} at \(t \to -\infty\). That is,
+
+    \[\lim_{t\to-\infty}2\alpha(t) = gH_-g^{-1} \qquad \lim_{t \to -\infty}\beta(t) = gY_-y^{-1}\]
+
+    with exponential convergence. Then there exists a gauge transformation \(g_- : \R \to \SL(n, \C)\) such that \((\alpha', \beta') = g_-\vdot(\alpha, \beta)\) is the constant solution
+
+    \[2\alpha' = H_- \qquad \beta' = Y_-\]
+
+    and \(g_-(t)\) converges as \(t \to -\infty\).
+\end{lemma}
+
+\begin{proof}
+    By conjugation, without loss of generality \(g = 1\). Considering the ODE
+
+    \begin{equation*}
+            \dot g_0 = 2g_0\alpha - H_-g_0
+    \end{equation*}
+
+    We can find \(g_0\) such that
+
+    \[H_- = 2g_0\alpha g_0^{-1} - \dot g_0 g_0^{-1}\]
+
+    with the boundary condition \(g_0(t) \to 1\) as \(t \to -\infty\), since \(2\alpha(t) \to H_-\) exponentially. \textbf{mhm... why?}
+
+    Using this, we get a transformed solution \((\alpha'', \beta'') = g_0\vdot(\alpha,\beta)\), with \(2\alpha'' = H_-\). In this case, the complex equation becomes
+
+    \[\dv{\beta''}{t} + 2\beta'' + [H_-, \beta''] = 0\]
+
+    Trying the ansatz
+
+    \begin{align*}
+        \beta''(t) &= e^{-2t}\Ad_{f(t)}(\omega) = e^{-2t}f\omega f^{-1} \\
+        f(t) &= \exp(Xt)
+    \end{align*}
+
+    We have that
+
+    \[\dot f = Xf\]
+
+    and so
+
+    \begin{align*}
+        \dot\beta'' &= -2e^{-2t}f\omega f^{-1} + e^{-2t}\dot f \omega f^{-1} - e^{-2t}f\omega f^{-1}\dot f f^{-1} \\
+        &= -2\beta'' + X\beta'' - \beta'' X
+    \end{align*}
+
+    Therefore, the complex equation becomes
+
+    \begin{align*}
+        \dot\beta'' + 2\beta'' + H_-\beta'' - \beta''H_- = -2\beta'' + X\beta'' - \beta''X + 2\beta'' + H_-\beta'' - \beta''H_- = [X + H_-, \beta'']
+    \end{align*}
+
+    Hence setting \(X = -H_-\), we get a solution. By dimensionality arguments, this is the general solution.
+
+    Using the composition
+
+    % https://q.uiver.app/#q=WzAsMyxbMCwwLCJcXHNsKDIsIFxcQykiXSxbMiwwLCJcXHNsKG4sIFxcQykiXSxbNCwwLCJcXGdsKFxcc2wobiwgXFxDKSkiXSxbMCwxLCJcXHJob18tIl0sWzEsMiwiXFxhZCJdXQ==
+\[\begin{tikzcd}[ampersand replacement=\&]
+	{\sl(2, \C)} \&\& {\sl(n, \C)} \&\& {\gl(\sl(n, \C))}
+	\arrow["{\rho_-}", from=1-1, to=1-3]
+	\arrow["\ad", from=1-3, to=1-5]
+\end{tikzcd}\]
+
+    We get a representation of \(\sl(2, \C)\) on \(\sl(n, \C)\). Therefore, we have a decomposition
+
+    \[\sl(n, \C) = \bigoplus_{k \in \Z}V_k\]
+
+    where \(V_\lambda\) is the \(\lambda\)-eigenspace of \(\ad(H_-)\). Since we want \(\beta'' \to Y_-\) as \(t \to -\infty\), we will try the ansatz \(\omega = Y_- + \delta\). By linearity, we can first compute the case of \(\omega = Y_-\).
+
+    First of all, notice that we also have that \(\dot f = f X = -fH_-\), and so in this case
+
+    \begin{align*}
+        \dot\beta'' &= -2e^{-2t}f Y_- f^{-1} - e^{-2t}f H_- Y_- f^{-1} + fY_-f^{-1}fH_-f^{-1} \\
+        &= -2\beta'' - f[H_-, Y_-]f^{-1} \\
+        &= 0
+    \end{align*}
+
+    as \([H_-, Y_-] = \rho_-([H, Y]) = \rho_-(-2Y) = -2Y_-\). Therefore, as \(\beta''(0) = Y_-\) in this case, it is constant. Now by linearity, say \(\delta = \sum_k \delta_k\), where \(\delta_k \in V_k\). Then for \(\omega = \delta_k\),
+
+    \[\dot\beta'' = -2\beta'' - f[H_-, \delta_k]f^{-1} = -(2+k)\beta''\]
+
+    This gives the solution
+
+    \[\beta''(t) = e^{-(2+k)t}\beta''(0) = e^{-(2+k)t}\delta_k\]
+
+    Since we require \(\beta''(t) \to 0\) as \(t \to -\infty\) in this case, we need \(-(2+k) > 0\), i.e. \(k < -2\). Hence the general solution in this case is
+
+    \[\beta''(t) = Y_- + e^{-2t}\exp(-H_-t)\delta\exp(H_-t)\]
+
+    where \(\delta \in \bigoplus\limits_{k < -2}V_k\). Now notice that \(g_0\) from earlier was not uniquely determined. We can still act on the solution by a gauge transformation \(g_1\), which preserves \(2\alpha'' = H_-\), and approaches \(1\) at \(t \to -\infty\). That is, we have the equation
+
+    \[H_- = g_1H_-g_1^{-1} - \dot g_1 g_1^{-1}\]
+
+    which we can rearrange to
+
+    \[\dot g_1 = g_1H_- - H_- g_1\]
+
+    Trying the ansatz
+
+    \begin{align*}
+        g_1(t) &= f(t)\sigma f(t)^{-1} \\
+        f(t) &= \exp(-H_- t)
+    \end{align*}
+
+    for \(\sigma \in \SL(n, \C)\), we find that this gives the general solution for the equation. For the boundary condition, suppose further that \(\sigma = \exp(\gamma)\), for some \(\gamma \in \sl(n, \C)\). Define
+
+    \[h_t(s) = f\exp(s\gamma)f^{-1}\]
+
+    and note that \(g_1(t) = h_t(1)\). Then
+
+    \begin{align*}
+        \dv{h_t}{s}(s) &= f \exp(s\gamma)\gamma f^{-1} \\
+        &= h_t(s) \cdot f \gamma f^{-1}
+    \end{align*}
+
+    Set \(\varphi(t) = f\gamma f^{-1}\), then we have that
+
+    \[\dot\varphi = -f[H, \gamma]f^{-1}\]
+
+    This equation is linear in \(\gamma\), and so for simplicity, we will assume \(\gamma \in V_k\). In this case, \(\dot\varphi = -k\varphi\), and so \(\varphi(t) = e^{-kt}\gamma\). Substituting this in, we get that
+
+    \[\dv{h_t}{s} = e^{-kt}h_t \cdot \gamma\]
+
+    and so, integrating this equation, we find that
+
+    \[h_t(s) = \exp(se^{-kt}\gamma) \implies g_1(t) = \exp(e^{-kt}\gamma)\]
+
+    Thus, for \(g_1 \to 1\) as \(t \to -\infty\), we must have \(k < 0\). Therefore, the general solution is
+
+    \[g_1(t) = \exp(-H_-t)\exp(\gamma)\exp(H_-t)\]
+
+    where \(\gamma \in \bigoplus\limits_{k < 0}V_k\). Therefore, if we consider \((\alpha', \beta') = g_1 \cdot (\alpha'', \beta'')\), we would get that \(2\alpha' = H_-\), and
+
+    \[\beta'(t) = Y_- + e^{-2t}\exp(-H_-t)(\exp(\gamma)(Y_- + \delta)\exp(-\gamma) - Y_-)\exp(H_-t)\]
+
+    Therefore, all that remains to show is that for all \(\delta \in \bigoplus\limits_{k < -2}V_k\), there exists \(\gamma \in \bigoplus\limits_{k < 0}V_k\) such that
+
+    \[\exp(\gamma)(Y_- + \delta)\exp(-\gamma) - Y_- = 0\]
+
+    We will use the implicit function theorem for this. Expand the left hand side near \(\gamma = \delta = 0\), the terms linear in \(\gamma, \delta\) are
+
+    \[f(\gamma, \delta) = \delta + \gamma Y_- - Y_-\gamma = \delta - [Y_-, \gamma]\]
+
+    From the representation theory of \(\sl(2, \C)\), we have a linear map
+
+    \[[Y_-, \cdot] : \bigoplus_{k < 0}V_k \to \bigoplus_{k < -2}V_k\]
+    
+    and so we have a map 
+
+    \[f : \bigoplus_{k < 0}V_k \oplus \bigoplus_{k < -2}V_k \to \bigoplus_{k < -2}V_k\]
+    
+    The map \(\gamma \mapsto f(\gamma, 0)\) is surjective, for example by decomposing \(\sl(n, \C)\) as a direct sum of \(\sl(2, \C)\) representations. Therefore if we have a decomposition
+
+    \[\bigoplus_{k < 0}V_k = K \oplus W\]
+
+    where \(K = \ker(f(\cdot, 0))\), then the map \(\hat f : W \to \bigoplus\limits_{k < -2}V_k\), given by \(\hat f(\gamma) = f(\gamma, 0)\), is an isomorphism. We can then apply the implicit function theorem to
+
+    \begin{align*}
+        F : \left(\bigoplus_{k < -2}V_k \oplus K\right) \oplus W &\to \bigoplus_{k < -2}V_k \\
+        F((\delta, k), \gamma') &= \exp((\gamma', k))(Y_- + \delta)\exp(-(\gamma', k)) - Y_-
+    \end{align*}
+
+    which then gives us a neighbourhood \(U\) of \(0\) in \(\bigoplus\limits_{k < -2}V_k\), and a neighbourhood \(V\) of \(0\) in \(W\), and a map \(g : U \times V \to W\) such that
+
+    \[F(x, g(x)) = 0\]
+
+    for all \(x \in U \times V\). Therefore, for \(\delta \in U\), setting \(\gamma = g(\delta, 0)\) gives the required result. Finally, we will use homogeneity to extend the result to all of \(\bigoplus \limits_{k < -2}V_k\). First of all, we note that the condition is invariant under the substitution
+
+    \begin{align*}
+        \gamma &= f\hat\gamma f^{-1} \\
+        \delta &= e^{-2t}f\hat\delta f^{-1}
+    \end{align*}
+
+    where \(f(t) = \exp(-H_-t)\), since we have that \(Y_- = e^{-2t}fY_-f^{-1}\), and that \(\exp(f\hat\gamma f^{-1}) = f\exp(\hat\gamma)f^{-1}\). Now suppose \([H, v] = mv\), and let \(\varphi = fvf^{-1}\). Then
+
+    \begin{align*}
+        \dot\varphi &= f\dot vf^{-1} - fvf^{-1}\dot f f^{-1} \\
+        &= -fHvf^{-1} + fvHf^{-1} \\
+        &= -mfvf^{-1} \\
+        &= -m\varphi
+    \end{align*}
+
+    Hence \(\varphi(t) = e^{-mt}v\). Therefore in the limit \(t \to -\infty\) (as \(m < 0\)), we have that \(\gamma \to 0\), and so we can apply the result for small \(\delta\).
+\end{proof}
+
+There is a very similar result for the limit at \(t \to \infty\).
+
+\begin{lemma}
+    \label{lem:complex-trajectory-convergence-positive}
+
+    Let \((\alpha, \beta)\) be a solution of the complex equation \cref{eq:complex-equation} satisfying the boundary equations \cref{eq:boundary-conditions} at \(t \to \infty\). That is,
+
+    \[\lim_{t \to \infty}2\alpha(t) = H_+ \qquad \lim_{t \to \infty}\beta(t) = Y_+\]
+
+    with exponential convergence. Then there exists a unique gauge transformation \(g_+ : \R \to \SL(n, \C)\), with \(g_+(t) \to 1\) as \(t \to \infty\), such that the transformed solution \((\alpha', \beta') = g_+ \vdot (\alpha, \beta)\) satisfies
+
+    \[2\alpha' = H_+ \qquad \beta'(0) \in S(\rho_+)\]
+\end{lemma}
+
+\begin{proof}
+    The proof is very similar to the previous lemma. We find a gauge transformation \(g_0\), approaching \(1\) as \(t \to \infty\), such that \((\alpha'', \beta'') = g\vdot (\alpha, \beta)\) satisfies
+
+    \begin{align*}
+        2\alpha'' &= H_+ \\
+        \beta''(t) &= Y_+ + e^{-2t}\exp(-H_+t)\epsilon\exp(H_+t)
+    \end{align*}
+
+    with
+
+    \[\epsilon \in \bigoplus_{k > -2}V_k\]
+
+    where in this case, \(V_k\) is the \(k\)-eigenspace of \(\ad(H_+)\). As above, we have a further choice of gauge transformation \(g_1\) of the form
+
+    \[g_1(t) = \exp(-H_+t)\exp(\gamma)\exp(H_+t)\]
+
+    where \(\gamma \in \bigoplus_{i > 0}V_k\). Using this, the solution becomes
+
+    \[\beta''(t) = Y_+ + e^{-2t}\exp(-H_+t)(\exp(\gamma)(Y_+ + \epsilon)\exp(-\gamma) - Y_+)\exp(H_+t)\]
+
+    Recall that \(S(\rho_+) = Y_+ + Z(X_+)\). Therefore, we need to show that for each \(\epsilon \in \bigoplus\limits_{k > -2}V_k\), there exists \(\gamma \in \bigoplus\limits_{k > 0}V_k\) such that
+
+    \[\exp(\gamma)(Y_+ + \epsilon)\exp(-\gamma) - Y_+ \in Z(X_+)\]
+
+    Expanding the left hand side near \(\gamma = \epsilon = 0\), to first order we have
+
+    \[f(\gamma, \epsilon) = \epsilon - [Y_+, \gamma]\]
+
+    In this case, we have a linear map
+
+    \[[Y_+, \cdot] : \bigoplus_{k > 0}V_k \to \bigoplus_{k > -2}V_k\]
+
+    which is injective, and its image satisfies
+
+    \[\bigoplus_{k > -2} V_k = \Im([Y_+, \cdot]) \oplus Z(X_+)\]
+
+    Therefore, for each \(\epsilon\), there exists a unique \(\gamma\) such that \(f(\gamma, \epsilon) \in Z(X_+)\). Hence the linearisation has a unique solution, and so by the implicit function theorem, for \(\epsilon\) sufficiently small, there exists \(\gamma\) such that \(\exp(\gamma)(Y_+ + \epsilon)\exp(-\gamma) - Y_+ \in Z(X_+)\). Finally, we can use homogeneity to extend the result to all of \(\bigoplus\limits_{k > -2}V_k\) as above.
+\end{proof}
+
+Now let \((\alpha', \beta')\) be a solution of the complex equation \cref{eq:complex-equation} satisfying the boundary conditions \cref{eq:boundary-conditions}. Define a gauge transformation \(g : \R \to \SL(n, \C)\) via
+
+\begin{equation}
+    g(t) = \begin{cases}
+        g_-(t) & t \le 0 \\
+        g_+(t) & t \ge 1
+    \end{cases}
+\end{equation}
+
+and smooth on \([0, 1]\). Then \(g(t)\) is bounded, since \(g_-\) and \(g_+\) are, as they converge in the limit \(t \to \pm\infty\). Therefore, \(g \in \mcG_0^c\), and \((\alpha, \beta) = g \vdot (\alpha', \beta')\) is given by
+
+\begin{equation}
+    \label{eq:complex-trajectory-form}
+    \begin{split}
+        \alpha(t) &= \begin{cases}
+            \frac{1}{2}H_- & t \le 0 \\
+            \frac{1}{2}H_+ & t \ge 1
+        \end{cases} \\
+        \beta(t) &= \begin{cases}
+            Y_- & t \le 0 \\
+            Y_+ + e^{-2t}\exp(-H_+t)\epsilon\exp(H_+t) & t \ge 1
+        \end{cases}
+    \end{split}
+\end{equation}
+
+and hence every complex trajectory is equivalent to one of this form. Moreover, we can choose \(\epsilon\) such that \(Y_+ + \epsilon \in S(\rho_+)\), and in this case, \(\epsilon\) is uniquely determined.
+
+Since \((\alpha, \beta)\) is locally equivalent to the constant solution \((-\frac{1}{2}H_-, Y_-)\), the element \(Y_+ + \epsilon\) must be conjugate to \(Y_-\) in \(\sl(n, \C)\). That is, \(Y_+ + \epsilon \in \mcN(\rho_-)\). Conversely, given \(Y_+ + \epsilon \in S(\rho_+) \cap \mcN(\rho_-)\), we can always find a solution satisfying \cref{eq:complex-trajectory-form}.
+
+\begin{proposition}
+    \label{prop:complex-trajectory-classification}
+
+    The equivalence classes of complex trajectories associated to \(\rho_+, \rho_-\) are parametrised by \(S(\rho_+) \cap \mcN(\rho_-)\).
+\end{proposition}
+
+\begin{proof}
+    We have already seen that each trajectory is equivalent to one in the form \cref{eq:complex-trajectory-form}, which is parametrised by the element \(Y_+ + \epsilon \in S(\rho_+) \cap \mcN(\rho_-)\). Using \cref{lem:complex-trajectory-equal}, we see that two trajectories which are equal outside of \([0, 1]\) are equivalent. Therefore, the equivalence classes are parametrised by \(Y_+ + \epsilon \in S(\rho_+) \cap \mcN(\rho_-)\).
+\end{proof}
+
+\section{Nahm's equations}
+
+\label{sec:nahm}
+
+Consider the change of variables
+
+\[T_i = e^{2t}A_i \qquad s = -\frac12e^{-2t}\]
+
+Using this, \cref{eq:gradient-flow-system} becomes
+
+\begin{align*}
+    \dv{T_1}{s} &= -[T_2, T_3] \\
+    \dv{T_2}{s} &= -[T_3, T_1] \\
+    \dv{T_3}{s} &= -[T_1, T_2]
+\end{align*}
+
+which are Nahm's equations. The same change of variables also transforms \cref{eq:gradient-flow-system-extended} into 
+
+\begin{align*}
+    \dv{T_1}{s} + [T_0, T_1] + [T_2, T_3] &= 0 \\
+    \dv{T_2}{s} + [T_0, T_2] + [T_3, T_1] &= 0 \\
+    \dv{T_3}{s} + [T_0, T_3] + [T_1, T_2] &= 0 \\
+\end{align*}
+
+Using this, we can also consider the action of the gauge group on this system. Recall that the action is given by \cref{eq:action}, which is:
+
+\[g \vdot A = (gA_0g^{-1} - \dot g g^{-1}, gA_1g^{-1}, gA_2g^{-1}, gA_3g^{-1})\]
+
+Note that
+
+\[\dot g = \dv{g}{t} = \dv{g}{s}\dv{s}{t} = e^{-2t}\dv{g}{s}\]
+
+In this case, the gauge group action becomes
+
+\begin{align*}
+    g \vdot T &= g \vdot (e^{-2t}T_0, e^{-2t}T_1, e^{-2t}T_2, e^{-2t}T_3) \\
+    &= \left(e^{-2t}gT_0g^{-1} - e^{-2t}\dv{g}{s} g^{-1}, e^{-2t}gT_1g^{-1}, e^{-2t}gT_2g^{-1}, e^{-2t}gT_3g^{-1}\right) \\
+    &= \left(gT_0g^{-1} - \dv{g}{s}g^{-1}, gT_1g^{-1}, gT_2g^{-1}, gT_3g^{-1}\right)
+\end{align*}
+
+This is the same as the action as in \cite[Equation 1.6]{donaldson_nahms_1984}. Finally, we can consider the \(\SL(n, \C)\) valued paths
+
+\[\tilde\alpha = e^{2t}\alpha = \frac{1}{2}(T_0 + iT_1) \qquad \tilde\beta = e^{2t}\beta = \frac12(T_2 + iT_3)\]
+
+In this case the real and complex equations become
+
+\begin{align}
+    \label{eq:nahm-real-equation}
+    \dv{s}(\tilde\alpha + \tilde\alpha^*) + 2([\tilde\alpha, \tilde\alpha^*] + [\tilde\beta, \tilde\beta^*]) &= 0 \\
+    \dv{\tilde\beta}{s} + 2[\tilde\alpha, \tilde\beta] &= 0 \nonumber
+\end{align}
+
+With all of this in mind, this allows us to use the results from \cite{donaldson_nahms_1984}.
+
+\section{Real equation}
+
+Recall the real equation \cref{eq:real-equation},
+
+\[\hat F(\alpha, \beta) = \dv{t}(\alpha + \alpha^*) + 2(\alpha + \alpha^*) + 2([\alpha, \alpha^*] + [\beta, \beta^*]) = 0\]
+
+Write \((\alpha', \beta') = g \vdot (\alpha, \beta)\), and we will regard \(\hat F(\alpha', \beta') = 0\) as an equation for \(g\). First of all, notice that the real equation is invariant under the action of \(\mcG\), and so the action of \(g\) only depends on the corresponding path
+
+\[\tilde g : \R \to \SL(n, \C) / \SU(n) = \mcH\]
+
+From the polar decomposition of \(\SL(n, \C)\), we can write any \(A \in \SL(n, \C)\) uniquely as \(A = UP\), where \(U \in \SU(n)\) and \(P\) is hermitian, with positive eigenvalues and \(\det(P) = 1\). Hence we can choose
+
+\[\mcH = \left\{A \in \SL(n, \C) \mid A \text{ hermitian, with positive eigenvalues}\right\}\]
+
+For each \(g\), we define \(h = h(g) = g^*g\), which gives us a path \(h : \R \to \mcH\).
+
+\subsection{Uniqueness}
+
+\begin{lemma}
+    Suppose \((\alpha, \beta)\) satisfies the complex equation on an interval \([-N, N]\). Then for any \(h_-, h_+ \in \mcH\), there exists \(g : [-N, N] \to \SL(n, \C)\) continuous and smooth on the interior, with \(h = h(g)\) satisfying
+
+    \[h(-N) = h_- \qquad h(N) = h_+\]
+
+    and such that \((\alpha', \beta') = g \vdot (\alpha, \beta)\) satisfies the real equation \(\hat F(\alpha', \beta') = 0\) on \([-N, N]\).
+\end{lemma}
+
+\begin{proof}
+    See \cite[Proposition 2.8]{donaldson_nahms_1984}. The main idea is that the real equation (for Nahm's equations) is the Euler-Lagrange equations for a functional, and so the result follows by the direct method of the calculus of variations. To get the result, we apply \cite[Proposition 2.8]{donaldson_nahms_1984} with
+
+    \[\text{`}\alpha\text{'} := \tilde \alpha = e^{2t}\alpha \qquad \text{`}\beta\text{'} = \tilde\beta = e^{2t}\beta\]
+
+    and modify the interval \([\epsilon, 2-\epsilon]\) to \([-N, N]\). The work in \cref{sec:nahm} shows that \(g\) has the required properties.
+\end{proof}
+
+Now for \(h \in \mcH\), with eigenvalues \(\lambda_1, \dots, \lambda_k\), define
+
+\[\Psi(h) = \log\max(\lambda_i)\]
+
+Since \(\det(h) = 1\), \(\Psi(h) = 0\) if and only if \(h = 1\). Moreover, if \(h(t)\) is continuous, then \(\Psi(h(t))\) is as well.
+
+\begin{lemma}
+    If \((\alpha', \beta') = g \vdot (\alpha, \beta)\) over some interval in \(\R\), then with \(h = g^*g\),
+
+    \[\dv[2]{t}\Psi(h) + 2\dv{t}\Psi(h) \ge -2\left(\abs{\hat F(\alpha, \beta)} + \abs{\hat F(\alpha', \beta')}\right)\]
+
+    weakly. Note the norm on the right hand side is defined using the Killing form.
+\end{lemma}
+
+\begin{proof}
+    We want to use \cite[Lemma 2.10]{donaldson_nahms_1984}. First, we will write the left hand side in terms of \(s\). In this case, we have
+
+    \begin{align*}
+        \dv{\Psi}{s} &= \dv{\Psi}{t}\dv{t}{s} \\
+        \dv[2]{\Psi}{s} &= \dv[2]{\Psi}{t}\left(\dv{t}{s}\right)^2 + \dv{\Psi}{t}\dv[2]{t}{s} \\
+        &= e^{4t}\left(\dv[2]{\Psi}{t} + 2\dv{\Psi}{t}\right) 
+    \end{align*}
+
+    Next, note that the real equation for Nahm's equations, \cref{eq:nahm-real-equation}, is
+
+    \begin{align*}
+        \dv{s}(\tilde\alpha + \tilde\alpha^*) + 2([\tilde\alpha, \tilde\alpha^*] + [\tilde\beta, \tilde\beta^*]) &=\dv{t}(e^{2t}(\alpha + \alpha^*))\dv{t}{s} + 2e^{4t}([\alpha, \alpha^*] + [\beta, \beta^*]) \\
+        &= e^{4t}\left(\dv{t}(\alpha + \alpha^*) + 2(\alpha + \alpha^*) + 2([\alpha, \alpha^*] + [\beta, \beta^*])\right)
+    \end{align*}
+
+    Therefore, compared to \cite[Lemma 2.10]{donaldson_nahms_1984}, we have a factor of \(e^{4t}\) on both sides, which is a positive function. Therefore, the result follows.
+\end{proof}
+
+\begin{proposition}
+    Suppose \((\alpha', \beta')\) and \((\alpha'', \beta'')\) are equivalent complex trajectories, satisfying the real equation \cref{eq:real-equation}, then \((\alpha'', \beta'') = g\vdot(\alpha', \beta')\) for some \(g \in \mcG\), i.e. \(g : \R \to \SU(n)\), with \(g(t) \to 1\) as \(t \to \infty\).
+\end{proposition}
+
+\begin{proof}
+    Suppose \((\alpha', \beta')\) and \((\alpha'', \beta'') = g\vdot(\alpha', \beta')\) both satisfy the real equation. Setting \(h = h(g)\) and \(\Psi = \Psi(h)\), we find that
+
+    \[\ddot \Psi + 2\dot\Psi \ge 0\]
+
+    Using the same computation as in the previous lemma, this implies that
+
+    \[\dv[2]{\Psi}{s} \ge 0\]
+
+    and so \(\Psi(s)\) is convex. The other conditions transform to \(\Psi : (-\infty, 0) \to \R\) as: \(\Psi(s) \to 0\) as \(s \to 0\), \(\Psi(s)\) bounded and nonnegative. This then implies that \(\Psi\) must be identically zero. Hence \(h = 1\), and so \(g^*g = 1\). That is, \(g\) takes values in \(\SU(n)\).
+\end{proof}
+
+\subsection{Existence}
+
+Let \((\alpha, \beta)\) be a solution to the complex equations. We can assume without loss of generality that \((\alpha, \beta)\) is in the form \cref{eq:complex-trajectory-form}.
+
+\begin{lemma}
+    If \((\alpha, \beta)\) are in the form as in \cref{eq:complex-trajectory-form}, and \(\epsilon \in Z(X_+)\), then
+
+    \[
+    \begin{cases}
+        \hat F(\alpha, \beta) = 0 & \text{on }\Ioc{-\infty, 0} \\
+        \abs{\hat F(\alpha, \beta)} \le Ce^{-4t} & \text{on }\Ico{0, \infty}
+    \end{cases}\]
+\end{lemma}
+
+\begin{proof}
+    In both cases, since \(\rho_{\pm}\) are representations of \(\su(2)\), we have that
+
+    \begin{align*}
+        H_{\pm}^* &= H_{\pm} \\
+        X_{\pm}^* &= Y_{\pm} \\
+        Y_{\pm}^* &= X_{\pm} \\
+    \end{align*}
+
+    Thus, in the first case, we have
+
+    \[2H_- + 2[Y_-, X_-] = 0\]
+
+    which is true as \(\rho_-\) is a representation of \(\sl(2, \C)\).
+\end{proof}
+
+\appendix
+
+\section{Representation theory of \(\sl(2, \C)\)}
+
+In this section, we will sketch the representation theory of \(\sl(2, \C)\). For more details, see \cite[Section 7]{humphreys}.
+
+Let \(V\) be a complex vector space. Then a representation of \(\sl(2, \C)\) is a Lie algebra homomorphism \(\rho : \sl(2, \C) \to \gl(V)\). When clear, we will write \(X \vdot v := \rho(X)(v)\). Choose the basis
+
+\[X = \begin{pmatrix}
+    0 & 1 \\
+    0 & 0
+\end{pmatrix} \quad Y = \begin{pmatrix}
+    0 & 0 \\
+    1 & 0
+\end{pmatrix} \quad H = \begin{pmatrix}
+    1 & 0 \\
+    0 & -1
+\end{pmatrix}\]
+
+for \(\sl(2, \C)\). The commutators are \([H, X] = 2X, [H, Y] = -2Y, [X,Y] = H\)
+
+We first note that \(\rho(H)\) is diagonalisable, and so we have a Jordan decomposition
+
+\[V = \bigoplus_{\lambda \in \C}V_\lambda\]
+
+where
+
+\[V_\lambda = \left\{v \in V \mid H \cdot v = \lambda v\right\}\]
+
+is the \(\lambda\)-eigenspace of \(H\). In fact, we have:
+
+\begin{enumerate}
+    \item \[V = \bigoplus_{\lambda \in \Z}V_\lambda\]
+    \item if \(v \in V_\mu\), then \(X \cdot v \in V_{\mu+2}\) and \(Y \cdot v \in V_{\mu-2}\).
+\end{enumerate}
+
+\section{Distributions}
+
+\label{sec:distributions}
+
+Let \(\Omega \subseteq \R^n\) be open and connected.
+
+\begin{definition}
+    [positive]
+    We say that \(u \in \mcD'(\Omega)\) is \emph{positive} if for all \(\phi \in C_c^\infty(\Omega)\), with \(\phi \ge 0\), \(u[\phi] \ge 0\). We write this as \(u \ge 0\). 
+\end{definition}
+
+\begin{definition}
+    [derivative]
+
+    The derivative of a distribution \(u \in \mcD'(\Omega)\) is the distribution \(Du\) given by
+
+    \[Du[\phi] = -u[D\phi]\]
+\end{definition}
+
+Finally, recall that we have an embedding \(T : L^1_\text{loc.}(\Omega) \to \mcD'(\omega)\), given by
+
+\[T_f(\phi) = \int_\Omega f\phi \dd x\]
+
+We will abuse notation and write \(Df = DT_f\). With this, let
+
+\[L = \sum_{k=0}^d a_k D^k\]
+
+be a linear differential operator, \(a_k : \Omega \to \R\) smooth. Suppose \(Lf \ge 0\). Then we say that the differential inequality \(Lf \ge 0\) holds \emph{weakly}.
 
 \printbibliography
 
