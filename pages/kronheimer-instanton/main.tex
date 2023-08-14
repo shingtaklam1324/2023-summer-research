@@ -684,6 +684,7 @@ For each \(g\), we define \(h = h(g) = g^*g\), which gives us a path \(h : \R \t
 \subsection{Uniqueness}
 
 \begin{lemma}
+    \label{lem:gauge-exists-with-dirichlet}
     Suppose \((\alpha, \beta)\) satisfies the complex equation on an interval \([-N, N]\). Then for any \(h_-, h_+ \in \mcH\), there exists \(g : [-N, N] \to \SL(n, \C)\) continuous and smooth on the interior, with \(h = h(g)\) satisfying
 
     \[h(-N) = h_- \qquad h(N) = h_+\]
@@ -775,8 +776,39 @@ Let \((\alpha, \beta)\) be a solution to the complex equations. We can assume wi
 
     \[2H_- + 2[Y_-, X_-] = 0\]
 
-    which is true as \(\rho_-\) is a representation of \(\sl(2, \C)\).
+    which is true as \(\rho_-\) is a representation of \(\sl(2, \C)\). For the second case, let
+
+    \[\epsilon(t) = e^{-2t}\exp(-H_+t)\epsilon\exp(H_+t)\]
+
+    and we have that
+
+    \[\alpha = \frac12H_+ \qquad \beta(t) = Y_+ + \epsilon(t)\]
+
+    Computing each part, we have
+
+    \begin{align*}
+        \alpha + \alpha^* &= H_+ \\
+        [\alpha, \alpha^*] &= 0 \\
+        [\beta, \beta^*] &= [Y_+ + \epsilon(t), Y_+^* + \epsilon(t)^*] \\
+        &= -H_+ + [\epsilon(t), X_+] + [Y_+, \epsilon(t)^*] + [\epsilon(t), \epsilon(t)^*] \\
+        &= -H_+ + 2[\epsilon(t), X_+] + [\epsilon(t), \epsilon(t)^*]
+    \end{align*}
+
+    We want to show that \([\epsilon(t), X_+] = 0\). Set \(f = \exp(-H_+t)\), then this is equivalent to showing \(\varphi = 0\), where \(\varphi(t) = [\epsilon, e^{2t}f^{-1}X_+ f]\). Since \(\varphi(0) = 0\), as \(\epsilon \in Z(X_+)\), suffices to show \(\dot\varphi = 0\). Computing,
+
+    \begin{align*}
+        \dot\varphi &= [\epsilon, 2e^{-2t}f^{-1}X_+ f - e^{2t}f^{-1}H_+X_+ f + e^{2t}f^{-1}X_+ H_+f] \\
+        &= 0
+    \end{align*}
+
+    as \([H, X] = 2X\). Therefore, we have that \(\hat F(\alpha, \beta) = 2[\epsilon(t), \epsilon(t)^*]\). In this case, we have that \(\abs{\epsilon(t)} = e^{-2t}\abs{\epsilon}\), and so using the fact that the norm is (up to a constant) submultiplicative, we have that
+
+    \[\abs{\hat F(\alpha, \beta)} \le Ce^{-4t}\]
+
+    Since \(\hat F\) is bounded on \([0, 1]\), making \(C\) larger if necessary, we have that \(\abs{\hat F(\alpha, \beta)} \le Ce^{-4t}\) on \(\Ico{0, \infty}\). 
 \end{proof}
+
+Using \cref{lem:gauge-exists-with-dirichlet}, for each \(N \in \N\), we can find a complex gauge transformation \(g_N : [-N, N] \to \SL(n, \C)\), such that \(g_N \vdot (\alpha, \beta)\) satisfies the real equation, and \(h_N = g_N^*g_N\) satisfies the Dirichlet boundary condition \(h_N(\pm N) = 1\). We will now show that the \(h_N\) have a smooth limit as \(N \to \infty\).
 
 \appendix
 
