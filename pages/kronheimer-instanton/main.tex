@@ -26,6 +26,8 @@ which has complexification
 
 \[G^c = \SL(n, \C) \qquad \mfg^c = \sl(n, \C)\]
 
+\tableofcontents
+
 \section{Introduction}
 
 The inner product on \(\su(n)\) is given by \(-\kappa\), where \(\kappa\) is the Killing form. That is,
@@ -126,6 +128,8 @@ We will then define \(\mcN(\rho)\) for the nilpotent orbit of \(Y\) in \(\sl(n, 
 where \(Z(X) = \left\{A \in \sl(n, \C) \mid [A, X] = 0\right\}\). Using this, we have
 
 \begin{theorem}
+    \label{thm:main}
+
     For any pair of homomorphisms \(\rho_-, \rho_+\), there is a diffeomorphism
 
     \[M(\rho_-, \rho_+) \cong \mcN(\rho_-) \cap S(\rho_+)\]
@@ -136,6 +140,18 @@ If \(\rho_+ = 0\), then \(S(\rho_+) = \sl(n, \C)\), and in this case, we have a 
 \[M(\rho_-, 0) \cong \mcN(\rho_-)\]
 
 Moreover, every nilpotent orbit is \(\mcN(\rho)\) for some homomorphism \(\rho : \su(2) \to \su(n)\), which means that we have a description of all nilpotent orbits in \(\sl(n, \C)\).
+
+We will defer the proof of \cref{thm:main} to \cref{sec:proof}, but below, we will provide a sketch proof, which will also function as an outline for the note.
+
+First, we will extend \cref{eq:gradient-flow-system} to a system of equations \cref{eq:gradient-flow-system-extended}. In this case, we have an action of a gauge group. Writing
+
+\[\alpha = \frac{1}{2}(A_0 + iA_1) \qquad \beta = \frac12(A_2 + iA_3)\]
+
+We can split Nahm's equations into a real equation \cref{eq:real-equation} and a complex equation \cref{eq:complex-equation}. In \cref{lem:complex-trajectory-convergence-negative} and \cref{lem:complex-trajectory-convergence-positive}, we show that using the group action, we can assume that the solution to the complex equation takes a given form. In particular, in \cref{prop:complex-trajectory-classification}, we prove that the solutions are parametrised by an element of \(S(\rho_+) \cap \mcN(\rho_-)\).
+
+Thus, we have a bijection between the space of (equivalence classes of) solutions of the complex equation and \(S(\rho_+) \cap \mcN(\rho_-)\). Since each solution to \cref{eq:gradient-flow-system} gives us a solution to the real and complex equations, this gives us a map \(\mcM(\rho_-, \rho_+) \to S(\rho_+) \cap \mcN(\rho_-)\).
+
+Working now with the real equation, using \cref{prop:real-equation-uniqueness}, we can show that the map is injective. On the other hand, in \cref{prop:real-trajectory-existence}, we show that within each equivalence class of complex trajectories, there exists a trajectory which satisfies the real equation. Decomposing into hermitian and anti-hermitian parts, we can use this to recover a solution to the extended equations \cref{eq:gradient-flow-system-extended}. Finally, we use the group action to show that we can take \(A_0 = 0\), and recover a solution to the original equations \cref{eq:gradient-flow-system}. Thus, the map is also surjective.
 
 \section{Complex trajectories}
 
@@ -707,6 +723,8 @@ Now for \(h \in \mcH\), with eigenvalues \(\lambda_1, \dots, \lambda_k\), define
 Since \(\det(h) = 1\), \(\Psi(h) = 0\) if and only if \(h = 1\). Moreover, if \(h(t)\) is continuous, then \(\Psi(h(t))\) is as well.
 
 \begin{lemma}
+    \label{lem:differential-inequality}
+
     If \((\alpha', \beta') = g \vdot (\alpha, \beta)\) over some interval in \(\R\), then with \(h = g^*g\),
 
     \[\dv[2]{t}\Psi(h) + 2\dv{t}\Psi(h) \ge -2\left(\abs{\hat F(\alpha, \beta)} + \abs{\hat F(\alpha', \beta')}\right)\]
@@ -734,6 +752,7 @@ Since \(\det(h) = 1\), \(\Psi(h) = 0\) if and only if \(h = 1\). Moreover, if \(
 \end{proof}
 
 \begin{proposition}
+    \label{prop:real-equation-uniqueness}
     Suppose \((\alpha', \beta')\) and \((\alpha'', \beta'')\) are equivalent complex trajectories, satisfying the real equation \cref{eq:real-equation}, then \((\alpha'', \beta'') = g\vdot(\alpha', \beta')\) for some \(g \in \mcG\), i.e. \(g : \R \to \SU(n)\), with \(g(t) \to 1\) as \(t \to \infty\).
 \end{proposition}
 
@@ -754,6 +773,8 @@ Since \(\det(h) = 1\), \(\Psi(h) = 0\) if and only if \(h = 1\). Moreover, if \(
 Let \((\alpha, \beta)\) be a solution to the complex equations. We can assume without loss of generality that \((\alpha, \beta)\) is in the form \cref{eq:complex-trajectory-form}.
 
 \begin{lemma}
+    \label{lem:existence-bound}
+
     If \((\alpha, \beta)\) are in the form as in \cref{eq:complex-trajectory-form}, and \(\epsilon \in Z(X_+)\), then
 
     \[
@@ -809,6 +830,89 @@ Let \((\alpha, \beta)\) be a solution to the complex equations. We can assume wi
 \end{proof}
 
 Using \cref{lem:gauge-exists-with-dirichlet}, for each \(N \in \N\), we can find a complex gauge transformation \(g_N : [-N, N] \to \SL(n, \C)\), such that \(g_N \vdot (\alpha, \beta)\) satisfies the real equation, and \(h_N = g_N^*g_N\) satisfies the Dirichlet boundary condition \(h_N(\pm N) = 1\). We will now show that the \(h_N\) have a smooth limit as \(N \to \infty\).
+
+\begin{lemma}
+    \label{lem:uniform-bound}
+    Let \(C\) be the constant from \cref{lem:existence-bound}. Define the \(C^1\) function \(\psi : \R \to \R\) by
+
+    \[\psi(t) = \begin{cases}
+        C/4 & t \le 0 \\
+        Ce^{-2t}/2 - Ce^{-4t}/4 & t \ge 0
+    \end{cases}\]
+
+    Then for all \(N\), we have \(\Psi(h_N) < \psi\) on \([-N, N]\).
+\end{lemma}
+
+\begin{proof}
+    We have that
+
+    \[\ddot \psi + 2\dot\psi = \begin{cases}
+        0 & t < 0 \\
+        -2Ce^{-4t} & t > 0
+    \end{cases}\]
+
+    and \cref{lem:differential-inequality} and \cref{lem:existence-bound} gives us that
+
+    \[\ddot\Psi + 2\dot\Psi \ge -2\abs{\hat F(\alpha, \beta)} \ge \begin{cases}
+        0 & t \le 0 \\
+        -2Ce^{-4t} & t \ge 0
+    \end{cases}\]
+
+    Therefore, we have that \((\ddot\Psi - \ddot\psi) + 2(\dot\Psi - \dot\psi) \ge 0\). Using the change of variables \(s = -\frac12e^{-2t}\) as before, we find that
+
+    \[\dv[2]{s}(\Psi - \psi) \ge 0\]
+
+    That is, \(\Psi - \psi\), as a function of \(s\), is convex. Therefore, by the maximum principle for convex functions, the maximum value of \(\Psi - \psi\) is attained at one of the end points. By assumption, \(h_N(\pm N) = 1\), and so \(\Psi(\pm N) = 0\). Thus, \(\Psi(-N) - \psi(-N) = -C/4 < 0\). Similarly, \(\Psi(N) - \psi(N) = Ce^{-2N}/2 - Ce^{-4N}/4 < 0\). Therefore, \(\Psi - \psi\) is negative on \([-N, N]\). In fact, it is bounded away from zero.
+\end{proof}
+
+\begin{lemma}
+    \label{lem:limit-gauge}
+    The \(h_N\) converges in the \(C^\infty\) topology on compact subsets, to a smooth path \(h : \R \to \mcH\), such that
+
+    \begin{enumerate}[(i)]
+        \item \(h\) is bounded, and for large \(t\), \[\abs{h(t) - 1} \le C'e^{-2t}\] for some \(C' > 0\),
+        \item if \(g = h^{1/2}\), \((\alpha', \beta') = g \vdot (\alpha, \beta)\), then \(\hat F(\alpha', \beta') = 0\),
+        \item the derivative \(\dv*{h}{t}\) is bounded, and for large \(t\), \[\abs{\dv{h}{t}} < C''e^{-2t}\] for some \(C'' > 0\)
+    \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+    Omitted.
+\end{proof}
+
+Using this, we can prove:
+
+\begin{proposition}
+    \label{prop:real-trajectory-existence}
+
+    For every complex trajectory \((\alpha, \beta)\), there is an equivalent trajectory \((\alpha', \beta') = g \vdot (\alpha, \beta)\) which satisfies the real equation \(\hat F(\alpha', \beta') = 0\).
+\end{proposition}
+
+\begin{proof}
+    Using \(g\) from \cref{lem:limit-gauge}, we all we need to show is that \((\alpha', \beta')\) satisfy the boundary conditions \cref{eq:complex-trajectory-boundary-conditions}. First of all, using \cref{lem:limit-gauge} (iii), we find that \((\alpha', \beta') - (\alpha, \beta)\) decays exponentially as \(t \to \infty\). In particular, this means that the boundary conditions at \(t \to \infty\) are satisfied.
+
+    For the boundary conditions at \(t \to -\infty\), split \((\alpha', \beta')\) into hermitian and skew-hermitian parts, to get a solution \((A_0, A_1, A_2, A_3)\) of the extended gradient flow equations \cref{eq:gradient-flow-system-extended}. Using a real gauge transformation \(g \in \mcG\), we can make \(A_0 = 0\), which gives us a solution \((A_1', A_2', A_3')\) of the gradient flow equations \cref{eq:gradient-flow-system}. By \cref{lem:limit-gauge} (iii), this is a bounded trajectory. Therefore, it approaches a critical point. Hence the boundary conditions at \(t \to -\infty\) are satisfied, although it might be for a different representation \(\rho_-\). However, by \cref{lem:complex-trajectory-convergence-negative}, the conjugacy class of the representation \(\rho_-\) given in the limit, is uniquely determined by the orbit in which \(\beta'\) lies, which is the same orbit as \(\beta\).
+\end{proof}
+
+\section{Proof of \cref{thm:main}}
+
+Suppose \(A(t)\) is a solution to the gradient flow equations \cref{eq:gradient-flow-system} satisfying the boundary conditions \cref{eq:boundary-conditions}. Setting \(A_0 = 0\), we obtain a complex trajectory \((\alpha, \beta)\). The only thing we need to check that the convergence at \(t \to \pm\infty\) is exponential. But \cref{eq:gradient-flow-system} is an autonomous system, and so the convergence rate of its linearisation is exponential, e.g. by diagonlising the linearisation. Near the fixed points \(\rho_+\) and \(g\rho_-g^{-1}\), the fact that the gradient flow converges implies that it must converge exponentially.
+
+Therefore, we have a map from \(M(\rho_-, \rho_+)\) to the space of equivalence classes of complex trajectories. 
+
+\Cref{prop:real-equation-uniqueness} shows that this map is injective. To see this, suppose \(A, A' \in M(\rho_-, \rho_+)\) give equivalent complex trajectories. Then there exists \(g : \R \to \SU(n)\), with \(g \vdot A = A'\), and \(g(t) \to 1\) as \(t \to \infty\). But in this case, \(A_0 = A_0' = 0\), which means that
+
+\[-\dot g g^{-1} = 0 \implies \dot g = 0\]
+
+and so \(g(t) = 1\) for all \(t\). That is, \(A = A'\).
+
+By \cref{prop:real-trajectory-existence}, in each equivalence class there is a complex trajectory \((\alpha', \beta')\) satisfying the real equation. Decomposing \((\alpha', \beta')\) into hermitian and skew-hermitian parts, we get a solution \((A_0, A_1, A_2, A_3)\) of the extended equations \cref{eq:gradient-flow-system-extended}. Moreover, \(A_0\) decays exponenitally, so there exists a real gauge transformation \(g : \R \to \SU(n)\), with \(g(t) \to 1\) as \(t \to 1\), such that
+
+\[gA_0g^{-1} - \dot g g^{-1} = 0\]
+
+Therefore, from this, we obtain a solution to the original equations. Thus, the map from \(M(\rho_-, \rho_+)\) to the space of equivalence classes of complex trajectories is surjective.
+
+\label{sec:proof}
 
 \appendix
 
