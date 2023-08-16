@@ -372,7 +372,7 @@ As a consequence of this, we have
 
     \[H_- = 2g_0\alpha g_0^{-1} - \dot g_0 g_0^{-1}\]
 
-    with the boundary condition \(g_0(t) \to 1\) as \(t \to -\infty\), since \(2\alpha(t) \to H_-\) exponentially. \textbf{mhm... why?}
+    with the boundary condition \(g_0(t) \to 1\), as \(t \to -\infty\), since \(2\alpha(t) \to H_-\) exponentially. \textbf{TODO: Check this, see email.}
 
     Using this, we get a transformed solution \((\alpha'', \beta'') = g_0\vdot(\alpha,\beta)\), with \(2\alpha'' = H_-\). In this case, the complex equation becomes
 
@@ -597,7 +597,7 @@ Now let \((\alpha', \beta')\) be a solution of the complex equation \cref{eq:com
     \end{cases}
 \end{equation}
 
-and smooth on \([0, 1]\). Then \(g(t)\) is bounded, since \(g_-\) and \(g_+\) are, as they converge in the limit \(t \to \pm\infty\). Therefore, \(g \in \mcG_0^c\), and \((\alpha, \beta) = g \vdot (\alpha', \beta')\) is given by
+and smooth on all of \(\R\). Then \(g(t)\) is bounded, since \(g_-\) and \(g_+\) are, as they converge in the limit \(t \to \pm\infty\). Therefore, \(g \in \mcG_0^c\), and \((\alpha, \beta) = g \vdot (\alpha', \beta')\) is given by
 
 \begin{equation}
     \label{eq:complex-trajectory-form}
@@ -914,6 +914,179 @@ Therefore, from this, we obtain a solution to the original equations. Thus, the 
 
 \label{sec:proof}
 
+\section{Nilpotent orbit}
+
+As we are predominantly interested in the nilpotent orbits, we will consider the case where \(\rho_+ = 0\). Define \(M(\rho) = M(\rho, 0)\) to be the space of solutions to \cref{eq:gradient-flow-system}, satisfying the boundary conditions
+
+\[\lim_{t \to -\infty}A(t) \in C(\rho) \qquad \lim_{t \to \infty}A(t) = 0\]
+
+In this case, \cref{thm:main} becomes
+
+\[M(\rho) \cong \mcN(\rho)\]
+
+First of all, given \(A = (A_1, A_2, A_3) \in M(\rho)\), we send it to the equivalence class of the complex trajectory
+
+\[\alpha = iA_1 \qquad \beta = A_2 + iA_3\]
+
+Putting \((\alpha, \beta)\) into the form of \cref{eq:complex-trajectory-form}, we have that
+
+\begin{equation}
+    \begin{split}
+        \alpha(t) &= \begin{cases}
+            \frac12H & t \le 0 \\
+            0 & t \ge 1
+        \end{cases} \\
+        \beta(t) &= \begin{cases}
+            Y & t \le 0 \\
+            e^{-2t}\epsilon & t \ge 1
+        \end{cases}
+    \end{split}
+\end{equation}
+
+where \(\epsilon\) is conjugate to \(Y\), i.e. \(\epsilon \in \mcN(\rho)\). Note however in this case, we don't need to use \cref{lem:complex-trajectory-convergence-negative} for \(t \le 0\), we could just leave it as is, and just use \cref{lem:complex-trajectory-convergence-positive}. Therefore, to compute \(\epsilon\), we can just solve the ODE
+
+\begin{align*}
+    \dot g &= 2g\alpha = 2igA_1 \\
+    \lim_{t \to \infty}g(t) &= 1
+\end{align*}
+
+and in this case, \(g\) will transform \(\beta\) to \(e^{-2t}\epsilon\) for some \(\epsilon \in \sl(n, \C)\). More precisely, \(\epsilon = g(0)\beta(0)g(0)^{-1}\).
+
+\subsection{Nahm's equations}
+
+Consider the complex equation for Nahm's equations, that is, using the change of variables
+
+\[s = -\frac12e^{-2t} \qquad \tilde\alpha = e^{2t}\alpha \qquad \tilde\beta = e^{2t}\beta\]
+
+we have the complex equation
+
+\[\dv{\tilde\beta}{s} + 2[\tilde\alpha, \tilde \beta] = 0\]
+
+The tangent space to the adjoint orbit \(M\) of \(\tilde\beta\) at \(\tilde\beta\) is
+
+\[\left\{[X, \tilde\beta] \mid X \in \sl(n, \C)\right\}\]
+
+which means that \(\dv{\tilde{\beta}}{s} \in \TT_{\tilde\beta}M\). Therefore \(\tilde\beta\) stays in the same adjoint orbit of \(\sl(n, \C)\). We can transfer this back to the original equations, since for a \emph{nilpotent} matrix \(A\), \(A\) and \(\lambda A\) are conjugate, for all \(\lambda \in \C\). That is, \(\beta\) stays within the same nilpotent orbit.
+
+\subsection{Boundary conditions to Nahm's equations}
+
+In this case, we would like to translate the boundary conditions from \(A = (A_1, A_2, A_3)\) to boundary conditions on \(T = (T_1, T_2, T_3)\), where \(T = e^{2t}A\).
+
+The boundary condition \(A \to 0\) at \(t \to \infty\) becomes
+
+\[e^{-2t}T \to 0 \implies sT \to 0\]
+
+as \(s \to 0\). The boundary condition \(\lim\limits_{t \to -\infty}A(t) \in C(\rho)\) becomes
+
+\[\lim_{s \to -\infty}e^{-2t}T \in C(\rho) \implies \lim_{s \to -\infty}sT \in -\frac12 C(\rho)\]
+
+That is, we have the boundary conditions
+
+\begin{equation}
+    \label{eq:nahm-boundary-conditions}
+    \begin{split}
+        \lim_{s \to 0} s T &= 0 \\
+        \lim_{s \to -\infty}sT &\in C(\sigma)
+    \end{split}
+\end{equation}
+
+where \(\sigma = (\sigma_1, \sigma_2, \sigma_3) = -\frac12\rho\) satisfies
+
+\begin{align*}
+    [\sigma_1, \sigma_2] &= \sigma_3 \\
+    [\sigma_2, \sigma_3] &= \sigma_1 \\
+    [\sigma_3, \sigma_1] &= \sigma_2
+\end{align*}
+
+In particular, given such a triple, define
+
+\begin{equation}
+    \label{eq:nahm-asymptotic-solution}
+    T_i = \frac{\sigma_i}{s-1}
+\end{equation}
+
+Then this is a solution to Nahm's equations, satisfying the boundary conditions \cref{eq:boundary-conditions}. In fact, all solutions will be asymptotic to (a conjugate of) this one as \(s \to -\infty\).
+
+\subsection{Map for \(\epsilon\) using Nahm's equations}
+
+Setting \(\tilde\alpha = e^{2t}\alpha\) and \(\tilde\beta = e^{2t}\beta\), then we have the complex equation coming from Nahm's equations, i.e.
+
+\[\dv{\tilde\beta}{s} + [\tilde\alpha, \tilde\beta] = 0\]
+
+Therefore, if we instead solve for \(g \vdot (\tilde\alpha, \tilde\beta) = (0, \tilde\beta')\), i.e.
+
+\[\dv{g}{s} = 2g\tilde\alpha\]
+
+with the boundary condition that \(g \to 1\) as \(s \to 0\), then \(\tilde\beta'\) is constant, and this constant is exactly \(\epsilon\). In fact, this is the same equation as in \cref{lem:complex-trajectory-convergence-positive}, just with a change of variables. Therefore, in this case,
+
+\[\tilde\beta(t) = g(t)^{-1}\epsilon g(t)\]
+
+and since \(g(t) \to 1\) as \(s \to 0\), we have that
+
+\[\epsilon = \lim_{s \to 0}\tilde\beta(s)\]
+
+Substituting in the definitions of \(s\) and \(\tilde\beta\), we get that
+
+\[\epsilon = \lim_{t \to \infty}e^{2t}\beta(t)\]
+
+We can do this explicitly for the solution \cref{eq:nahm-asymptotic-solution}. In this case, we have the equation
+
+\[\dot g = g \cdot \frac{2i\sigma_1}{s-1}\]
+
+Suppose \(g(s) = \exp(\gamma(s))\), for some \(\gamma : (-\infty, 0) \to \sl(n, \C)\). In this case,
+
+\[\dot g = g \cdot \dot\gamma\]
+
+Therefore, we want \(\dot\gamma = \dfrac{2i\sigma_1}{s-1}\). Integrating, we find that
+
+\[\gamma(s) = 2i\log(1-s)\sigma_1 + c\]
+
+Substituting this in, we get that
+
+\[g(s) = A\exp(2i\log(1-s)\sigma_1)\]
+
+In fact, the expression above is well defined for \(s \in (-\infty, 1)\). In this case, \(g(0) = A\), and we want \(g(0) = 1\), therefore, \(A = 1\). i.e. 
+
+\[g(s) = \exp(2i\log(1-s)\sigma_1)\]
+
+If we set \(\tilde\beta = T_2 + iT_3\), then \(g\tilde\beta g^{-1}\) is constant, and in fact it is just
+
+\[\tilde\beta(0) = -(\sigma_2 + i\sigma_3)\]
+
+\section{Decomposition}
+
+In the proof, when splitting the gradient flow equations \cref{eq:gradient-flow-system} into the real (\cref{eq:real-equation}) and complex (\cref{eq:complex-equation}) equations, we made a choice to make \(A_1\) ``special''. However, any cyclic permutation of \(A_1, A_2, A_3\) will leave \cref{eq:gradient-flow-system} invariant. Say instead we choose
+
+\[\tilde\alpha = \frac12(A_0 + iA_2) \qquad \tilde\beta = \frac12(A_3 + iA_1)\]
+
+The real and complex equations are invariant, since the gradient flow equations are invariant under cyclic permutations. That is, we have
+
+\begin{align*}
+    \hat F(\tilde\alpha, \tilde\beta) = \dv{t}(\tilde\alpha + \tilde\alpha^*) + 2(\tilde\alpha + \tilde\alpha^*) + 2([\tilde\alpha, \tilde\alpha^*] + [\tilde\beta, \tilde\beta^*]) &= 0\\
+    \dv{\tilde\beta}{t} + 2\tilde\beta + 2[\tilde\alpha, \tilde\beta] &= 0 
+\end{align*}
+
+In this case, given Lie algebra homomorphisms \(\rho_-, \rho_+ : \su(2) \to \su(n)\), we have the corresponding elements
+
+\begin{align*}
+    \tilde H_\pm = \rho_\pm(ie_2) &= \rho_\pm\begin{pmatrix}
+        0 & i \\
+        -i & 0
+    \end{pmatrix} \\
+    \tilde X_\pm = \rho_\pm\left(\frac{1}{2}(e_3 + ie_1)\right) &= \rho_\pm\begin{pmatrix}
+        1 & -i \\
+        -i & -1
+    \end{pmatrix} \\
+    \tilde Y_\pm = \rho_\pm\left(\frac12(-e_3 + ie_1)\right) &= \rho_\pm\begin{pmatrix}
+        1 & i \\
+        i & -1
+    \end{pmatrix}
+\end{align*}
+
+In this case (for the nilpotent orbits), we will get an element \(\epsilon\) which is in the same \(\SL(n, \C)\) orbit as \(\tilde Y_-\).
+
+\textbf{TODO: Is this the same orbit as \(Y_-\)?}
+
 \appendix
 
 \section{Representation theory of \(\sl(2, \C)\)}
@@ -969,7 +1142,7 @@ Let \(\Omega \subseteq \R^n\) be open and connected.
     \[Du[\phi] = -u[D\phi]\]
 \end{definition}
 
-Finally, recall that we have an embedding \(T : L^1_\text{loc.}(\Omega) \to \mcD'(\omega)\), given by
+Finally, recall that we have an embedding \(T : L^1_\text{loc.}(\Omega) \to \mcD'(\Omega)\), given by
 
 \[T_f(\phi) = \int_\Omega f\phi \dd x\]
 
