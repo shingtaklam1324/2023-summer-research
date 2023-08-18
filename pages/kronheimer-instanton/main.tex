@@ -1,4 +1,4 @@
-\documentclass{article}
+\documentclass{report}
 
 \usepackage{../../Style}
 \usepackage{biblatex}
@@ -29,6 +29,8 @@ which has complexification
 \[G^c = \SL(n, \C) \qquad \mfg^c = \sl(n, \C)\]
 
 \tableofcontents
+
+\chapter{Moduli space}
 
 \section{Introduction}
 
@@ -972,6 +974,8 @@ which means that \(\dv{\tilde{\beta}}{s} \in \TT_{\tilde\beta}M\). Therefore \(\
 
 \subsection{Boundary conditions to Nahm's equations}
 
+\label{subsec:nahm-boundary-conditions}
+
 In this case, we would like to translate the boundary conditions from \(A = (A_1, A_2, A_3)\) to boundary conditions on \(T = (T_1, T_2, T_3)\), where \(T = e^{2t}A\).
 
 The boundary condition \(A \to 0\) at \(t \to \infty\) becomes
@@ -1089,11 +1093,157 @@ In this case (for the nilpotent orbits), we will get an element \(\epsilon\) whi
 
 \textbf{TODO: Is this the same orbit as \(Y_-\)?}
 
-\section{Manifold structure of \(M(\rho)\)}
+\chapter{HyperK\"ahler manifold structure}
 
-In this section, we will compute the manifold structure of \(M(\rho)\), following \cite{kronheimer_hyper-kahlerian_1990}. Note that \cite{kronheimer_hyper-kahlerian_1990} is for \emph{regular semisimple} orbits, therefore there are a few modifications which are required.
+In this chapter, we will construct the hyperK\"ahler manifold structure on \(M(\rho)\), following \cite{kronheimer_hyper-kahlerian_1990}. Note however that \cite{kronheimer_hyper-kahlerian_1990} is for the \emph{regular semisimple} orbit, therefore to transfer it to the nilpotent orbit, we will need to make some changes.
+
+\section{Nahm's equations}
+
+Recall that if we set \(B = e^{2t}A\) and \(s = -\frac12e^{-t}\), then the equations \cref{eq:gradient-flow-system} becomes Nahm's equations
+
+\begin{equation}
+    \label{eq:nahm}
+    \begin{split}
+        \dv{B_1}{s} + [B_2, B_3] &= 0 \\
+        \dv{B_2}{s} + [B_3, B_1] &= 0 \\
+        \dv{B_3}{s} + [B_1, B_2] &= 0
+    \end{split}
+\end{equation}
+
+and from \cref{subsec:nahm-boundary-conditions}, we have the boundary conditions
+
+\begin{align*}
+    \lim_{s \to 0}sT &= 0 \\
+    \lim_{s \to -\infty}sT &\in C(\sigma)
+\end{align*}
+
+where \(\sigma = -\frac12\rho\), satisfies
+
+\begin{align*}
+    [\sigma_1, \sigma_2] &= \sigma_3 \\
+    [\sigma_2, \sigma_3] &= \sigma_1 \\
+    [\sigma_3, \sigma_1] &= \sigma_2
+\end{align*}
+
+Moreover, since we assume the limits \(s \to 0\) exists, we will consider the equations on the half interval \(\Ioc{-\infty, 0}\).
+
+Adding in a fourth function \(B_0 : \Ioc{-\infty, 0} \to \su(n)\), we can write the extended Nahm's equations as
+
+\begin{equation}
+    \label{eq:extended-nahm}
+    \begin{split}
+        \dv{B_1}{s} + [B_0, B_1] + [B_2, B_3] &= 0 \\
+        \dv{B_2}{s} + [B_0, B_2] + [B_3, B_1] &= 0 \\
+        \dv{B_3}{s} + [B_0, B_3] + [B_1, B_2] &= 0
+    \end{split}
+\end{equation}
+
+We have three equations for four variables, so the system is underdetermined. We can introduce the gauge group as before, with
+
+\begin{align*}
+    \mcG &= \left\{g : \Ioc{-\infty, 0} \to \su(n)\right\} \\
+    % \mcG^c &= \left\{g : \Ioc{-\infty, 0} \to \sl(n, \C)\right\}
+    \mcG_0 &= \left\{g : \Ioc{-\infty, 0} \to \su(n), g(0) = 1\right\}
+    % \mcG_0^c &= \left\{g : \Ioc{-\infty, 0} \to \sl(n, \C), g(0) = 1\right\}
+\end{align*}
+
+with the action given by
+
+\[g \vdot (B_0, B_1, B_2, B_3) := \left(gB_0g^{-1} - \dv{g}{s}g^{-1}, gB_1g^{-1}, gB_2g^{-1}, gB_3g^{-1}\right)\]
+
+Using this, if we ignore the boundary conditions, then the space of solutions to \cref{eq:nahm} are the same as the space of solutions to \cref{eq:extended-nahm} modulo the action of \(\mcG_0\), since we can always use \(\mcG_0\) to make \(B_0 = 0\). Moreover, by an element of \(\mcG_0\), we can assume that \(\lim_{s \to -\infty}sT = \sigma\). Let
+
+\[B^0 = \left(0, \frac{\sigma_1}{s-1}, \frac{\sigma_2}{s-1}, \frac{\sigma_3}{s-1}\right)\]
+
+be the ``trivial'' solution to Nahm's equations. We are interested in solutions which are asymptotic to this one. To do this, let \(\Omega\) denote the space of all \(C^1\) maps
+
+\[b = (b_0, b_1, b_2, b_3) : \Ioc{-\infty, 0} \to \su(n) \otimes \R^4\]
+
+\textbf{TODO: Subject to some boundary/norm conditions}
+
+and let
+
+\[\msA = B^0 + \Omega = \left\{B^0 + b \mid b \in \Omega\right\}\]
+
+Then all of the solutions which we are interested in belong to \(\msA\). For any path \(u : \Ioc{-\infty, 0} \to \su(n)\), define
+
+\[\grad_B u = \left(\dv{u}{s} + [B_0, u], [B_1, u], [B_2, u], [B_3, u]\right)\]
+
+and we have that
+
+\[M(\rho) \cong \left\{B \in \msA \text{ satisfying \cref{eq:extended-nahm}}\right\}/\msG\]
+
+where \(\msG\) is a gauge group.
+
+\section{HyperK\"ahler structure on \(\Omega\)}
+
+\(\Omega\) inherits a natural quaternionic structure from \(\R^4 \cong \bb H\), and we have a norm defined by \(\Omega \subseteq L^2\). That is, we have the \(L^2\) inner product
+
+\[\iinner{b, c} = \sum_{j=0}^3\int_{-\infty}^0 \inner{b_j(s), c_j(s)}\dd s\]
+
+and the complex structures are given by
+
+\begin{align*}
+    I(b_0, b_1, b_2, b_3) &= (-b_1, b_0, -b_3, b_2) \\
+    J(b_0, b_1, b_2, b_3) &= (-b_2, b_3, b_0, -b_1) \\
+    K(b_0, b_1, b_2, b_3) &= (-b_3, -b_2, b_1, b_0)
+\end{align*}
+
+Since \(\msA\) is an affine space modelled on \(\Omega\), this means that \(\msA\) inherits a natural hyperK\"ahler structure.
+
+\section{Tangent space}
+
+Let \(\grad_B^*\) be the \(L^2\) adjoint of \(\grad_B\), i.e.
+
+\[\grad_B^*u = - \dv{u_0}{s} - \sum_{j=0}^3[B_0, u_0]\]
+
+Using this, we have
+
+\begin{proposition}
+    \label{prop:tangent-space} \(M(\rho)\) is a smooth manifold, and the tangent space to \(M\) at a (the equivalence class) of a solution 
+    
+    \[B = (B_0(s), B_1(s), B_2(s), B_3(s))\] 
+    
+    to \cref{eq:extended-nahm} can be identified with the set of solutions in \(\Omega\) of the linear equations
+
+    \begin{equation}
+        \label{eq:tangent-space}
+        \begin{split}
+            \dv{b_0}{s} + [B_0, b_0] + [B_1, b_1] + [B_2, b_2] + [B_3, b_3] &= 0 \\
+            \dv{b_1}{s} + [B_0, b_1] - [B_1, b_0] + [B_2, b_3] - [B_3, b_2] &= 0 \\
+            \dv{b_2}{s} + [B_0, b_2] - [B_1, b_3] - [B_2, b_0] + [B_3, b_1] &= 0 \\
+            \dv{b_3}{s} + [B_0, b_3] + [B_1, b_2] - [B_2, b_1] - [B_3, b_0] &= 0
+        \end{split}
+    \end{equation}
+
+    Equivalently, it is given by the equation
+
+    \[\grad^*_B(b) = \grad^*_B(Ib) = \grad^*_B(Jb) = \grad^*_B(Kb) = 0\]
+\end{proposition}
+
+Using this, the tangent space to \(M\) at \(B\) is a subspace of \(\Omega\), which is invariant under \(I, J, K\). Therefore, \(M\) inherits three almost complex structures satisfying the quaternionic relations. In fact, this and the \(L^2\) metric on \(\Omega\) makes \(M\) into a hyperK\"ahler manifold.
+
+\section{Adjoint orbit}
+
+Define a map \(\phi : M(\rho) \to \msN\) by
+
+\[\phi(B) = \frac12(B_2(0) + iB_3(0))\]
+
+and from the previous section, we have that \(\phi(B)\) is in the same adjoint orbit as \(Y\). In terms of the complex coordinates
+
+\[\alpha(s) = \frac12(B_0(s) + iB_1(s)) \qquad \beta(s) = \frac12(B_2(s) + iB_3(s))\]
+
+and a tangent vector \((\delta\alpha, \delta\beta) = (b_0, b_1, b_2, b_3)\), the complex structure \(I\) is just
+
+\[I(\delta\alpha, \delta\beta) = (i\delta\alpha, i\delta\beta)\]
+
+In this case, \(\phi(\alpha, \beta) = \beta(0)\), and \(\phi\) can easily be extended to \(\msA\). Therefore, in this case we have that \(\phi\) is holomorphic with respect to the complex structures \(I\) on \(M(\rho)\) and \(i\) on the adjoint orbit (which as a complex submanifold of \(\sl(n, \C)\) is naturally K\"ahler).
+
+\textbf{TODO: Compute \(\dd\phi\) (which is just \(\phi\)?) with respect to the tangent space, which is defined as a Lie bracket. Then use this to compute the complex structure \(J\).}
 
 \appendix
+
+\chapter{Prerequisites}
 
 \section{Representation theory of \(\sl(2, \C)\)}
 
