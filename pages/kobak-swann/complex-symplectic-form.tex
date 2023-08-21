@@ -1,0 +1,137 @@
+\documentclass{article}
+
+\usepackage{../../Style}
+
+\usepackage{biblatex}
+\addbibresource{../../bibliography.bib}
+
+\DeclareMathOperator{\SU}{SU}
+\newcommand{\su}{\mathfrak{su}}
+
+\renewcommand{\sl}{\mathfrak{sl}}
+
+\DeclareMathOperator{\gr}{grad}
+
+\newcommand{\iinner}[1]{\left\langle\!\left\langle #1 \right\rangle\!\right\rangle}
+
+\title{The complex symplectic forms}
+\author{Shing Tak Lam}
+
+\begin{document}
+
+\maketitle
+
+In this note, we will study the complex symplectic form from the construction in \cite{kobak_classical_1996}.
+
+\section{Tangent spaces}
+
+Let \(M\) be as in \cite{kobak_classical_1996}, and write a generic point as \((\alpha_j, \beta_j)\). Then we have the real and complex moment maps, which are
+
+\begin{align*}
+    \mu_r(\alpha_j, \beta_j) &= (\alpha_{j-1}\alpha_{j-1}^* - \beta_{j-1}^*\beta_{j-1}+\beta_j\beta_j^* - \alpha_j^*\alpha_j)_{j=1}^{k-1} \\
+    \mu_c(\alpha_j, \beta_j) &= (\alpha_{j-1}\beta_{j-1} - \beta_j\alpha_j)_{j=1}^{k-1}
+\end{align*}
+
+First of all, we want to compute the tangent space to \(\mu_c^{-1}(0)\). By standard arguments, we have that
+
+\[\T_{(\alpha_j, \beta_j)}\mu_c^{-1}(0) = \ker\left((\dd\mu_c)_{(\alpha_j, \beta_j)}\right)\]
+
+We can compute the derivative, since
+
+\begin{align*}
+    \mu_c(\alpha_j + \delta_j, \beta_j + \epsilon_j) &= (\alpha_{j-1} + \delta_{j-1})(\beta_{j-1} + \epsilon_{j-1}) - (\beta_j + \epsilon_j)(\alpha_j + \delta_j) \\
+    &= \alpha_{j-1}\beta_{j-1} - \beta_j\alpha_j + \delta_{j-1}\beta_{j-1} + \alpha_{j-1}\epsilon_{j-1} - \beta_j\delta_j - \epsilon_j\alpha_j + \text{ higher order terms}\\
+    &= \mu_c(\alpha_j, \beta_j) + \delta_{j-1}\beta_{j-1} + \alpha_{j-1}\epsilon_{j-1} - \beta_j\delta_j - \epsilon_j\alpha_j + \text{ higher order terms}
+\end{align*}
+
+Hence we have that
+
+\[\T_{(\alpha, \beta)}\mu_c^{-1}(0) = \left\{(\delta_j, \epsilon_j) \mid \delta_{j-1}\beta_{j-1} + \alpha_{j-1}\epsilon_{j-1} - \beta_j\delta_j - \epsilon_j\alpha_j = 0\right\}\]
+
+Next, we have the map \(\Phi^c : \mu_c^{-1}(0) \to \mcN\), given by \(\Phi^c(\alpha, \beta) = \alpha_{k-1}\beta_{k-1}\). The derivative of this map is given by
+
+\begin{align*}
+    \Phi^c(\alpha + \delta, \beta + \epsilon) = (\alpha_{k-1} + \delta_{k-1})(\beta_{k-1} + \epsilon_{k-1}) = \Phi^c(\alpha, \beta) + \delta_{k-1}\beta_{k-1} + \alpha_{k-1}\epsilon_{k-1} + \text{ higher order terms}
+\end{align*}
+
+Therefore, the map \(\dd\Phi^c\) is given by
+
+\[\dd\Phi^c(\delta, \epsilon) = \delta_{k-1}\beta_{k-1} + \alpha_{k-1}\epsilon_{k-1}\]
+
+Restricting to an open subset giving us the top nilpotent orbit \(N\) given by \(M\), \(\Phi^c\) is a submersion.
+
+Fix the point \((\alpha, \beta)\) and let \(X = \alpha_{k-1}\beta_{k-1}\). In this case, we must have that
+
+\[\dd\Phi^c(\delta, \epsilon) \in \T_XN = \left\{[X, Y] \mid Y \in \sl(n, \C)\right\}\]
+
+Now given \(Y \in \sl(n, \C)\), setting
+
+\begin{align*}
+    \delta_j ^0&= \begin{cases}
+        0 & j < k-1 \\
+        -Y\alpha_{k-1} & j = k - 1
+    \end{cases} \\
+    \epsilon_j^0 &= \begin{cases}
+        0 & j < k - 1 \\
+        \beta_{k-1}Y & j = k - 1
+    \end{cases}
+\end{align*}
+
+gives us an element of \(T_{(\alpha, \beta)}\mu_c^{-1}(0)\), with \(\dd\Phi^c(\delta^0, \epsilon^0) = [X, Y]\). More generally, since we have a diffeomorphism
+
+\[\mu_c^{-1}(0)/G^\C \cong N\]
+
+induced by \(\Phi^c\), we can compute the (affine) space of possible choices of \(\delta, \epsilon\). The \(G^\C = \GL(n_1,\C) \times \cdots \times \GL(n_{k-1}, \C)\) action is given by
+
+\[(\alpha, \beta) \mapsto (g_{j+1}\alpha_jg_j^{-1}, g_j\beta_jg_{j+1}^{-1})\]
+
+where \(g_0, g_k = 1\). Therefore, for a generic element \((X_1, \dots, X_{k-1}) \in \mfg^\C = \gl(n_1, \C) \oplus \cdots \oplus \gl(n_{k-1}, \C)\), the infinitesimal action is given by
+
+\[(X_{j+1}\alpha_j - \alpha_jX_j, X_j\beta_j - \beta_jX_{j+1})\]
+
+Let
+
+\[V^\C = \left\{(X_{j+1}\alpha_j - \alpha_jX_j, X_j\beta_j - \beta_jX_{j+1}) \mid X_j \in \gl(n_j, \C)\right\}\]
+
+be the subspace given by the \(G^\C\) action. This is precisely the kernel of \(\dd\Phi^c\), as we have
+
+\[(\alpha_{k-1} - \alpha_{k-1}X_{k-1})\beta_{k-1} + \alpha_{k-1}(X_{k-1}\beta_{k-1} - \beta_{k-1}) = 0\]
+
+Moreover,
+
+\begin{align*}
+    &(X_j\alpha_{j-1} - \alpha_{j-1}X_{j-1})\beta_{j-1} + \alpha_{j-1}(X_{j-1}\beta_{j-1} - \beta_{j-1}X_j) - \beta_j(X_{j+1}\alpha_j - \alpha_jX_j) - (X_j\beta_j - \beta_jX_{j+1})\alpha_j \\
+    &= [X_j, \alpha_{j-1}\beta_{j-1} - \beta_j\alpha_j] \\
+    &= 0
+\end{align*}
+
+So it is a subspace. On \(\mu_c^{-1}(0)\), we have a Riemannian metric induced from \(M\), which is
+
+\[g((\alpha, \beta), (\gamma, \delta)) = \sum_{j=0}^{k-1}\Re\tr(\alpha_j\gamma_j^* + \beta_j^*\delta_j)\]
+
+We would like to find \((u, v) \in V^\C\), so that \((\delta^0, \epsilon^0) + (u, v) \in (V^\C)^\perp\). 
+
+Say 
+
+\begin{align*}
+    u_j &= X_{j+1}\alpha_j - \alpha_jX_j \\
+    v_j &= X_j\beta_j - \beta_jX_{j+1} \\
+    x_j &= Z_{j+1}\alpha_j - \alpha_jZ_j \\
+    y_j &= Z_j\beta_j - \beta_jZ_{j+1} \\
+\end{align*}
+
+Then for \(j = k - 1\), we have
+
+\section{Complex Kirillov-Konstant-Souriau form}
+
+Define the form
+
+\[\omega_c([X, Y], [X, Z]) = \inner{X, [Y, Z]} = \tr(X[Y, Z]) = \tr(XYZ - XZY)\]
+
+We can then compute the pullback \((\Phi^c)^*\omega_c\)
+
+\section{Complex symplectic form on quotient}
+
+\printbibliography
+
+\end{document}

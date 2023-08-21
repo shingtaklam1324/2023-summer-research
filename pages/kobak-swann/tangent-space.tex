@@ -1,0 +1,100 @@
+\documentclass{article}
+
+\usepackage{../../Style}
+
+\usepackage{biblatex}
+\addbibresource{../../bibliography.bib}
+
+\DeclareMathOperator{\SU}{SU}
+\newcommand{\su}{\mathfrak{su}}
+
+\renewcommand{\sl}{\mathfrak{sl}}
+
+\DeclareMathOperator{\gr}{grad}
+
+\newcommand{\iinner}[1]{\left\langle\!\left\langle #1 \right\rangle\!\right\rangle}
+
+\title{Tangent spaces}
+\author{Shing Tak Lam}
+
+\begin{document}
+
+\maketitle
+
+Let \(M\) be as in \cite{kobak_classical_1996}, and write a generic point as \((\alpha_j, \beta_j)\). Then we have the real and complex moment maps, which are
+
+\begin{align*}
+    \mu_r(\alpha_j, \beta_j) &= (\alpha_{j-1}\alpha_{j-1}^* - \beta_{j-1}^*\beta_{j-1}+\beta_j\beta_j^* - \alpha_j^*\alpha_j)_{j=1}^{k-1} \\
+    \mu_c(\alpha_j, \beta_j) &= (\alpha_{j-1}\beta_{j-1} - \beta_j\alpha_j)_{j=1}^{k-1}
+\end{align*}
+
+First of all, we want to compute the tangent space to \(\mu_c^{-1}(0)\). By standard arguments, we have that
+
+\[\T_{(\alpha_j, \beta_j)}\mu_c^{-1}(0) = \ker\left((\dd\mu_c)_{(\alpha_j, \beta_j)}\right)\]
+
+We can compute the derivative, since
+
+\begin{align*}
+    \mu_c(\alpha_j + \delta_j, \beta_j + \epsilon_j) &= (\alpha_{j-1} + \delta_{j-1})(\beta_{j-1} + \epsilon_{j-1}) - (\beta_j + \epsilon_j)(\alpha_j + \delta_j) \\
+    &= \alpha_{j-1}\beta_{j-1} - \beta_j\alpha_j + \delta_{j-1}\beta_{j-1} + \alpha_{j-1}\epsilon_{j-1} - \beta_j\delta_j - \epsilon_j\alpha_j + \text{ higher order terms}\\
+    &= \mu_c(\alpha_j, \beta_j) + \delta_{j-1}\beta_{j-1} + \alpha_{j-1}\epsilon_{j-1} - \beta_j\delta_j - \epsilon_j\alpha_j + \text{ higher order terms}
+\end{align*}
+
+Hence we have that
+
+\[\T_{(\alpha, \beta)}\mu_c^{-1}(0) = \left\{(\delta_j, \epsilon_j) \mid \delta_{j-1}\beta_{j-1} + \alpha_{j-1}\epsilon_{j-1} - \beta_j\delta_j - \epsilon_j\alpha_j = 0\right\}\]
+
+Next, we have the map \(\Phi^c : \mu_c^{-1}(0) \to \mcN\), given by \(\Phi^c(\alpha, \beta) = \alpha_{k-1}\beta_{k-1}\). The derivative of this map is given by
+
+\begin{align*}
+    \Phi^c(\alpha + \delta, \beta + \epsilon) = (\alpha_{k-1} + \delta_{k-1})(\beta_{k-1} + \epsilon_{k-1}) = \Phi^c(\alpha, \beta) + \delta_{k-1}\beta_{k-1} + \alpha_{k-1}\epsilon_{k-1} + \text{ higher order terms}
+\end{align*}
+
+Therefore, the map \(\dd\Phi^c\) is given by
+
+\[\dd\Phi^c(\delta, \epsilon) = \delta_{k-1}\beta_{k-1} + \alpha_{k-1}\epsilon_{k-1}\]
+
+Restricting to an open subset, giving us the top nilpotent orbit \(N\) given by \(M\), \(\Phi^c\) is a submersion.
+
+The complex structure \(I\) acts on the tangent space by
+
+\[I(\delta, \epsilon) = (i\delta, i\epsilon)\]
+
+and so,
+
+\[\dd\Phi^c(I(\delta, \epsilon)) = i\dd\Phi^c(\delta, \epsilon)\]
+
+Hence, we must have that \(\Phi^c\) on \(\mu_c^{-1}(0)/G^\C\) is a biholomorphism. Fix the point \((\alpha, \beta)\) and let \(X = \alpha_{k-1}\beta_{k-1}\). In this case, we must have that
+
+\[\dd\Phi^c(\delta, \epsilon) \in \T_XN = \left\{[X, Y] \mid Y \in \sl(n, \C)\right\}\]
+
+Using the biholomorphism, and the fact that
+
+\[\sl(n, \C) = \su(n) \oplus i\su(n)\]
+
+We just need to find \(\delta, \epsilon\) such that for a fixed \(Y \in \su(n)\), \(\dd\Phi^c(\delta, \epsilon) = [X, Y]\).
+
+One choice would be
+
+\begin{align*}
+    \delta^0_j &= \begin{cases}
+        -Y\alpha_{k-1} & j = k-1 \\
+        0 & j < k-1
+    \end{cases} \\
+    \epsilon^0_j &= \begin{cases}
+        \beta_{k-1}Y & j = k-1 \\
+        0 & j < k-1
+    \end{cases}
+\end{align*}
+
+Define
+
+\[V^\C = \left\{(X_{j+1}\alpha_j - \alpha_jX_j, X_j\beta_j - \beta_jX_{j+1}) \mid X_j \in \gl(n_j, \C)\right\}\]
+
+for the subspace given by the \(G^\C\) action. This is also the kernel of \(\dd\Phi^c\). Hence the choices of \((\delta, \epsilon)\) is the affine space
+
+\[(\delta^0, \epsilon^0) + V^\C\]
+
+\printbibliography
+
+\end{document}

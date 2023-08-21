@@ -1,0 +1,111 @@
+\documentclass{article}
+
+\usepackage{../../Style}
+
+\usepackage{biblatex}
+\addbibresource{../../bibliography.bib}
+
+\DeclareMathOperator{\SU}{SU}
+\newcommand{\su}{\mathfrak{su}}
+
+\renewcommand{\sl}{\mathfrak{sl}}
+
+\DeclareMathOperator{\gr}{grad}
+
+\newcommand{\iinner}[1]{\left\langle\!\left\langle #1 \right\rangle\!\right\rangle}
+
+\title{Riemannian metric}
+\author{Shing Tak Lam}
+
+\begin{document}
+
+\maketitle
+
+In this note, we will compute the Riemannian metric on the adjoint orbit, following \cite{kobak_classical_1996}.
+
+Choose a sequence \(n_0, \dots, n_k\), with \(n_0 = 0\) and \(n_k = n\). Then define the space
+
+\[M = \bigoplus_{j=0}^{k-1}\left(\Hom(\C^{n_j}, \C^{n_{j+1}}) \oplus \Hom(\C^{n_{j+1}}, \C^{n_j})\right)\]
+
+We will identify \(M\) with the matrix space
+
+\[M = \bigoplus_{j=1}^{k-1}\left(\Mat_{n_{j+1} \times n_j}(\C) \oplus \Mat_{n_j \times n_{j+1}}(\C)\right)\]
+
+and write a general point as \((\alpha_j, \beta_j)\), where \(\alpha_j : \C^{n_j} \to \C^{n_{j+1}}\) and \(\beta_j : \C^{n_{j+1}} \to \C^{n_j}\). Define the moment maps
+
+\begin{align*}
+    \mu_r(\alpha_j, \beta_j) &= (\alpha_{j-1}\alpha_{j-1}^* - \beta_{j-1}^*\beta_{j-1}+\beta_j\beta_j^* - \alpha_j^*\alpha_j)_{j=1}^{k-1} \\
+    \mu_c(\alpha_j, \beta_j) &= (\alpha_{j-1}\beta_{j-1} - \beta_j\alpha_j)_{j=1}^{k-1}
+\end{align*}
+
+Computing the derivatives at the fixed point \(p = (\alpha_j, \beta_j)\),
+
+\begin{align*}
+    \dd\mu_r(\delta_j, \epsilon_j) &= \left(\alpha_{j-1}\delta_{j-1}^* + \delta_{j-1}\alpha_{j-1}^* - \epsilon_{j-1}^*\beta_{j-1} - \beta_{j-1}^*\epsilon_{j-1} + \epsilon_j\beta_j^* + \beta_j\epsilon_j^* - \alpha_j^*\delta_j - \delta_j^*\alpha_j\right)_{j=1}^{k-1} \\
+    \dd\mu_c(\delta_j, \epsilon_j) &= \left(\delta_{j-1}\beta_{j-1} + \alpha_{j-1}\epsilon_{j-1} - \beta_j\delta_j - \epsilon_j\alpha_j\right)_{j=1}^{k-1}
+\end{align*}
+
+and the tangent space of \(\mu^{-1}(0) = \mu_c^{-1}(0) \cap \mu_r^{-1}(0)\) is
+
+\[\T_p\mu^{-1}(0) = \ker(\dd\mu_r) \cap \ker(\dd\mu_c)\]
+
+Next, note that if we differentiate the \(G = \rm U(n_1) \times \cdots \times \rm U(n_{k-1})\) action, we will get the kernel of the quotient map, which is
+
+\[V = \left\{(X_{j+1}\alpha_j - \alpha_jX_j, X_j\beta_j - \beta_jX_{j+1}) \mid X_j \in \mfu(n_j)\right\}\]
+
+The Riemannian metric on the quotient space \(\mu^{-1}(0)/G\) is induced by the linear isomorphism
+
+\[\T_{[p]}(\mu^{-1}(0)/G) \cong H := V^\perp\]
+
+given by the quotient map. Next, note that the map \(\tilde\Phi^c(\alpha_j, \beta_j) = \alpha_{k-1}\beta_{k-1}\) defines a diffeomorphism \(\Phi^c : \mu^{-1}(0)/G \to N\), where \(N\) is a nilpotent orbit (when restricted to an open subset of \(\mu^{-1}(0)\)).
+
+% https://q.uiver.app/#q=WzAsMyxbMCwwLCJcXG11XnstMX0oMCkiXSxbMCwyLCJcXG11XnstMX0oMCkvRyJdLFsyLDIsIk4iXSxbMCwxLCIiLDAseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJlcGkifX19XSxbMSwyLCJcXFBoaV5jIl0sWzAsMiwiXFx0aWxkZVxcUGhpXmMiXV0=
+\[\begin{tikzcd}
+	{\mu^{-1}(0)} \\
+	\\
+	{\mu^{-1}(0)/G} && N
+	\arrow["\pi"', two heads, from=1-1, to=3-1]
+	\arrow["{\Phi^c}", from=3-1, to=3-3]
+	\arrow["{\tilde\Phi^c}", from=1-1, to=3-3]
+\end{tikzcd}\]
+
+Therefore, we can compute the Riemannian metric on \(\mu^{-1}(0)/G\) by considering its pullback to \(\mu^{-1}(0)\). Moreover, since \(N\) is a complex submanifold of \(\sl(n, \C)\), it also has a natural Riemannian metric \(g\) from its K\"ahler structure. We can then consider the pullback \((\tilde\Phi^c)^*g\) as an inner product on \(H\).
+
+Suppose \((\delta_j, \epsilon_j) \in H\). Then for all \((u_j, v_j) \in V\), say \(u_j = X_{j+1}\alpha_j - \alpha_jX_j, v_j = X_j\beta_j - \beta_jX_{j+1}\),
+
+\begin{align*}
+    \sum_{j=1}^{k-1}\Re\left(\tr(\delta_j u_j^*) + \tr(\epsilon_jv_j^*)\right) &= \sum_{j=1}^{k-1}\Re\left(\tr((\alpha_j^*\delta_j - \epsilon_j\beta_j^*)X_j) + \tr((\beta_j^*\epsilon_j - \delta_j\alpha_j^*)X_{j+1})\right) \\
+    &= \Re\sum_{j=1}^{k-1}\tr((\alpha_j^*\delta_j - \epsilon_j\beta_j^* + \beta_{j-1}^*\epsilon_{j-1} - \delta_{j-1}\alpha_{j-1}^*)X_j)
+\end{align*}
+
+Therefore, a sufficient condition is
+
+\[\alpha_j^*\delta_j - \epsilon_j\beta_j^* + \beta_{j-1}^*\epsilon_{j-1} - \delta_{j-1}\alpha_{j-1}^* = 0\]
+
+Finally, we compute
+
+\[\dd\Phi^c(\delta, \epsilon) = \delta_{k-1}\beta_{k-1} + \alpha_{k-1}\epsilon_{k-1}\]
+
+Combining all of the above, we have the following conditions
+
+\begin{enumerate}
+    \item \(\ker(\dd\mu_r)\) \[\alpha_{j-1}\delta_{j-1}^* + \delta_{j-1}\alpha_{j-1}^* - \epsilon_{j-1}^*\beta_{j-1} - \beta_{j-1}^*\epsilon_{j-1} + \epsilon_j\beta_j^* + \beta_j\epsilon_j^* - \alpha_j^*\delta_j - \delta_j^*\alpha_j = 0\]
+    \item \(\ker(\dd\mu_c)\) \[\delta_{j-1}\beta_{j-1} + \alpha_{j-1}\epsilon_{j-1} - \beta_j\delta_j - \epsilon_j\alpha_j = 0\]
+    \item \(\mu_c = 0\) \[\alpha_{j-1}\beta_{j-1} - \beta_j\alpha_j = 0\]
+    \item \(\mu_r = 0\) \[\alpha_{j-1}\alpha_{j-1}^* - \beta_{j-1}^*\beta_{j-1}+\beta_j\beta_j^* - \alpha_j^*\alpha_j = 0\]
+    \item Orthogonality \[\alpha_j^*\delta_j - \epsilon_j\beta_j^* + \beta_{j-1}^*\epsilon_{j-1} - \delta_{j-1}\alpha_{j-1}^* = 0\]
+\end{enumerate}
+
+Note also that 5. implies 1.
+
+With all of these, it is then clear that
+
+\[J(\delta_j, \epsilon_j) = (-\epsilon_j^*, \delta_j^*)\]
+
+defines a linear map \(H \to H\). Hence we have the complex structure \(J\) on \(N\), given by
+
+\[J(\delta_{k-1}\beta_{k-1} + \alpha_{k-1}\epsilon_{k-1}) = \alpha_{k-1}\delta_{k-1}^* - \epsilon_{k-1}^*\beta_{k-1}\]
+
+\printbibliography
+
+\end{document}

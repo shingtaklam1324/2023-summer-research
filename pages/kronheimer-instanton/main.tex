@@ -1195,7 +1195,7 @@ Since \(\msA\) is an affine space modelled on \(\Omega\), this means that \(\msA
 
 Let \(\grad_B^*\) be the \(L^2\) adjoint of \(\grad_B\), i.e.
 
-\[\grad_B^*u = - \dv{u_0}{s} - \sum_{j=0}^3[B_0, u_0]\]
+\[\grad_B^*u = - \dv{u_0}{s} - \sum_{j=0}^3[B_j, u_j]\]
 
 Using this, we have
 
@@ -1227,7 +1227,7 @@ Using this, the tangent space to \(M\) at \(B\) is a subspace of \(\Omega\), whi
 
 Define a map \(\phi : M(\rho) \to \msN\) by
 
-\[\phi(B) = \frac12(B_2(0) + iB_3(0))\]
+\[\phi(B) = B_2(0) + iB_3(0)\]
 
 and from the previous section, we have that \(\phi(B)\) is in the same adjoint orbit as \(Y\). In terms of the complex coordinates
 
@@ -1237,9 +1237,42 @@ and a tangent vector \((\delta\alpha, \delta\beta) = (b_0, b_1, b_2, b_3)\), the
 
 \[I(\delta\alpha, \delta\beta) = (i\delta\alpha, i\delta\beta)\]
 
-In this case, \(\phi(\alpha, \beta) = \beta(0)\), and \(\phi\) can easily be extended to \(\msA\). Therefore, in this case we have that \(\phi\) is holomorphic with respect to the complex structures \(I\) on \(M(\rho)\) and \(i\) on the adjoint orbit (which as a complex submanifold of \(\sl(n, \C)\) is naturally K\"ahler).
+In this case, \(\phi(\alpha, \beta) = 2\beta(0)\), and \(\phi\) can easily be extended to \(\msA\), as
 
-\textbf{TODO: Compute \(\dd\phi\) (which is just \(\phi\)?) with respect to the tangent space, which is defined as a Lie bracket. Then use this to compute the complex structure \(J\).}
+\[\phi(B_0, B_1, B_2, B_3) = B_2(0) + iB_3(0)\]
+
+Hence
+
+\begin{align*}
+    \phi(B + b) &= \phi(B_0 + b_0, B_1 + b_1, B_2 + b_2, B_3 + b_3) \\
+    &= B_2(0) + b_2(0) + iB_3(0) + ib_3(0) \\
+    &= \phi(B) + b_2(0) + ib_3(0) 
+\end{align*}
+
+and so, \(\dd\phi_B(b) = b_2(0) + ib_3(0)\). Therefore, in this case we have that \(\phi\) is holomorphic with respect to the complex structures \(I\) on \(M(\rho)\) and \(i\) on the adjoint orbit (which as a complex submanifold of \(\sl(n, \C)\) is naturally K\"ahler).
+
+However, we already have an expression of the tangent space of the adjoint orbit of \(A\), which is
+
+\[\T_A\mcO = \left\{[A, X] \mid X \in \sl(n, \C)\right\}\]
+
+and so, we would like to relate \(\dd\phi_B(b) = b_2(0) + ib_3(0)\) to a Lie bracket with \(\phi(B) = B_2(0) + iB_3(0)\).
+
+\textbf{TODOs}
+
+\begin{enumerate}
+    \item Figure out the norm conditions on \(\Omega\),
+    \item Relate the conditions to the boundary conditions \(b(0) \in \su(n) \otimes \R^4\),
+    \item Write down the subspace of \(\su(n) \otimes \R^4\) which we get,
+    \item Compute the complex structures on the adjoint orbit using this.
+\end{enumerate}
+
+% Next, note that 
+
+% \[\dd\phi_B(Jb) = \dd\phi_B(-b_2, b_3, b_0, -b_1) = b_0(0) - ib_1(0)\]
+
+% \textbf{TODO: Compute \(\dd\phi\) (which is just \(\phi\)?) with respect to the tangent space, which is defined as a Lie bracket. Then use this to compute the complex structure \(J\).}
+
+% \emph{The complex symplectic form \(\omega_J + i\omega_K\) on the adjoint orbit from this is the Kirillov-Kostant-Souriau form, which is the same as the Kobak-Swann one. Therefore, all we need to show is that \(J\) is the same in both cases.}
 
 \appendix
 
