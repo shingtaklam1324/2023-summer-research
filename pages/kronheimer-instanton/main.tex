@@ -1113,8 +1113,8 @@ Recall that if we set \(B = e^{2t}A\) and \(s = -\frac12e^{-t}\), then the equat
 and from \cref{subsec:nahm-boundary-conditions}, we have the boundary conditions
 
 \begin{align*}
-    \lim_{s \to 0}sT &= 0 \\
-    \lim_{s \to -\infty}sT &\in C(\sigma)
+    \lim_{s \to 0}sB &= 0 \\
+    \lim_{s \to -\infty}sB &\in C(\sigma)
 \end{align*}
 
 where \(\sigma = -\frac12\rho\), satisfies
@@ -1151,7 +1151,7 @@ with the action given by
 
 \[g \vdot (B_0, B_1, B_2, B_3) := \left(gB_0g^{-1} - \dv{g}{s}g^{-1}, gB_1g^{-1}, gB_2g^{-1}, gB_3g^{-1}\right)\]
 
-Using this, if we ignore the boundary conditions, then the space of solutions to \cref{eq:nahm} are the same as the space of solutions to \cref{eq:extended-nahm} modulo the action of \(\mcG_0\), since we can always use \(\mcG_0\) to make \(B_0 = 0\). Moreover, by an element of \(\mcG_0\), we can assume that \(\lim_{s \to -\infty}sT = \sigma\). Let
+Using this, if we ignore the boundary conditions, then the space of solutions to \cref{eq:nahm} are the same as the space of solutions to \cref{eq:extended-nahm} modulo the action of \(\mcG_0\), since we can always use \(\mcG_0\) to make \(B_0 = 0\). Moreover, by an element of \(\mcG_0\), we can assume that \(\lim_{s \to -\infty}sB = \sigma\). Let
 
 \[B^0 = \left(0, \frac{\sigma_1}{s-1}, \frac{\sigma_2}{s-1}, \frac{\sigma_3}{s-1}\right)\]
 
@@ -1159,7 +1159,9 @@ be the ``trivial'' solution to Nahm's equations. We are interested in solutions 
 
 \[b = (b_0, b_1, b_2, b_3) : \Ioc{-\infty, 0} \to \su(n) \otimes \R^4\]
 
-\textbf{TODO: Subject to some boundary/norm conditions}
+The boundary conditions on \(M(\rho)\) gives us a norm condition, which is
+
+\[\norm{b}_1 = \sup_{s \le 0}(\abs{sb_j}) < \infty\]
 
 and let
 
@@ -1257,14 +1259,86 @@ However, we already have an expression of the tangent space of the adjoint orbit
 
 and so, we would like to relate \(\dd\phi_B(b) = b_2(0) + ib_3(0)\) to a Lie bracket with \(\phi(B) = B_2(0) + iB_3(0)\).
 
-\textbf{TODOs}
+\section{At a particular solution}
 
-\begin{enumerate}
-    \item Figure out the norm conditions on \(\Omega\),
-    \item Relate the conditions to the boundary conditions \(b(0) \in \su(n) \otimes \R^4\),
-    \item Write down the subspace of \(\su(n) \otimes \R^4\) which we get,
-    \item Compute the complex structures on the adjoint orbit using this.
-\end{enumerate}
+Now, we would like to compute the tangent space at the solution given by \(B^0\). In this case, we can write the system as
+
+\begin{equation}
+    \label{eq:particular-solution-ode}
+    \dot b = \frac{1}{1-s}Zb
+\end{equation}
+
+where \(Z\) is a fixed linear map. Suppose \(v\) is an eigenvector of \(Z\), with eigenvalue \(\lambda\). Say \(b = fv\). Then \cref{eq:particular-solution-ode} gives us
+
+\[\dot f v = \frac{\lambda f}{1-s}v\]
+
+Integrating this, we find that
+
+\[f(s) = A(1-s)^\lambda\]
+
+Since \(v\) is only chosen up to a scalar multiple, without loss of generality, we may assume \(A = 1\), so \(f(s) = (1-s)^\lambda\). In this case,
+
+\[\norm{b}_1 = K\sup_{s \le 0}\abs{s(1-s)^\lambda}\]
+
+which is finite if and only if \(\lambda \le 1\). More generally, consider a cyclic subspace, i.e. \(v_1, \dots, v_m\) linearly independent, with
+
+\begin{align*}
+    v_0 &= 0 \\
+    Mv_k &= \lambda v_k + v_{k-1}
+\end{align*}
+
+and suppose we wanted to consider solutions of the form
+
+\[b = \sum_{j=1}^m f_jv_j\]
+
+Differentiating componentwise, we have that
+
+\[\dot b = \sum_{j=1}^m \dot f_jv_j\]
+
+On the other hand, \cref{eq:particular-solution-ode} gives us that
+
+\begin{align*}
+    \dot b &= \sum_{j=1}^m \frac{f_j}{1-s}(\lambda v_j + v_{j-1}) \\
+    &= \sum_{j=1}^m\frac{\lambda f_j + f_{j+1}}{s-1}v_j
+\end{align*}
+
+where we set \(f_{m+1} = 0\). In particular, this means that we must have that
+
+\[\dot f_j = \frac{\lambda f_j + f_{j+1}}{1-s}\]
+
+In the case \(m = 2\), as above, we have that
+
+\[f_2(s) = (1-s)^\lambda\]
+
+and we have the ODE
+
+\[(1-s)\dv{f_1}{s} = \lambda f_1 + (1-s)^\lambda\]
+
+which has solution
+
+\[f_1(s) = A(1-s)^{-\lambda} - \frac{(1-s)^\lambda}{2\lambda}\]
+
+Since we already have that \(\lambda \le -1\), the only way for \(\abs{s f_1(s)}\) to be bounded is if \(A = 0\). That is,
+
+\[f_1(s) = -\frac{(1-s)^\lambda}{2\lambda}\]
+
+In general, we have a solution of the form
+
+\[f_j(s) = (-2\lambda)^j(1-s)^\lambda\]
+
+for \(\lambda \le -1\). The initial value in this case is
+
+\[f_j(0) = (-2\lambda)^j(1)^\lambda = (-2\lambda)^j\]
+
+% \[f_1(s) = A(1-s)^{-\lambda}-\frac{()}\]
+% \textbf{TODOs}
+
+% \begin{enumerate}
+%     \item Figure out the norm conditions on \(\Omega\),
+%     \item Relate the conditions to the boundary conditions \(b(0) \in \su(n) \otimes \R^4\),
+%     \item Write down the subspace of \(\su(n) \otimes \R^4\) which we get,
+%     \item Compute the complex structures on the adjoint orbit using this.
+% \end{enumerate}
 
 % Next, note that 
 
