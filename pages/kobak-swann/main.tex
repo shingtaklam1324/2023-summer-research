@@ -1,0 +1,293 @@
+\documentclass{article}
+
+\usepackage{../../Style}
+\usepackage{biblatex}
+\addbibresource{../../bibliography.bib}
+
+\DeclareMathOperator{\SU}{SU}
+\newcommand{\su}{\mathfrak{su}}
+
+\renewcommand{\sl}{\mathfrak{sl}}
+
+\DeclareMathOperator{\gr}{grad}
+
+\newcommand{\sslash}{/\!/}
+
+\newcommand{\iinner}[1]{\left\langle\!\left\langle #1 \right\rangle\!\right\rangle}
+
+\title{\Citetitle{kobak_classical_1996} by \Citeauthor{kobak_classical_1996}}
+\author{Shing Tak Lam}
+
+\begin{document}
+
+\maketitle
+
+In this note, we follow \cite{kobak_classical_1996} and construct a hyperK\"ahler metric on the adjoint orbits of \(\SL(n, \C)\) using a finite dimensional hyperK\"ahler quotient.
+
+\section{Flat HyperK\"ahler space}
+
+First, choose a sequence \((V_0, \dots, V_k)\) of Hermitian vector spaces, with \(\dim_\C(V_i) = n_i\), \(n_0 = 0\) and \(n_k = n\). Define
+
+\[M = \bigoplus_{j=0}^{k-1}\left(\Hom_\C(V_j, V_{j+1}) \oplus \Hom_\C(V_{j+1}, V_j)\right)\]
+
+We will write a point in \(M\) in terms of linear maps \((\alpha_j, \beta_j)\), where \(\alpha_j : V_j \to V_{j+1}\) and \(\beta_j : V_{j+1} \to V_j\). The quaternionic structure on \(M\) is given by
+
+\[I(\alpha_j, \beta_j) = (i\alpha_j, i\beta_j) \qquad J(\alpha_j, \beta_j) = (-\beta_j^*, \alpha_j^*)\]
+
+where \(^*\) denotes the Hermitian adjoint. That is, if we choose a basis for each \(V_j\), the conjugate transpose. The metric on \(M\) is given by the standard Euclidean inner product, that is,
+
+\[\norm{(\alpha_j, \beta_j)}^2 = \sum_{j=0}^{k-1}\Re\tr(\alpha_j^*\alpha_j + \beta_j\beta_j^*)\]
+
+This metric, along with the complex structures \(I, J, K = IJ\), makes \(M\) into a flat hyperK\"ahler manifold.
+
+\section{HyperK\"ahler quotient}
+
+\label{sec:hyperkahler-quotient}
+
+Now define the Lie group
+
+\[G = \rm U(n_1) \times \cdots \times \rm U(n_{k-1})\]
+
+This acts on \(M\) by
+
+\begin{equation}
+    \label{eq:action}
+    g \vdot (\alpha_j, \beta_j) = (g_{j+1}\alpha_jg_j^{-1}, g_j\beta_jg_{j+1}^{-1})
+\end{equation}
+
+where \(g = (g_0, \dots, g_k)\), \(g_0 = g_k = 1\), \(g_j \in \rm U(n_j)\) for \(1 \le j \le k-1\). The corresponding hyperK\"ahler moment map for this action is
+
+\[\mu = i\mu_r + 2k\mu_c : M \to \mfg^* \otimes \Im(\bb H)\]
+
+where \(\mfg \cong \mfg^* \cong \mfu(n_1) \oplus \cdots \oplus \mfu(n_{k-1})\). The real moment map is
+
+\[\mu_r(\alpha_j, \beta_j) = (\alpha_{j-1}\alpha_{j-1}^* - \beta_{j-1}^*\beta_{j-1} + \beta_j\beta_j^* - \alpha_j^*\alpha_j) \in \mfg \otimes i\R \cong i\mfg\]
+
+and the complex moment map is
+
+\[\mu_c(\alpha_j, \beta_j) = (\alpha_{j-1}\beta_{j-1} - \beta_j\alpha_j) \in \mfg \otimes \C\]
+
+Using this, we can consider various (hyper)K\"ahler quotients. In particular, we would like to show that the K\"ahler quotient \(\mu_r^{-1}(0)/G\) is homeomorphic to the complex quotient \(G^\C\mu_r^{-1}(0)\sslash G^\C\), where \(G^\C = \GL(n_1, \C) \times \cdots \times \GL(n_{k-1}, \C)\) is the complexification of \(G\), and \(G^\C\mu_r^{-1}(0)\sslash G^\C\) is the set of closed \(G^\C\) orbits in \(G^\C\mu_r^{-1}(0)\).
+
+Define \(f : M \to \R\), \(f(x) = \norm{\mu_r}^2\). For a fixed point \(x_0 \in M\), the path of steepest descent of \(x\) under \(f\) is a function \(x : \Ico{0, \infty} \to M\), such that
+
+\begin{align*}
+    x(0) &= x_0 \\
+    \dv{x}{t} &= -\grad f(x(t))
+\end{align*}
+
+From results of Kirwan\cite{kirwan}, see also \cite[Theorem 2.2]{kobak_classical_1996}, it suffices to show that for all \(x_0 \in M\), the path of steepest descent of \(x\) under \(f\) is bounded, and the limit points lie in \(\mu_r^{-1}(0)\). Noting that \(f(x) \le \norm{x}^4\), we have thet the paths of steepest descent for \(f\) are bounded. To show that the limit points lie in \(\mu_r^{-1}(0)\), we note that \(\mu_r^* = \mu_r\), and so 
+
+\[\grad f = 2(\dd\mu_r)\mu_r\]
+
+and hence the critical points of \(\mu_r\) are when \(\mu_r = 0\). With all of this in mind, the natural map
+
+\begin{align*}
+    \mu_r^{-1}(0)/G &\to G^\C\mu_r^{-1}(0)\sslash G^\C \\
+    [x] &\mapsto [x]
+\end{align*}
+
+is a homeomorphism. Now consider \(\mu^{-1}(0) = \mu_r^{-1}(0) \cap \mu_c^{-1}(0)\), then the hyperK\"ahler quotient \(\mu^{-1}(0)/G\) is a submanifold of \(\mu_r^{-1}(0)/G\), which using the above identification, corresponding to closed \(G^\C\) orbits of \(\mu_c^{-1}(0)\).
+
+Therefore, in the next section, we will consider closed \(G^\C\) orbits in the complex quotient \(\mu_c^{-1}(0)/G^\C\).
+
+\section{Complex quotient}
+
+Define a map
+
+\begin{align*}
+    X : M &\to \End(\C^n) \\
+    X(\alpha_j, \beta_j) &= \alpha_{k-1}\beta_{k-1}
+\end{align*}
+
+If \(\mu_c(\alpha_j, \beta_j) = 0\), then
+
+\[X^2 = \alpha_{k-1}\beta_{k-1}\alpha_{k-1}\beta_{k-1} = \alpha_{k-1}\alpha_{k-2}\beta_{k-2}\beta_{k-1}\]
+
+and in general,
+
+\[X^k = \alpha_{k-1}\cdots \alpha_0\beta_0\cdots \beta_{k-1} = 0\]
+
+Therefore, \(X\) is a nilpotent matrix. Moreover, let \(G^\C\) act via \cref{eq:action}. Then this action preserves \(X\), and also preserves \(\mu_c^{-1}(0)\) setwise. Therefore, we have a well defined map
+
+\begin{align*}
+    \Phi^c : \mu_c^{-1}(0)/G^\C &\to \mcN \\
+    \Phi^c([\alpha_j, \beta_j]) &= \alpha_{k-1}\beta_{k-1}
+\end{align*}
+
+where \(\msN \subseteq \sl(n, \C)\) is the variety of nilpotent matrices. The main theorem is
+
+\begin{theorem}
+    The map \(\Phi^c\), restricted to the set of closed \(G^\C\) orbits, is injective. Furthermore, its image consistes of a union of closures of nilpotent orbits in \(\sl(n, \C)\). If there exists \(X \in \sl(n, \C)\) such that \(\rank(X^i) = n_{k-i}\) for \(i = 0, \dots, k\), then the image is precisely the closure of the nilpotent orbit containing \(X\).
+\end{theorem}
+
+\begin{proof}
+    First of all, notice that we have a \(\GL(n, \C)\) action, using \cref{eq:action}, setting \(g_0 = \dots = g_{k-1} = 1\) and \(g_k \in \GL(n, \C)\). In this case, the action preserves the set \(\mu_c^{-1}(0)\), and we have that
+
+    \[X(g \vdot (\alpha_j, \beta_j)) = g X(\alpha_j, \beta_j)g^{-1}\]
+
+    Therefore, the image of \(\Phi^c\) is a union of nilpotent orbits.
+
+    \subsection{Injectivity}
+    
+    Let \(X\) be a point in the image, \((\alpha_j, \beta_j)\) be a point in a closed \(G^\C\) orbit, with \(X(\alpha_j, \beta_j) = X\). We will show that this orbit is unique. 
+    
+    \textbf{Jordan Normal Form.} Using the \(\GL(n, \C)\) action, we may assume without loss of generality that \(X\) is in Jordan Normal Form, and we can write
+
+    \[V_k = V_k^1 \oplus \cdots \oplus V_k^r\]
+
+    where each \(V_k^j\) is a cyclic subspace for \(X\). Set \(V_{k-1}^i = \beta_{k-1}(V_k^i) \subseteq V_{k-1}\). Since \(X = \alpha_{k-1}\beta_{k-1}\) preserves \(V_k^i\), we must have that \(\alpha(V_{k-1}^i) \subseteq V_k^i\), and by considering the action of a nilpotent Jordan block, we must also have that
+
+    \[\dim(V_{k-1}^i) \ge \dim(V_k^i) - 1\]
+
+    More generally, if we set
+
+    \[V_j^i = \beta_j(V_{j+1}^i)\]
+
+    and assume inductively that \(\alpha_{j+1}(V_{j+1}^i)\subseteq V_{j+2}^i\), then
+
+    \[\alpha_j(V_j^i) = \alpha_j\beta_j(V_{j+1}^i) = \beta_{j+1}\alpha_{j+1}(V_{j+1}^i) \subseteq \beta_{j+1}(V_{j+2}^i) = V_{j+1}^i\]
+
+    Therefore, we can now assume without loss of generality that \(r = 1\), i.e. \(X\) is a single nilpotent Jordan block.
+
+    \textbf{\(\beta_j\) surjective.} We will now show that we can assume that each \(\beta_j\) is surjective. For each \(j\), ket \(V_i^0\) be such that
+
+    \[V_j = V_j^0 \oplus \Im(\beta_j)\]
+
+    We will use the \(G^\C\) action to modify \((\alpha_j, \beta_j)\) such that \(\alpha_{k-1}\vert_{V_{k-1}^0} = 0\). Let \(g_j \in \GL(n_j, \C)\) be multiplication by \(\lambda\) on \(V_j^0\), and \(\id\) on \(\Im(\beta_j)\). Then with respect to the splitting, \(g = (g_1, \dots, g_{k-1})\) acts, via \cref{eq:action} as
+
+    \begin{align*}
+        \alpha_{k-1} = \begin{pmatrix}
+            A_{11} & A_{12}
+        \end{pmatrix} &\mapsto \begin{pmatrix}
+            \lambda^{-1}A_{11} & A_{12}
+        \end{pmatrix} \\
+        \beta_{k-1} = \begin{pmatrix}
+            0 \\ B_{21}
+        \end{pmatrix} &\mapsto \begin{pmatrix}
+            0 \\ B_{21}
+        \end{pmatrix} \\
+        \alpha_j = \begin{pmatrix}
+            A_{j11} & 0 \\
+            A_{j21} & A_{j22}
+        \end{pmatrix} &\mapsto \begin{pmatrix}
+            A_{j11} & 0 \\
+            \lambda^{-1}A_{j21} & A_{j22}
+        \end{pmatrix} \\
+        \beta_j = \begin{pmatrix}
+            0 & 0 \\
+            B_{j21} & B_{j22}
+        \end{pmatrix} &\mapsto \begin{pmatrix}
+            0 & 0 \\
+            \lambda^{-1}B_{j21} & B_{j22}
+        \end{pmatrix}
+    \end{align*}
+
+    Note that the top left entry of \(\alpha_j\) is zero, since
+
+    \[\alpha_j(\beta_j(v)) = \beta_{j+1}\alpha_{j+1}(v) \in \Im(\beta_{j+1})\]
+
+    Since we assumed the \(G^\C\) orbit is closed, letting \(\abs{\lambda} \to \infty\) gives us a new point with \(A_{11} = 0\). By repeating the process above, using \(g = (g_1, \dots, g_{k-2}, 1), \dots, g = (g_1, 1, \dots, 1)\), we can get
+
+    \[\alpha_j\vert_{V_j^0} = 0\]
+
+    as required.
+
+    \textbf{\(\alpha_j\) injective.} A very similar argument to the above shows that we can assume that each \(\alpha_j\) is injective. This then means that \(\dim(V_i) = \dim(V_{i-1}) + 1\) for all \(i\), by considering the rank of \(X^i\).
+
+    \textbf{Standard form for \(\beta_j\)} Using the \(G^\C\) action, we can consider a change of basis, so that each \(\beta_j\) is of the form
+
+    \[\beta_j = \begin{pmatrix}
+        0 & 1 & 0 & \cdots & 0 \\
+        0 & 0 & 1 & \cdots & 0 \\
+        \vdots & \vdots & \vdots & \ddots & \vdots \\
+        0 & 0 & 0 & \cdots & 1
+    \end{pmatrix}\]
+
+    which follows by induction.
+
+    \textbf{Each \(\alpha_j\) is upper triangular.} We will prove this by induction. The complex moment map equations state that
+
+    \[\beta_j\alpha_j = \alpha_{j-1}\beta_{j-1}\]
+
+    In particular, we have that
+
+    \[0 = \beta_1\alpha_1 = \begin{pmatrix}
+        0 & 1
+    \end{pmatrix}\begin{pmatrix}
+        \alpha_{111} \\ \alpha_{121}
+    \end{pmatrix} = \begin{pmatrix}
+        \alpha_{121}
+    \end{pmatrix}\]
+
+    Therefore, \(\alpha_1\) is upper triangular. Now suppose \(\alpha_{j-1}\) is upper triangular, i.e. \(\alpha_{j-1,a,b} = 0\) for \(a > b\). Then
+
+    \[(\beta_{j-1}\alpha_{j-1})_{a,b} = \alpha_{j-1, a+1, b}\]
+
+    which is zero if \(a \ge b\), and \((\alpha_j\beta_j)_{a, b} = \alpha_{j, a, b-1}\). Therefore, \(\alpha_{j, a, b} = 0\) for \(a > b\), and the nonzero entries of \(\alpha_{j-1}\) are determined by the nonzero entries of \(\alpha_j\). 
+    
+    \textbf{Uniqueness.} Now \(X = \alpha_{k-1}\beta_{k-1}\) has \((a, b)\) entry \(\alpha_{k-1, a, b-1}\). Therefore, \(\alpha_{k-1}\), and thus all the other \(\alpha_i\), are uniquely determined by \(X\). Thus, the orbit is unique.
+
+    \subsection{Closures of nilpotent orbits}
+
+    We will first need the following lemmas.
+
+    \begin{lemma}
+        Let \(X\) be a nilpotent matrix. Then the numbers \(\rank(X^i)\) determine the nilpotent orbit of \(X\) in \(\sl(n, \C)\).
+    \end{lemma}
+
+    \begin{proof}
+        We may put \(X\) into Jordan normal form. In this case, the nilpotent orbits are determined by the sizes of the Jordan blocks. Using some combinatorics, we can recover the sizes of the Jordan blocks from the numbers \(\rank(X^i)\).
+    \end{proof}
+
+    \begin{lemma}
+        Suppose \(X, Y\) are nilpotent \(n \times n\) matrices. Then \(Y\) lies in the closure of the nilpotent orbit containing \(X\) if and only if \(\rank(Y^i) \le \rank(X^i)\) for all \(i\).
+    \end{lemma}
+
+    \begin{proof}
+        Again using Jordan normal form, we can reduce to the case where \(X\) is a Jordan block. Noting that for all \(\lambda \ne 0\),
+
+        \[\begin{pmatrix}
+            0 & 1 & 0 & \cdots  & 0 \\
+            \vdots & \ddots & \ddots & \ddots & \vdots\\
+            \vdots &  & \ddots & 1 & 0 \\
+            \vdots &  &  & \ddots & \lambda \\
+            0 & \cdots & \cdots & \cdots & 0
+        \end{pmatrix}\]
+
+        has Jordan normal form
+
+        \[\begin{pmatrix}
+            0 & 1 & 0 & \cdots  & 0 \\
+            \vdots & \ddots & \ddots & \ddots & \vdots\\
+            \vdots &  & \ddots & \ddots & 0 \\
+            \vdots &  &  & \ddots & 1 \\
+            0 & \cdots & \cdots & \cdots & 0
+        \end{pmatrix}\]
+
+        Taking the limit as \(\lambda \to 0\) gives a Jordan block of size one smaller. Repeating this process, for any of the nonzero entries, we can show that any \(n \times n\) nilpotent matrix is in the closure of the orbit of \(X\). The rank condition just gives us the sizes of the Jordan blocks, and shows that this process works for any such \(X, Y\).
+    \end{proof}
+
+    Note that if \(X = \alpha_{k-1}\beta_{k-1}\), then we have an upper bound
+
+    \begin{equation}
+        \label{eq:rank-bound}
+        \rank(X^i) \le n_{k-i}
+    \end{equation}
+
+    and in fact (apart from the fact that \(X\) has to be nilpotent), this is the only constraint. Therefore, the image of \(\Phi^c\) is a union of closures of nilpotent orbits, or equivalently, the union of orbits which satisfy \cref{eq:rank-bound}. Moreover, if there exists \(X\) such that \(\rank(X^i) = n_{k-i}\), then the image must be the closure of its nilpotent orbit.
+\end{proof}
+
+\begin{remark}
+    From the proof, we can see that in fact, we could have assumed \(n_0 < n_1 < \dots < n_k\) without loss of generality.
+\end{remark}
+
+Combining this result with the discussion in \cref{sec:hyperkahler-quotient}, we have the following:
+
+\begin{theorem}
+    The hyperK\"ahler quotient of \(M\) by \(G\) is a union of closures of nilpotent orbits in \(\sl(n, \C)\). If there is a nilpotent element \(X \in \sl(n, \C)\) with \(\rank(X^i) = n_{k-i}\) for all \(i\), then the quotient is isomorphic to the closure of the nilpotent orbit containing \(X\).
+\end{theorem}
+
+\printbibliography
+
+\end{document}
