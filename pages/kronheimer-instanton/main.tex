@@ -1155,7 +1155,15 @@ Using this, if we ignore the boundary conditions, then the space of solutions to
 
 \[B^0 = \left(0, \frac{\sigma_1}{s-1}, \frac{\sigma_2}{s-1}, \frac{\sigma_3}{s-1}\right)\]
 
-be the ``trivial'' solution to Nahm's equations. We are interested in solutions which are asymptotic to this one. To do this, let \(\Omega_1\) denote the space of all \(C^1\) maps
+be the ``trivial'' solution to Nahm's equations. We are interested in solutions which are asymptotic to this one. In \cite[Proof of Theorem 1, p. 482]{kronheimer_instantons_1990}, we have exponential convergence of \(A\), i.e.
+
+\[\abs{A - \rho} \le Ke^{\eta t}\]
+
+for some \(\eta > 0\), as \(t \to -\infty\). This then gives us that in the limit as \(s \to -\infty\),
+
+\[\abs{B - B^0} \le \frac{Ke^{\eta t}}{s} = \frac{K}{s^{1+\zeta}} \le \frac{C}{(1-s)^{1+\zeta}}\]
+
+for some \(C, \zeta > 0\). Let \(\Omega_1\) denote the space of all \(C^1\) maps
 
 \[b = (b_0, b_1, b_2, b_3) : \Ioc{-\infty, 0} \to \su(n) \otimes \R^4\]
 
@@ -1241,7 +1249,7 @@ Using this, we have
 
 Using this, the tangent space to \(M\) at \(B\) is a subspace of \(\Omega\), which is invariant under \(I, J, K\). Therefore, \(M\) inherits three almost complex structures satisfying the quaternionic relations. In fact, this and the \(L^2\) metric on \(\Omega\) makes \(M\) into a hyperK\"ahler manifold.
 
-We will sketch how to modify the proof of \cite[Lemma 3.8]{kronheimer_hyper-kahlerian_1990} to this case, as it will then imply the above proposition, using the same proof.
+Below, we will sketch how to modify the proof of \cite[Lemma 3.8]{kronheimer_hyper-kahlerian_1990} to take into account the different boundary conditions in the nilpotent case. With these modifications, we will prove that the operator \(\grad_B^*\grad_B\) on a given space is invertible, and so the same proof as in \cite[Proposition 3.9]{kronheimer_hyper-kahlerian_1990} will work.
 
 The space \(\Omega_0\) can be defined as in the paper, i.e.
 
@@ -1269,24 +1277,6 @@ where \(\Lambda\) is the nonnegative self-adjoint operator
 \(\Lambda\) is diagonalisable, and so we have the equations
 
 \[\ddot u - \frac{\lambda^2}{(s-1)^2}u = v\]
-
-As in \cite{kronheimer_hyper-kahlerian_1990}, we now consider the case where \(v\) is compactly supported. Define \(f(s) = (1-s)^\delta u(s)\). Consider a maxima of \(f\), so \(s_0\) such that \(f'(s_0) = 0\), \(f''(s_0) \le 0\). Computing, we find that
-
-\[u''(s_0) - \frac{\delta(\delta+1)}{(1-s_0)^2}u(s_0) \le 0\]
-
-Using the equation for \(u''\), we then get the equation that
-
-\[\frac{\lambda^2 - \delta(\delta+1)}{(1-s_0)^2}u(s_0) \le v(s_0)\]
-
-Since \(\lambda > 0\), for \(\delta\) sufficiently small, \(\lambda^2 - \delta(k+1) > 0\). In this case, we find that
-
-\[f(s_0) \le K(1-s_0)^{\delta+2}v(s_0)\]
-
-and at a minima, we have the reverse inequality. Therefore, we must have that
-
-\[\sup_s\left((1-s)^\delta\abs{u(s)}\right) \le K\sup_s\left((1-s)^{2+\delta}\abs{v(s)}\right)\]
-
-for some constant \(K\) which is independent of \(v\).
 
 \subsection{The norm on \(\Omega_0\)}
 
@@ -1317,9 +1307,25 @@ Therefore, to bound the norm on \(\Omega_0\), all we need is a bound on
     (1-s)^{2 + \delta}\abs{\dv[2]{u}{s}}
 \end{align*}
 
-\subsection{Bounded below}
+\subsection{Case \(\lambda > 0\)}
 
-Above, we already have a bound on \((1-s)^{\delta}\abs{u(s)}\) from the \(\Omega_0'\) norm of \(v\). In this subsection, we will compute bounds on the derivatives, and show that the operator \(\grad_B^*\grad_B : \Omega_0 \to \Omega_0'\) is bounded below. In particular, this means that we can use density to extend our arguments above to all of \(\Omega_0'\), since the image of an operator which is bounded below is closed. Moreover, since it is a bijection (injectivity follows from the same reason as in \cite{kronheimer_hyper-kahlerian_1990}), the inverse is then a bounded linear map.
+As in \cite{kronheimer_hyper-kahlerian_1990}, we now consider the case where \(v\) is compactly supported. Define \(f(s) = (1-s)^\delta u(s)\). Consider a maxima of \(f\), so \(s_0\) such that \(f'(s_0) = 0\), \(f''(s_0) \le 0\). Computing, we find that
+
+\[u''(s_0) - \frac{\delta(\delta+1)}{(1-s_0)^2}u(s_0) \le 0\]
+
+Using the equation for \(u''\), we then get the equation that
+
+\[\frac{\lambda^2 - \delta(\delta+1)}{(1-s_0)^2}u(s_0) \le v(s_0)\]
+
+Since \(\lambda > 0\), for \(\delta\) sufficiently small, \(\lambda^2 - \delta(k+1) > 0\). In this case, we find that
+
+\[f(s_0) \le K(1-s_0)^{\delta+2}v(s_0)\]
+
+and at a minima, we have the reverse inequality. Therefore, we must have that
+
+\[\sup_s\left((1-s)^\delta\abs{u(s)}\right) \le K\sup_s\left((1-s)^{2+\delta}\abs{v(s)}\right)\]
+
+for some constant \(K\) which is independent of \(v\).
 
 The bound on \((1-s)^{2+\delta}\abs{\dv*[2]{u}{s}}\) follows from the ODE and the \(\Omega_0'\) bound on \(v\). Therefore, all we need is a bound on \((1-s_0)^{1+\delta}\abs{\dv*{u}{s}}\). But this follows from a similar argument to the above. Set \(g(s) = (1-s)^{1+\delta}u'(s)\). Then at a maxima/minima of \(g\),
 
@@ -1334,6 +1340,20 @@ which means that
 \[(1-s_0)^{1+\delta}u'(s_0) = \frac{(1-s_0)^{2+\delta}}{1+\delta}u''(s_0)\]
 
 Hence the bound on the second derivative gives us a bound on the first derivative.
+
+\subsection{Case \(\lambda = 0\)}
+
+In this case, we have the equation
+
+\[\ddot u = -v\]
+
+This immediately gives us the bound on the second derivative. The same argument as in the previous subsection shows that this gives us a bound on \((1-s)^{1+\delta}\dot u\). Therefore, all we need is a bound on \((1-s)^{2+\delta}u\). Defining \(h(s) = (1-s)^{2+\delta_0}\), and using the same argument again, we get a bound on \(h\).
+
+\subsection{Bounded below}
+
+We have shown that the operator \(\grad_B^*\grad_B : \Omega_0 \to \Omega_0'\) is bounded below. In particular, this means that we can use density to extend our arguments above to all of \(\Omega_0'\), since the image of an operator which is bounded below is closed. Moreover, since it is a bijection (injectivity follows from the same reason as in \cite{kronheimer_hyper-kahlerian_1990}), the inverse is then a bounded linear map.
+
+The bound that \(\delta^2\) is smaller than the least positive eigenvalue is replaced by the requirement that \(\delta(\delta + 1) < \lambda^2\), where \(\lambda^2\) is the least positive eigenvalue.
 
 \section{Adjoint orbit}
 
