@@ -1155,17 +1155,17 @@ Using this, if we ignore the boundary conditions, then the space of solutions to
 
 \[B^0 = \left(0, \frac{\sigma_1}{s-1}, \frac{\sigma_2}{s-1}, \frac{\sigma_3}{s-1}\right)\]
 
-be the ``trivial'' solution to Nahm's equations. We are interested in solutions which are asymptotic to this one. To do this, let \(\Omega\) denote the space of all \(C^1\) maps
+be the ``trivial'' solution to Nahm's equations. We are interested in solutions which are asymptotic to this one. To do this, let \(\Omega_1\) denote the space of all \(C^1\) maps
 
 \[b = (b_0, b_1, b_2, b_3) : \Ioc{-\infty, 0} \to \su(n) \otimes \R^4\]
 
 The boundary conditions on \(M(\rho)\) gives us a norm condition, which is
 
-\[\norm{b}_1 = \sup_{s \le 0}(\abs{sb_j}) < \infty\]
+\[\norm{b}_\delta = \sup_{s \le 0}((1-s)^{1+\delta}\abs{b_j}) + \sup_{s\le0}((1-s)^{2+\delta}\abs{\dot b_j}) < \infty\]
 
-and let
+for some \(\delta > 0\), and let
 
-\[\msA = B^0 + \Omega = \left\{B^0 + b \mid b \in \Omega\right\}\]
+\[\msA = B^0 + \Omega_1 = \left\{B^0 + b \mid b \in \Omega_1\right\}\]
 
 Then all of the solutions which we are interested in belong to \(\msA\). For any path \(u : \Ioc{-\infty, 0} \to \su(n)\), define
 
@@ -1175,11 +1175,15 @@ and we have that
 
 \[M(\rho) \cong \left\{B \in \msA \text{ satisfying \cref{eq:extended-nahm}}\right\}/\msG\]
 
-where \(\msG\) is a gauge group.
+where \(\msG\) is the group
 
-\section{HyperK\"ahler structure on \(\Omega\)}
+\[\msG = \left\{g : \Ioc{-\infty, 0} \to \SU(n) \mid g(0) = 1, g^{-1}\grad_Bg \in \Omega_1\right\}\]
 
-\(\Omega\) inherits a natural quaternionic structure from \(\R^4 \cong \bb H\), and we have a norm defined by \(\Omega \subseteq L^2\). That is, we have the \(L^2\) inner product
+The condition \(g^{-1}\grad_Bg \in \Omega_1\) just means that \(g\) carries \(B\) to another element of \(\msA\).
+
+\section{HyperK\"ahler structure on \(\Omega_1\)}
+
+\(\Omega_1\) inherits a natural quaternionic structure from \(\R^4 \cong \bb H\), and we have a norm defined by \(\Omega_1 \subseteq L^2\). That is, we have the \(L^2\) inner product
 
 \[\iinner{b, c} = \sum_{j=0}^3\int_{-\infty}^0 \inner{b_j(s), c_j(s)}\dd s\]
 
@@ -1192,6 +1196,18 @@ and the complex structures are given by
 \end{align*}
 
 Since \(\msA\) is an affine space modelled on \(\Omega\), this means that \(\msA\) inherits a natural hyperK\"ahler structure.
+
+\subsection{Integrability}
+
+A priori, it is not clear that \(\Omega_1\) is a subspace of \(L^2\). However, from the decay condition, we have that
+
+\[\abs{b(s)}^2 \le K \abs{s}^{-2}\]
+
+for some \(K > 0\). The integral
+
+\[\int_{-\infty}^{-1}\frac{1}{x^2}\dd x\]
+
+is finite, and elements of \(\Omega_1\) are bounded on \([-1, 0]\). Therefore, they are in \(L^2\). In fact, the decay condition shows that the elements are also in \(L^1\).
 
 \section{Tangent space}
 
@@ -1224,6 +1240,100 @@ Using this, we have
 \end{proposition}
 
 Using this, the tangent space to \(M\) at \(B\) is a subspace of \(\Omega\), which is invariant under \(I, J, K\). Therefore, \(M\) inherits three almost complex structures satisfying the quaternionic relations. In fact, this and the \(L^2\) metric on \(\Omega\) makes \(M\) into a hyperK\"ahler manifold.
+
+We will sketch how to modify the proof of \cite[Lemma 3.8]{kronheimer_hyper-kahlerian_1990} to this case, as it will then imply the above proposition, using the same proof.
+
+The space \(\Omega_0\) can be defined as in the paper, i.e.
+
+\[\Omega_0 = \left\{u \mid u(0) = 0, \grad_Bu \in \Omega_1 \text{ for some }B \in \msA\right\}\]
+
+with norm \(\norm{u}_0 = \norm{\grad_Bu}_\delta\) and we can define
+
+\[\Omega_0' = \left\{v \ \bigg\vert\  \norm{v}_\delta' = \sup_s((1-s)^{2+\delta}\abs{v(s)}) < \infty\right\}\]
+
+We are interested in the operator
+
+\begin{align*}
+    \grad_B^*\grad_B(u) &= \grad_B^*\left(\dv{u}{s} + [B_0, u], [B_1, u], [B_2, u], [B_3, u]\right) \\
+    &= -\dv{s}(\dv{u}{s} + [B_0, u]) - \left[B_0, \dv{u}{s}\right]- \sum_{j=0}^3[B_j, [B_j, u]]
+\end{align*}
+
+Considering the case \(B = B^0\), we get the equation
+
+\[\dv[2]{u}{s} - \frac{1}{(s-1)^2}\Lambda u = -v\]
+
+where \(\Lambda\) is the nonnegative self-adjoint operator
+
+\[\Lambda u = \sum_{j=0}^3 [\sigma_j^*, [\sigma_j, u]]\]
+
+\(\Lambda\) is diagonalisable, and so we have the equations
+
+\[\ddot u - \frac{\lambda^2}{(s-1)^2}u = v\]
+
+As in \cite{kronheimer_hyper-kahlerian_1990}, we now consider the case where \(v\) is compactly supported. Define \(f(s) = (1-s)^\delta u(s)\). Consider a maxima of \(f\), so \(s_0\) such that \(f'(s_0) = 0\), \(f''(s_0) \le 0\). Computing, we find that
+
+\[u''(s_0) - \frac{\delta(\delta+1)}{(1-s_0)^2}u(s_0) \le 0\]
+
+Using the equation for \(u''\), we then get the equation that
+
+\[\frac{\lambda^2 - \delta(\delta+1)}{(1-s_0)^2}u(s_0) \le v(s_0)\]
+
+Since \(\lambda > 0\), for \(\delta\) sufficiently small, \(\lambda^2 - \delta(k+1) > 0\). In this case, we find that
+
+\[f(s_0) \le K(1-s_0)^{\delta+2}v(s_0)\]
+
+and at a minima, we have the reverse inequality. Therefore, we must have that
+
+\[\sup_s\left((1-s)^\delta\abs{u(s)}\right) \le K\sup_s\left((1-s)^{2+\delta}\abs{v(s)}\right)\]
+
+for some constant \(K\) which is independent of \(v\).
+
+\subsection{The norm on \(\Omega_0\)}
+
+Here, we will compute the norm on \(\Omega_0\), using \(B = B^0\). In particular, we have that
+
+\[\grad_Bu = \left(\dv{u}{s}, \frac{1}{s-1}[\sigma_1, u], \frac{1}{s-1}[\sigma_2, u], \frac{1}{s-1}[\sigma_3, u]\right)\]
+
+The first term gives us
+
+\[(1-s)^{1+\delta}\abs{\dv{u}{s}} \qqtext{and} (1-s)^{2+\delta}\abs{\dv[2]{u}{s}}\]
+
+The rest of the terms are bounded by
+
+\[\frac{(1-s)^{1+\delta}}{s-1} K \abs{u} \le K'(1-s)^\delta\abs{u}\]
+
+for some constant \(K'\) independent of \(u\). For the derivative, we have the terms
+
+\begin{align*}
+    \frac{(1-s)^{2 + \delta}}{(1-s)^2}[\sigma_1, u] &\le C(1-s)^\delta\abs{u} \\
+    \frac{(1-s)^{2 + \delta}}{1-s}\left[\sigma_1, \dv{u}{s}\right] & \le C'(1-s)^{1+\delta}\abs{\dv{u}{s}}
+\end{align*}
+
+Therefore, to bound the norm on \(\Omega_0\), all we need is a bound on
+
+\begin{align*}
+    (1-s)^\delta\abs{u(s)} \\
+    (1-s)^{1+\delta}\abs{\dv{u}{s}} \\
+    (1-s)^{2 + \delta}\abs{\dv[2]{u}{s}}
+\end{align*}
+
+\subsection{Bounded below}
+
+Above, we already have a bound on \((1-s)^{\delta}\abs{u(s)}\) from the \(\Omega_0'\) norm of \(v\). In this subsection, we will compute bounds on the derivatives, and show that the operator \(\grad_B^*\grad_B : \Omega_0 \to \Omega_0'\) is bounded below. In particular, this means that we can use density to extend our arguments above to all of \(\Omega_0'\), since the image of an operator which is bounded below is closed. Moreover, since it is a bijection (injectivity follows from the same reason as in \cite{kronheimer_hyper-kahlerian_1990}), the inverse is then a bounded linear map.
+
+The bound on \((1-s)^{2+\delta}\abs{\dv*[2]{u}{s}}\) follows from the ODE and the \(\Omega_0'\) bound on \(v\). Therefore, all we need is a bound on \((1-s_0)^{1+\delta}\abs{\dv*{u}{s}}\). But this follows from a similar argument to the above. Set \(g(s) = (1-s)^{1+\delta}u'(s)\). Then at a maxima/minima of \(g\),
+
+\[g'(s_0) = (1-s_0)^{1+\delta}u''(s_0) - (1+\delta)(1-s_0)^\delta u'(s_0) = 0\]
+
+and so
+
+\[u'(s_0) = \frac{1-s_0}{1+\delta}u''(s_0)\]
+
+which means that
+
+\[(1-s_0)^{1+\delta}u'(s_0) = \frac{(1-s_0)^{2+\delta}}{1+\delta}u''(s_0)\]
+
+Hence the bound on the second derivative gives us a bound on the first derivative.
 
 \section{Adjoint orbit}
 
@@ -1261,6 +1371,8 @@ and so, we would like to relate \(\dd\phi_B(b) = b_2(0) + ib_3(0)\) to a Lie bra
 
 \section{At a particular solution}
 
+\textbf{TODO: We changed the definition of the norm to be \(\abs{s}^{1 + \delta}\), so I think the \(\lambda \le -1\) should be \(\lambda \le -1 - \delta\)?}
+
 Now, we would like to compute the tangent space at the solution given by \(B^0\). In this case, we can write the system as
 
 \begin{equation}
@@ -1268,7 +1380,7 @@ Now, we would like to compute the tangent space at the solution given by \(B^0\)
     \dot b = \frac{1}{1-s}Zb
 \end{equation}
 
-where \(Z\) is a fixed linear map. Suppose \(v\) is an eigenvector of \(Z\), with eigenvalue \(\lambda\). Say \(b = fv\). Then \cref{eq:particular-solution-ode} gives us
+where \(Z\) is a fixed linear map, which has \emph{complex} coefficients, as we will consider \(b = (b_0 + ib_1, b_2 + ib_3) \in \sl(n, \C) \oplus \sl(n, \C)\). Suppose \(v\) is an eigenvector of \(Z\), with eigenvalue \(\lambda\). Say \(b = fv\). Then \cref{eq:particular-solution-ode} gives us
 
 \[\dot f v = \frac{\lambda f}{1-s}v\]
 
@@ -1280,7 +1392,7 @@ Since \(v\) is only chosen up to a scalar multiple, without loss of generality, 
 
 \[\norm{b}_1 = K\sup_{s \le 0}\abs{s(1-s)^\lambda}\]
 
-which is finite if and only if \(\lambda \le 1\). More generally, consider a cyclic subspace, i.e. \(v_1, \dots, v_m\) linearly independent, with
+which is finite if and only if \(\Re(\lambda) \le 1\). More generally, consider a cyclic subspace, i.e. \(v_1, \dots, v_m\) linearly independent, with
 
 \begin{align*}
     v_0 &= 0 \\
@@ -1318,7 +1430,7 @@ which has solution
 
 \[f_1(s) = A(1-s)^{-\lambda} - \frac{(1-s)^\lambda}{2\lambda}\]
 
-Since we already have that \(\lambda \le -1\), the only way for \(\abs{s f_1(s)}\) to be bounded is if \(A = 0\). That is,
+Since we already have that \(\Re(\lambda) \le -1\), the only way for \(\abs{s f_1(s)}\) to be bounded is if \(A = 0\). That is,
 
 \[f_1(s) = -\frac{(1-s)^\lambda}{2\lambda}\]
 
@@ -1329,6 +1441,8 @@ In general, we have a solution of the form
 for \(\lambda \le -1\). The initial value in this case is
 
 \[f_j(0) = (-2\lambda)^j(1)^\lambda = (-2\lambda)^j\]
+
+Finally, we note that every solution can be written as a sum of ``cyclic'' solutions as above, since we can put \(Z\) into Jordan normal form. Moreover, using linear combinations of the above solutions, we find that the space of boundary values \(b(0)\) which we are interested in is precisely the (cyclic) vectors of \(Z\) associated with the eigenvalues with \(\Re(\lambda) \le -1\).
 
 % \[f_1(s) = A(1-s)^{-\lambda}-\frac{()}\]
 % \textbf{TODOs}
