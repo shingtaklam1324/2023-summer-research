@@ -1,0 +1,1829 @@
+\documentclass{report}
+
+\usepackage{../../Style}
+\usepackage[
+backend=biber,
+style=alphabetic,
+]{biblatex}
+\addbibresource{../../bibliography.bib}
+
+\DeclareMathOperator{\SU}{SU}
+\newcommand{\su}{\mathfrak{su}}
+
+\renewcommand{\sl}{\mathfrak{sl}}
+
+\DeclareMathOperator{\gr}{grad}
+
+\newcommand{\sslash}{/\!/}
+
+\newcommand{\iinner}[1]{\left\langle\!\left\langle #1 \right\rangle\!\right\rangle}
+
+\title{HyperK\"ahler structure on the nilpotent adjoint orbits of \(\SL(n, \C)\)}
+\author{Shing Tak Lam}
+
+\begin{document}
+
+\maketitle
+
+In this document, we will outline the construction of hyperK\"ahler metrics on the nilpotent adjoint orbits of \(\SL(n, \C)\). In \cref{chapter:Kobak-Swann}, we will follow \cite{kobak_classical_1996}, and define the hyperK\"ahler metric using a finite dimensional quotient. In \cref{chapter:Kronheimer-nilpotent}, we will follow \cite{kronheimer_instantons_1990}, and consider a space of solutions to Nahm's equations, which gives us a diffeomorphism between the space of solutions and a nilpotent orbit. Finally, in \cref{chapter:Kronheimer-hyperkahler} we will show how to modify the arguments from \cite{kronheimer_hyper-kahlerian_1990} to work in the nilpotent case.
+
+\tableofcontents
+
+\chapter{Kobak-Swann construction}
+
+\label{chapter:Kobak-Swann}
+
+In this chapter, we follow \cite{kobak_classical_1996} and construct a hyperK\"ahler metric on the adjoint orbits of \(\SL(n, \C)\) using a finite dimensional hyperK\"ahler quotient.
+
+\section{Flat HyperK\"ahler space}
+
+First, choose a sequence \((V_0, \dots, V_k)\) of Hermitian vector spaces, with \(\dim_\C(V_i) = n_i\), \(n_0 = 0\) and \(n_k = n\). Define
+
+\[M = \bigoplus_{j=0}^{k-1}\left(\Hom_\C(V_j, V_{j+1}) \oplus \Hom_\C(V_{j+1}, V_j)\right)\]
+
+We will write a point in \(M\) in terms of linear maps \((\alpha_j, \beta_j)\), where \(\alpha_j : V_j \to V_{j+1}\) and \(\beta_j : V_{j+1} \to V_j\). The quaternionic structure on \(M\) is given by
+
+\[I(\alpha_j, \beta_j) = (i\alpha_j, i\beta_j) \qquad J(\alpha_j, \beta_j) = (-\beta_j^*, \alpha_j^*)\]
+
+where \(^*\) denotes the Hermitian adjoint. That is, if we choose a basis for each \(V_j\), the conjugate transpose. The metric on \(M\) is given by the (real) inner product,
+
+\[\norm{(\alpha_j, \beta_j)}^2 = \sum_{j=0}^{k-1}\Re\tr(\alpha_j^*\alpha_j + \beta_j\beta_j^*)\]
+
+This metric, along with the complex structures \(I, J, K = IJ\), makes \(M\) into a flat hyperK\"ahler manifold.
+
+\section{HyperK\"ahler quotient}
+
+\label{sec:hyperkahler-quotient}
+
+Now define the Lie group
+
+\[G = \rm U(n_1) \times \cdots \times \rm U(n_{k-1})\]
+
+This acts on \(M\) by
+
+\begin{equation}
+    \label{eq:ks-action}
+    g \vdot (\alpha_j, \beta_j) = (g_{j+1}\alpha_jg_j^{-1}, g_j\beta_jg_{j+1}^{-1})
+\end{equation}
+
+where \(g = (g_0, \dots, g_k)\), \(g_0 = g_k = 1\), \(g_j \in \rm U(n_j)\) for \(1 \le j \le k-1\). The corresponding hyperK\"ahler moment map for this action is
+
+\[\mu = i\mu_r + 2k\mu_c : M \to \mfg^* \otimes \Im(\bb H)\]
+
+where \(\mfg \cong \mfg^* \cong \mfu(n_1) \oplus \cdots \oplus \mfu(n_{k-1})\). The real moment map is
+
+\[\mu_r(\alpha_j, \beta_j) = (\alpha_{j-1}\alpha_{j-1}^* - \beta_{j-1}^*\beta_{j-1} + \beta_j\beta_j^* - \alpha_j^*\alpha_j) \in \mfg \otimes i\R \cong i\mfg\]
+
+and the complex moment map is
+
+\[\mu_c(\alpha_j, \beta_j) = (\alpha_{j-1}\beta_{j-1} - \beta_j\alpha_j) \in \mfg \otimes \C\]
+
+Using this, we can consider various (hyper)K\"ahler quotients. In particular, we would like to show that the K\"ahler quotient \(\mu_r^{-1}(0)/G\) is homeomorphic to the complex quotient \(G^\C\mu_r^{-1}(0)\sslash G^\C\), where \(G^\C = \GL(n_1, \C) \times \cdots \times \GL(n_{k-1}, \C)\) is the complexification of \(G\), and \(G^\C\mu_r^{-1}(0)\sslash G^\C\) is the set of closed \(G^\C\) orbits in \(G^\C\mu_r^{-1}(0)\).
+
+Define \(f : M \to \R\), \(f(x) = \norm{\mu_r}^2\). For a fixed point \(x_0 \in M\), the path of steepest descent of \(x\) under \(f\) is a function \(x : \Ico{0, \infty} \to M\), such that
+
+\begin{align*}
+    x(0) &= x_0 \\
+    \dv{x}{t} &= -\grad f(x(t))
+\end{align*}
+
+From the following results of Kirwan,
+
+\begin{theorem}
+    [{\cite[Theorem 2.2]{kobak_classical_1996}, \cite[p. 101]{kirwan}}] Let \(X\) be a compact K\"ahler manifold and let \(G\) be a compact Lie group acting on \(X\) holomorphically and isometrically, such that the complexification \(G^\C\) also acts holomorphically on \(X\). Let \(\mu\) be a K\"ahler moment map for the action of \(G\). Then \(x \in X\) lies in \(G^\C\mu^{-1}(0)\) if and only if
+
+    \[x \in X^{\min} := \left\{y \mid \text{ limit under the steepest descent of }f\text{ lies in }\mu^{-1}(0)\right\}\]
+
+    and the orbit \(G^\C x\) is closed in \(X^{\min}\). Moreover, the map \(\mu^{-1}(0)/G \to G^\C\mu^{-1}(0)\sslash G^\C\) is a homeomorphism.
+\end{theorem}
+
+\begin{proposition}
+    [{\cite[Condition 2.4]{kobak_classical_1996}, \cite[9.1]{kirwan}}]
+    The above theorem can be applied to non-compact manifolds, provided that every path of steepest descent for \(f\) is contained in a compact subset of \(X\).
+\end{proposition}
+
+it suffices to show that for all \(x_0 \in M\), the path of steepest descent of \(x\) under \(f\) is bounded, and the limit points lie in \(\mu_r^{-1}(0)\). Noting that \(f(x) \le \norm{x}^4\), we have thet the paths of steepest descent for \(f\) are bounded. To show that the limit points lie in \(\mu_r^{-1}(0)\), we note that \(\mu_r^* = \mu_r\), and so 
+
+\[\grad f = 2(\dd\mu_r)\mu_r\]
+
+and hence the critical points of \(\mu_r\) are when \(\mu_r = 0\). With all of this in mind, the natural map
+
+\begin{align*}
+    \mu_r^{-1}(0)/G &\to G^\C\mu_r^{-1}(0)\sslash G^\C \\
+    [x] &\mapsto [x]
+\end{align*}
+
+is a homeomorphism. Now consider \(\mu^{-1}(0) = \mu_r^{-1}(0) \cap \mu_c^{-1}(0)\), then the hyperK\"ahler quotient \(\mu^{-1}(0)/G\) is a submanifold of \(\mu_r^{-1}(0)/G\), which using the above identification, corresponding to closed \(G^\C\) orbits of \(\mu_c^{-1}(0)\).
+
+Therefore, in the next section, we will consider closed \(G^\C\) orbits in the complex quotient \(\mu_c^{-1}(0)/G^\C\).
+
+\section{Complex quotient}
+
+Define a map
+
+\begin{align*}
+    X : M &\to \End(\C^n) \\
+    X(\alpha_j, \beta_j) &= \alpha_{k-1}\beta_{k-1}
+\end{align*}
+
+If \(\mu_c(\alpha_j, \beta_j) = 0\), then
+
+\[X^2 = \alpha_{k-1}\beta_{k-1}\alpha_{k-1}\beta_{k-1} = \alpha_{k-1}\alpha_{k-2}\beta_{k-2}\beta_{k-1}\]
+
+and in general,
+
+\[X^k = \alpha_{k-1}\cdots \alpha_0\beta_0\cdots \beta_{k-1} = 0\]
+
+Therefore, \(X\) is a nilpotent matrix. Moreover, let \(G^\C\) act via \cref{eq:ks-action}. Then this action preserves \(X\), and also preserves \(\mu_c^{-1}(0)\) setwise. Therefore, we have a well defined map
+
+\begin{align*}
+    \Phi^c : \mu_c^{-1}(0)/G^\C &\to \mcN \\
+    \Phi^c([\alpha_j, \beta_j]) &= \alpha_{k-1}\beta_{k-1}
+\end{align*}
+
+where \(\msN \subseteq \sl(n, \C)\) is the variety of nilpotent matrices. The main theorem is
+
+\begin{theorem}
+    [{\cite[Theorem 2.1]{kobak_classical_1996}}]
+    The map \(\Phi^c\), restricted to the set of closed \(G^\C\) orbits, is injective. Furthermore, its image consistes of a union of closures of nilpotent orbits in \(\sl(n, \C)\). If there exists \(X \in \sl(n, \C)\) such that \(\rank(X^i) = n_{k-i}\) for \(i = 0, \dots, k\), then the image is precisely the closure of the nilpotent orbit containing \(X\).
+\end{theorem}
+
+\begin{proof}
+    First of all, notice that we have a \(\GL(n, \C)\) action, using \cref{eq:ks-action}, setting \(g_0 = \dots = g_{k-1} = 1\) and \(g_k \in \GL(n, \C)\). In this case, the action preserves the set \(\mu_c^{-1}(0)\), and we have that
+
+    \[X(g \vdot (\alpha_j, \beta_j)) = g X(\alpha_j, \beta_j)g^{-1}\]
+
+    Therefore, the image of \(\Phi^c\) is a union of nilpotent orbits.
+
+    \subsection{Injectivity}
+    
+    Let \(X\) be a point in the image, \((\alpha_j, \beta_j)\) be a point in a closed \(G^\C\) orbit, with \(X(\alpha_j, \beta_j) = X\). We will show that this orbit is unique. 
+    
+    \textbf{Jordan Normal Form.} Using the \(\GL(n, \C)\) action, we may assume without loss of generality that \(X\) is in Jordan Normal Form, and we can write
+
+    \[V_k = V_k^1 \oplus \cdots \oplus V_k^r\]
+
+    where each \(V_k^j\) is a cyclic subspace for \(X\). Set \(V_{k-1}^i = \beta_{k-1}(V_k^i) \subseteq V_{k-1}\). Since \(X = \alpha_{k-1}\beta_{k-1}\) preserves \(V_k^i\), we must have that \(\alpha(V_{k-1}^i) \subseteq V_k^i\), and by considering the action of a nilpotent Jordan block, we must also have that
+
+    \[\dim(V_{k-1}^i) \ge \dim(V_k^i) - 1\]
+
+    More generally, if we set
+
+    \[V_j^i = \beta_j(V_{j+1}^i)\]
+
+    and assume inductively that \(\alpha_{j+1}(V_{j+1}^i)\subseteq V_{j+2}^i\), then
+
+    \[\alpha_j(V_j^i) = \alpha_j\beta_j(V_{j+1}^i) = \beta_{j+1}\alpha_{j+1}(V_{j+1}^i) \subseteq \beta_{j+1}(V_{j+2}^i) = V_{j+1}^i\]
+
+    Therefore, we can now assume without loss of generality that \(r = 1\), i.e. \(X\) is a single nilpotent Jordan block.
+
+    \textbf{\(\beta_j\) surjective.} We will now show that we can assume that each \(\beta_j\) is surjective. For each \(j\), ket \(V_i^0\) be such that
+
+    \[V_j = V_j^0 \oplus \Im(\beta_j)\]
+
+    We will use the \(G^\C\) action to modify \((\alpha_j, \beta_j)\) such that \(\alpha_{k-1}\vert_{V_{k-1}^0} = 0\). Let \(g_j \in \GL(n_j, \C)\) be multiplication by \(\lambda\) on \(V_j^0\), and \(\id\) on \(\Im(\beta_j)\). Then with respect to the splitting, \(g = (g_1, \dots, g_{k-1})\) acts, via \cref{eq:ks-action} as
+
+    \begin{align*}
+        \alpha_{k-1} = \begin{pmatrix}
+            A_{11} & A_{12}
+        \end{pmatrix} &\mapsto \begin{pmatrix}
+            \lambda^{-1}A_{11} & A_{12}
+        \end{pmatrix} \\
+        \beta_{k-1} = \begin{pmatrix}
+            0 \\ B_{21}
+        \end{pmatrix} &\mapsto \begin{pmatrix}
+            0 \\ B_{21}
+        \end{pmatrix} \\
+        \alpha_j = \begin{pmatrix}
+            A_{j11} & 0 \\
+            A_{j21} & A_{j22}
+        \end{pmatrix} &\mapsto \begin{pmatrix}
+            A_{j11} & 0 \\
+            \lambda^{-1}A_{j21} & A_{j22}
+        \end{pmatrix} \\
+        \beta_j = \begin{pmatrix}
+            0 & 0 \\
+            B_{j21} & B_{j22}
+        \end{pmatrix} &\mapsto \begin{pmatrix}
+            0 & 0 \\
+            \lambda^{-1}B_{j21} & B_{j22}
+        \end{pmatrix}
+    \end{align*}
+
+    Note that the top left entry of \(\alpha_j\) is zero, since
+
+    \[\alpha_j(\beta_j(v)) = \beta_{j+1}\alpha_{j+1}(v) \in \Im(\beta_{j+1})\]
+
+    Since we assumed the \(G^\C\) orbit is closed, letting \(\abs{\lambda} \to \infty\) gives us a new point with \(A_{11} = 0\). By repeating the process above, using \(g = (g_1, \dots, g_{k-2}, 1), \dots, g = (g_1, 1, \dots, 1)\), we can get
+
+    \[\alpha_j\vert_{V_j^0} = 0\]
+
+    as required.
+
+    \textbf{\(\alpha_j\) injective.} A very similar argument to the above shows that we can assume that each \(\alpha_j\) is injective. This then means that \(\dim(V_i) = \dim(V_{i-1}) + 1\) for all \(i\), by considering the rank of \(X^i\).
+
+    \textbf{Standard form for \(\beta_j\)} Using the \(G^\C\) action, we can consider a change of basis, so that each \(\beta_j\) is of the form
+
+    \[\beta_j = \begin{pmatrix}
+        0 & 1 & 0 & \cdots & 0 \\
+        0 & 0 & 1 & \cdots & 0 \\
+        \vdots & \vdots & \vdots & \ddots & \vdots \\
+        0 & 0 & 0 & \cdots & 1
+    \end{pmatrix}\]
+
+    which follows by induction.
+
+    \textbf{Each \(\alpha_j\) is upper triangular.} We will prove this by induction. The complex moment map equations state that
+
+    \[\beta_j\alpha_j = \alpha_{j-1}\beta_{j-1}\]
+
+    In particular, we have that
+
+    \[0 = \beta_1\alpha_1 = \begin{pmatrix}
+        0 & 1
+    \end{pmatrix}\begin{pmatrix}
+        \alpha_{111} \\ \alpha_{121}
+    \end{pmatrix} = \begin{pmatrix}
+        \alpha_{121}
+    \end{pmatrix}\]
+
+    Therefore, \(\alpha_1\) is upper triangular. Now suppose \(\alpha_{j-1}\) is upper triangular, i.e. \(\alpha_{j-1,a,b} = 0\) for \(a > b\). Then
+
+    \[(\beta_{j-1}\alpha_{j-1})_{a,b} = \alpha_{j-1, a+1, b}\]
+
+    which is zero if \(a \ge b\), and \((\alpha_j\beta_j)_{a, b} = \alpha_{j, a, b-1}\). Therefore, \(\alpha_{j, a, b} = 0\) for \(a > b\), and the nonzero entries of \(\alpha_{j-1}\) are determined by the nonzero entries of \(\alpha_j\). 
+    
+    \textbf{Uniqueness.} Now \(X = \alpha_{k-1}\beta_{k-1}\) has \((a, b)\) entry \(\alpha_{k-1, a, b-1}\). Therefore, \(\alpha_{k-1}\), and thus all the other \(\alpha_i\), are uniquely determined by \(X\). Thus, the orbit is unique.
+
+    \subsection{Closures of nilpotent orbits}
+
+    We will first need the following lemmas.
+
+    \begin{lemma}
+        Let \(X\) be a nilpotent matrix. Then the numbers \(\rank(X^i)\) determine the nilpotent orbit of \(X\) in \(\sl(n, \C)\).
+    \end{lemma}
+
+    \begin{proof}
+        We may put \(X\) into Jordan normal form. In this case, the nilpotent orbits are determined by the sizes of the Jordan blocks. Using some combinatorics, we can recover the sizes of the Jordan blocks from the numbers \(\rank(X^i)\).
+    \end{proof}
+
+    \begin{lemma}
+        Suppose \(X, Y\) are nilpotent \(n \times n\) matrices. Then \(Y\) lies in the closure of the nilpotent orbit containing \(X\) if and only if \(\rank(Y^i) \le \rank(X^i)\) for all \(i\).
+    \end{lemma}
+
+    \begin{proof}
+        Again using Jordan normal form, we can reduce to the case where \(X\) is a Jordan block. Noting that for all \(\lambda \ne 0\),
+
+        \[\begin{pmatrix}
+            0 & 1 & 0 & \cdots  & 0 \\
+            \vdots & \ddots & \ddots & \ddots & \vdots\\
+            \vdots &  & \ddots & 1 & 0 \\
+            \vdots &  &  & \ddots & \lambda \\
+            0 & \cdots & \cdots & \cdots & 0
+        \end{pmatrix}\]
+
+        has Jordan normal form
+
+        \[\begin{pmatrix}
+            0 & 1 & 0 & \cdots  & 0 \\
+            \vdots & \ddots & \ddots & \ddots & \vdots\\
+            \vdots &  & \ddots & \ddots & 0 \\
+            \vdots &  &  & \ddots & 1 \\
+            0 & \cdots & \cdots & \cdots & 0
+        \end{pmatrix}\]
+
+        Taking the limit as \(\lambda \to 0\) gives a Jordan block of size one smaller. Repeating this process, for any of the nonzero entries, we can show that any \(n \times n\) nilpotent matrix is in the closure of the orbit of \(X\). The rank condition just gives us the sizes of the Jordan blocks, and shows that this process works for any such \(X, Y\).
+    \end{proof}
+
+    Note that if \(X = \alpha_{k-1}\beta_{k-1}\), then we have an upper bound
+
+    \begin{equation}
+        \label{eq:rank-bound}
+        \rank(X^i) \le n_{k-i}
+    \end{equation}
+
+    and in fact (apart from the fact that \(X\) has to be nilpotent), this is the only constraint. Therefore, the image of \(\Phi^c\) is a union of closures of nilpotent orbits, or equivalently, the union of orbits which satisfy \cref{eq:rank-bound}. Moreover, if there exists \(X\) such that \(\rank(X^i) = n_{k-i}\), then the image must be the closure of its nilpotent orbit.
+\end{proof}
+
+\begin{remark}
+    From the proof, we can see that in fact, we could have assumed \(n_0 < n_1 < \dots < n_k\) without loss of generality.
+\end{remark}
+
+Combining this result with the discussion in \cref{sec:hyperkahler-quotient}, we have the following:
+
+\begin{theorem}
+    [{\cite[Theorem 2.7]{kobak_classical_1996}}]
+    The hyperK\"ahler quotient of \(M\) by \(G\) is a union of closures of nilpotent orbits in \(\sl(n, \C)\). If there is a nilpotent element \(X \in \sl(n, \C)\) with \(\rank(X^i) = n_{k-i}\) for all \(i\), then the quotient is isomorphic to the closure of the nilpotent orbit containing \(X\).
+\end{theorem}
+
+\section{Complex-symplectic form}
+
+In this section, we compute the complex-symplectic form \(\omega_c = \omega_J + i\omega_K\) given by the hyperK\"ahler quotient. 
+
+Throughout, we will restrict to an open subset of \(M\), corresponding to the ``top'' nilpotent orbit in the image. Moreover, we will need to consider points in a closed \(G^\C\) orbit. For simplicity of notation, we won't write the restrictions. 
+
+Fix a point \(p = (\alpha_j, \beta_j) \in \mu_c^{-1}(0)\). Then
+
+\[
+(\dd\mu_c)_p(\delta_j, \epsilon_j) = \left(\delta_{j-1}\beta_{j-1} + \alpha_{j-1}\epsilon_{j-1} - \beta_j\delta_j - \epsilon_j\alpha_j\right)_{j=1}^{k-1}
+\]
+
+where we write a generic tangent vector as \((\delta_j, \epsilon_j)\), \(\delta_j : V_j \to V_{j+1}\) and \(\epsilon_j : V_{j+1} \to V_j\). Therefore, the tangent space to \(\mu_c^{-1}(0)\) at \(p\) is
+
+\[\T_p\mu_c^{-1}(0) = \ker((\dd\mu_c)_p) = \left\{(\delta_j, \epsilon_j) \mid \delta_{j-1}\beta_{j-1} + \alpha_{j-1}\epsilon_{j-1} - \beta_j\delta_j - \epsilon_j\alpha_j\right\}\]
+
+We have maps
+
+% https://q.uiver.app/#q=WzAsMyxbMCwwLCJcXG11X2Neey0xfSgwKSJdLFswLDIsIlxcbXVfY157LTF9KDApXFxzc2xhc2ggR15cXEMiXSxbMiwyLCJOIl0sWzAsMSwiXFxwaSIsMix7InN0eWxlIjp7ImhlYWQiOnsibmFtZSI6ImVwaSJ9fX1dLFsxLDIsIlxcUGhpXmMiLDJdLFswLDIsIlxcdGlsZGVcXFBoaV5jIl1d
+\[\begin{tikzcd}
+	{\mu_c^{-1}(0)} \\
+	\\
+	{\mu_c^{-1}(0) / G^\C} && N
+	\arrow["\pi"', two heads, from=1-1, to=3-1]
+	\arrow["{\Phi^c}"', from=3-1, to=3-3]
+	\arrow["{\tilde\Phi^c}", from=1-1, to=3-3]
+\end{tikzcd}\]
+
+where \(N\) is the ``top'' nilpotent orbit, \(\pi\) is the quotient map. The complex-symplectic form \(\tilde\omega_c\) on \(\mu_c^{-1}(0) / G^c\) satisfies
+
+\[\pi^*\tilde\omega_c = i^*\omega_c\]
+
+where \(\omega_c\) is the complex-symplectic form on \(M\), and \(i : \mu_c^{-1}(0) \hookrightarrow G^\C\) is the inclusion map. Therefore, it is determined by its pullback to \(\mu_c^{-1}(0)\). Let \(\hat\omega_c\) be the complex-symplectic form on \(N\), defined by the ``complex Kirillov-Kostant-Souriau'' formula, i.e.
+
+\[(\hat\omega_c)_X([X, Y], [X, Z]) = \tr(X[Y, Z])\]
+
+Then
+
+\[(\tilde\Phi^c)^*\hat\omega_c = \pi^*((\Phi^c)^*\hat\omega_c)\]
+
+Therefore, to show that the complex-symplectic form on \(N\) given by the quotient is the complex KKS form, it suffices to show that
+
+\[(\tilde\Phi^c)^*\hat\omega_c = i^*\omega_c\]
+
+The map \(\tilde\Phi^c\) is defined by
+
+\[\tilde\Phi^c(\alpha_j, \beta_j) = \alpha_{k-1}\beta_{k-1}\]
+
+Therefore, its derivative is given by
+
+\[\dd\tilde\Phi^c(\delta, \epsilon) = \delta_{k-1}\beta_{k-1} + \alpha_{k-1}\epsilon_{k-1}\]
+
+Let \(X = \alpha_{k-1}\beta_{k-1}\). We would like to relate the above to a Lie bracket with \(X\). Fix \(Y \in \sl(n, \C)\), and define
+
+\begin{align*}
+    \delta^Y_j &= \begin{cases}
+        0 & j < k - 1 \\
+        -Y\alpha_{k-1} & j = k - 1 \\
+    \end{cases} \\
+    \epsilon^Y_j &= \begin{cases}
+        0 & j < k - 1 \\
+        \beta_{k-1}Y & j = k - 1 \\
+    \end{cases}
+\end{align*}
+
+Then \(\dd\tilde\Phi^c(\delta^Y_j, \epsilon^Y_j) = [X, Y]\). Moreover, by substituting into the definition of \(\TT_p\mu_c^{-1}(0)\), we find that \((\delta^Y_j, \epsilon^Y_j) \in \TT_p\mu_c^{-1}(0)\). Therefore,
+
+\[(\tilde\Phi^c)^*((\delta^Y, \epsilon^Y), (\delta^Z, \epsilon^Z)) = (\hat\omega_c)_X([X, Y], [X, Z]) = \tr(X[Y, Z])\]
+
+Noting that
+
+\[J(\delta^Y, \epsilon^Y) = \begin{cases}
+    (0, 0) & j < k - 1 \\
+    (-Y^*\beta_{k-1}^*, -\alpha_{k-1}^*Y^*) & j = k - 1
+\end{cases}\]
+
+We then get that
+
+\begin{align*}
+    \omega_J((\delta^Y, \epsilon^Y), (\delta^Z, \epsilon^Z)) &= g(J(\delta^Y, \epsilon^Y), (\delta^Z, \epsilon^Z)) \\
+    &= \Re \left(\tr(-(-Y^*\beta_{k-1}^*)^*Z\alpha_{k-1}) + \tr((-\alpha_{k-1}^*Y^*)^*\beta_{k-1}Z)\right) \\
+    &= \Re\left(\tr(\alpha_{k-1}\beta_{k-1}YZ) - \tr(\alpha_{k-1}\beta_{k-1}ZY)\right) \\
+    &= \Re \tr(X[Y, Z])
+\end{align*}
+
+Next, for \(K\), we have that
+
+\[K(\delta^Y, \epsilon^Y) = \begin{cases}
+    (0, 0) & j < k - 1 \\
+    (-iY^*\beta_{k-1}^*, -i\alpha_{k-1}^*Y^*) & j = k - 1
+\end{cases}\]
+
+and
+
+\begin{align*}
+    \omega_K((\delta^Y, \epsilon^Y), (\delta^Z, \epsilon^Z)) &= g(K(\delta^Y, \epsilon^Y), (\delta^Z, \epsilon^Z)) \\
+    &= \Re \left(\tr(-(-iY^*\beta_{k-1}^*)^*Z\alpha_{k-1}) + \tr((-i\alpha_{k-1}^*Y^*)^*\beta_{k-1}Z)\right) \\
+    &= -\Im\left(\tr(\alpha_{k-1}\beta_{k-1}ZY) - \tr(\alpha_{k-1}\beta_{k-1}YZ)\right) \\
+    &= \Im \tr(X[Y, Z])
+\end{align*}
+
+Combining these two, we then have that
+
+\[\omega_c((\delta^Y, \epsilon^Y), (\delta^Z, \epsilon^Z)) = \tr(X[Y, Z])\]
+
+as required.
+
+\chapter{Kronheimer's construction}
+
+\label{chapter:Kronheimer-nilpotent}
+
+In this chapter, we will follow \cite{kronheimer_instantons_1990} and consider a space of solutions to Nahm's equations. In particular, we will fill in the details in some of the proofs.
+
+\section{Introduction}
+
+The inner product on \(\su(n)\) is given by \(-\kappa\), where \(\kappa\) is the Killing form. That is,
+
+\[\inner{A, B} = -\tr(AB)\]
+
+Define
+
+\begin{align*}
+    \varphi : \su(n) \times \su(n) \times \su(n) &\to \R \\
+    \varphi(A_1, A_2, A_3) &= \sum_{j=1}^3 \inner{A_j, A_j} + \inner{A_1, [A_2, A_3]}
+\end{align*}
+
+We are interested in studying the gradient flow of \(\varphi\). That is, \(A_1, A_2, A_3 : I \to \su(n)\) such that
+
+\begin{equation}
+    \label{eq:gradient-flow}
+    (\dot A_1, \dot A_2, \dot A_3) = -\grad \varphi(A_1, A_2, A_3)
+\end{equation}
+
+First of all, notice that
+
+\[\varphi(A_1 + H_1, A_2, A_3) = \varphi(A_1, A_2, A_3) + 2\inner{H_1, A_1} + \inner{H_1, [A_2, A_3]}\]
+
+and that \(\inner{A_1, [A_2, A_3]} = \inner{A_2, [A_3, A_1]} = \inner{A_3, [A_1, A_2]}\). Therefore, \cref{eq:gradient-flow} becomes
+
+\begin{equation}
+    \label{eq:gradient-flow-system}
+    \begin{split}
+        \dot A_1 &= -2A_1 - [A_2, A_3] \\
+        \dot A_2 &= -2A_2 - [A_3, A_1] \\
+        \dot A_3 &= -2A_3 - [A_1, A_2]
+    \end{split}
+\end{equation}
+
+The critical points of \cref{eq:gradient-flow-system} are triples \((A_1, A_2, A_3)\) satisfying
+
+\[[A_1, A_2] = -2A_3 \quad [A_2, A_3] = -A_1 \quad [A_3, A_1] = -2A_2\]
+
+Recall that the Lie algebra \(\su(2)\) has basis
+
+\[e_1 = \begin{pmatrix}
+    -i & 0 \\
+    0 & i
+\end{pmatrix} \quad e_2 = \begin{pmatrix}
+    0 & 1 \\
+    -1 & 0
+\end{pmatrix} \quad e_3 = \begin{pmatrix}
+    0 & -i \\
+    -i & 0
+\end{pmatrix}\]
+
+satifying the above relations. Therefore, critical points of \cref{eq:gradient-flow-system} correspond to Lie algebra homomorphisms \(\rho : \su(2) \to \su(n)\). From this, we see that at all critical points of \cref{eq:gradient-flow-system}, \(\varphi\) is nonnegative, and it is zero only at \((0, 0, 0)\).
+
+Next, we will identify \(\su(n) \times \su(n) \times \su(n) \cong \rm L(\su(2), \su(n))\), the space of linear maps \(\su(2) \to \su(n)\), sending \((A_1, A_2, A_3)\) to the linear map \(A\) given by \(e_i \mapsto A_i\).
+
+The adjoint action of \(\SU(n)\) on \(\su(n)\) is given by
+
+\[\Ad_g(A) = gAg^{-1}\]
+
+and this induces an action on \(\rm L(\su(2), \su(n))\) by
+
+\[g \cdot A : e_i \mapsto gA_ig^{-1}\]
+
+For any Lie algebra homomorphism \(\rho : \su(2) \to \su(n)\), define
+
+\[C(\rho) = \left\{g \cdot \rho \mid g \in \SU(n)\right\}\]
+
+for the critical manifold of all homomorphisms which are conjugate to \(\rho\) via the adjoint action. For Lie algebra homomorphisms \(\rho_-, \rho_+ : \su(2) \to \su(n)\), define \(M(\rho_-, \rho_+)\) for the space of solutions \(A(t)\) to \cref{eq:gradient-flow-system}, with boundary conditions
+
+\begin{equation}
+    \label{eq:boundary-conditions}
+    \begin{split}
+        \lim_{t\to-\infty}A(t) &\in C(\rho_-) \\
+        \lim_{t\to\infty}A(t) &= \rho_+
+    \end{split}
+\end{equation}
+
+Note that we are considering parametrised trajectories, therefore there is a natural \(\R\)-action sending \(A(t)\) to \(A(t+c)\).
+
+For a Lie algebra homomorphism \(\rho : \su(2) \to \su(n)\), we can extend it to a Lie algebra homomorphism \(\rho : \sl(2, \C) \to \sl(n, \C)\), and define
+
+\[H = \rho\begin{pmatrix}
+    1 & 0 \\
+    0 & -1
+\end{pmatrix}\quad X = \rho\begin{pmatrix}
+    0 & 1 \\
+    0 & 0
+\end{pmatrix} \quad Y = \rho\begin{pmatrix}
+    0 & 0 \\
+    1 & 0
+\end{pmatrix}\]
+
+We will then define \(\mcN(\rho)\) for the nilpotent orbit of \(Y\) in \(\sl(n, \C)\), and the affine subspace
+
+\[S(\rho) = Y + Z(X)\]
+
+where \(Z(X) = \left\{A \in \sl(n, \C) \mid [A, X] = 0\right\}\). Using this, we have
+
+\begin{theorem}
+    [{\cite[Theorem 1]{kronheimer_instantons_1990}}]
+    \label{thm:main}
+
+    For any pair of homomorphisms \(\rho_-, \rho_+\), there is a diffeomorphism
+
+    \[M(\rho_-, \rho_+) \cong \mcN(\rho_-) \cap S(\rho_+)\]
+\end{theorem}
+
+If \(\rho_+ = 0\), then \(S(\rho_+) = \sl(n, \C)\), and in this case, we have a diffeomorphism
+
+\[M(\rho_-, 0) \cong \mcN(\rho_-)\]
+
+Moreover, every nilpotent orbit is \(\mcN(\rho)\) for some homomorphism \(\rho : \su(2) \to \su(n)\), which means that we have a description of all nilpotent orbits in \(\sl(n, \C)\).
+
+We will defer the proof of \cref{thm:main} to \cref{sec:proof}, but below, we will provide a sketch proof, which will also function as an outline for the note.
+
+First, we will extend \cref{eq:gradient-flow-system} to a system of equations \cref{eq:gradient-flow-system-extended}. In this case, we have an action of a gauge group. Writing
+
+\[\alpha = \frac{1}{2}(A_0 + iA_1) \qquad \beta = \frac12(A_2 + iA_3)\]
+
+We can split Nahm's equations into a real equation \cref{eq:real-equation} and a complex equation \cref{eq:complex-equation}. In \cref{lem:complex-trajectory-convergence-negative} and \cref{lem:complex-trajectory-convergence-positive}, we show that using the group action, we can assume that the solution to the complex equation takes a given form. In particular, in \cref{prop:complex-trajectory-classification}, we prove that the solutions are parametrised by an element of \(S(\rho_+) \cap \mcN(\rho_-)\).
+
+Thus, we have a bijection between the space of (equivalence classes of) solutions of the complex equation and \(S(\rho_+) \cap \mcN(\rho_-)\). Since each solution to \cref{eq:gradient-flow-system} gives us a solution to the real and complex equations, this gives us a map \(\mcM(\rho_-, \rho_+) \to S(\rho_+) \cap \mcN(\rho_-)\).
+
+Working now with the real equation, using \cref{prop:real-equation-uniqueness}, we can show that the map is injective. On the other hand, in \cref{prop:real-trajectory-existence}, we show that within each equivalence class of complex trajectories, there exists a trajectory which satisfies the real equation. Decomposing into hermitian and anti-hermitian parts, we can use this to recover a solution to the extended equations \cref{eq:gradient-flow-system-extended}. Finally, we use the group action to show that we can take \(A_0 = 0\), and recover a solution to the original equations \cref{eq:gradient-flow-system}. Thus, the map is also surjective.
+
+\section{Complex trajectories}
+
+\subsection{Gauge group}
+
+First of all, we will extend \cref{eq:gradient-flow-system} by considering \(A_0, \dots, A_3 : \R \to \su(n)\), satisfying the equations
+
+\begin{equation}
+    \label{eq:gradient-flow-system-extended}
+    \begin{split}
+        \dot A_1 &= -2A_1 - [A_0, A_1] - [A_2, A_3] \\
+        \dot A_2 &= -2A_2 - [A_0, A_2] + [A_1, A_3] \\
+        \dot A_3 &= -2A_3 - [A_0, A_3] - [A_1, A_2] \\
+    \end{split}
+\end{equation}
+
+Define the group
+
+\[\mcG = \left\{g : \R \to \SU(n)\right\}\]
+
+with pointwise operations. Then \(\mcG\) acts \(A = (A_0, \dots, A_3)\) by
+
+\begin{equation}
+    \label{eq:action}
+    (g \vdot A)(t) = \left(g(t)A_0(t)g(t)^{-1} - \dv{g}{t}(t) \cdot g(t)^{-1}, g(t)A_1(t)g(t)^{-1}, g(t)A_2(t)g(t)^{-1}, g(t)A_3(t)g(t)^{-1}\right)
+\end{equation}
+
+For brevity, when clear, we will write this as
+
+\[g \vdot A = (gA_0g^{-1} - \dot g g^{-1}, gA_1g^{-1}, gA_2g^{-2}, gA_3g^{-1})\]
+
+Note that \(\dot g(t) \in \TT_{g(t)}\SU(n) = g(t)\su(n)\), and so \(\dot g(t)g(t)^{-1} \in g(t)\su(n)g(t)^{-1} = \su(n)\). First, we will show that \cref{eq:gradient-flow-system-extended} is invariant under the action \cref{eq:action}. To see this, the transformed right hand side (for the first equation) is
+
+\begin{align*}
+    -2gA_1g^{-1} - [gA_0g^{-1} - \dot g g^{-1}, gA_1g^{-1}] - [gA_2g^{-1}, gA_3g^{-1}] &= g(-2A_1 - [A_0, A_1] - [A_2, A_3])g^{-1} + [\dot g g^{-1}, gA_1g^{-1}] \\
+    &= g\dot A_1g^{-1} + \dot g A_1 g^{-1} - gA_1g^{-1}\dot g g^{-1} \\
+\end{align*}
+
+which is precisely \(\dv{t}(gA_1g^{-1})\). Moreover, in \cref{eq:action}, we can always choose \(g\) to make \(A_0 = 0\), by considering the linear ODE
+
+\[\dot g = gA_0\]
+
+Therefore, we don't change the problem much by considering \cref{eq:gradient-flow-system-extended}. 
+
+\subsection{Complex equations}
+
+Next, we will break the symmetry in the equations, by choosing \(A_1\) to be `special'. More precisely, we will consider \(\alpha, \beta : \R \to \sl(n, \C)\), defined by
+
+\[\alpha = \frac{1}{2}(A_0 + iA_1) \qquad \beta = \frac{1}{2}(A_2 + iA_3)\]
+
+In this case, we have the followiing expressions:
+
+\begin{align*}
+    \alpha^* &= \frac{1}{2}(-A_0 + iA_1) \\
+    \alpha + \alpha^* &= iA_1 \\
+    [\alpha, \alpha^*] &= \frac12i[A_0, A_1] \\
+    [\beta, \beta^*] &= \frac12i[A_2, A_3]
+\end{align*}
+
+and so the first equation in \cref{eq:gradient-flow-system-extended} can be written as the \emph{real equation}
+
+\begin{equation}
+    \label{eq:real-equation}
+    \dv{t}(\alpha + \alpha^*) + 2(\alpha + \alpha^*) + 2([\alpha, \alpha^*] + [\beta, \beta^*]) = 0
+\end{equation}
+
+and using
+
+\[[\alpha, \beta] = \frac14\left([A_0, A_2] + [A_3, A_1]\right) + \frac14i\left([A_0, A_3] + [A_1, A_2]\right)\]
+
+the second equation in \cref{eq:gradient-flow-system-extended} becomes the \emph{complex equation}
+
+\begin{equation}
+    \label{eq:complex-equation}
+    \dv{\beta}{t} + 2\beta + 2[\alpha, \beta] = 0
+\end{equation}
+
+As above, the real equation is invariant under the action of \(\mcG\). But in this case, the complex equation is invariant under the action of the complex gauge group
+
+\[\mcG^c = \left\{\R \to \SL(n, \C)\right\}\]
+
+via \cref{eq:action}. In particular, the action is given by
+
+\[g \vdot (\alpha, \beta) = \left(g\alpha g^{-1} - \frac{1}{2}\dot g g^{-1}, g\beta g^{-1}\right)\]
+
+and so substituting into \cref{eq:complex-equation}, we get
+
+\begin{align*}
+    \dot g \beta g^{-1} + g\dot\beta g^{-1} - g\beta g^{-1}\dot g g^{-1} + 2 g\beta g^{-1} + 2 g[\alpha, \beta]g^{-1} - [\dot g g^{-1}, g\beta g^{-1}] = g\left(\dot\beta + 2\beta + 2[\alpha,\beta]\right)g^{-1}
+\end{align*}
+
+\subsection{Complex trajectories}
+
+Let \(\rho_+, \rho_- : \su(2) \to \su(n)\) be Lie algebra homomorphisms. Extend them to Lie algebra homomorphisms \(\sl(2, \C) \to \sl(n, \C)\), and define
+
+\[H_{\pm} = \rho_\pm\begin{pmatrix}
+    1 & 0 \\
+    0 & -1
+\end{pmatrix} \qquad X_\pm = \rho_\pm \begin{pmatrix}
+    0 & 1 \\
+    0 & 0
+\end{pmatrix} \qquad Y_\pm = \rho_\pm \begin{pmatrix}
+    0 & 0 \\
+    1 & 0
+\end{pmatrix}\]
+
+\begin{definition}
+    [{\cite[Definition 5]{kronheimer_instantons_1990}}] A \emph{complex trajectory} associated to \(\rho_+, \rho_-\) is a pair of smooth functions \(\alpha, \beta : \R \to \sl(n, \C)\), which satisfy the complex equation \cref{eq:complex-equation}, and the boundary conditions
+
+    \begin{equation}
+        \label{eq:complex-trajectory-boundary-conditions}
+        \begin{split}
+            \lim_{t \to \infty}2\alpha(t) &= H_+ \\
+            \lim_{t \to -\infty}2\alpha(t) &= gH_-g^{-1} \\
+            \lim_{t \to \infty}\beta(t) &= Y_+ \\
+            \lim_{t \to -\infty}\beta(t) &= gY_-g^{-1}
+        \end{split}
+    \end{equation}
+
+    for some \(g \in \SU(n)\). Moreover, we require that the convergence in \cref{eq:complex-trajectory-boundary-conditions} is exponential, that is,
+
+    \[\norm{2\alpha(t) - H_+} < Ke^{-\eta t}\]
+
+    for some \(\eta, K > 0\) and so on. Note the choice of norm here does not matter, as all norms on \(\sl(n, \C)\) are equivalent.
+\end{definition}
+
+Now define the subgroup \(\mcG^c_0\) of \(\mcG^c\) by
+
+\[\mcG^c_0 = \left\{g \in \mcG^c \mid g \text{ bounded}, \lim_{t \to \infty}g(t) = 1\right\}\]
+
+Using the operator norm, which satisfies \(\norm{gh} \le \norm{g}\norm{h}\), it is clear that \(\mcG_0^c\) is closed under multiplication. Therefore, all we need to show is that it is closed under inverses. One proof is as follows:
+
+By Cayley-Hamilton, we have coefficients \(c_1(t), \dots, c_{n-1}(t)\) such that
+
+\[g(t)^n + c_{n-1}g(t)^{n-1} + \dots + c_1(t)g(t) + 1 = 0\]
+
+Multiplying by \(g(t)^{-1}\), we get
+
+\[g(t)^{-1} = -\left(g(t)^{n-1} + c_{n-1}g(t)^{n-2} + \dots + c_1(t)\right)\]
+
+The \(c_i(t)\) are the elementary symmetric functions in the eigenvalues of \(g(t)\), and the eigenvalues of \(g(t)\) are bounded, since any eigenvalue \(\lambda\) of \(g(t)\) necessarily satisfies \(\abs{\lambda} \le \norm{g(t)}\). Therefore, the coefficients on the right hand side are bounded. Hence by the triangle inequality, we have a bound on \(\norm{g(t)^{-1}}\).
+
+\begin{definition}
+    [{\cite[Definition 6]{kronheimer_instantons_1990}}] We say that two complex trajectories \((\alpha, \beta)\) and \((\alpha', \beta')\) are \emph{equivalent} if there exists \(g \in \mcG^c_0\) such that
+
+    \[(\alpha', \beta') = g \vdot (\alpha, \beta)\]
+
+    i.e. they are in the same \(\mcG_0^c\) orbit.
+\end{definition}
+
+\subsection{Classification of complex trajectories}
+
+First of all, note that under the \(\mcG^c\) action, we can always make \(\alpha = 0\). In particular, we need
+
+\[\dot g = 2g\alpha\]
+
+Assuming this, the complex equation \cref{eq:complex-equation} becomes
+
+\[\dv{\beta}{t} + 2\beta = 0\]
+
+which has solution
+
+\[\beta(t) = e^{-2t}\beta_0\]
+
+for some \(\beta_0\). Therefore, the only local invariant under the \(\mcG^c\) (and \(\mcG^c_0\)) action is the conjugacy class of \(\beta_0\). Reversing the \(\mcG^c\) action, we find that a generic local solution is
+
+\begin{align*}
+    \alpha = \frac{1}{2}g^{-1}\dot g \\
+    \beta = e^{-2t}g^{-1}\beta_0g
+\end{align*}
+
+As a consequence of this, we have
+
+\begin{lemma}
+    [{\cite[Lemma 9]{kronheimer_instantons_1990}}]
+    \label{lem:complex-trajectory-equal}
+
+    If \((\alpha, \beta)\) and \((\alpha', \beta')\) are complex trajectories which are equal outside of some compact set \(K \subseteq \R\), then \((\alpha, \beta)\) and \((\alpha', \beta')\) are equivalent.
+\end{lemma}
+
+\begin{proof}
+    Without loss of generality, we may assume \(K = [-M, M]\) for some \(M > 0\). Using the \(\mcG^c\) action, we may assume that
+
+    \[\alpha(t) = 0 \qquad \beta(t) = e^{-2t}\beta_0\]
+
+    Now let \(g \in \mcG^c\) be such that
+
+    \[g \vdot (\alpha', \beta') = (0, e^{-2t}\beta_0')\]
+
+    In particular, as
+
+    \[\dot g = 2g\alpha'\]
+
+    \(\dot g = 0\) for \(t \notin [-M, M]\), and so \(g\) is constant outside of \([-M, M]\). Say \(g = g_-\) for \(t < -M\) and \(g = g_+\) for \(t > M\). By left multiplication by \(g_+^{-1}\), we can assume \(g_+ = 1\). This means that for \(t > M\), \(e^{-2t}\beta'(t) = e^{-2t}\beta_0'\). But in this case \(\beta = \beta'\), so \(\beta_0 = \beta_0'\). Hence \(g \cdot (\alpha', \beta') = (\alpha, \beta)\), and so they are equivalent.
+\end{proof}
+
+\begin{lemma}
+    [{\cite[Lemma 10]{kronheimer_instantons_1990}}]
+    \label{lem:complex-trajectory-convergence-negative}
+
+    Let \((\alpha, \beta)\) be a solution of the complex equation \cref{eq:complex-equation}, satisfying the boundary equations \cref{eq:complex-trajectory-boundary-conditions} at \(t \to -\infty\). That is,
+
+    \[\lim_{t\to-\infty}2\alpha(t) = gH_-g^{-1} \qquad \lim_{t \to -\infty}\beta(t) = gY_-y^{-1}\]
+
+    with exponential convergence. Then there exists a gauge transformation \(g_- : \R \to \SL(n, \C)\) such that \((\alpha', \beta') = g_-\vdot(\alpha, \beta)\) is the constant solution
+
+    \[2\alpha' = H_- \qquad \beta' = Y_-\]
+
+    and \(g_-(t)\) converges as \(t \to -\infty\).
+\end{lemma}
+
+\begin{proof}
+    By conjugation, without loss of generality \(g = 1\). Considering the ODE
+
+    \begin{equation*}
+            \dot g_0 = 2g_0\alpha - H_-g_0
+    \end{equation*}
+
+    We can find \(g_0\) such that
+
+    \[H_- = 2g_0\alpha g_0^{-1} - \dot g_0 g_0^{-1}\]
+
+    with the boundary condition \(g_0(t) \to 1\), as \(t \to -\infty\), since \(2\alpha(t) \to H_-\) exponentially.
+
+    Using this, we get a transformed solution \((\alpha'', \beta'') = g_0\vdot(\alpha,\beta)\), with \(2\alpha'' = H_-\). In this case, the complex equation becomes
+
+    \[\dv{\beta''}{t} + 2\beta'' + [H_-, \beta''] = 0\]
+
+    Trying the ansatz
+
+    \begin{align*}
+        \beta''(t) &= e^{-2t}\Ad_{f(t)}(\omega) = e^{-2t}f\omega f^{-1} \\
+        f(t) &= \exp(Xt)
+    \end{align*}
+
+    We have that
+
+    \[\dot f = Xf\]
+
+    and so
+
+    \begin{align*}
+        \dot\beta'' &= -2e^{-2t}f\omega f^{-1} + e^{-2t}\dot f \omega f^{-1} - e^{-2t}f\omega f^{-1}\dot f f^{-1} \\
+        &= -2\beta'' + X\beta'' - \beta'' X
+    \end{align*}
+
+    Therefore, the complex equation becomes
+
+    \begin{align*}
+        \dot\beta'' + 2\beta'' + H_-\beta'' - \beta''H_- = -2\beta'' + X\beta'' - \beta''X + 2\beta'' + H_-\beta'' - \beta''H_- = [X + H_-, \beta'']
+    \end{align*}
+
+    Hence setting \(X = -H_-\), we get a solution. By dimensionality arguments, this is the general solution.
+
+    Using the composition
+
+    % https://q.uiver.app/#q=WzAsMyxbMCwwLCJcXHNsKDIsIFxcQykiXSxbMiwwLCJcXHNsKG4sIFxcQykiXSxbNCwwLCJcXGdsKFxcc2wobiwgXFxDKSkiXSxbMCwxLCJcXHJob18tIl0sWzEsMiwiXFxhZCJdXQ==
+\[\begin{tikzcd}[ampersand replacement=\&]
+	{\sl(2, \C)} \&\& {\sl(n, \C)} \&\& {\gl(\sl(n, \C))}
+	\arrow["{\rho_-}", from=1-1, to=1-3]
+	\arrow["\ad", from=1-3, to=1-5]
+\end{tikzcd}\]
+
+    We get a representation of \(\sl(2, \C)\) on \(\sl(n, \C)\). Therefore, we have a decomposition\footnote{See \cref{sec:representation-theory-sl2} for more details on this, as well as some more details on the representation theory of \(\sl(2, \C)\).}
+
+    \[\sl(n, \C) = \bigoplus_{k \in \Z}V_k\]
+
+    where \(V_\lambda\) is the \(\lambda\)-eigenspace of \(\ad(H_-)\). Since we want \(\beta'' \to Y_-\) as \(t \to -\infty\), we will try the ansatz \(\omega = Y_- + \delta\). By linearity, we can first compute the case of \(\omega = Y_-\).
+
+    First of all, notice that we also have that \(\dot f = f X = -fH_-\), and so in this case
+
+    \begin{align*}
+        \dot\beta'' &= -2e^{-2t}f Y_- f^{-1} - e^{-2t}f H_- Y_- f^{-1} + fY_-f^{-1}fH_-f^{-1} \\
+        &= -2\beta'' - f[H_-, Y_-]f^{-1} \\
+        &= 0
+    \end{align*}
+
+    as \([H_-, Y_-] = \rho_-([H, Y]) = \rho_-(-2Y) = -2Y_-\). Therefore, as \(\beta''(0) = Y_-\) in this case, it is constant. Now by linearity, say \(\delta = \sum_k \delta_k\), where \(\delta_k \in V_k\). Then for \(\omega = \delta_k\),
+
+    \[\dot\beta'' = -2\beta'' - f[H_-, \delta_k]f^{-1} = -(2+k)\beta''\]
+
+    This gives the solution
+
+    \[\beta''(t) = e^{-(2+k)t}\beta''(0) = e^{-(2+k)t}\delta_k\]
+
+    Since we require \(\beta''(t) \to 0\) as \(t \to -\infty\) in this case, we need \(-(2+k) > 0\), i.e. \(k < -2\). Hence the general solution in this case is
+
+    \[\beta''(t) = Y_- + e^{-2t}\exp(-H_-t)\delta\exp(H_-t)\]
+
+    where \(\delta \in \bigoplus\limits_{k < -2}V_k\). Now notice that \(g_0\) from earlier was not uniquely determined. We can still act on the solution by a gauge transformation \(g_1\), which preserves \(2\alpha'' = H_-\), and approaches \(1\) at \(t \to -\infty\). That is, we have the equation
+
+    \[H_- = g_1H_-g_1^{-1} - \dot g_1 g_1^{-1}\]
+
+    which we can rearrange to
+
+    \[\dot g_1 = g_1H_- - H_- g_1\]
+
+    Trying the ansatz
+
+    \begin{align*}
+        g_1(t) &= f(t)\sigma f(t)^{-1} \\
+        f(t) &= \exp(-H_- t)
+    \end{align*}
+
+    for \(\sigma \in \SL(n, \C)\), we find that this gives the general solution for the equation. For the boundary condition, suppose further that \(\sigma = \exp(\gamma)\), for some \(\gamma \in \sl(n, \C)\). Define
+
+    \[h_t(s) = f\exp(s\gamma)f^{-1}\]
+
+    and note that \(g_1(t) = h_t(1)\). Then
+
+    \begin{align*}
+        \dv{h_t}{s}(s) &= f \exp(s\gamma)\gamma f^{-1} \\
+        &= h_t(s) \cdot f \gamma f^{-1}
+    \end{align*}
+
+    Set \(\varphi(t) = f\gamma f^{-1}\), then we have that
+
+    \[\dot\varphi = -f[H, \gamma]f^{-1}\]
+
+    This equation is linear in \(\gamma\), and so for simplicity, we will assume \(\gamma \in V_k\). In this case, \(\dot\varphi = -k\varphi\), and so \(\varphi(t) = e^{-kt}\gamma\). Substituting this in, we get that
+
+    \[\dv{h_t}{s} = e^{-kt}h_t \cdot \gamma\]
+
+    and so, integrating this equation, we find that
+
+    \[h_t(s) = \exp(se^{-kt}\gamma) \implies g_1(t) = \exp(e^{-kt}\gamma)\]
+
+    Thus, for \(g_1 \to 1\) as \(t \to -\infty\), we must have \(k < 0\). Therefore, the general solution is
+
+    \[g_1(t) = \exp(-H_-t)\exp(\gamma)\exp(H_-t)\]
+
+    where \(\gamma \in \bigoplus\limits_{k < 0}V_k\). Therefore, if we consider \((\alpha', \beta') = g_1 \cdot (\alpha'', \beta'')\), we would get that \(2\alpha' = H_-\), and
+
+    \[\beta'(t) = Y_- + e^{-2t}\exp(-H_-t)(\exp(\gamma)(Y_- + \delta)\exp(-\gamma) - Y_-)\exp(H_-t)\]
+
+    Therefore, all that remains to show is that for all \(\delta \in \bigoplus\limits_{k < -2}V_k\), there exists \(\gamma \in \bigoplus\limits_{k < 0}V_k\) such that
+
+    \[\exp(\gamma)(Y_- + \delta)\exp(-\gamma) - Y_- = 0\]
+
+    We will use the implicit function theorem for this. Expand the left hand side near \(\gamma = \delta = 0\), the terms linear in \(\gamma, \delta\) are
+
+    \[f(\gamma, \delta) = \delta + \gamma Y_- - Y_-\gamma = \delta - [Y_-, \gamma]\]
+
+    From the representation theory of \(\sl(2, \C)\), we have a linear map
+
+    \[[Y_-, \cdot] : \bigoplus_{k < 0}V_k \to \bigoplus_{k < -2}V_k\]
+    
+    and so we have a map 
+
+    \[f : \bigoplus_{k < 0}V_k \oplus \bigoplus_{k < -2}V_k \to \bigoplus_{k < -2}V_k\]
+    
+    The map \(\gamma \mapsto f(\gamma, 0)\) is surjective, for example by decomposing \(\sl(n, \C)\) as a direct sum of \(\sl(2, \C)\) representations. Therefore if we have a decomposition
+
+    \[\bigoplus_{k < 0}V_k = K \oplus W\]
+
+    where \(K = \ker(f(\cdot, 0))\), then the map \(\hat f : W \to \bigoplus\limits_{k < -2}V_k\), given by \(\hat f(\gamma) = f(\gamma, 0)\), is an isomorphism. We can then apply the implicit function theorem to
+
+    \begin{align*}
+        F : \left(\bigoplus_{k < -2}V_k \oplus K\right) \oplus W &\to \bigoplus_{k < -2}V_k \\
+        F((\delta, k), \gamma') &= \exp((\gamma', k))(Y_- + \delta)\exp(-(\gamma', k)) - Y_-
+    \end{align*}
+
+    which then gives us a neighbourhood \(U\) of \(0\) in \(\bigoplus\limits_{k < -2}V_k\), and a neighbourhood \(V\) of \(0\) in \(W\), and a map \(g : U \times V \to W\) such that
+
+    \[F(x, g(x)) = 0\]
+
+    for all \(x \in U \times V\). Therefore, for \(\delta \in U\), setting \(\gamma = g(\delta, 0)\) gives the required result. Finally, we will use homogeneity to extend the result to all of \(\bigoplus \limits_{k < -2}V_k\). First of all, we note that the condition is invariant under the substitution
+
+    \begin{align*}
+        \gamma &= f\hat\gamma f^{-1} \\
+        \delta &= e^{-2t}f\hat\delta f^{-1}
+    \end{align*}
+
+    where \(f(t) = \exp(-H_-t)\), since we have that \(Y_- = e^{-2t}fY_-f^{-1}\), and that \(\exp(f\hat\gamma f^{-1}) = f\exp(\hat\gamma)f^{-1}\). Now suppose \([H, v] = mv\), and let \(\varphi = fvf^{-1}\). Then
+
+    \begin{align*}
+        \dot\varphi &= f\dot vf^{-1} - fvf^{-1}\dot f f^{-1} \\
+        &= -fHvf^{-1} + fvHf^{-1} \\
+        &= -mfvf^{-1} \\
+        &= -m\varphi
+    \end{align*}
+
+    Hence \(\varphi(t) = e^{-mt}v\). Therefore in the limit \(t \to -\infty\) (as \(m < 0\)), we have that \(\gamma \to 0\), and so we can apply the result for small \(\delta\).
+\end{proof}
+
+There is a very similar result for the limit at \(t \to \infty\).
+
+\begin{lemma}
+    [{\cite[Lemma 11]{kronheimer_instantons_1990}}]
+    \label{lem:complex-trajectory-convergence-positive}
+
+    Let \((\alpha, \beta)\) be a solution of the complex equation \cref{eq:complex-equation} satisfying the boundary equations \cref{eq:boundary-conditions} at \(t \to \infty\). That is,
+
+    \[\lim_{t \to \infty}2\alpha(t) = H_+ \qquad \lim_{t \to \infty}\beta(t) = Y_+\]
+
+    with exponential convergence. Then there exists a unique gauge transformation \(g_+ : \R \to \SL(n, \C)\), with \(g_+(t) \to 1\) as \(t \to \infty\), such that the transformed solution \((\alpha', \beta') = g_+ \vdot (\alpha, \beta)\) satisfies
+
+    \[2\alpha' = H_+ \qquad \beta'(0) \in S(\rho_+)\]
+\end{lemma}
+
+\begin{proof}
+    The proof is very similar to the previous lemma. We find a gauge transformation \(g_0\), approaching \(1\) as \(t \to \infty\), such that \((\alpha'', \beta'') = g\vdot (\alpha, \beta)\) satisfies
+
+    \begin{align*}
+        2\alpha'' &= H_+ \\
+        \beta''(t) &= Y_+ + e^{-2t}\exp(-H_+t)\epsilon\exp(H_+t)
+    \end{align*}
+
+    with
+
+    \[\epsilon \in \bigoplus_{k > -2}V_k\]
+
+    where in this case, \(V_k\) is the \(k\)-eigenspace of \(\ad(H_+)\). As above, we have a further choice of gauge transformation \(g_1\) of the form
+
+    \[g_1(t) = \exp(-H_+t)\exp(\gamma)\exp(H_+t)\]
+
+    where \(\gamma \in \bigoplus_{i > 0}V_k\). Using this, the solution becomes
+
+    \[\beta''(t) = Y_+ + e^{-2t}\exp(-H_+t)(\exp(\gamma)(Y_+ + \epsilon)\exp(-\gamma) - Y_+)\exp(H_+t)\]
+
+    Recall that \(S(\rho_+) = Y_+ + Z(X_+)\). Therefore, we need to show that for each \(\epsilon \in \bigoplus\limits_{k > -2}V_k\), there exists \(\gamma \in \bigoplus\limits_{k > 0}V_k\) such that
+
+    \[\exp(\gamma)(Y_+ + \epsilon)\exp(-\gamma) - Y_+ \in Z(X_+)\]
+
+    Expanding the left hand side near \(\gamma = \epsilon = 0\), to first order we have
+
+    \[f(\gamma, \epsilon) = \epsilon - [Y_+, \gamma]\]
+
+    In this case, we have a linear map
+
+    \[[Y_+, \cdot] : \bigoplus_{k > 0}V_k \to \bigoplus_{k > -2}V_k\]
+
+    which is injective, and its image satisfies
+
+    \[\bigoplus_{k > -2} V_k = \Im([Y_+, \cdot]) \oplus Z(X_+)\]
+
+    Therefore, for each \(\epsilon\), there exists a unique \(\gamma\) such that \(f(\gamma, \epsilon) \in Z(X_+)\). Hence the linearisation has a unique solution, and so by the implicit function theorem, for \(\epsilon\) sufficiently small, there exists \(\gamma\) such that \(\exp(\gamma)(Y_+ + \epsilon)\exp(-\gamma) - Y_+ \in Z(X_+)\). Finally, we can use homogeneity to extend the result to all of \(\bigoplus\limits_{k > -2}V_k\) as above.
+\end{proof}
+
+Now let \((\alpha', \beta')\) be a solution of the complex equation \cref{eq:complex-equation} satisfying the boundary conditions \cref{eq:boundary-conditions}. Define a gauge transformation \(g : \R \to \SL(n, \C)\) via
+
+\begin{equation}
+    g(t) = \begin{cases}
+        g_-(t) & t \le 0 \\
+        g_+(t) & t \ge 1
+    \end{cases}
+\end{equation}
+
+and smooth on all of \(\R\). Then \(g(t)\) is bounded, since \(g_-\) and \(g_+\) are, as they converge in the limit \(t \to \pm\infty\). Therefore, \(g \in \mcG_0^c\), and \((\alpha, \beta) = g \vdot (\alpha', \beta')\) is given by
+
+\begin{equation}
+    \label{eq:complex-trajectory-form}
+    \begin{split}
+        \alpha(t) &= \begin{cases}
+            \frac{1}{2}H_- & t \le 0 \\
+            \frac{1}{2}H_+ & t \ge 1
+        \end{cases} \\
+        \beta(t) &= \begin{cases}
+            Y_- & t \le 0 \\
+            Y_+ + e^{-2t}\exp(-H_+t)\epsilon\exp(H_+t) & t \ge 1
+        \end{cases}
+    \end{split}
+\end{equation}
+
+and hence every complex trajectory is equivalent to one of this form. Moreover, we can choose \(\epsilon\) such that \(Y_+ + \epsilon \in S(\rho_+)\), and in this case, \(\epsilon\) is uniquely determined.
+
+Since \((\alpha, \beta)\) is locally equivalent to the constant solution \((-\frac{1}{2}H_-, Y_-)\), the element \(Y_+ + \epsilon\) must be conjugate to \(Y_-\) in \(\sl(n, \C)\). That is, \(Y_+ + \epsilon \in \mcN(\rho_-)\). Conversely, given \(Y_+ + \epsilon \in S(\rho_+) \cap \mcN(\rho_-)\), we can always find a solution satisfying \cref{eq:complex-trajectory-form}.
+
+\begin{proposition}
+    [{\cite[Proposition 7]{kronheimer_instantons_1990}}]
+    \label{prop:complex-trajectory-classification}
+
+    The equivalence classes of complex trajectories associated to \(\rho_+, \rho_-\) are parametrised by \(S(\rho_+) \cap \mcN(\rho_-)\).
+\end{proposition}
+
+\begin{proof}
+    We have already seen that each trajectory is equivalent to one in the form \cref{eq:complex-trajectory-form}, which is parametrised by the element \(Y_+ + \epsilon \in S(\rho_+) \cap \mcN(\rho_-)\). Using \cref{lem:complex-trajectory-equal}, we see that two trajectories which are equal outside of \([0, 1]\) are equivalent. Therefore, the equivalence classes are parametrised by \(Y_+ + \epsilon \in S(\rho_+) \cap \mcN(\rho_-)\).
+\end{proof}
+
+\section{Nahm's equations}
+
+\label{sec:nahm}
+
+Consider the change of variables
+
+\[T_i = e^{2t}A_i \qquad s = -\frac12e^{-2t}\]
+
+Using this, \cref{eq:gradient-flow-system} becomes
+
+\begin{align*}
+    \dv{T_1}{s} &= -[T_2, T_3] \\
+    \dv{T_2}{s} &= -[T_3, T_1] \\
+    \dv{T_3}{s} &= -[T_1, T_2]
+\end{align*}
+
+which are Nahm's equations. The same change of variables also transforms \cref{eq:gradient-flow-system-extended} into 
+
+\begin{align*}
+    \dv{T_1}{s} + [T_0, T_1] + [T_2, T_3] &= 0 \\
+    \dv{T_2}{s} + [T_0, T_2] + [T_3, T_1] &= 0 \\
+    \dv{T_3}{s} + [T_0, T_3] + [T_1, T_2] &= 0 \\
+\end{align*}
+
+Using this, we can also consider the action of the gauge group on this system. Recall that the action is given by \cref{eq:action}, which is:
+
+\[g \vdot A = (gA_0g^{-1} - \dot g g^{-1}, gA_1g^{-1}, gA_2g^{-1}, gA_3g^{-1})\]
+
+Note that
+
+\[\dot g = \dv{g}{t} = \dv{g}{s}\dv{s}{t} = e^{-2t}\dv{g}{s}\]
+
+In this case, the gauge group action becomes
+
+\begin{align*}
+    g \vdot T &= g \vdot (e^{-2t}T_0, e^{-2t}T_1, e^{-2t}T_2, e^{-2t}T_3) \\
+    &= \left(e^{-2t}gT_0g^{-1} - e^{-2t}\dv{g}{s} g^{-1}, e^{-2t}gT_1g^{-1}, e^{-2t}gT_2g^{-1}, e^{-2t}gT_3g^{-1}\right) \\
+    &= \left(gT_0g^{-1} - \dv{g}{s}g^{-1}, gT_1g^{-1}, gT_2g^{-1}, gT_3g^{-1}\right)
+\end{align*}
+
+This is the same as the action as in \cite[Equation 1.6]{donaldson_nahms_1984}. Finally, we can consider the \(\SL(n, \C)\) valued paths
+
+\[\tilde\alpha = e^{2t}\alpha = \frac{1}{2}(T_0 + iT_1) \qquad \tilde\beta = e^{2t}\beta = \frac12(T_2 + iT_3)\]
+
+In this case the real and complex equations become
+
+\begin{align}
+    \label{eq:nahm-real-equation}
+    \dv{s}(\tilde\alpha + \tilde\alpha^*) + 2([\tilde\alpha, \tilde\alpha^*] + [\tilde\beta, \tilde\beta^*]) &= 0 \\
+    \dv{\tilde\beta}{s} + 2[\tilde\alpha, \tilde\beta] &= 0 \nonumber
+\end{align}
+
+With all of this in mind, this allows us to use the results from \cite{donaldson_nahms_1984}.
+
+\section{Real equation}
+
+Recall the real equation \cref{eq:real-equation},
+
+\[\hat F(\alpha, \beta) = \dv{t}(\alpha + \alpha^*) + 2(\alpha + \alpha^*) + 2([\alpha, \alpha^*] + [\beta, \beta^*]) = 0\]
+
+Write \((\alpha', \beta') = g \vdot (\alpha, \beta)\), and we will regard \(\hat F(\alpha', \beta') = 0\) as an equation for \(g\). First of all, notice that the real equation is invariant under the action of \(\mcG\), and so the action of \(g\) only depends on the corresponding path
+
+\[\tilde g : \R \to \SL(n, \C) / \SU(n) = \mcH\]
+
+From the polar decomposition of \(\SL(n, \C)\), we can write any \(A \in \SL(n, \C)\) uniquely as \(A = UP\), where \(U \in \SU(n)\) and \(P\) is hermitian, with positive eigenvalues and \(\det(P) = 1\). Hence we can choose
+
+\[\mcH = \left\{A \in \SL(n, \C) \mid A \text{ hermitian, with positive eigenvalues}\right\}\]
+
+For each \(g\), we define \(h = h(g) = g^*g\), which gives us a path \(h : \R \to \mcH\).
+
+\subsection{Uniqueness}
+
+\begin{lemma}
+    [{\cite[Lemma 12]{kronheimer_instantons_1990}}]
+    \label{lem:gauge-exists-with-dirichlet}
+    Suppose \((\alpha, \beta)\) satisfies the complex equation on an interval \([-N, N]\). Then for any \(h_-, h_+ \in \mcH\), there exists \(g : [-N, N] \to \SL(n, \C)\) continuous and smooth on the interior, with \(h = h(g)\) satisfying
+
+    \[h(-N) = h_- \qquad h(N) = h_+\]
+
+    and such that \((\alpha', \beta') = g \vdot (\alpha, \beta)\) satisfies the real equation \(\hat F(\alpha', \beta') = 0\) on \([-N, N]\).
+\end{lemma}
+
+\begin{proof}
+    See \cite[Proposition 2.8]{donaldson_nahms_1984}. The main idea is that the real equation (for Nahm's equations) is the Euler-Lagrange equations for a functional, and so the result follows by the direct method of the calculus of variations. To get the result, we apply \cite[Proposition 2.8]{donaldson_nahms_1984} with
+
+    \[\text{`}\alpha\text{'} := \tilde \alpha = e^{2t}\alpha \qquad \text{`}\beta\text{'} = \tilde\beta = e^{2t}\beta\]
+
+    and modify the interval \([\epsilon, 2-\epsilon]\) to \([-N, N]\). The work in \cref{sec:nahm} shows that \(g\) has the required properties.
+\end{proof}
+
+Now for \(h \in \mcH\), with eigenvalues \(\lambda_1, \dots, \lambda_k\), define
+
+\[\Psi(h) = \log\max(\lambda_i)\]
+
+Since \(\det(h) = 1\), \(\Psi(h) = 0\) if and only if \(h = 1\). Moreover, if \(h(t)\) is continuous, then \(\Psi(h(t))\) is as well.
+
+\begin{lemma}
+    [{\cite[Lemma 13]{kronheimer_instantons_1990}}]
+    \label{lem:differential-inequality}
+
+    If \((\alpha', \beta') = g \vdot (\alpha, \beta)\) over some interval in \(\R\), then with \(h = g^*g\),
+
+    \[\dv[2]{t}\Psi(h) + 2\dv{t}\Psi(h) \ge -2\left(\abs{\hat F(\alpha, \beta)} + \abs{\hat F(\alpha', \beta')}\right)\]
+
+    weakly\footnote{See \cref{sec:weak-inequalities} for the definition.}. Note the norm on the right hand side is defined using the Killing form.
+\end{lemma}
+
+\begin{proof}
+    We want to use \cite[Lemma 2.10]{donaldson_nahms_1984}. First, we will write the left hand side in terms of \(s\). In this case, we have
+
+    \begin{align*}
+        \dv{\Psi}{s} &= \dv{\Psi}{t}\dv{t}{s} \\
+        \dv[2]{\Psi}{s} &= \dv[2]{\Psi}{t}\left(\dv{t}{s}\right)^2 + \dv{\Psi}{t}\dv[2]{t}{s} \\
+        &= e^{4t}\left(\dv[2]{\Psi}{t} + 2\dv{\Psi}{t}\right) 
+    \end{align*}
+
+    Next, note that the real equation for Nahm's equations, \cref{eq:nahm-real-equation}, is
+
+    \begin{align*}
+        \dv{s}(\tilde\alpha + \tilde\alpha^*) + 2([\tilde\alpha, \tilde\alpha^*] + [\tilde\beta, \tilde\beta^*]) &=\dv{t}(e^{2t}(\alpha + \alpha^*))\dv{t}{s} + 2e^{4t}([\alpha, \alpha^*] + [\beta, \beta^*]) \\
+        &= e^{4t}\left(\dv{t}(\alpha + \alpha^*) + 2(\alpha + \alpha^*) + 2([\alpha, \alpha^*] + [\beta, \beta^*])\right)
+    \end{align*}
+
+    Therefore, compared to \cite[Lemma 2.10]{donaldson_nahms_1984}, we have a factor of \(e^{4t}\) on both sides, which is a positive function. Therefore, the result follows.
+\end{proof}
+
+\begin{proposition}
+    [{\cite[Proposition 8(b)]{kronheimer_instantons_1990}}]
+    \label{prop:real-equation-uniqueness}
+    Suppose \((\alpha', \beta')\) and \((\alpha'', \beta'')\) are equivalent complex trajectories, satisfying the real equation \cref{eq:real-equation}, then \((\alpha'', \beta'') = g\vdot(\alpha', \beta')\) for some \(g \in \mcG\), i.e. \(g : \R \to \SU(n)\), with \(g(t) \to 1\) as \(t \to \infty\).
+\end{proposition}
+
+\begin{proof}
+    Suppose \((\alpha', \beta')\) and \((\alpha'', \beta'') = g\vdot(\alpha', \beta')\) both satisfy the real equation. Setting \(h = h(g)\) and \(\Psi = \Psi(h)\), we find that
+
+    \[\ddot \Psi + 2\dot\Psi \ge 0\]
+
+    Using the same computation as in the previous lemma, this implies that
+
+    \[\dv[2]{\Psi}{s} \ge 0\]
+
+    and so \(\Psi(s)\) is convex. The other conditions transform to \(\Psi : (-\infty, 0) \to \R\) as: \(\Psi(s) \to 0\) as \(s \to 0\), \(\Psi(s)\) bounded and nonnegative. This then implies that \(\Psi\) must be identically zero. Hence \(h = 1\), and so \(g^*g = 1\). That is, \(g\) takes values in \(\SU(n)\).
+\end{proof}
+
+\subsection{Existence}
+
+Let \((\alpha, \beta)\) be a solution to the complex equations. We can assume without loss of generality that \((\alpha, \beta)\) is in the form \cref{eq:complex-trajectory-form}.
+
+\begin{lemma}
+    [{\cite[Lemma 14]{kronheimer_instantons_1990}}]
+    \label{lem:existence-bound}
+
+    If \((\alpha, \beta)\) are in the form as in \cref{eq:complex-trajectory-form}, and \(\epsilon \in Z(X_+)\), then
+
+    \[
+    \begin{cases}
+        \hat F(\alpha, \beta) = 0 & \text{on }\Ioc{-\infty, 0} \\
+        \abs{\hat F(\alpha, \beta)} \le Ce^{-4t} & \text{on }\Ico{0, \infty}
+    \end{cases}\]
+\end{lemma}
+
+\begin{proof}
+    In both cases, since \(\rho_{\pm}\) are representations of \(\su(2)\), we have that
+
+    \begin{align*}
+        H_{\pm}^* &= H_{\pm} \\
+        X_{\pm}^* &= Y_{\pm} \\
+        Y_{\pm}^* &= X_{\pm} \\
+    \end{align*}
+
+    Thus, in the first case, we have
+
+    \[2H_- + 2[Y_-, X_-] = 0\]
+
+    which is true as \(\rho_-\) is a representation of \(\sl(2, \C)\). For the second case, let
+
+    \[\epsilon(t) = e^{-2t}\exp(-H_+t)\epsilon\exp(H_+t)\]
+
+    and we have that
+
+    \[\alpha = \frac12H_+ \qquad \beta(t) = Y_+ + \epsilon(t)\]
+
+    Computing each part, we have
+
+    \begin{align*}
+        \alpha + \alpha^* &= H_+ \\
+        [\alpha, \alpha^*] &= 0 \\
+        [\beta, \beta^*] &= [Y_+ + \epsilon(t), Y_+^* + \epsilon(t)^*] \\
+        &= -H_+ + [\epsilon(t), X_+] + [Y_+, \epsilon(t)^*] + [\epsilon(t), \epsilon(t)^*] \\
+        &= -H_+ + 2[\epsilon(t), X_+] + [\epsilon(t), \epsilon(t)^*]
+    \end{align*}
+
+    We want to show that \([\epsilon(t), X_+] = 0\). Set \(f = \exp(-H_+t)\), then this is equivalent to showing \(\varphi = 0\), where \(\varphi(t) = [\epsilon, e^{2t}f^{-1}X_+ f]\). Since \(\varphi(0) = 0\), as \(\epsilon \in Z(X_+)\), suffices to show \(\dot\varphi = 0\). Computing,
+
+    \begin{align*}
+        \dot\varphi &= [\epsilon, 2e^{-2t}f^{-1}X_+ f - e^{2t}f^{-1}H_+X_+ f + e^{2t}f^{-1}X_+ H_+f] \\
+        &= 0
+    \end{align*}
+
+    as \([H, X] = 2X\). Therefore, we have that \(\hat F(\alpha, \beta) = 2[\epsilon(t), \epsilon(t)^*]\). In this case, we have that \(\abs{\epsilon(t)} = e^{-2t}\abs{\epsilon}\), and so using the fact that the norm is (up to a constant) submultiplicative, we have that
+
+    \[\abs{\hat F(\alpha, \beta)} \le Ce^{-4t}\]
+
+    Since \(\hat F\) is bounded on \([0, 1]\), making \(C\) larger if necessary, we have that \(\abs{\hat F(\alpha, \beta)} \le Ce^{-4t}\) on \(\Ico{0, \infty}\). 
+\end{proof}
+
+Using \cref{lem:gauge-exists-with-dirichlet}, for each \(N \in \N\), we can find a complex gauge transformation \(g_N : [-N, N] \to \SL(n, \C)\), such that \(g_N \vdot (\alpha, \beta)\) satisfies the real equation, and \(h_N = g_N^*g_N\) satisfies the Dirichlet boundary condition \(h_N(\pm N) = 1\). We will now show that the \(h_N\) have a smooth limit as \(N \to \infty\).
+
+\begin{lemma}
+    [{\cite[Lemma 15]{kronheimer_instantons_1990}}]
+    \label{lem:uniform-bound}
+    Let \(C\) be the constant from \cref{lem:existence-bound}. Define the \(C^1\) function \(\psi : \R \to \R\) by
+
+    \[\psi(t) = \begin{cases}
+        C/4 & t \le 0 \\
+        Ce^{-2t}/2 - Ce^{-4t}/4 & t \ge 0
+    \end{cases}\]
+
+    Then for all \(N\), we have \(\Psi(h_N) < \psi\) on \([-N, N]\).
+\end{lemma}
+
+\begin{proof}
+    We have that
+
+    \[\ddot \psi + 2\dot\psi = \begin{cases}
+        0 & t < 0 \\
+        -2Ce^{-4t} & t > 0
+    \end{cases}\]
+
+    and \cref{lem:differential-inequality} and \cref{lem:existence-bound} gives us that
+
+    \[\ddot\Psi + 2\dot\Psi \ge -2\abs{\hat F(\alpha, \beta)} \ge \begin{cases}
+        0 & t \le 0 \\
+        -2Ce^{-4t} & t \ge 0
+    \end{cases}\]
+
+    Therefore, we have that \((\ddot\Psi - \ddot\psi) + 2(\dot\Psi - \dot\psi) \ge 0\). Using the change of variables \(s = -\frac12e^{-2t}\) as before, we find that
+
+    \[\dv[2]{s}(\Psi - \psi) \ge 0\]
+
+    That is, \(\Psi - \psi\), as a function of \(s\), is convex. Therefore, by the maximum principle for convex functions, the maximum value of \(\Psi - \psi\) is attained at one of the end points. By assumption, \(h_N(\pm N) = 1\), and so \(\Psi(\pm N) = 0\). Thus, \(\Psi(-N) - \psi(-N) = -C/4 < 0\). Similarly, \(\Psi(N) - \psi(N) = Ce^{-2N}/2 - Ce^{-4N}/4 < 0\). Therefore, \(\Psi - \psi\) is negative on \([-N, N]\). In fact, it is bounded away from zero.
+\end{proof}
+
+\begin{lemma}
+    [{\cite[Corollary 16, Lemma 17]{kronheimer_instantons_1990}}]
+    \label{lem:limit-gauge}
+    The \(h_N\) converges in the \(C^\infty\) topology on compact subsets, to a smooth path \(h : \R \to \mcH\), such that
+
+    \begin{enumerate}[(i)]
+        \item \(h\) is bounded, and for large \(t\), \[\abs{h(t) - 1} \le C'e^{-2t}\] for some \(C' > 0\),
+        \item if \(g = h^{1/2}\), \((\alpha', \beta') = g \vdot (\alpha, \beta)\), then \(\hat F(\alpha', \beta') = 0\),
+        \item the derivative \(\dv*{h}{t}\) is bounded, and for large \(t\), \[\abs{\dv{h}{t}} < C''e^{-2t}\] for some \(C'' > 0\)
+    \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+    Omitted.
+\end{proof}
+
+Using this, we can prove:
+
+\begin{proposition}
+    \label{prop:real-trajectory-existence}
+
+    For every complex trajectory \((\alpha, \beta)\), there is an equivalent trajectory \((\alpha', \beta') = g \vdot (\alpha, \beta)\) which satisfies the real equation \(\hat F(\alpha', \beta') = 0\).
+\end{proposition}
+
+\begin{proof}
+    Using \(g\) from \cref{lem:limit-gauge}, we all we need to show is that \((\alpha', \beta')\) satisfy the boundary conditions \cref{eq:complex-trajectory-boundary-conditions}. First of all, using \cref{lem:limit-gauge} (iii), we find that \((\alpha', \beta') - (\alpha, \beta)\) decays exponentially as \(t \to \infty\). In particular, this means that the boundary conditions at \(t \to \infty\) are satisfied.
+
+    For the boundary conditions at \(t \to -\infty\), split \((\alpha', \beta')\) into hermitian and skew-hermitian parts, to get a solution \((A_0, A_1, A_2, A_3)\) of the extended gradient flow equations \cref{eq:gradient-flow-system-extended}. Using a real gauge transformation \(g \in \mcG\), we can make \(A_0 = 0\), which gives us a solution \((A_1', A_2', A_3')\) of the gradient flow equations \cref{eq:gradient-flow-system}. By \cref{lem:limit-gauge} (iii), this is a bounded trajectory. Therefore, it approaches a critical point. Hence the boundary conditions at \(t \to -\infty\) are satisfied, although it might be for a different representation \(\rho_-\). However, by \cref{lem:complex-trajectory-convergence-negative}, the conjugacy class of the representation \(\rho_-\) given in the limit, is uniquely determined by the orbit in which \(\beta'\) lies, which is the same orbit as \(\beta\).
+\end{proof}
+
+\section{Proof of \cref{thm:main}}
+
+Suppose \(A(t)\) is a solution to the gradient flow equations \cref{eq:gradient-flow-system} satisfying the boundary conditions \cref{eq:boundary-conditions}. Setting \(A_0 = 0\), we obtain a complex trajectory \((\alpha, \beta)\). The only thing we need to check that the convergence at \(t \to \pm\infty\) is exponential. But \cref{eq:gradient-flow-system} is an autonomous system, and so the convergence rate of its linearisation is exponential, e.g. by diagonlising the linearisation. Near the fixed points \(\rho_+\) and \(g\rho_-g^{-1}\), the fact that the gradient flow converges implies that it must converge exponentially.
+
+Therefore, we have a map from \(M(\rho_-, \rho_+)\) to the space of equivalence classes of complex trajectories. 
+
+\Cref{prop:real-equation-uniqueness} shows that this map is injective. To see this, suppose \(A, A' \in M(\rho_-, \rho_+)\) give equivalent complex trajectories. Then there exists \(g : \R \to \SU(n)\), with \(g \vdot A = A'\), and \(g(t) \to 1\) as \(t \to \infty\). But in this case, \(A_0 = A_0' = 0\), which means that
+
+\[-\dot g g^{-1} = 0 \implies \dot g = 0\]
+
+and so \(g(t) = 1\) for all \(t\). That is, \(A = A'\).
+
+By \cref{prop:real-trajectory-existence}, in each equivalence class there is a complex trajectory \((\alpha', \beta')\) satisfying the real equation. Decomposing \((\alpha', \beta')\) into hermitian and skew-hermitian parts, we get a solution \((A_0, A_1, A_2, A_3)\) of the extended equations \cref{eq:gradient-flow-system-extended}. Moreover, \(A_0\) decays exponenitally, so there exists a real gauge transformation \(g : \R \to \SU(n)\), with \(g(t) \to 1\) as \(t \to 1\), such that
+
+\[gA_0g^{-1} - \dot g g^{-1} = 0\]
+
+Therefore, from this, we obtain a solution to the original equations. Thus, the map from \(M(\rho_-, \rho_+)\) to the space of equivalence classes of complex trajectories is surjective.
+
+\label{sec:proof}
+
+\section{Nilpotent orbit}
+
+As we are predominantly interested in the nilpotent orbits, we will consider the case where \(\rho_+ = 0\). Define \(M(\rho) = M(\rho, 0)\) to be the space of solutions to \cref{eq:gradient-flow-system}, satisfying the boundary conditions
+
+\[\lim_{t \to -\infty}A(t) \in C(\rho) \qquad \lim_{t \to \infty}A(t) = 0\]
+
+In this case, \cref{thm:main} becomes
+
+\[M(\rho) \cong \mcN(\rho)\]
+
+First of all, given \(A = (A_1, A_2, A_3) \in M(\rho)\), we send it to the equivalence class of the complex trajectory
+
+\[\alpha = iA_1 \qquad \beta = A_2 + iA_3\]
+
+Putting \((\alpha, \beta)\) into the form of \cref{eq:complex-trajectory-form}, we have that
+
+\begin{equation}
+    \begin{split}
+        \alpha(t) &= \begin{cases}
+            \frac12H & t \le 0 \\
+            0 & t \ge 1
+        \end{cases} \\
+        \beta(t) &= \begin{cases}
+            Y & t \le 0 \\
+            e^{-2t}\epsilon & t \ge 1
+        \end{cases}
+    \end{split}
+\end{equation}
+
+where \(\epsilon\) is conjugate to \(Y\), i.e. \(\epsilon \in \mcN(\rho)\). Note however in this case, we don't need to use \cref{lem:complex-trajectory-convergence-negative} for \(t \le 0\), we could just leave it as is, and just use \cref{lem:complex-trajectory-convergence-positive}. Therefore, to compute \(\epsilon\), we can just solve the ODE
+
+\begin{align*}
+    \dot g &= 2g\alpha = 2igA_1 \\
+    \lim_{t \to \infty}g(t) &= 1
+\end{align*}
+
+and in this case, \(g\) will transform \(\beta\) to \(e^{-2t}\epsilon\) for some \(\epsilon \in \sl(n, \C)\). More precisely, \(\epsilon = g(0)\beta(0)g(0)^{-1}\).
+
+\subsection{Nahm's equations}
+
+Consider the complex equation for Nahm's equations, that is, using the change of variables
+
+\[s = -\frac12e^{-2t} \qquad \tilde\alpha = e^{2t}\alpha \qquad \tilde\beta = e^{2t}\beta\]
+
+we have the complex equation
+
+\[\dv{\tilde\beta}{s} + 2[\tilde\alpha, \tilde \beta] = 0\]
+
+The tangent space to the adjoint orbit \(M\) of \(\tilde\beta\) at \(\tilde\beta\) is
+
+\[\left\{[X, \tilde\beta] \mid X \in \sl(n, \C)\right\}\]
+
+which means that \(\dv{\tilde{\beta}}{s} \in \TT_{\tilde\beta}M\). Therefore \(\tilde\beta\) stays in the same adjoint orbit of \(\sl(n, \C)\). We can transfer this back to the original equations, since for a \emph{nilpotent} matrix \(A\), \(A\) and \(\lambda A\) are conjugate, for all \(\lambda \in \C\). That is, \(\beta\) stays within the same nilpotent orbit.
+
+\subsection{Boundary conditions to Nahm's equations}
+
+\label{subsec:nahm-boundary-conditions}
+
+In this case, we would like to translate the boundary conditions from \(A = (A_1, A_2, A_3)\) to boundary conditions on \(T = (T_1, T_2, T_3)\), where \(T = e^{2t}A\).
+
+The boundary condition \(A \to 0\) at \(t \to \infty\) becomes
+
+\[e^{-2t}T \to 0 \implies sT \to 0\]
+
+as \(s \to 0\). The boundary condition \(\lim\limits_{t \to -\infty}A(t) \in C(\rho)\) becomes
+
+\[\lim_{s \to -\infty}e^{-2t}T \in C(\rho) \implies \lim_{s \to -\infty}sT \in -\frac12 C(\rho)\]
+
+That is, we have the boundary conditions
+
+\begin{equation}
+    \label{eq:nahm-boundary-conditions}
+    \begin{split}
+        \lim_{s \to 0} s T &= 0 \\
+        \lim_{s \to -\infty}sT &\in C(\sigma)
+    \end{split}
+\end{equation}
+
+where \(\sigma = (\sigma_1, \sigma_2, \sigma_3) = -\frac12\rho\) satisfies
+
+\begin{align*}
+    [\sigma_1, \sigma_2] &= \sigma_3 \\
+    [\sigma_2, \sigma_3] &= \sigma_1 \\
+    [\sigma_3, \sigma_1] &= \sigma_2
+\end{align*}
+
+In particular, given such a triple, define
+
+\begin{equation}
+    \label{eq:nahm-asymptotic-solution}
+    T_i = \frac{\sigma_i}{s-1}
+\end{equation}
+
+Then this is a solution to Nahm's equations, satisfying the boundary conditions \cref{eq:boundary-conditions}. In fact, all solutions will be asymptotic to (a conjugate of) this one as \(s \to -\infty\).
+
+\subsection{Map for \(\epsilon\) using Nahm's equations}
+
+Setting \(\tilde\alpha = e^{2t}\alpha\) and \(\tilde\beta = e^{2t}\beta\), then we have the complex equation coming from Nahm's equations, i.e.
+
+\[\dv{\tilde\beta}{s} + [\tilde\alpha, \tilde\beta] = 0\]
+
+Therefore, if we instead solve for \(g \vdot (\tilde\alpha, \tilde\beta) = (0, \tilde\beta')\), i.e.
+
+\[\dv{g}{s} = 2g\tilde\alpha\]
+
+with the boundary condition that \(g \to 1\) as \(s \to 0\), then \(\tilde\beta'\) is constant, and this constant is exactly \(\epsilon\). In fact, this is the same equation as in \cref{lem:complex-trajectory-convergence-positive}, just with a change of variables. Therefore, in this case,
+
+\[\tilde\beta(t) = g(t)^{-1}\epsilon g(t)\]
+
+and since \(g(t) \to 1\) as \(s \to 0\), we have that
+
+\[\epsilon = \lim_{s \to 0}\tilde\beta(s)\]
+
+\begin{subappendices}
+
+    \section{Representation theory of \(\sl(2, \C)\)}
+
+    \label{sec:representation-theory-sl2}
+    
+    In this section, we will sketch the representation theory of \(\sl(2, \C)\) that is required for the analysis in this chapter. For more details, see \cite[Section 7]{humphreys}.
+    
+    Let \(V\) be a complex vector space. Then a representation of \(\sl(2, \C)\) is a Lie algebra homomorphism \(\rho : \sl(2, \C) \to \gl(V)\). When clear, we will write \(X \vdot v := \rho(X)(v)\). Choose the basis
+    
+    \[X = \begin{pmatrix}
+        0 & 1 \\
+        0 & 0
+    \end{pmatrix} \quad Y = \begin{pmatrix}
+        0 & 0 \\
+        1 & 0
+    \end{pmatrix} \quad H = \begin{pmatrix}
+        1 & 0 \\
+        0 & -1
+    \end{pmatrix}\]
+    
+    for \(\sl(2, \C)\). The commutators are \([H, X] = 2X, [H, Y] = -2Y, [X,Y] = H\)
+    
+    We first note that \(\rho(H)\) is diagonalisable, and so we have a Jordan decomposition
+    
+    \[V = \bigoplus_{\lambda \in \C}V_\lambda\]
+    
+    where
+    
+    \[V_\lambda = \left\{v \in V \mid H \cdot v = \lambda v\right\}\]
+    
+    is the \(\lambda\)-eigenspace of \(H\). In fact, we have:
+    
+    \begin{enumerate}
+        \item \[V = \bigoplus_{\lambda \in \Z}V_\lambda\]
+        \item if \(v \in V_\mu\), then \(X \cdot v \in V_{\mu+2}\) and \(Y \cdot v \in V_{\mu-2}\).
+    \end{enumerate}
+    
+    \section{Weak inequalities}
+    
+    \label{sec:weak-inequalities}
+
+    Let \(\Omega \subseteq \R^n\) be open and connected.
+    
+    \begin{definition}
+        [positive]
+        We say that \(u \in \mcD'(\Omega)\) is \emph{positive} if for all \(\phi \in C_c^\infty(\Omega)\), with \(\phi \ge 0\), \(u[\phi] \ge 0\). We write this as \(u \ge 0\). 
+    \end{definition}
+    
+    \begin{definition}
+        [derivative]
+    
+        The derivative of a distribution \(u \in \mcD'(\Omega)\) is the distribution \(Du\) given by
+    
+        \[Du[\phi] = -u[D\phi]\]
+    \end{definition}
+    
+    Finally, recall that we have an embedding \(T : L^1_\text{loc.}(\Omega) \to \mcD'(\Omega)\), given by
+    
+    \[T_f(\phi) = \int_\Omega f\phi \dd x\]
+    
+    We will abuse notation and write \(Df = DT_f\). With this, let
+    
+    \[L = \sum_{k=0}^d a_k D^k\]
+    
+    be a linear differential operator, \(a_k : \Omega \to \R\) smooth. Suppose \(Lf \ge 0\). Then we say that the differential inequality \(Lf \ge 0\) holds \emph{weakly}.
+    
+
+\end{subappendices}
+
+\chapter{HyperK\"ahler manifold structure}
+
+\label{chapter:Kronheimer-hyperkahler}
+
+In this chapter, we will construct the hyperK\"ahler manifold structure on \(M(\rho)\), following \cite{kronheimer_hyper-kahlerian_1990}. Note however that \cite{kronheimer_hyper-kahlerian_1990} is for the \emph{regular semisimple} orbit, therefore to transfer it to the nilpotent orbit, we will need to make some changes. This chapter also contains a few things which overlap with the previous chapter, but for ease of reading, we will include them as well.
+
+On the other hand, the emphasis on this section is not to fill in details, but rather to show how to modify the arguments. Therefore, we will omit some details, and refer the reader to \cite{kronheimer_hyper-kahlerian_1990} for more details.
+
+\section{Nahm's equations}
+
+Recall that if we set \(B = e^{2t}A\) and \(s = -\frac12e^{-t}\), then the equations \cref{eq:gradient-flow-system} becomes Nahm's equations
+
+\begin{equation}
+    \label{eq:nahm}
+    \begin{split}
+        \dv{B_1}{s} + [B_2, B_3] &= 0 \\
+        \dv{B_2}{s} + [B_3, B_1] &= 0 \\
+        \dv{B_3}{s} + [B_1, B_2] &= 0
+    \end{split}
+\end{equation}
+
+and from \cref{subsec:nahm-boundary-conditions}, we have the boundary conditions
+
+\begin{align*}
+    \lim_{s \to 0}sB &= 0 \\
+    \lim_{s \to -\infty}sB &\in C(\sigma)
+\end{align*}
+
+where \(\sigma = -\frac12\rho\), satisfies
+
+\begin{align*}
+    [\sigma_1, \sigma_2] &= \sigma_3 \\
+    [\sigma_2, \sigma_3] &= \sigma_1 \\
+    [\sigma_3, \sigma_1] &= \sigma_2
+\end{align*}
+
+Moreover, since we assume the limits \(s \to 0\) exists, we will consider the equations on the half interval \(\Ioc{-\infty, 0}\).
+
+Adding in a fourth function \(B_0 : \Ioc{-\infty, 0} \to \su(n)\), we can write the extended Nahm's equations as
+
+\begin{equation}
+    \label{eq:extended-nahm}
+    \begin{split}
+        \dv{B_1}{s} + [B_0, B_1] + [B_2, B_3] &= 0 \\
+        \dv{B_2}{s} + [B_0, B_2] + [B_3, B_1] &= 0 \\
+        \dv{B_3}{s} + [B_0, B_3] + [B_1, B_2] &= 0
+    \end{split}
+\end{equation}
+
+We have three equations for four variables, so the system is underdetermined. We can introduce the gauge group as before, with
+
+\begin{align*}
+    \mcG &= \left\{g : \Ioc{-\infty, 0} \to \su(n)\right\} \\
+    % \mcG^c &= \left\{g : \Ioc{-\infty, 0} \to \sl(n, \C)\right\}
+    \mcG_0 &= \left\{g : \Ioc{-\infty, 0} \to \su(n), g(0) = 1\right\}
+    % \mcG_0^c &= \left\{g : \Ioc{-\infty, 0} \to \sl(n, \C), g(0) = 1\right\}
+\end{align*}
+
+with the action given by
+
+\[g \vdot (B_0, B_1, B_2, B_3) := \left(gB_0g^{-1} - \dv{g}{s}g^{-1}, gB_1g^{-1}, gB_2g^{-1}, gB_3g^{-1}\right)\]
+
+Using this, if we ignore the boundary conditions, then the space of solutions to \cref{eq:nahm} are the same as the space of solutions to \cref{eq:extended-nahm} modulo the action of \(\mcG_0\), since we can always use \(\mcG_0\) to make \(B_0 = 0\). Moreover, by an element of \(\mcG_0\), we can assume that \(\lim_{s \to -\infty}sB = \sigma\). 
+
+We would like a version of \cite[Lemma 3.4]{kronheimer_hyper-kahlerian_1990}, since this would give us the space which we are interested in. However, since the boundary conditions are different, we won't have an exponential rate of convergence. Let
+
+\[B^0 = \left(0, \frac{\sigma_1}{s-1}, \frac{\sigma_2}{s-1}, \frac{\sigma_3}{s-1}\right)\]
+
+be the ``asymptotic'' solution to Nahm's equations. We are interested in solutions which are asymptotic to this one. 
+
+\begin{lemma}
+    \label{lem:rate-of-convergence}
+    Let \(B\) be a solution to \cref{eq:extended-nahm}, with \(sB \to \sigma\) as \(s \to -\infty\). Then there exists \(C, \delta > 0\) such that
+
+    \[\abs{B - B^0} \le \frac{Ke^{\eta t}}{\abs{s}} = \frac{K}{\abs{s}^{1+\delta}} \le \frac{C}{(1-s)^{1+\delta}}\]
+\end{lemma}
+
+\begin{proof}
+    In \cite[Proof of Theorem 1, p. 482]{kronheimer_instantons_1990}, we have exponential convergence of \(A\), i.e.
+    
+    \[\abs{A - \rho} \le Ke^{\eta t}\]
+    
+    for some \(K, \eta > 0\), as \(t \to -\infty\). This then gives us that in the limit as \(s \to -\infty\),
+    
+    \[\abs{B - B^0} \le \frac{Ke^{\eta t}}{\abs{s}} = \frac{K}{\abs{s}^{1+\zeta}} \le \frac{C}{(1-s)^{1+\zeta}}\]
+\end{proof}
+
+Let \(\Omega_1\) denote the space of all \(C^1\) maps
+
+\[b = (b_0, b_1, b_2, b_3) : \Ioc{-\infty, 0} \to \su(n) \otimes \R^4\]
+
+The boundary conditions on \(M(\rho)\) gives us a norm condition, which is
+
+\[\norm{b}_1 = \sup_{s \le 0}((1-s)^{1+\delta}\abs{b_j}) + \sup_{s\le0}((1-s)^{2+\delta}\abs{\dot b_j}) < \infty\]
+
+for some \(\delta > 0\), and define the affine space
+
+\[\msA = B^0 + \Omega_1 = \left\{B^0 + b \mid b \in \Omega_1\right\}\]
+
+By \cref{lem:rate-of-convergence}, all of the solutions which we are interested in belong to \(\msA\). For any path \(u : \Ioc{-\infty, 0} \to \su(n)\), define
+
+\[\grad_B u = \left(\dv{u}{s} + [B_0, u], [B_1, u], [B_2, u], [B_3, u]\right)\]
+
+and we have that \cite[Proposition 3.7]{kronheimer_hyper-kahlerian_1990}
+
+\[M(\rho) \cong \left\{B \in \msA \text{ satisfying \cref{eq:extended-nahm}}\right\}/\msG\]
+
+where \(\msG\) is the group
+
+\[\msG = \left\{g : \Ioc{-\infty, 0} \to \SU(n) \mid g(0) = 1, g^{-1}\grad_Bg \in \Omega_1\right\}\]
+
+The condition \(g^{-1}\grad_Bg \in \Omega_1\) just means that \(g\) carries \(B\) to another element of \(\msA\).
+
+\section{HyperK\"ahler structure on \(\Omega_1\)}
+
+\(\Omega_1\) inherits a natural quaternionic structure from \(\R^4 \cong \bb H\), and we have a norm defined by \(\Omega_1 \subseteq L^2\). That is, we have the \(L^2\) inner product
+
+\[\iinner{b, c} = \sum_{j=0}^3\int_{-\infty}^0 \inner{b_j(s), c_j(s)}\dd s\]
+
+and the complex structures are given by
+
+\begin{align*}
+    I(b_0, b_1, b_2, b_3) &= (-b_1, b_0, -b_3, b_2) \\
+    J(b_0, b_1, b_2, b_3) &= (-b_2, b_3, b_0, -b_1) \\
+    K(b_0, b_1, b_2, b_3) &= (-b_3, -b_2, b_1, b_0)
+\end{align*}
+
+Since \(\msA\) is an affine space modelled on \(\Omega\), this means that \(\msA\) inherits a natural hyperK\"ahler structure.
+
+\subsection{Integrability}
+
+A priori, it is not clear that \(\Omega_1\) is a subspace of \(L^2\). However, from the decay condition, we have that
+
+\[\abs{b(s)}^2 \le K \abs{s}^{-2}\]
+
+for some \(K > 0\). The integral
+
+\[\int_{-\infty}^{-1}\frac{1}{x^2}\dd x\]
+
+is finite, and elements of \(\Omega_1\) are bounded on \([-1, 0]\). Therefore, they are in \(L^2\). In fact, the decay condition shows that the elements are also in \(L^1\).
+
+\section{Tangent space}
+
+Let \(\grad_B^*\) be the \(L^2\) adjoint of \(\grad_B\), i.e.
+
+\[\grad_B^*u = - \dv{u_0}{s} - \sum_{j=0}^3[B_j, u_j]\]
+
+Using this, we have
+
+\begin{proposition}
+    [{\cite[Proposition 3.9]{kronheimer_hyper-kahlerian_1990}}]
+    \label{prop:tangent-space} \(M(\rho)\) is a smooth manifold, and the tangent space to \(M\) at a (the equivalence class) of a solution 
+    
+    \[B = (B_0(s), B_1(s), B_2(s), B_3(s))\] 
+    
+    to \cref{eq:extended-nahm} can be identified with the set of solutions in \(\Omega\) of the linear equations
+
+    \begin{equation}
+        \label{eq:tangent-space}
+        \begin{split}
+            \dv{b_0}{s} + [B_0, b_0] + [B_1, b_1] + [B_2, b_2] + [B_3, b_3] &= 0 \\
+            \dv{b_1}{s} + [B_0, b_1] - [B_1, b_0] + [B_2, b_3] - [B_3, b_2] &= 0 \\
+            \dv{b_2}{s} + [B_0, b_2] - [B_1, b_3] - [B_2, b_0] + [B_3, b_1] &= 0 \\
+            \dv{b_3}{s} + [B_0, b_3] + [B_1, b_2] - [B_2, b_1] - [B_3, b_0] &= 0
+        \end{split}
+    \end{equation}
+
+    Equivalently, it is given by the equation
+
+    \[\grad^*_B(b) = \grad^*_B(Ib) = \grad^*_B(Jb) = \grad^*_B(Kb) = 0\]
+\end{proposition}
+
+Using this, the tangent space to \(M\) at \(B\) is a subspace of \(\Omega\), which is invariant under \(I, J, K\). Therefore, \(M\) inherits three almost complex structures satisfying the quaternionic relations. In fact, this and the \(L^2\) metric on \(\Omega\) makes \(M\) into a hyperK\"ahler manifold.
+
+Below, we will sketch how to modify the proof of \cite[Lemma 3.8]{kronheimer_hyper-kahlerian_1990} to take into account the different boundary conditions in the nilpotent case. With these modifications, we will prove that the operator \(\grad_B^*\grad_B\) on a given space is invertible, and so the same proof as in \cite[Proposition 3.9]{kronheimer_hyper-kahlerian_1990} will work.
+
+The space \(\Omega_0\) can be defined as in the paper, i.e.
+
+\[\Omega_0 = \left\{u \mid u(0) = 0, \grad_Bu \in \Omega_1 \text{ for some }B \in \msA\right\}\]
+
+with norm \(\norm{u}_0 = \norm{\grad_Bu}_1\) and we can define
+
+\[\Omega_0' = \left\{v \ \bigg\vert\  \norm{v}_0' = \sup_s((1-s)^{2+\delta}\abs{v(s)}) < \infty\right\}\]
+
+We are interested in the operator
+
+\begin{align*}
+    \grad_B^*\grad_B(u) &= \grad_B^*\left(\dv{u}{s} + [B_0, u], [B_1, u], [B_2, u], [B_3, u]\right) \\
+    &= -\dv{s}(\dv{u}{s} + [B_0, u]) - \left[B_0, \dv{u}{s}\right]- \sum_{j=0}^3[B_j, [B_j, u]]
+\end{align*}
+
+Considering the case \(B = B^0\), we get the equation
+
+\[\dv[2]{u}{s} - \frac{1}{(s-1)^2}\Lambda u = -v\]
+
+where \(\Lambda\) is the nonnegative self-adjoint operator
+
+\[\Lambda u = \sum_{j=0}^3 [\sigma_j^*, [\sigma_j, u]]\]
+
+\(\Lambda\) is diagonalisable, and so we have the equations
+
+\[\ddot u - \frac{\lambda^2}{(s-1)^2}u = v\]
+
+\subsection{The norm on \(\Omega_0\)}
+
+Here, we will compute the norm on \(\Omega_0\), using \(B = B^0\). In particular, we have that
+
+\[\grad_Bu = \left(\dv{u}{s}, \frac{1}{s-1}[\sigma_1, u], \frac{1}{s-1}[\sigma_2, u], \frac{1}{s-1}[\sigma_3, u]\right)\]
+
+The first term gives us
+
+\[(1-s)^{1+\delta}\abs{\dv{u}{s}} \qqtext{and} (1-s)^{2+\delta}\abs{\dv[2]{u}{s}}\]
+
+The rest of the terms are bounded by
+
+\[\frac{(1-s)^{1+\delta}}{s-1} K \abs{u} \le K'(1-s)^\delta\abs{u}\]
+
+for some constant \(K'\) independent of \(u\). For the derivative, we have the terms
+
+\begin{align*}
+    \frac{(1-s)^{2 + \delta}}{(1-s)^2}[\sigma_1, u] &\le C(1-s)^\delta\abs{u} \\
+    \frac{(1-s)^{2 + \delta}}{1-s}\left[\sigma_1, \dv{u}{s}\right] & \le C'(1-s)^{1+\delta}\abs{\dv{u}{s}}
+\end{align*}
+
+Therefore, to bound the norm on \(\Omega_0\), all we need is a bound on
+
+\begin{align*}
+    (1-s)^\delta\abs{u(s)} \\
+    (1-s)^{1+\delta}\abs{\dv{u}{s}} \\
+    (1-s)^{2 + \delta}\abs{\dv[2]{u}{s}}
+\end{align*}
+
+\subsection{Case \(\lambda > 0\)}
+
+As in \cite{kronheimer_hyper-kahlerian_1990}, we now consider the case where \(v\) is compactly supported. Define \(f(s) = (1-s)^\delta u(s)\). Consider a maxima of \(f\), so \(s_0\) such that \(f'(s_0) = 0\), \(f''(s_0) \le 0\). Computing, we find that
+
+\[u''(s_0) - \frac{\delta(\delta+1)}{(1-s_0)^2}u(s_0) \le 0\]
+
+Using the equation for \(u''\), we then get the equation that
+
+\[\frac{\lambda^2 - \delta(\delta+1)}{(1-s_0)^2}u(s_0) \le v(s_0)\]
+
+Since \(\lambda > 0\), for \(\delta\) sufficiently small, \(\lambda^2 - \delta(\delta+1) > 0\). In this case, we find that
+
+\[f(s_0) \le K(1-s_0)^{\delta+2}v(s_0)\]
+
+and at a minima, we have the reverse inequality. Therefore, we must have that
+
+\[\sup_s\left((1-s)^\delta\abs{u(s)}\right) \le K\sup_s\left((1-s)^{2+\delta}\abs{v(s)}\right)\]
+
+for some constant \(K\) which is independent of \(v\).
+
+The bound on \((1-s)^{2+\delta}\abs{\dv*[2]{u}{s}}\) follows from the ODE and the \(\Omega_0'\) bound on \(v\). Therefore, all we need is a bound on \((1-s_0)^{1+\delta}\abs{\dv*{u}{s}}\). But this follows from a similar argument to the above. Set \(g(s) = (1-s)^{1+\delta}u'(s)\). Then at a maxima/minima of \(g\),
+
+\[g'(s_0) = (1-s_0)^{1+\delta}u''(s_0) - (1+\delta)(1-s_0)^\delta u'(s_0) = 0\]
+
+and so
+
+\[u'(s_0) = \frac{1-s_0}{1+\delta}u''(s_0)\]
+
+which means that
+
+\[(1-s_0)^{1+\delta}u'(s_0) = \frac{(1-s_0)^{2+\delta}}{1+\delta}u''(s_0)\]
+
+Hence the bound on the second derivative gives us a bound on the first derivative.
+
+\subsection{Case \(\lambda = 0\)}
+
+In this case, we have the equation
+
+\[\ddot u = -v\]
+
+This immediately gives us the bound on the second derivative. The same argument as in the previous subsection shows that this gives us a bound on \((1-s)^{1+\delta}\dot u\). Therefore, all we need is a bound on \((1-s)^{2+\delta}u\). Defining \(h(s) = (1-s)^{2+\delta}\), and using the same argument again, we get a bound on \(h\).
+
+\subsection{Bounded below}
+
+We have shown that the operator \(\grad_B^*\grad_B : \Omega_0 \to \Omega_0'\) is bounded below. In particular, this means that we can use density to extend our arguments above to all of \(\Omega_0'\), since the image of an operator which is bounded below is closed. Moreover, since it is a bijection (injectivity follows from the same reason as in \cite{kronheimer_hyper-kahlerian_1990}), the inverse is then a bounded linear map.
+
+The bound that \(\delta^2\) is smaller than the least positive eigenvalue is replaced by the requirement that \(\delta(\delta + 1) < \lambda^2\), where \(\lambda^2\) is the least positive eigenvalue.
+
+\section{Adjoint orbit}
+
+Define a map \(\phi : M(\rho) \to \msN\) by
+
+\[\phi(B) = B_2(0) + iB_3(0)\]
+
+and from the previous section, we have that \(\phi(B)\) is in the same adjoint orbit as \(Y\). In terms of the complex coordinates
+
+\[\alpha(s) = \frac12(B_0(s) + iB_1(s)) \qquad \beta(s) = \frac12(B_2(s) + iB_3(s))\]
+
+and a tangent vector \((\delta\alpha, \delta\beta) = (b_0, b_1, b_2, b_3)\), the complex structure \(I\) is just
+
+\[I(\delta\alpha, \delta\beta) = (i\delta\alpha, i\delta\beta)\]
+
+In this case, \(\phi(\alpha, \beta) = 2\beta(0)\), and \(\phi\) can easily be extended to \(\msA\), as
+
+\[\phi(B_0, B_1, B_2, B_3) = B_2(0) + iB_3(0)\]
+
+Hence
+
+\begin{align*}
+    \phi(B + b) &= \phi(B_0 + b_0, B_1 + b_1, B_2 + b_2, B_3 + b_3) \\
+    &= B_2(0) + b_2(0) + iB_3(0) + ib_3(0) \\
+    &= \phi(B) + b_2(0) + ib_3(0) 
+\end{align*}
+
+and so, \(\dd\phi_B(b) = b_2(0) + ib_3(0)\). Therefore, in this case we have that \(\phi\) is holomorphic with respect to the complex structures \(I\) on \(M(\rho)\) and \(i\) on the adjoint orbit (which as a complex submanifold of \(\sl(n, \C)\) is naturally K\"ahler).
+
+
+% However, we already have an expression of the tangent space of the adjoint orbit of \(A\), which is
+
+% \[\T_A\mcO = \left\{[A, X] \mid X \in \sl(n, \C)\right\}\]
+
+% and so, we would like to relate \(\dd\phi_B(b) = b_2(0) + ib_3(0)\) to a Lie bracket with \(\phi(B) = B_2(0) + iB_3(0)\).
+
+\printbibliography
+
+\end{document}
