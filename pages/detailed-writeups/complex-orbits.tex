@@ -49,7 +49,7 @@ where \(^*\) denotes the Hermitian adjoint. That is, if we choose a basis for ea
 
 \[\norm{(\alpha_j, \beta_j)}^2 = \sum_{j=0}^{k-1}\Re\tr(\alpha_j^*\alpha_j + \beta_j\beta_j^*)\]
 
-This metric, along with the complex structures \(I, J, K = IJ\), makes \(M\) into a flat hyperK\"ahler manifold.
+This metric, along with the complex structures \(I, J, K = IJ\), makes \(M\) into a flat hyperK\"ahler manifold, as \(I, J, K\) satisfy the quaternionic relations, and are isometries with respect to the above norm.
 
 \section{HyperK\"ahler quotient}
 
@@ -94,7 +94,7 @@ From the following results of Kirwan,
 
     \[x \in X^{\min} := \left\{y \mid \text{ limit under the steepest descent of }f\text{ lies in }\mu^{-1}(0)\right\}\]
 
-    and the orbit \(G^\C x\) is closed in \(X^{\min}\). Moreover, the map \(\mu^{-1}(0)/G \to G^\C\mu^{-1}(0)\sslash G^\C\) is a homeomorphism.
+    and the orbit \(G^\C x\) is closed in \(X^{\min}\). Moreover, the map \(\mu^{-1}(0)/G \to G^\C\mu^{-1}(0)\sslash G^\C\), sending the \(G\)-orbit of \(x \in \mu^{-1}(0)\) to the \(G^\C\) orbit of \(x\), is a homeomorphism.
 \end{theorem}
 
 \begin{proposition}
@@ -141,7 +141,7 @@ Therefore, \(X\) is a nilpotent matrix. Moreover, let \(G^\C\) act via \cref{eq:
     \Phi^c([\alpha_j, \beta_j]) &= \alpha_{k-1}\beta_{k-1}
 \end{align*}
 
-where \(\msN \subseteq \sl(n, \C)\) is the variety of nilpotent matrices. The main theorem is
+where \(\mcN \subseteq \sl(n, \C)\) is the variety of nilpotent matrices. The main theorem is
 
 \begin{theorem}
     [{\cite[Theorem 2.1]{kobak_classical_1996}}]
@@ -1308,7 +1308,11 @@ Using this, we can prove:
 
 \section{Proof of \cref{thm:main}}
 
-Suppose \(A(t)\) is a solution to the gradient flow equations \cref{eq:gradient-flow-system} satisfying the boundary conditions \cref{eq:boundary-conditions}. Setting \(A_0 = 0\), we obtain a complex trajectory \((\alpha, \beta)\). The only thing we need to check that the convergence at \(t \to \pm\infty\) is exponential. But \cref{eq:gradient-flow-system} is an autonomous system, and so the convergence rate of its linearisation is exponential, e.g. by diagonlising the linearisation. Near the fixed points \(\rho_+\) and \(g\rho_-g^{-1}\), the fact that the gradient flow converges implies that it must converge exponentially.
+\label{sec:proof-main}
+
+Suppose \(A(t)\) is a solution to the gradient flow equations \cref{eq:gradient-flow-system} satisfying the boundary conditions \cref{eq:boundary-conditions}. Setting \(A_0 = 0\), we obtain a complex trajectory \((\alpha, \beta)\). The only thing we need to check that the convergence at \(t \to \pm\infty\) is exponential. 
+
+\textbf{Now sure how this is true. In the paper (p. 482), Kronheimer claims that it is a standard property of the gradient flow equations \cref{eq:gradient-flow-system}}
 
 Therefore, we have a map from \(M(\rho_-, \rho_+)\) to the space of equivalence classes of complex trajectories. 
 
@@ -1587,7 +1591,7 @@ be the ``asymptotic'' solution to Nahm's equations. We are interested in solutio
 \end{lemma}
 
 \begin{proof}
-    In \cite[Proof of Theorem 1, p. 482]{kronheimer_instantons_1990}, we have exponential convergence of \(A\), i.e.
+    In \cite[Proof of Theorem 1, p. 482]{kronheimer_instantons_1990} (also see \cref{sec:proof}), we have exponential convergence of \(A\), i.e.
     
     \[\abs{A - \rho} \le Ke^{\eta t}\]
     
@@ -1620,7 +1624,7 @@ where \(\msG\) is the group
 
 \[\msG = \left\{g : \Ioc{-\infty, 0} \to \SU(n) \mid g(0) = 1, g^{-1}\grad_Bg \in \Omega_1\right\}\]
 
-The condition \(g^{-1}\grad_Bg \in \Omega_1\) just means that \(g\) carries \(B\) to another element of \(\msA\).
+acting via \cref{eq:action}. The condition \(g^{-1}\grad_Bg \in \Omega_1\) just means that \(g\) carries \(B\) to another element of \(\msA\).
 
 \section{HyperK\"ahler structure on \(\Omega_1\)}
 
@@ -1791,7 +1795,7 @@ The bound that \(\delta^2\) is smaller than the least positive eigenvalue is rep
 
 \section{Adjoint orbit}
 
-Define a map \(\phi : M(\rho) \to \msN\) by
+Define a map \(\phi : M(\rho) \to \mcN\) by
 
 \[\phi(B) = B_2(0) + iB_3(0)\]
 
